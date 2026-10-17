@@ -45,7 +45,7 @@ make sec       # gitleaks, govulncheck, semgrep
 - Private subscription methods apply to user channels and private block channels. `block_rfq.trades.{currency}` stays public. Raw market-data channels require authentication even when their method is `public/subscribe`.
 - WebSocket authentication, unsubscribe calls and JSON-RPC replies have no schemas in the downloaded subscription document. The caller handles those on the supplied transport; the generated package covers subscriptions and notifications.
 - Both patches reconcile repeated array payloads and nullable fields with the provider examples and descriptions. The WebSocket patch also repairs order flag booleans, maker strings and sparse incremental ticker statistics. Preserve item schemas when wrapping incorrectly declared objects in arrays.
-- Block trade confirmation notifications require `app_name` according to the schema even though the example omits it. Strict decoding preserves that requirement.
+- Block trade confirmation notifications require `app_name` in the source schema, but its description marks the field optional and the examples omit it. The WebSocket patch drops it from `required`, so strict decoding accepts notifications without it.
 - Both patches normalize descriptions for generated comments without changing wire values.
 - Keep the REST `number` to `float64` mapping. Without it, prices and amounts become `float32`.
 - `make generate` downloads the current specs, so it can change the client even when nothing here changed. Review the generated diff.

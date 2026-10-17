@@ -1,6 +1,7 @@
 ---
 name: go-deribit
-description: Unofficial Go client for Deribit crypto options and futures, generated from Deribit's public specs. Root package `deribit` (`github.com/psyb0t/go-deribit`) covers all 186 REST paths for instruments, market data, accounts, positions, orders, transfers and account administration. Package `deribitws` (`/ws`) covers all 43 JSON-RPC subscription channels for order books, tickers, trades and account updates. Use when Go code needs Deribit REST calls or WebSocket subscriptions, or already imports go-deribit.
+description: Writes Go code with go-deribit, an unofficial client for Deribit crypto options and futures generated from Deribit's public specs. Root package `deribit` (`github.com/psyb0t/go-deribit`) covers all 186 REST paths for instruments, market data, accounts, positions, orders, transfers and account administration. Package `deribitws` (`/ws`) covers all 43 JSON-RPC subscription channels for order books, tickers, trades and account updates. Use when Go code needs Deribit REST calls or WebSocket subscriptions, or already imports go-deribit.
+license: MIT
 homepage: https://github.com/psyb0t/go-deribit
 user-invocable: true
 metadata:
@@ -40,6 +41,22 @@ For installation, environments, generated methods, response fields and WebSocket
 - The code is not Go. This module ships Go packages.
 - A provider-maintained client is required. This client is unofficial and unaffiliated with Deribit.
 - The task changes generated code. Read the repository's `AGENTS.md` instead.
+
+## Finding endpoints and types
+
+The examples below cover a few calls. Every operation in the specs has a generated method, and the spec's descriptions are on them as Go doc comments. Look names and fields up instead of guessing. After `go get github.com/psyb0t/go-deribit`, from inside your module:
+
+```bash
+go doc github.com/psyb0t/go-deribit ClientWithResponsesInterface  # every REST endpoint method
+go doc github.com/psyb0t/go-deribit PublicGetInstrumentsParams    # one method, params type or model
+go doc -all github.com/psyb0t/go-deribit                          # the whole REST package
+go doc github.com/psyb0t/go-deribit/ws Handler                    # every subscription notification handler
+go doc github.com/psyb0t/go-deribit/ws Client                     # the SendSubscribe... methods and Run
+```
+
+The same documentation is at https://pkg.go.dev/github.com/psyb0t/go-deribit.
+
+REST operation IDs are assigned from the complete path, so `/public/get_time` becomes `PublicGetTime`; every operation is a GET with query parameters. `<OperationId>WithResponse` takes the context, then `*<OperationId>Params` when the operation has query parameters. Parsed response types can carry a numeric suffix from name collision resolution (`PublicGetTimeResponse3`). The `JSON200` field (or `JSON401` where the spec declares it) holds the decoded body for that status; it is nil for any other status.
 
 ## Usage
 

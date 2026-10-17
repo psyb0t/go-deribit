@@ -64,6 +64,8 @@ The same code is in `example_test.go`, so `make test` checks that it compiles. S
 
 Method names come from the complete endpoint paths: `/public/get_time` becomes `PublicGetTimeWithResponse`.
 
+The full API is in the [Go reference](https://pkg.go.dev/github.com/psyb0t/go-deribit); after `go get`, `go doc github.com/psyb0t/go-deribit` prints the REST package and `go doc github.com/psyb0t/go-deribit/ws` the WebSocket package locally.
+
 ## Auth
 
 Private REST requests use `Authorization: Bearer <access-token>`. Read the token from `DERIBIT_ACCESS_TOKEN`, as the request editor above does. The `/public/auth` endpoint obtains an OAuth access token with client credentials, a client signature or a refresh token. This client does not refresh tokens automatically. The published REST spec omits security schemes. Never log authentication request URLs, access tokens or client secrets.
