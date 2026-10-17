@@ -1,0 +1,19 @@
+{
+  "name": "go-deribit",
+  "description": "Unofficial Go client for Deribit crypto options and futures: REST account, orders, instruments and market data, plus generated WebSocket subscriptions.",
+  "author": {
+    "name": "psyb0t",
+    "url": "https://github.com/psyb0t"
+  },
+  "homepage": "https://github.com/psyb0t/go-deribit",
+  "license": "MIT",
+  "keywords": [
+    "deribit",
+    "trading",
+    "crypto",
+    "api-client",
+    "go-library",
+    "openapi",
+    "asyncapi"
+  ]
+}

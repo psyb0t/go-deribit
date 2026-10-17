@@ -1,0 +1,46 @@
+name: regen
+
+on:
+  # Daily. Slot derived from a hash of the repo name, like pipeline.yml, but a
+  # different slice of it so the two never share a minute:
+  #   c=$(printf go-deribit | cksum | cut -d' ' -f1)
+  #   minute=$(( (c / 1440) % 60 ))   -> 34
+  #   hour=$(( (c / 86400) % 24 ))    -> 1
+  schedule:
+    - cron: "34 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  regen:
+    permissions:
+      contents: write # commit, push and tag
+      issues: write # failure issue on scheduled runs
+    uses: psyb0t/reusable-github-workflows/.github/workflows/regen-and-update-repo.yml@master
+    with:
+      tag: true
+      generate_command: "make generate"
+      check_commands: "make lint && make test && make sec"
+      changelog_path: "CHANGELOG.md"
+      version_files: ".agents/.codex-plugin/plugin.json"
+      # Hand the version line of each spec under api/ to the description step.
+      context_command: "for f in api/*; do if [ -f \"$f\" ]; then printf '%s: %s\\n' \"$f\" \"$(grep -m1 -E '^ *\\\"?version\\\"? *:' \"$f\" || echo unknown)\"; fi; done"
+      go_apidiff: true
+      go_module: "github.com/psyb0t/go-deribit"
+      fix_protected_paths: |
+        .github/*
+        Makefile
+        AGENTS.md
+        .agents/rules/*
+        .gitleaks.toml
+        .gitleaksignore
+        .golangci.yml
+        .semgrepignore
+        scripts/sec.sh
+        scripts/lint.sh
+        scripts/fetch-spec.sh
+        scripts/test-coverage.sh
+      failure_issue_title: "Scheduled spec regeneration failed"
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}

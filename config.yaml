@@ -1,0 +1,16 @@
+package: deribit
+generate:
+  client: true
+  models: true
+output: client.gen.go
+output-options:
+  resolve-type-name-collisions: true
+  # Prices, quantities and amounts are plain `type: number` without a format,
+  # which oapi-codegen maps to float32 by default. float32 loses precision on
+  # money values, so map them to float64.
+  type-mapping:
+    number:
+      default:
+        type: float64
+compatibility:
+  always-prefix-enum-values: true

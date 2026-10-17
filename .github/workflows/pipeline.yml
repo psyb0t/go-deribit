@@ -1,0 +1,67 @@
+name: pipeline
+
+on:
+  push:
+  # Refreshes the imported-by badge. WEEKLY, not daily: pkg.go.dev's crawl lags
+  # publication by days, so a daily run re-derives an unchanged number six extra
+  # times a week, and each drags the full test suite along, since the badges
+  # job needs the coverage artifact.
+  #
+  # The WHOLE pipeline, not a badges-only job: the badge publisher wipes its
+  # branch and republishes only what the run produced, so a badges-only refresh
+  # would delete coverage/version/license.
+  #
+  # Slot derived from a hash of the repo name: GitHub cron has no randomness,
+  # and the scheduler sheds queued runs hardest at the round numbers a human
+  # would pick.
+  schedule:
+    - cron: "26 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  code:
+    permissions:
+      contents: read
+      security-events: write # for the sec SARIF upload
+    uses: psyb0t/reusable-github-workflows/.github/workflows/code-workflow.yml@master
+    with:
+      lint_command: "make lint"
+      test_command: "make test"
+      sec_command: "make sec"
+      # Skipped: `make generate` downloads Deribit's current spec, so the drift
+      # check would fail on every upstream spec release instead of on a stale
+      # committed client. Regenerate locally and commit the result.
+      generate_command: "-"
+      sarif_file: "sec.sarif"
+      sarif_category: "go"
+
+  badges:
+    needs: [code]
+    if: github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    uses: psyb0t/reusable-github-workflows/.github/workflows/create-badges.yml@master
+    with:
+      importers: true
+
+  # Cut a GitHub Release on tag pushes once the checks pass (go-workflow did this
+  # inline; code-workflow leaves it to this reusable job).
+  release:
+    needs: [code]
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    uses: psyb0t/reusable-github-workflows/.github/workflows/release-workflow.yml@master
+
+  # Validates the agent skills under .agents/skills/ on every push and publishes
+  # them to ClawHub on tag pushes, once the checks pass.
+  clawhub:
+    needs: [code]
+    permissions:
+      contents: read
+    uses: psyb0t/reusable-github-workflows/.github/workflows/clawhub-publish.yml@master
+    with:
+      skill_names: '["go-deribit"]'
+      plugin_names: "[]"
+    secrets:
+      clawhub_token: ${{ secrets.CLAWHUB_TOKEN }}

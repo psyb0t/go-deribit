@@ -1,0 +1,2 @@
+package: deribitws
+output: deribitws.gen.go

@@ -1,0 +1,23 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "block_trade_confirmations",
+    "data": {
+      "nonce": "EXAMPLE-DO-NOT-USE",
+      "timestamp": 1,
+      "trades": [
+        {
+          "instrument_name": "BTC-PERPETUAL",
+          "direction": "buy",
+          "price": 123.456789,
+          "amount": 1
+        }
+      ],
+      "app_name": "example",
+      "role": "maker",
+      "user_id": 1,
+      "state": {}
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "block_rfq.taker.BTC",
+    "data": {
+      "combo_id": null,
+      "makers": [
+        "example-maker"
+      ],
+      "legs": []
+    }
+  }
+}

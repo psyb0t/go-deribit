@@ -1,0 +1,27 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "user.changes.BTC_USDC.100ms",
+    "data": {
+      "positions": [
+        {
+          "instrument_name": "BTC_USDC",
+          "kind": "spot",
+          "user_id": 1,
+          "average_price": 1,
+          "direction": "buy",
+          "mark_price": 1,
+          "delta": 1,
+          "index_price": 1,
+          "initial_margin": 1,
+          "maintenance_margin": 1,
+          "total_profit_loss": 1,
+          "floating_profit_loss": 1,
+          "realized_profit_loss": 1,
+          "size": 1
+        }
+      ]
+    }
+  }
+}

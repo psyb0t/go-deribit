@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "deribit_price_statistics.btc_usd",
+    "data": {
+      "index_name": "btc_usd",
+      "low24h": 1,
+      "high24h": 1,
+      "change24h": 1,
+      "high_volatility": true
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "user.portfolio.BTC",
+    "data": {
+      "currency": "example",
+      "equity": 1,
+      "maintenance_margin": 1,
+      "initial_margin": 1,
+      "available_funds": 1,
+      "available_withdrawal_funds": 1,
+      "balance": 1,
+      "margin_balance": 1,
+      "session_upl": 1,
+      "session_rpl": 1,
+      "total_pl": 1,
+      "options_pl": 1,
+      "options_session_upl": 1,
+      "options_session_rpl": 1,
+      "options_delta": 1,
+      "options_gamma": 1,
+      "options_value": 1,
+      "options_vega": 1,
+      "options_theta": 1,
+      "options_gamma_map": {},
+      "options_vega_map": {},
+      "options_theta_map": {},
+      "futures_pl": 1,
+      "futures_session_upl": 1,
+      "futures_session_rpl": 1,
+      "delta_total_map": {},
+      "projected_delta_total": 1,
+      "portfolio_margining_enabled": false,
+      "cross_collateral_enabled": false,
+      "margin_model": "example",
+      "projected_maintenance_margin": 1,
+      "spot_reserve": 1
+    }
+  }
+}

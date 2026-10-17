@@ -1,0 +1,45 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "user.changes.BTC-PERPETUAL.100ms",
+    "data": {
+      "positions": [
+        {
+          "instrument_name": "BTC-PERPETUAL",
+          "kind": "future",
+          "user_id": 1,
+          "average_price": 1,
+          "direction": "buy",
+          "mark_price": 1,
+          "delta": 1,
+          "index_price": 1,
+          "initial_margin": 1,
+          "maintenance_margin": 1,
+          "settlement_price": 1,
+          "total_profit_loss": 1,
+          "floating_profit_loss": 1,
+          "realized_profit_loss": 1,
+          "size": 1
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "example",
+          "order_state": "open",
+          "order_type": "market",
+          "time_in_force": "good_til_cancelled",
+          "instrument_name": "BTC-PERPETUAL",
+          "creation_timestamp": 1,
+          "last_update_timestamp": 1,
+          "direction": "buy",
+          "price": 1,
+          "label": "example",
+          "post_only": false,
+          "api": false,
+          "max_show": 1
+        }
+      ]
+    }
+  }
+}

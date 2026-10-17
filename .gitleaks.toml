@@ -1,0 +1,31 @@
+title = "go-deribit secret scanning"
+
+[extend]
+useDefault = true
+
+# gitleaks' `dir` mode walks the working tree and does NOT honour .gitignore, so
+# every gitignored local path is named again here. Nothing gitignored is tracked
+# by git. The committed Go vendor/ tree is intentionally NOT listed: it ships to
+# consumers, so it gets scanned. Verify with `git check-ignore <path>` before
+# adding a line; an entry for a committed source path silences real leaks.
+[[allowlists]]
+description = "Gitignored local scratch, downloaded specs, caches, and scan artifacts"
+paths = [
+  '''(^|/)\.env$''',
+  '''(^|/)\.vscode(?:/|$)''',
+  '''(^|/)\.telemetry(?:/|$)''',
+  '''(^|/)\.research_files(?:/|$)''',
+  '''(^|/)\.testing(?:/|$)''',
+  '''(^|/)api/(?:openapi|asyncapi)(?:\.[a-z]+)?\.json$''',
+  '''(^|/)__pycache__(?:/|$)''',
+  '''(^|/)sec\.sarif$''',
+  '''(^|/)git-update\.sh(?:\.debot)?$''',
+  '''(^|/)CLAUDE\.md$''',
+]
+
+[[allowlists]]
+description = "Published Deribit access-token example in generated REST comments"
+condition = "AND"
+paths = ['''(^|/)client\.gen\.go$''']
+regexTarget = "secret"
+regexes = ['''^843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7$''']

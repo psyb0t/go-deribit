@@ -1,0 +1,28 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "user.trades.BTC-PERPETUAL.100ms",
+    "data": [
+      {
+        "trade_id": "example-trade",
+        "trade_seq": 1,
+        "instrument_name": "BTC-PERPETUAL",
+        "timestamp": 1,
+        "direction": "buy",
+        "tick_direction": 0,
+        "index_price": 123.456789,
+        "price": 123.456789,
+        "amount": 1,
+        "mark_price": 123.456789,
+        "order_id": "example-order",
+        "matching_id": null,
+        "fee": 0,
+        "fee_currency": "BTC",
+        "state": "open",
+        "post_only": true,
+        "reduce_only": false
+      }
+    ]
+  }
+}

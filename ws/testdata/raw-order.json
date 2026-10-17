@@ -1,0 +1,22 @@
+{
+  "jsonrpc": "2.0",
+  "method": "subscription",
+  "params": {
+    "channel": "user.orders.BTC-PERPETUAL.raw",
+    "data": {
+      "order_id": "example-order",
+      "order_state": "open",
+      "order_type": "limit",
+      "time_in_force": "good_til_cancelled",
+      "instrument_name": "BTC-PERPETUAL",
+      "creation_timestamp": 1,
+      "last_update_timestamp": 1,
+      "direction": "buy",
+      "price": 123.456789,
+      "label": "",
+      "post_only": false,
+      "api": true,
+      "max_show": 1
+    }
+  }
+}
