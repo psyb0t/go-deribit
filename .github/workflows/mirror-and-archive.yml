@@ -13,13 +13,14 @@ jobs:
     uses: psyb0t/reusable-github-workflows/.github/workflows/git-mirror.yml@master
     with:
       gitlab_enabled: true
-      codeberg_enabled: true
+      # Codeberg caps an account at 100 repositories, so generated API
+      # clients are not mirrored there.
+      codeberg_enabled: false
       # Gitee wants a mobile number bound to the account; without one it creates
       # the repo private instead of refusing.
       gitee_enabled: false
     secrets:
       gitlab_token: ${{ secrets.GITLAB_TOKEN }}
-      codeberg_token: ${{ secrets.CODEBERG_TOKEN }}
 
   # Off feature-branch pushes -- the archive is rate-limited.
   archive:

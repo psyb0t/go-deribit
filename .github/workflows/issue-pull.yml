@@ -14,9 +14,10 @@ jobs:
       issues: write
     uses: psyb0t/reusable-github-workflows/.github/workflows/issue-pull.yml@master
     with:
+      # Generated API clients are not mirrored to Codeberg.
+      codeberg_enabled: false
       # Only the cron needs spreading out. A manual run is one repo, triggered by
       # one person who is waiting for it.
       jitter_seconds: ${{ github.event_name == 'schedule' && 600 || 0 }}
     secrets:
-      codeberg_token: ${{ secrets.CODEBERG_TOKEN }}
       gitlab_token: ${{ secrets.GITLAB_TOKEN }}
