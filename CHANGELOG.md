@@ -2,6 +2,11 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.1.2, 2026-10-17
+
+- `make sec` no longer fails on the generated client's free-form JSON fields. Semgrep's unsafe-deserialization-interface rule is skipped for `client.gen.go` only. It still runs on handwritten code and the WebSocket package, and every other rule still runs on the generated client.
+- The v0.1.1 documentation update (the `go doc` lookup section, the license field and the OpenClaw `requires` fix in the agent skill) reaches ClawHub with this release, because the v0.1.1 pipeline stopped at that check.
+
 ## v0.1.1, 2026-10-17
 
 - Documentation only. The agent skill explains how to look up every endpoint, parameter and model with `go doc` or on pkg.go.dev, and declares its license.
