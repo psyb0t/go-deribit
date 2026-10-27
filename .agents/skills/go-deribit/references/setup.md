@@ -4,7 +4,7 @@ This module is unofficial and not affiliated with Deribit.
 
 ## Requirements
 
-- Go 1.26.9 or newer, per `go.mod`.
+- Go 1.26.10 or newer, per `go.mod`.
 - An OAuth access token for private REST requests. The example reads `DERIBIT_ACCESS_TOKEN`; public REST market data and most public subscriptions need no credentials.
 
 ## Install

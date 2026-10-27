@@ -3,7 +3,7 @@ UID := $(shell id -u)
 GID := $(shell id -g)
 
 # Every Go and tooling command runs inside the dev image, so the toolchain
-# (Go 1.26.9), the linter and the security scanners are identical in a local
+# (Go 1.26.10), the linter and the security scanners are identical in a local
 # shell and in CI. The workspace is bind-mounted; caches go to /tmp so the
 # non-root run needs no writable GOPATH. CGO stays on for the race detector.
 DEV_RUN := docker run --rm --init \

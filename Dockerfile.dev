@@ -1,28 +1,53 @@
 # Development image for all Makefile-driven Go checks.
 #
-# Pins the Go 1.26.9 toolchain and carries the linter and security scanners, so
+# Pins the Go 1.26.10 toolchain and carries the linter and security scanners, so
 # `make lint`, `make test` and `make sec` run identically
 # in a local shell and in CI (the pipeline runs every make target inside this
 # image, so there is no host toolchain to drift).
-FROM golang:1.26.9-alpine@sha256:3082400e369fa24d5fc60bca20edab3f6d604e0c5a690ec66b295eff4dd87ade
+FROM golang:1.26.10-trixie@sha256:e18951cff6896c16909458a8e0cbd52364a347826ff1f5b86d095fe0670d52e7
 
-RUN apk add --no-cache \
-		bash=5.3.9-r1 \
-		build-base=0.5-r4 \
-		ca-certificates=20260909-r0 \
-		git=2.54.0-r0 \
-		jq=1.8.2-r0 \
-		make=4.4.1-r4 \
-		python3=3.14.8-r0 \
-		py3-pip=26.1.2-r0 \
-		shellcheck=0.11.0-r1 \
-		shfmt=3.13.1-r3
+# The base image records the snapshot.debian.org timestamp it was built from.
+# Installing from that snapshot ties every apt package to the base image digest,
+# so the build never breaks when the live Debian mirrors move on.
+RUN set -eu; \
+	sources=/etc/apt/sources.list.d/debian.sources; \
+	snapshot="$(grep -m1 -oE '[0-9]{8}T[0-9]{6}Z' "$sources")"; \
+	test -n "$snapshot"; \
+	sed -i -E "s|^URIs: http://deb.debian.org/(debian(-security)?)$|URIs: http://snapshot.debian.org/archive/\1/${snapshot}|" "$sources"; \
+	apt-get -o Acquire::Retries=5 -o Acquire::Check-Valid-Until=false update; \
+	apt-get install -y --no-install-recommends python3-venv xz-utils; \
+	rm -rf /var/lib/apt/lists/*
 
 # Security tools are pinned in the development image so local and CI scans use
 # the same versions.
-RUN go install golang.org/x/vuln/cmd/govulncheck@v1.6.0
+RUN go install golang.org/x/vuln/cmd/govulncheck@v1.6.0 \
+	&& go install mvdan.cc/sh/v3/cmd/shfmt@v3.13.1
 
 ARG TARGETARCH
+
+RUN set -eu; \
+	case "$TARGETARCH" in \
+		amd64) \
+			jq_sha256="b1c22172dd303f3be49e935aa56aa48a8b7a46e0bc838b4997d3bb451495870f"; \
+			shellcheck_arch="x86_64"; \
+			shellcheck_sha256="8c3be12b05d5c177a04c29e3c78ce89ac86f1595681cab149b65b97c4e227198" \
+			;; \
+		arm64) \
+			jq_sha256="8b85c817833814ddca00a144c33705546355afccf0cf39b188f3cdb48b852309"; \
+			shellcheck_arch="aarch64"; \
+			shellcheck_sha256="12b331c1d2db6b9eb13cfca64306b1b157a86eb69db83023e261eaa7e7c14588" \
+			;; \
+		*) exit 1 ;; \
+	esac; \
+	wget -q -O /usr/local/bin/jq \
+		"https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-linux-${TARGETARCH}"; \
+	echo "${jq_sha256}  /usr/local/bin/jq" | sha256sum -c -; \
+	chmod 0755 /usr/local/bin/jq; \
+	wget -q -O /tmp/shellcheck.tar.xz \
+		"https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.${shellcheck_arch}.tar.xz"; \
+	echo "${shellcheck_sha256}  /tmp/shellcheck.tar.xz" | sha256sum -c -; \
+	tar -xJf /tmp/shellcheck.tar.xz -C /usr/local/bin --strip-components=1 shellcheck-v0.11.0/shellcheck; \
+	rm /tmp/shellcheck.tar.xz
 
 RUN set -eu; \
 	case "$TARGETARCH" in \
@@ -44,12 +69,15 @@ RUN set -eu; \
 
 COPY requirements-semgrep.txt /tmp/requirements-semgrep.txt
 
-RUN pip install \
-		--break-system-packages \
+# A virtual environment keeps semgrep's dependencies apart from the Python
+# packages Debian manages.
+RUN python3 -m venv /opt/semgrep \
+	&& /opt/semgrep/bin/pip install \
 		--disable-pip-version-check \
 		--no-cache-dir \
 		--require-hashes \
-		-r /tmp/requirements-semgrep.txt
+		-r /tmp/requirements-semgrep.txt \
+	&& ln -s /opt/semgrep/bin/semgrep /usr/local/bin/semgrep
 
 WORKDIR /work
 

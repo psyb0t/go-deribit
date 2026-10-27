@@ -1,6 +1,6 @@
 {
   "name": "go-deribit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Unofficial Go client for Deribit crypto options and futures: REST account, orders, instruments and market data, plus generated WebSocket subscriptions.",
   "author": {
     "name": "psyb0t",
