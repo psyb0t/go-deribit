@@ -73,7 +73,6 @@ def wire_shape($value):
   else . end;
 
 # The examples include optional fields absent from their closed schemas.
-# Keep both the legacy singular position and the wire positions array.
 .channels |= with_entries(
   .key as $channel
   | if $channel == "deribit_price_statistics.(index_name)" then
@@ -87,12 +86,9 @@ def wire_shape($value):
         .max_show = {type:"number"}
     elif ($channel|startswith("user.changes.")) then
       # Settlement price is explicitly optional for spot positions.
-      .value.messages.subscription_message.payload.properties.data.properties
-        .position.required -= ["settlement_price"]
-      |
       .value.messages.subscription_message.payload.properties.data.properties |= (
-        .positions = {type:"array",items:.position}
-        | .orders.properties.max_show = {type:"number"}
+        .positions.items.required -= ["settlement_price"]
+        | .orders.items.properties.max_show = {type:"number"}
       )
     elif ($channel == "block_trade_confirmations" or $channel == "block_trade_confirmations.(currency)") then
       # The description marks app_name optional, and both examples omit it.

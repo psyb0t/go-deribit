@@ -30,21 +30,6 @@ func (e ErrorMessageResponseJsonrpc) Valid() bool {
 	}
 }
 
-// Defines values for ErrorResponseJsonrpc.
-const (
-	ErrorResponseJsonrpcN20 ErrorResponseJsonrpc = "2.0"
-)
-
-// Valid indicates whether the value is a known member of the ErrorResponseJsonrpc enum.
-func (e ErrorResponseJsonrpc) Valid() bool {
-	switch e {
-	case ErrorResponseJsonrpcN20:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for GetlistCustodyAccounts200responseJsonrpc.
 const (
 	GetlistCustodyAccounts200responseJsonrpcN20 GetlistCustodyAccounts200responseJsonrpc = "2.0"
@@ -2613,24 +2598,6 @@ func (e Currency) Valid() bool {
 	}
 }
 
-// Defines values for CurrencyPortfolioCurrency.
-const (
-	CurrencyPortfolioCurrencyBtc CurrencyPortfolioCurrency = "btc"
-	CurrencyPortfolioCurrencyEth CurrencyPortfolioCurrency = "eth"
-)
-
-// Valid indicates whether the value is a known member of the CurrencyPortfolioCurrency enum.
-func (e CurrencyPortfolioCurrency) Valid() bool {
-	switch e {
-	case CurrencyPortfolioCurrencyBtc:
-		return true
-	case CurrencyPortfolioCurrencyEth:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for CurrencyWithAny.
 const (
 	CurrencyWithAnyAny  CurrencyWithAny = "any"
@@ -2701,6 +2668,7 @@ func (e CustodyName) Valid() bool {
 const (
 	DepositStateCompleted DepositState = "completed"
 	DepositStatePending   DepositState = "pending"
+	DepositStateRefunded  DepositState = "refunded"
 	DepositStateRejected  DepositState = "rejected"
 	DepositStateReplaced  DepositState = "replaced"
 )
@@ -2711,6 +2679,8 @@ func (e DepositState) Valid() bool {
 	case DepositStateCompleted:
 		return true
 	case DepositStatePending:
+		return true
+	case DepositStateRefunded:
 		return true
 	case DepositStateRejected:
 		return true
@@ -3419,17 +3389,21 @@ func (e OrderType) Valid() bool {
 
 // Defines values for OrderType2.
 const (
-	OrderType2All          OrderType2 = "all"
-	OrderType2Limit        OrderType2 = "limit"
-	OrderType2StopAll      OrderType2 = "stop_all"
-	OrderType2StopLimit    OrderType2 = "stop_limit"
-	OrderType2StopMarket   OrderType2 = "stop_market"
-	OrderType2TakeAll      OrderType2 = "take_all"
-	OrderType2TakeLimit    OrderType2 = "take_limit"
-	OrderType2TakeMarket   OrderType2 = "take_market"
-	OrderType2TrailingAll  OrderType2 = "trailing_all"
-	OrderType2TrailingStop OrderType2 = "trailing_stop"
-	OrderType2TriggerAll   OrderType2 = "trigger_all"
+	OrderType2All                        OrderType2 = "all"
+	OrderType2Limit                      OrderType2 = "limit"
+	OrderType2OneCancelsOrTriggersOther  OrderType2 = "one_cancels_or_triggers_other"
+	OrderType2OneCancelsOther            OrderType2 = "one_cancels_other"
+	OrderType2OneTriggersOneCancelsOther OrderType2 = "one_triggers_one_cancels_other"
+	OrderType2OneTriggersOther           OrderType2 = "one_triggers_other"
+	OrderType2StopAll                    OrderType2 = "stop_all"
+	OrderType2StopLimit                  OrderType2 = "stop_limit"
+	OrderType2StopMarket                 OrderType2 = "stop_market"
+	OrderType2TakeAll                    OrderType2 = "take_all"
+	OrderType2TakeLimit                  OrderType2 = "take_limit"
+	OrderType2TakeMarket                 OrderType2 = "take_market"
+	OrderType2TrailingAll                OrderType2 = "trailing_all"
+	OrderType2TrailingStop               OrderType2 = "trailing_stop"
+	OrderType2TriggerAll                 OrderType2 = "trigger_all"
 )
 
 // Valid indicates whether the value is a known member of the OrderType2 enum.
@@ -3438,6 +3412,14 @@ func (e OrderType2) Valid() bool {
 	case OrderType2All:
 		return true
 	case OrderType2Limit:
+		return true
+	case OrderType2OneCancelsOrTriggersOther:
+		return true
+	case OrderType2OneCancelsOther:
+		return true
+	case OrderType2OneTriggersOneCancelsOther:
+		return true
+	case OrderType2OneTriggersOther:
 		return true
 	case OrderType2StopAll:
 		return true
@@ -4972,6 +4954,7 @@ const (
 	PrivateWithdrawParamsPriorityInsane      PrivateWithdrawParamsPriority = "insane"
 	PrivateWithdrawParamsPriorityLow         PrivateWithdrawParamsPriority = "low"
 	PrivateWithdrawParamsPriorityMid         PrivateWithdrawParamsPriority = "mid"
+	PrivateWithdrawParamsPriorityNormal      PrivateWithdrawParamsPriority = "normal"
 	PrivateWithdrawParamsPriorityVeryHigh    PrivateWithdrawParamsPriority = "very_high"
 	PrivateWithdrawParamsPriorityVeryLow     PrivateWithdrawParamsPriority = "very_low"
 )
@@ -4988,6 +4971,8 @@ func (e PrivateWithdrawParamsPriority) Valid() bool {
 	case PrivateWithdrawParamsPriorityLow:
 		return true
 	case PrivateWithdrawParamsPriorityMid:
+		return true
+	case PrivateWithdrawParamsPriorityNormal:
 		return true
 	case PrivateWithdrawParamsPriorityVeryHigh:
 		return true
@@ -5189,6 +5174,7 @@ func (e PublicGetSupportedIndexNamesParamsType) Valid() bool {
 
 // Defines values for PublicGetTradingviewChartDataParamsResolution.
 const (
+	PublicGetTradingviewChartDataParamsResolutionD    PublicGetTradingviewChartDataParamsResolution = "D"
 	PublicGetTradingviewChartDataParamsResolutionN1   PublicGetTradingviewChartDataParamsResolution = "1"
 	PublicGetTradingviewChartDataParamsResolutionN10  PublicGetTradingviewChartDataParamsResolution = "10"
 	PublicGetTradingviewChartDataParamsResolutionN120 PublicGetTradingviewChartDataParamsResolution = "120"
@@ -5206,6 +5192,8 @@ const (
 // Valid indicates whether the value is a known member of the PublicGetTradingviewChartDataParamsResolution enum.
 func (e PublicGetTradingviewChartDataParamsResolution) Valid() bool {
 	switch e {
+	case PublicGetTradingviewChartDataParamsResolutionD:
+		return true
 	case PublicGetTradingviewChartDataParamsResolutionN1:
 		return true
 	case PublicGetTradingviewChartDataParamsResolutionN10:
@@ -5279,43 +5267,27 @@ func (e PublicTestParamsExpectedResult) Valid() bool {
 
 // ErrorMessageResponse defines model for ErrorMessageResponse.
 type ErrorMessageResponse struct {
-	Error int `json:"error"`
+	Error struct {
+		Code int `json:"code"`
+
+		// Data Optional error details.
+		Data    interface{} `json:"data,omitempty"`
+		Message string      `json:"message"`
+	} `json:"error"`
 
 	// Id The id that was sent in the request
 	Id *int `json:"id,omitempty"`
 
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc ErrorMessageResponseJsonrpc `json:"jsonrpc"`
-	Message string                      `json:"message"`
 }
 
 // ErrorMessageResponseJsonrpc The JSON-RPC version (2.0)
 type ErrorMessageResponseJsonrpc string
 
-// ErrorResponse Generic error response for broken references
-type ErrorResponse struct {
-	Error struct {
-		// Code Error code
-		Code int `json:"code"`
-
-		// Message Error message
-		Message string `json:"message"`
-	} `json:"error"`
-	Jsonrpc ErrorResponseJsonrpc `json:"jsonrpc"`
-}
-
-// ErrorResponseJsonrpc defines model for ErrorResponse.Jsonrpc.
-type ErrorResponseJsonrpc string
-
 // GetlistCustodyAccounts200response defines model for GetlistCustodyAccounts200response.
 type GetlistCustodyAccounts200response struct {
-	Error struct {
-		// Code Error code
-		Code int `json:"code"`
-
-		// Message Error message
-		Message string `json:"message"`
-	} `json:"error"`
+	Id      *int                                     `json:"id,omitempty"`
 	Jsonrpc GetlistCustodyAccounts200responseJsonrpc `json:"jsonrpc"`
 	Result  *[]CustodyAccount                        `json:"result,omitempty"`
 }
@@ -5516,7 +5488,7 @@ type PrivateAccountResponse struct {
 		// Example: 0
 		FuturesSessionUpl float64 `json:"futures_session_upl"`
 
-		// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity that is excluded from proof of reserve calculations
+		// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity
 		HasNonBlockChainEquity *bool `json:"has_non_block_chain_equity,omitempty"`
 
 		// Id Account id (available when parameter `extended` = `true`)
@@ -5928,7 +5900,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			FuturesSessionUpl float64 `json:"futures_session_upl"`
 
-			// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity that is excluded from proof of reserve calculations
+			// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity
 			HasNonBlockChainEquity *bool `json:"has_non_block_chain_equity,omitempty"`
 
 			// InitialMargin Minimum margin required to open or increase positions (includes margin for open orders). If initial margin usage exceeds 100%, `available_funds` is `0`. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
@@ -6189,9 +6161,15 @@ type PrivateBuyAndSellResponse struct {
 
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateBuyAndSellResponseJsonrpc `json:"jsonrpc"`
-	Result  struct {
-		Order  Order       `json:"order"`
-		Trades []UserTrade `json:"trades"`
+
+	// Result Regular, trigger and OTO/OTOCO results contain `order` and `trades`.
+	// When a `one_cancels_other` request places two orders, the result contains
+	// `oco_orders` and `trades` instead. A single regular-order result still uses `order`.
+	Result struct {
+		// OcoOrders The two orders placed by an OCO request; returned instead of order.
+		OcoOrders *[]Order    `json:"oco_orders,omitempty"`
+		Order     *Order      `json:"order,omitempty"`
+		Trades    []UserTrade `json:"trades"`
 	} `json:"result"`
 }
 
@@ -6413,14 +6391,10 @@ type PrivateCreateSubaccountResponse struct {
 		LoginEnabled bool `json:"login_enabled"`
 
 		// MarginModel Margin model
-		MarginModel string     `json:"margin_model"`
-		Portfolio   *Portfolio `json:"portfolio,omitempty"`
+		MarginModel string `json:"margin_model"`
 
-		// ProofId hashed identifier used in the Proof Of Liability for the subaccount. This identifier allows you to find your entries in the Deribit Proof-Of-Reserves files. IMPORTANT: Keep it secret to not disclose your entries in the Proof-Of-Reserves.
-		ProofId string `json:"proof_id"`
-
-		// ProofIdSignature signature used as a base string for proof_id hash. IMPORTANT: Keep it secret to not disclose your entries in the Proof-Of-Reserves.
-		ProofIdSignature string `json:"proof_id_signature"`
+		// Portfolio Portfolio entries keyed by lowercase currency code.
+		Portfolio *Portfolio `json:"portfolio,omitempty"`
 
 		// ReceiveNotifications When `true` - receive all notification emails on the main email
 		ReceiveNotifications bool `json:"receive_notifications"`
@@ -6944,10 +6918,10 @@ type PrivateGetCancelOnDisconnectResponse struct {
 		// Enabled Current configuration status
 		//
 		// Example: true
-		Enabled *EnabledField `json:"enabled,omitempty"`
+		Enabled EnabledField `json:"enabled"`
 
 		// Scope Informs if Cancel on Disconnect was checked for the current connection or the account
-		Scope *CodScope `json:"scope,omitempty"`
+		Scope CodScope `json:"scope"`
 	} `json:"result"`
 }
 
@@ -7436,14 +7410,10 @@ type PrivateGetSubaccountsResponse struct {
 		MarginModel *string `json:"margin_model,omitempty"`
 
 		// NotConfirmedEmail New email address that has not yet been confirmed. This field is only included if `with_portfolio` == `true`.
-		NotConfirmedEmail *string    `json:"not_confirmed_email,omitempty"`
-		Portfolio         *Portfolio `json:"portfolio,omitempty"`
+		NotConfirmedEmail *string `json:"not_confirmed_email,omitempty"`
 
-		// ProofId Hashed identifier used in the Proof Of Liability for the subaccount. This identifier allows you to find your entries in the Deribit Proof-Of-Reserves files. IMPORTANT: Keep it secret to not disclose your entries in the Proof-Of-Reserves.
-		ProofId *string `json:"proof_id,omitempty"`
-
-		// ProofIdSignature Signature used as a base string for proof_id hash. IMPORTANT: Keep it secret to not disclose your entries in the Proof-Of-Reserves.
-		ProofIdSignature *string `json:"proof_id_signature,omitempty"`
+		// Portfolio Portfolio entries keyed by lowercase currency code.
+		Portfolio *Portfolio `json:"portfolio,omitempty"`
 
 		// ReceiveNotifications When `true` - receive all notification emails on the main email
 		ReceiveNotifications bool `json:"receive_notifications"`
@@ -8190,12 +8160,18 @@ type PublicAuthResponse struct {
 		// Example: 843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7
 		AccessToken string `json:"access_token"`
 
+		// AppleLogin The access token was acquired by logging in through Apple.
+		AppleLogin *bool `json:"apple_login,omitempty"`
+
+		// CoinbaseLogin The access token was acquired by logging in through Coinbase.
+		CoinbaseLogin *bool `json:"coinbase_login,omitempty"`
+
 		// EnabledFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
 		EnabledFeatures *ApiKeyFeatures `json:"enabled_features,omitempty"`
 
 		// ExpiresIn Token lifetime in seconds
 		//
-		// Example: 315360000
+		// Example: 31536000
 		ExpiresIn int `json:"expires_in"`
 
 		// GoogleLogin The access token was acquired by logging in through Google.
@@ -8440,7 +8416,7 @@ type PublicGetBlockRfqTradesResponse struct {
 				// HedgeAmount Amount of the hedge leg. For linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
 				HedgeAmount *float64 `json:"hedge_amount,omitempty"`
 
-				// Price Price in base currency
+				// Price Price in the instrument's price units (quote currency for futures and spot).
 				Price *Price `json:"price,omitempty"`
 			} `json:"trades,omitempty"`
 		} `json:"block_rfqs,omitempty"`
@@ -8637,7 +8613,7 @@ type PublicGetFundingRateHistoryResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PublicGetFundingRateHistoryResponseJsonrpc `json:"jsonrpc"`
 	Result  []struct {
-		// IndexPrice Price in base currency
+		// IndexPrice Price in the instrument's price units (quote currency for futures and spot).
 		IndexPrice *Price `json:"index_price,omitempty"`
 
 		// Interest1h 1hour interest rate
@@ -8646,7 +8622,7 @@ type PublicGetFundingRateHistoryResponse struct {
 		// Interest8h 8hour interest rate
 		Interest8h *float64 `json:"interest_8h,omitempty"`
 
-		// PrevIndexPrice Price in base currency
+		// PrevIndexPrice Price in the instrument's price units (quote currency for futures and spot).
 		PrevIndexPrice *Price `json:"prev_index_price,omitempty"`
 
 		// Timestamp The timestamp (milliseconds since the Unix epoch)
@@ -9003,9 +8979,9 @@ type PublicTokenResponse struct {
 		// AccessToken Example: 843SehgeX5n6XxEU4XbABx4Cny5Akai5iHiJePTsvUw7
 		AccessToken string `json:"access_token"`
 
-		// ExpiresIn Token lifetime in seconds
+		// ExpiresIn Remaining token lifetime in seconds
 		//
-		// Example: 315360000
+		// Example: 900
 		ExpiresIn int `json:"expires_in"`
 
 		// RefreshToken Can be used to request a new token (with a new lifetime)
@@ -9016,7 +8992,7 @@ type PublicTokenResponse struct {
 		// Scope Type of the access for assigned token
 		Scope string `json:"scope"`
 
-		// Sid Optional Session id
+		// Sid Session id (present for session scope tokens)
 		Sid *string `json:"sid,omitempty"`
 
 		// TokenType Authorization type, allowed value - `bearer`
@@ -9060,13 +9036,13 @@ type TickerNotification struct {
 	// BestAskAmount It represents the requested order size of all best asks
 	BestAskAmount *BestAskAmount `json:"best_ask_amount"`
 
-	// BestAskPrice The current best ask price, `null` if there aren't any asks
+	// BestAskPrice The current best ask price, `0` if the ask side is empty
 	BestAskPrice *BestAskPrice `json:"best_ask_price"`
 
 	// BestBidAmount It represents the requested order size of all best bids
 	BestBidAmount *BestBidAmount `json:"best_bid_amount"`
 
-	// BestBidPrice The current best bid price, `null` if there aren't any bids
+	// BestBidPrice The current best bid price, `0` if the bid side is empty
 	BestBidPrice *BestBidPrice `json:"best_bid_price"`
 
 	// BidIv (Only for option) implied volatility for best bid
@@ -9201,13 +9177,13 @@ type TickerNotificationWithBidsAndAsks struct {
 	// BestAskAmount It represents the requested order size of all best asks
 	BestAskAmount *BestAskAmount `json:"best_ask_amount"`
 
-	// BestAskPrice The current best ask price, `null` if there aren't any asks
+	// BestAskPrice The current best ask price, `0` if the ask side is empty
 	BestAskPrice *BestAskPrice `json:"best_ask_price"`
 
 	// BestBidAmount It represents the requested order size of all best bids
 	BestBidAmount *BestBidAmount `json:"best_bid_amount"`
 
-	// BestBidPrice The current best bid price, `null` if there aren't any bids
+	// BestBidPrice The current best bid price, `0` if the bid side is empty
 	BestBidPrice *BestBidPrice `json:"best_bid_price"`
 
 	// BidIv (Only for option) implied volatility for best bid
@@ -9549,9 +9525,9 @@ type AddressBookItem struct {
 	// Type Address book type
 	Type *AddressBookType `json:"type,omitempty"`
 
-	// WaitingTimestamp Timestamp when the address will be ready
+	// WaitingTimestamp Timestamp (milliseconds since the Unix epoch) at which the address becomes usable; present while status is waiting; null for Coinbase deposit addresses.
 	//
-	// Example: true
+	// Example: 1720252232860
 	WaitingTimestamp *WaitingTimestamp `json:"waiting_timestamp,omitempty"`
 }
 
@@ -9716,13 +9692,13 @@ type BeneficiaryVaspWebsite = string
 // BestAskAmount It represents the requested order size of all best asks
 type BestAskAmount = float64
 
-// BestAskPrice The current best ask price, `null` if there aren't any asks
+// BestAskPrice The current best ask price, `0` if the ask side is empty
 type BestAskPrice = float64
 
 // BestBidAmount It represents the requested order size of all best bids
 type BestBidAmount = float64
 
-// BestBidPrice The current best bid price, `null` if there aren't any bids
+// BestBidPrice The current best bid price, `0` if the bid side is empty
 type BestBidPrice = float64
 
 // BidIv (Only for option) implied volatility for best bid
@@ -9812,7 +9788,7 @@ type BlockRfq struct {
 		// Maker Alias of the maker (optional)
 		Maker *string `json:"maker,omitempty"`
 
-		// Price Price in base currency
+		// Price Price in the instrument's price units (quote currency for futures and spot).
 		Price *Price `json:"price,omitempty"`
 	} `json:"trades,omitempty"`
 }
@@ -10002,7 +9978,7 @@ type BookSummary struct {
 	// AskPrice The current best ask price, `null` if there aren't any asks
 	//
 	// Example: 7022.89
-	AskPrice float64 `json:"ask_price"`
+	AskPrice *float64 `json:"ask_price"`
 
 	// BaseCurrency Base currency
 	//
@@ -10012,7 +9988,7 @@ type BookSummary struct {
 	// BidPrice The current best bid price, `null` if there aren't any bids
 	//
 	// Example: 7022.89
-	BidPrice float64 `json:"bid_price"`
+	BidPrice *float64 `json:"bid_price"`
 
 	// CreationTimestamp The timestamp (milliseconds since the Unix epoch)
 	//
@@ -10035,7 +10011,7 @@ type BookSummary struct {
 	// High Price of the 24h highest trade
 	//
 	// Example: 7022.89
-	High float64 `json:"high"`
+	High *float64 `json:"high"`
 
 	// InstrumentName Unique instrument identifier
 	//
@@ -10050,12 +10026,12 @@ type BookSummary struct {
 	// Last The price of the latest trade, `null` if there weren't any trades
 	//
 	// Example: 7022.89
-	Last float64 `json:"last"`
+	Last *float64 `json:"last"`
 
 	// Low Price of the 24h lowest trade, `null` if there weren't any trades
 	//
 	// Example: 7022.89
-	Low float64 `json:"low"`
+	Low *float64 `json:"low"`
 
 	// MarkIv (Only for option) implied volatility for mark price
 	MarkIv *MarkIv `json:"mark_iv,omitempty"`
@@ -10068,12 +10044,12 @@ type BookSummary struct {
 	// MidPrice The average of the best bid and ask, `null` if there aren't any asks or bids
 	//
 	// Example: 7022.89
-	MidPrice float64 `json:"mid_price"`
+	MidPrice *float64 `json:"mid_price"`
 
 	// OpenInterest Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	//
 	// Example: 0.5
-	OpenInterest float64 `json:"open_interest"`
+	OpenInterest *float64 `json:"open_interest,omitempty"`
 
 	// PriceChange 24-hour price change expressed as a percentage, `null` if there weren't any trades
 	//
@@ -10242,9 +10218,9 @@ type CoinbaseAddressBookItem struct {
 	// Example: 1536569522277
 	UpdatedTimestamp *Timestamp `json:"updated_timestamp,omitempty"`
 
-	// WaitingTimestamp Timestamp when the address will be ready
+	// WaitingTimestamp Timestamp (milliseconds since the Unix epoch) at which the address becomes usable; present while status is waiting; null for Coinbase deposit addresses.
 	//
-	// Example: true
+	// Example: 1720252232860
 	WaitingTimestamp *WaitingTimestamp `json:"waiting_timestamp,omitempty"`
 
 	// WalletType Type of the beneficiary wallet , travel rule data (present when provided)
@@ -10450,7 +10426,7 @@ type CurrencyPortfolio struct {
 	Balance float64 `json:"balance"`
 
 	// Currency The selected currency
-	Currency CurrencyPortfolioCurrency `json:"currency"`
+	Currency string `json:"currency"`
 
 	// Equity The account's current equity
 	Equity float64 `json:"equity"`
@@ -10467,9 +10443,6 @@ type CurrencyPortfolio struct {
 	// SpotReserve The account's balance reserved in active spot orders
 	SpotReserve float64 `json:"spot_reserve"`
 }
-
-// CurrencyPortfolioCurrency The selected currency
-type CurrencyPortfolioCurrency string
 
 // CurrencyTransactionId Transaction id in proper format for currency, `null` if id is not available
 //
@@ -10674,7 +10647,7 @@ type Deposit struct {
 	// Example: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
 	SourceAddress *CurrencyAddress `json:"source_address,omitempty"`
 
-	// State Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li>
+	// State Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li> <li><code>refunded</code>: rejected deposit returned to its sender; refund_transaction_id identifies the refund</li>
 	State DepositState `json:"state"`
 
 	// TransactionId Transaction id in proper format for currency, `null` if id is not available
@@ -10688,7 +10661,7 @@ type Deposit struct {
 	UpdatedTimestamp Timestamp `json:"updated_timestamp"`
 }
 
-// DepositState Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li>
+// DepositState Deposit state. Allowed values: <li><code>pending</code>: deposit detected on blockchain/system, compliance not yet finished</li> <li><code>completed</code>: compliance check finished successfully</li> <li><code>rejected</code>: deposit failed compliance and must be handled manually</li> <li><code>replaced</code>: deposit transaction was replaced on the blockchain and should have a new transaction hash</li> <li><code>refunded</code>: rejected deposit returned to its sender; refund_transaction_id identifies the refund</li>
 type DepositState string
 
 // Direction Direction: `buy`, or `sell`
@@ -10934,16 +10907,7 @@ type Instrument struct {
 	// MakerMaxCommission Optional. Maximum maker commission. Returned only when `extended=true` on `public/get_instruments`.
 	MakerMaxCommission *float64 `json:"maker_max_commission,omitempty"`
 
-	// MarginParams Optional (futures only). Formatted margin parameters. Returned only when `extended=true` on `public/get_instruments`.
-	MarginParams *struct {
-		IInc  *float64 `json:"i_inc,omitempty"`
-		MFee  *float64 `json:"m_fee,omitempty"`
-		MInc  *float64 `json:"m_inc,omitempty"`
-		MInit *float64 `json:"m_init,omitempty"`
-		MPow  *float64 `json:"m_pow,omitempty"`
-	} `json:"margin_params,omitempty"`
-
-	// MaxLeverage Maximal leverage for the default risk profile. Present on futures. Also present on some USDC spot pairs when spot margin loans are enabled (borrowable base, USDC quote); other spots omit the field. Not present on options.
+	// MaxLeverage Maximal leverage for the default risk profile (futures). For spot, present only on cross pairs when spot margin loans are enabled: derived from the loan initial-margin rate for borrowable USDC-quoted pairs, otherwise 1. Omitted on other spots and options.
 	//
 	//
 	// Example: 100
@@ -11241,7 +11205,7 @@ type OcoRef = string
 // OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 type OpenInterest = float64
 
-// OpenOrderPrice Price in base currency or "market_price" in case of open trigger market orders
+// OpenOrderPrice Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
 type OpenOrderPrice struct {
 	union json.RawMessage
 }
@@ -11369,7 +11333,7 @@ type Order struct {
 	// PostOnly `true` for post-only orders only
 	PostOnly PostOnly `json:"post_only"`
 
-	// Price Price in base currency or "market_price" in case of open trigger market orders
+	// Price Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
 	Price OpenOrderPrice `json:"price"`
 
 	// PrimaryOrderId Unique order identifier
@@ -11478,7 +11442,7 @@ type OrderStateStop = string
 // OrderType Order type: `"limit"`, `"market"`, `"stop_limit"`, `"stop_market"`, `"take_limit"`, `"take_market"`, `"trailing_stop"`
 type OrderType string
 
-// OrderType2 Order type: `"all"`, `"limit"`, `"trigger_all"`, `"stop_all"`, `"stop_limit"`, `"stop_market"`, `"take_all"`, `"take_limit"`, `"take_market"`, `"trailing_all"`, `"trailing_stop"`
+// OrderType2 Order-type filter, including regular, trigger and linked-order families.
 type OrderType2 string
 
 // Orders defines model for orders.
@@ -11564,10 +11528,8 @@ type PersonalWallet = bool
 // PmeCurrency The currency for which the Extended Risk Matrix will be calculated. Use `CROSS` for Cross Collateral simulation.
 type PmeCurrency string
 
-// Portfolio defines model for portfolio.
-type Portfolio struct {
-	BtcExample *CurrencyPortfolio `json:"btc(example),omitempty"`
-}
+// Portfolio Portfolio entries keyed by lowercase currency code.
+type Portfolio map[string]CurrencyPortfolio
 
 // Position defines model for position.
 type Position struct {
@@ -11669,7 +11631,7 @@ type PositionMoveTrade struct {
 	// Example: BTC-PERPETUAL
 	InstrumentName InstrumentName `json:"instrument_name"`
 
-	// Price Price in base currency
+	// Price Price in the instrument's price units (quote currency for futures and spot).
 	Price Price `json:"price"`
 
 	// SourceUid Trade source uid
@@ -11767,7 +11729,7 @@ type PositionWithOpenOrdersMargin struct {
 // PostOnly `true` for post-only orders only
 type PostOnly = bool
 
-// Price Price in base currency
+// Price Price in the instrument's price units (quote currency for futures and spot).
 type Price = float64
 
 // PriceIndex Name of price index that is used for this instrument
@@ -11849,13 +11811,16 @@ type PublicTrade struct {
 	// Iv Option implied volatility for the price (Option only)
 	Iv *float64 `json:"iv,omitempty"`
 
+	// Legs Leg trades, present when querying only combo trades.
+	Legs *[]PublicTrade `json:"legs,omitempty"`
+
 	// Liquidation Optional field (only for trades caused by liquidation): `"M"` when maker side of trade was under liquidation, `"T"` when taker side was under liquidation, `"MT"` when both sides of trade were under liquidation
 	Liquidation *PublicTradeLiquidation `json:"liquidation,omitempty"`
 
 	// MarkPrice Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 
-	// Price Price in base currency
+	// Price Price in the instrument's price units (quote currency for futures and spot).
 	Price Price `json:"price"`
 
 	// StarbaseMatchId Optional field containing the Starbase match identifier (present only for trades matched via Starbase)
@@ -12069,7 +12034,7 @@ type SettlementPrice = float64
 // SettlementType The type of settlement event. `settlement`: daily settlement of futures and perpetual positions at 08:00 UTC, converting unrealized profit and loss into realized profit and loss (option positions do not settle). `delivery`: one-time expiration of a futures or options contract at 08:00 UTC, closing any remaining open position at the delivery price (does not apply to perpetual or spot instruments). `bankruptcy`.
 type SettlementType string
 
-// SimpleOrderType Order type: `"all"`, `"limit"`, `"stop"`, `"take"`, `"trailing_stop"`, `"trailing_take"`
+// SimpleOrderType Order type filter: `all`, `limit`, `trigger_all`, `stop`, `take`, or `trailing_stop`.
 type SimpleOrderType string
 
 // Sorting defines model for sorting.
@@ -12088,10 +12053,10 @@ type StarbaseTimestamp = int
 // Stats defines model for stats.
 type Stats struct {
 	// High Highest price during 24h
-	High float64 `json:"high"`
+	High *float64 `json:"high"`
 
 	// Low Lowest price during 24h
-	Low float64 `json:"low"`
+	Low *float64 `json:"low"`
 
 	// PriceChange 24-hour price change expressed as a percentage, `null` if there weren't any trades
 	//
@@ -12100,6 +12065,9 @@ type Stats struct {
 
 	// Volume Volume during last 24h in base currency
 	Volume float64 `json:"volume"`
+
+	// VolumeNotional 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
+	VolumeNotional *float64 `json:"volume_notional,omitempty"`
 
 	// VolumeUsd Volume in usd (futures only)
 	VolumeUsd *VolumeUsd `json:"volume_usd,omitempty"`
@@ -12449,10 +12417,16 @@ type TransferItem struct {
 	// Nonce Optional idempotency nonce if provided in the request
 	Nonce *string `json:"nonce,omitempty"`
 
+	// Note Transfer note (empty string if unset).
+	Note *string `json:"note,omitempty"`
+
 	// OtherSide For transfer from/to subaccount returns this subaccount name, for transfer to other account returns address, for transfer from other account returns that accounts username.
 	//
 	// Example: Smith
 	OtherSide TransferOtherSide `json:"other_side"`
+
+	// Source Source account id; present for subaccount transfer submissions.
+	Source *int `json:"source,omitempty"`
 
 	// State Transfer state, allowed values : `prepared`, `confirmed`, `cancelled`, `waiting_for_admin`, `insufficient_funds`,  `withdrawal_limit` otherwise rejection reason
 	State TransferState `json:"state"`
@@ -12527,7 +12501,7 @@ type TriggerOrderHistoryRecord struct {
 	// PostOnly `true` for post-only orders only
 	PostOnly PostOnly `json:"post_only"`
 
-	// Price Price in base currency
+	// Price Price in the instrument's price units (quote currency for futures and spot).
 	Price Price `json:"price"`
 
 	// ReduceOnly Optional (not added for spot). '`true` for reduce-only orders only'
@@ -12668,16 +12642,16 @@ type UserTrade struct {
 	Liquidity *UserTradeLiquidity `json:"liquidity,omitempty"`
 
 	// MarkPrice Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 
-	// MatchingId Always `null`
+	// MatchingId Matched order id for self-trades; null otherwise.
 	MatchingId *string `json:"matching_id"`
 
 	// Mmp `true` if user order is MMP
 	Mmp *bool `json:"mmp,omitempty"`
 
 	// OrderId Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderId string `json:"order_id"`
+	OrderId *string `json:"order_id"`
 
 	// OrderType Order type: `"limit"`, `"market"`, or `"liquidation"`
 	OrderType *UserTradeOrderType `json:"order_type,omitempty"`
@@ -12686,9 +12660,9 @@ type UserTrade struct {
 	OriginalOrderType *OriginalOrderType `json:"original_order_type,omitempty"`
 
 	// PostOnly `true` if user order is post-only
-	PostOnly *string `json:"post_only,omitempty"`
+	PostOnly *bool `json:"post_only,omitempty"`
 
-	// Price Price in base currency
+	// Price Price in the instrument's price units (quote currency for futures and spot).
 	Price Price `json:"price"`
 
 	// ProfitLoss Profit and loss in base currency.
@@ -12700,8 +12674,8 @@ type UserTrade struct {
 	// QuoteSetId QuoteSet of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteSetId *string `json:"quote_set_id,omitempty"`
 
-	// ReduceOnly `true` if user order is reduce-only
-	ReduceOnly *string `json:"reduce_only,omitempty"`
+	// ReduceOnly `true` if user order is reduce-only; omitted for spot trades.
+	ReduceOnly *bool `json:"reduce_only,omitempty"`
 
 	// RiskReducing `true` if user order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users)
 	RiskReducing *bool `json:"risk_reducing,omitempty"`
@@ -12787,10 +12761,10 @@ type Username = string
 // VolumeUsd Volume in usd (futures only)
 type VolumeUsd = float64
 
-// WaitingTimestamp Timestamp when the address will be ready
+// WaitingTimestamp Timestamp (milliseconds since the Unix epoch) at which the address becomes usable; present while status is waiting; null for Coinbase deposit addresses.
 //
-// Example: true
-type WaitingTimestamp = bool
+// Example: 1720252232860
+type WaitingTimestamp = int
 
 // WalletAddressType Address type/purpose, allowed values : `deposit`
 type WalletAddressType = string
@@ -12813,6 +12787,12 @@ type Withdrawal struct {
 	// Example: 1
 	Amount CurrencyAmount `json:"amount"`
 
+	// ClearanceState Clearance state indicating the current status of the transaction clearance process. Allowed values: <li><code>in_progress</code>: clearance process is in progress</li> <li><code>pending_admin_decision</code>: transaction is under manual review by Deribit admin</li> <li><code>pending_user_input</code>: user should provide additional information regarding the transaction</li> <li><code>success</code>: clearance process completed successfully</li> <li><code>failed</code>: clearance process failed, transaction is rejected</li> <li><code>cancelled</code>: transaction is cancelled (currently used only for withdrawals, meaning the withdrawal is cancelled)</li> <li><code>refund_initiated</code>: clearance process failed, transaction refund is initiated, funds are removed from Deribit balance (valid for deposits only)</li> <li><code>refunded</code>: clearance process failed, deposit amount is refunded back to the client (valid for deposits only)</li>
+	ClearanceState *ClearanceState `json:"clearance_state,omitempty"`
+
+	// Completed Number of completed withdrawals to this address.
+	Completed *int `json:"completed,omitempty"`
+
 	// ConfirmedTimestamp The timestamp (milliseconds since the Unix epoch) of withdrawal confirmation, `null` when not confirmed
 	//
 	// Example: 1536569522277
@@ -12826,6 +12806,9 @@ type Withdrawal struct {
 	// Currency Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
 	Currency Currency `json:"currency"`
 
+	// ExecutionTimestamp Execution timestamp in milliseconds since the Unix epoch; present only when set and state is confirmed.
+	ExecutionTimestamp *int `json:"execution_timestamp,omitempty"`
+
 	// Fee Fee in currency
 	//
 	// Example: 0.000023
@@ -12838,6 +12821,9 @@ type Withdrawal struct {
 
 	// Nonce Optional idempotency nonce if provided in the request
 	Nonce *string `json:"nonce,omitempty"`
+
+	// Note Withdrawal note.
+	Note *string `json:"note,omitempty"`
 
 	// Priority Id of priority level
 	//
@@ -12863,381 +12849,6 @@ type WithdrawalState string
 
 // ErrorMessageResponse2 defines model for ErrorMessageResponse.
 type ErrorMessageResponse2 = ErrorMessageResponse
-
-// GetlistCustodyAccounts200responseResponse defines model for GetlistCustodyAccounts200response.
-type GetlistCustodyAccounts200responseResponse = GetlistCustodyAccounts200response
-
-// Getunsubscribe200responseResponse defines model for Getunsubscribe200response.
-type Getunsubscribe200responseResponse = Getunsubscribe200response
-
-// OkResponse2 defines model for OkResponse.
-type OkResponse2 = OkResponse
-
-// PrivateAcceptBlockRfqResponse2 defines model for PrivateAcceptBlockRfqResponse.
-type PrivateAcceptBlockRfqResponse2 = PrivateAcceptBlockRfqResponse
-
-// PrivateAccountResponse2 defines model for PrivateAccountResponse.
-type PrivateAccountResponse2 = PrivateAccountResponse
-
-// PrivateAccountSummariesResponse2 defines model for PrivateAccountSummariesResponse.
-type PrivateAccountSummariesResponse2 = PrivateAccountSummariesResponse
-
-// PrivateAddBlockRfqQuoteResponse2 defines model for PrivateAddBlockRfqQuoteResponse.
-type PrivateAddBlockRfqQuoteResponse2 = PrivateAddBlockRfqQuoteResponse
-
-// PrivateAddToAddressBookResponse2 defines model for PrivateAddToAddressBookResponse.
-type PrivateAddToAddressBookResponse2 = PrivateAddToAddressBookResponse
-
-// PrivateAddressBookResponse2 defines model for PrivateAddressBookResponse.
-type PrivateAddressBookResponse2 = PrivateAddressBookResponse
-
-// PrivateApiKeyResponse2 defines model for PrivateApiKeyResponse.
-type PrivateApiKeyResponse2 = PrivateApiKeyResponse
-
-// PrivateBuyAndSellResponse2 defines model for PrivateBuyAndSellResponse.
-type PrivateBuyAndSellResponse2 = PrivateBuyAndSellResponse
-
-// PrivateCancelAllBlockRfqQuotesResponse2 defines model for PrivateCancelAllBlockRfqQuotesResponse.
-type PrivateCancelAllBlockRfqQuotesResponse2 = PrivateCancelAllBlockRfqQuotesResponse
-
-// PrivateCancelAllResponse2 defines model for PrivateCancelAllResponse.
-type PrivateCancelAllResponse2 = PrivateCancelAllResponse
-
-// PrivateCancelBlockRfqQuoteResponse2 defines model for PrivateCancelBlockRfqQuoteResponse.
-type PrivateCancelBlockRfqQuoteResponse2 = PrivateCancelBlockRfqQuoteResponse
-
-// PrivateCancelBlockRfqResponse2 defines model for PrivateCancelBlockRfqResponse.
-type PrivateCancelBlockRfqResponse2 = PrivateCancelBlockRfqResponse
-
-// PrivateCancelBlockRfqTriggerResponse2 defines model for PrivateCancelBlockRfqTriggerResponse.
-type PrivateCancelBlockRfqTriggerResponse2 = PrivateCancelBlockRfqTriggerResponse
-
-// PrivateCancelQuotesResponse2 defines model for PrivateCancelQuotesResponse.
-type PrivateCancelQuotesResponse2 = PrivateCancelQuotesResponse
-
-// PrivateCancelResponse2 defines model for PrivateCancelResponse.
-type PrivateCancelResponse2 = PrivateCancelResponse
-
-// PrivateChangeMarginModelResponse2 defines model for PrivateChangeMarginModelResponse.
-type PrivateChangeMarginModelResponse2 = PrivateChangeMarginModelResponse
-
-// PrivateCoinbaseEstimateWithdrawalFeeResponse2 defines model for PrivateCoinbaseEstimateWithdrawalFeeResponse.
-type PrivateCoinbaseEstimateWithdrawalFeeResponse2 = PrivateCoinbaseEstimateWithdrawalFeeResponse
-
-// PrivateCreateBlockRfqResponse2 defines model for PrivateCreateBlockRfqResponse.
-type PrivateCreateBlockRfqResponse2 = PrivateCreateBlockRfqResponse
-
-// PrivateCreateComboResponse2 defines model for PrivateCreateComboResponse.
-type PrivateCreateComboResponse2 = PrivateCreateComboResponse
-
-// PrivateCreateSubaccountResponse2 defines model for PrivateCreateSubaccountResponse.
-type PrivateCreateSubaccountResponse2 = PrivateCreateSubaccountResponse
-
-// PrivateDeleteAddressBeneficiaryResponse2 defines model for PrivateDeleteAddressBeneficiaryResponse.
-type PrivateDeleteAddressBeneficiaryResponse2 = PrivateDeleteAddressBeneficiaryResponse
-
-// PrivateDeleteMemberResponse2 defines model for PrivateDeleteMemberResponse.
-type PrivateDeleteMemberResponse2 = PrivateDeleteMemberResponse
-
-// PrivateDepositAddressResponse2 defines model for PrivateDepositAddressResponse.
-type PrivateDepositAddressResponse2 = PrivateDepositAddressResponse
-
-// PrivateEditBlockRfqQuoteResponse2 defines model for PrivateEditBlockRfqQuoteResponse.
-type PrivateEditBlockRfqQuoteResponse2 = PrivateEditBlockRfqQuoteResponse
-
-// PrivateEditResponse2 defines model for PrivateEditResponse.
-type PrivateEditResponse2 = PrivateEditResponse
-
-// PrivateGetAccessLogResponse2 defines model for PrivateGetAccessLogResponse.
-type PrivateGetAccessLogResponse2 = PrivateGetAccessLogResponse
-
-// PrivateGetAddressBeneficiaryResponse2 defines model for PrivateGetAddressBeneficiaryResponse.
-type PrivateGetAddressBeneficiaryResponse2 = PrivateGetAddressBeneficiaryResponse
-
-// PrivateGetAffiliateProgramInfoResponse2 defines model for PrivateGetAffiliateProgramInfoResponse.
-type PrivateGetAffiliateProgramInfoResponse2 = PrivateGetAffiliateProgramInfoResponse
-
-// PrivateGetBlockRfqMakersResponse2 defines model for PrivateGetBlockRfqMakersResponse.
-type PrivateGetBlockRfqMakersResponse2 = PrivateGetBlockRfqMakersResponse
-
-// PrivateGetBlockRfqQuotesResponse2 defines model for PrivateGetBlockRfqQuotesResponse.
-type PrivateGetBlockRfqQuotesResponse2 = PrivateGetBlockRfqQuotesResponse
-
-// PrivateGetBlockRfqUserInfoResponse2 defines model for PrivateGetBlockRfqUserInfoResponse.
-type PrivateGetBlockRfqUserInfoResponse2 = PrivateGetBlockRfqUserInfoResponse
-
-// PrivateGetBlockRfqsResponse2 defines model for PrivateGetBlockRfqsResponse.
-type PrivateGetBlockRfqsResponse2 = PrivateGetBlockRfqsResponse
-
-// PrivateGetBlockTradeRequestsResponse2 defines model for PrivateGetBlockTradeRequestsResponse.
-type PrivateGetBlockTradeRequestsResponse2 = PrivateGetBlockTradeRequestsResponse
-
-// PrivateGetBlockTradeResponse2 defines model for PrivateGetBlockTradeResponse.
-type PrivateGetBlockTradeResponse2 = PrivateGetBlockTradeResponse
-
-// PrivateGetBlockTradesResponse2 defines model for PrivateGetBlockTradesResponse.
-type PrivateGetBlockTradesResponse2 = PrivateGetBlockTradesResponse
-
-// PrivateGetBrokerClientsResponse2 defines model for PrivateGetBrokerClientsResponse.
-type PrivateGetBrokerClientsResponse2 = PrivateGetBrokerClientsResponse
-
-// PrivateGetBrokerTradeRequestsResponse2 defines model for PrivateGetBrokerTradeRequestsResponse.
-type PrivateGetBrokerTradeRequestsResponse2 = PrivateGetBrokerTradeRequestsResponse
-
-// PrivateGetBrokerTradesResponse2 defines model for PrivateGetBrokerTradesResponse.
-type PrivateGetBrokerTradesResponse2 = PrivateGetBrokerTradesResponse
-
-// PrivateGetCancelOnDisconnectResponse2 defines model for PrivateGetCancelOnDisconnectResponse.
-type PrivateGetCancelOnDisconnectResponse2 = PrivateGetCancelOnDisconnectResponse
-
-// PrivateGetCurrenciesResponse2 defines model for PrivateGetCurrenciesResponse.
-type PrivateGetCurrenciesResponse2 = PrivateGetCurrenciesResponse
-
-// PrivateGetDepositsResponse2 defines model for PrivateGetDepositsResponse.
-type PrivateGetDepositsResponse2 = PrivateGetDepositsResponse
-
-// PrivateGetEmailLanguageResponse2 defines model for PrivateGetEmailLanguageResponse.
-type PrivateGetEmailLanguageResponse2 = PrivateGetEmailLanguageResponse
-
-// PrivateGetLegPricesResponse2 defines model for PrivateGetLegPricesResponse.
-type PrivateGetLegPricesResponse2 = PrivateGetLegPricesResponse
-
-// PrivateGetLspParticipantConfigResponse2 defines model for PrivateGetLspParticipantConfigResponse.
-type PrivateGetLspParticipantConfigResponse2 = PrivateGetLspParticipantConfigResponse
-
-// PrivateGetLspParticipantsResponse2 defines model for PrivateGetLspParticipantsResponse.
-type PrivateGetLspParticipantsResponse2 = PrivateGetLspParticipantsResponse
-
-// PrivateGetLspParticipantsUsageResponse2 defines model for PrivateGetLspParticipantsUsageResponse.
-type PrivateGetLspParticipantsUsageResponse2 = PrivateGetLspParticipantsUsageResponse
-
-// PrivateGetLspUsageResponse2 defines model for PrivateGetLspUsageResponse.
-type PrivateGetLspUsageResponse2 = PrivateGetLspUsageResponse
-
-// PrivateGetMarginsResponse2 defines model for PrivateGetMarginsResponse.
-type PrivateGetMarginsResponse2 = PrivateGetMarginsResponse
-
-// PrivateGetMembersResponse2 defines model for PrivateGetMembersResponse.
-type PrivateGetMembersResponse2 = PrivateGetMembersResponse
-
-// PrivateGetMmpConfigResponse2 defines model for PrivateGetMmpConfigResponse.
-type PrivateGetMmpConfigResponse2 = PrivateGetMmpConfigResponse
-
-// PrivateGetMmpStatusResponse2 defines model for PrivateGetMmpStatusResponse.
-type PrivateGetMmpStatusResponse2 = PrivateGetMmpStatusResponse
-
-// PrivateGetOpenOrdersResponse2 defines model for PrivateGetOpenOrdersResponse.
-type PrivateGetOpenOrdersResponse2 = PrivateGetOpenOrdersResponse
-
-// PrivateGetOrderHistoryResponse2 defines model for PrivateGetOrderHistoryResponse.
-type PrivateGetOrderHistoryResponse2 = PrivateGetOrderHistoryResponse
-
-// PrivateGetOrderMarginByIdsResponse2 defines model for PrivateGetOrderMarginByIdsResponse.
-type PrivateGetOrderMarginByIdsResponse2 = PrivateGetOrderMarginByIdsResponse
-
-// PrivateGetOrderStateByLabelResponse2 defines model for PrivateGetOrderStateByLabelResponse.
-type PrivateGetOrderStateByLabelResponse2 = PrivateGetOrderStateByLabelResponse
-
-// PrivateGetOrderStateResponse2 defines model for PrivateGetOrderStateResponse.
-type PrivateGetOrderStateResponse2 = PrivateGetOrderStateResponse
-
-// PrivateGetPositionResponse2 defines model for PrivateGetPositionResponse.
-type PrivateGetPositionResponse2 = PrivateGetPositionResponse
-
-// PrivateGetPositionsResponse2 defines model for PrivateGetPositionsResponse.
-type PrivateGetPositionsResponse2 = PrivateGetPositionsResponse
-
-// PrivateGetRewardEligibilityResponse2 defines model for PrivateGetRewardEligibilityResponse.
-type PrivateGetRewardEligibilityResponse2 = PrivateGetRewardEligibilityResponse
-
-// PrivateGetSubaccountsDetailsResponse2 defines model for PrivateGetSubaccountsDetailsResponse.
-type PrivateGetSubaccountsDetailsResponse2 = PrivateGetSubaccountsDetailsResponse
-
-// PrivateGetSubaccountsResponse2 defines model for PrivateGetSubaccountsResponse.
-type PrivateGetSubaccountsResponse2 = PrivateGetSubaccountsResponse
-
-// PrivateGetTransactionLogResponse2 defines model for PrivateGetTransactionLogResponse.
-type PrivateGetTransactionLogResponse2 = PrivateGetTransactionLogResponse
-
-// PrivateGetTransfersResponse2 defines model for PrivateGetTransfersResponse.
-type PrivateGetTransfersResponse2 = PrivateGetTransfersResponse
-
-// PrivateGetTriggerOrderHistoryResponse2 defines model for PrivateGetTriggerOrderHistoryResponse.
-type PrivateGetTriggerOrderHistoryResponse2 = PrivateGetTriggerOrderHistoryResponse
-
-// PrivateGetUserLocksResponse2 defines model for PrivateGetUserLocksResponse.
-type PrivateGetUserLocksResponse2 = PrivateGetUserLocksResponse
-
-// PrivateGetUserTradesByOrderResponse2 defines model for PrivateGetUserTradesByOrderResponse.
-type PrivateGetUserTradesByOrderResponse2 = PrivateGetUserTradesByOrderResponse
-
-// PrivateGetUserTradesHistoryResponse2 defines model for PrivateGetUserTradesHistoryResponse.
-type PrivateGetUserTradesHistoryResponse2 = PrivateGetUserTradesHistoryResponse
-
-// PrivateGetWithdrawalsResponse2 defines model for PrivateGetWithdrawalsResponse.
-type PrivateGetWithdrawalsResponse2 = PrivateGetWithdrawalsResponse
-
-// PrivateListAddressBeneficiariesResponse2 defines model for PrivateListAddressBeneficiariesResponse.
-type PrivateListAddressBeneficiariesResponse2 = PrivateListAddressBeneficiariesResponse
-
-// PrivateMassQuoteResponse2 defines model for PrivateMassQuoteResponse.
-type PrivateMassQuoteResponse2 = PrivateMassQuoteResponse
-
-// PrivatePmeSimulateResponse2 defines model for PrivatePmeSimulateResponse.
-type PrivatePmeSimulateResponse2 = PrivatePmeSimulateResponse
-
-// PrivatePositionMoveResponse2 defines model for PrivatePositionMoveResponse.
-type PrivatePositionMoveResponse2 = PrivatePositionMoveResponse
-
-// PrivateRemoveFromAddressBookResponse2 defines model for PrivateRemoveFromAddressBookResponse.
-type PrivateRemoveFromAddressBookResponse2 = PrivateRemoveFromAddressBookResponse
-
-// PrivateSaveAddressBeneficiaryResponse2 defines model for PrivateSaveAddressBeneficiaryResponse.
-type PrivateSaveAddressBeneficiaryResponse2 = PrivateSaveAddressBeneficiaryResponse
-
-// PrivateSetAddressRequiresSecurityKeyResponse2 defines model for PrivateSetAddressRequiresSecurityKeyResponse.
-type PrivateSetAddressRequiresSecurityKeyResponse2 = PrivateSetAddressRequiresSecurityKeyResponse
-
-// PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2 defines model for PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse.
-type PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2 = PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse
-
-// PrivateSetMemberResponse2 defines model for PrivateSetMemberResponse.
-type PrivateSetMemberResponse2 = PrivateSetMemberResponse
-
-// PrivateSetMmpConfigResponse2 defines model for PrivateSetMmpConfigResponse.
-type PrivateSetMmpConfigResponse2 = PrivateSetMmpConfigResponse
-
-// PrivateSettlementResponse2 defines model for PrivateSettlementResponse.
-type PrivateSettlementResponse2 = PrivateSettlementResponse
-
-// PrivateSimulateBlockTradeResponse2 defines model for PrivateSimulateBlockTradeResponse.
-type PrivateSimulateBlockTradeResponse2 = PrivateSimulateBlockTradeResponse
-
-// PrivateSimulatePortfolioResponse2 defines model for PrivateSimulatePortfolioResponse.
-type PrivateSimulatePortfolioResponse2 = PrivateSimulatePortfolioResponse
-
-// PrivateSubmitTransferResponse2 defines model for PrivateSubmitTransferResponse.
-type PrivateSubmitTransferResponse2 = PrivateSubmitTransferResponse
-
-// PrivateSubscribeResponse2 defines model for PrivateSubscribeResponse.
-type PrivateSubscribeResponse2 = PrivateSubscribeResponse
-
-// PrivateUpdateInAddressBookResponse2 defines model for PrivateUpdateInAddressBookResponse.
-type PrivateUpdateInAddressBookResponse2 = PrivateUpdateInAddressBookResponse
-
-// PrivateVerifyBlockTradeResponse2 defines model for PrivateVerifyBlockTradeResponse.
-type PrivateVerifyBlockTradeResponse2 = PrivateVerifyBlockTradeResponse
-
-// PrivateWithdrawResponse2 defines model for PrivateWithdrawResponse.
-type PrivateWithdrawResponse2 = PrivateWithdrawResponse
-
-// PublicAuthResponse2 defines model for PublicAuthResponse.
-type PublicAuthResponse2 = PublicAuthResponse
-
-// PublicGetAnnouncementsResponse2 defines model for PublicGetAnnouncementsResponse.
-type PublicGetAnnouncementsResponse2 = PublicGetAnnouncementsResponse
-
-// PublicGetAprHistoryResponse2 defines model for PublicGetAprHistoryResponse.
-type PublicGetAprHistoryResponse2 = PublicGetAprHistoryResponse
-
-// PublicGetBasketIndexCompositionResponse2 defines model for PublicGetBasketIndexCompositionResponse.
-type PublicGetBasketIndexCompositionResponse2 = PublicGetBasketIndexCompositionResponse
-
-// PublicGetBlockRfqTradesResponse2 defines model for PublicGetBlockRfqTradesResponse.
-type PublicGetBlockRfqTradesResponse2 = PublicGetBlockRfqTradesResponse
-
-// PublicGetBookSummaryResponse2 defines model for PublicGetBookSummaryResponse.
-type PublicGetBookSummaryResponse2 = PublicGetBookSummaryResponse
-
-// PublicGetComboDetailsResponse2 defines model for PublicGetComboDetailsResponse.
-type PublicGetComboDetailsResponse2 = PublicGetComboDetailsResponse
-
-// PublicGetComboIdsResponse2 defines model for PublicGetComboIdsResponse.
-type PublicGetComboIdsResponse2 = PublicGetComboIdsResponse
-
-// PublicGetCombosResponse2 defines model for PublicGetCombosResponse.
-type PublicGetCombosResponse2 = PublicGetCombosResponse
-
-// PublicGetContractSizeResponse2 defines model for PublicGetContractSizeResponse.
-type PublicGetContractSizeResponse2 = PublicGetContractSizeResponse
-
-// PublicGetCurrenciesResponse2 defines model for PublicGetCurrenciesResponse.
-type PublicGetCurrenciesResponse2 = PublicGetCurrenciesResponse
-
-// PublicGetDeliveryPricesResponse2 defines model for PublicGetDeliveryPricesResponse.
-type PublicGetDeliveryPricesResponse2 = PublicGetDeliveryPricesResponse
-
-// PublicGetExpirationsResponse2 defines model for PublicGetExpirationsResponse.
-type PublicGetExpirationsResponse2 = PublicGetExpirationsResponse
-
-// PublicGetFundingChartDataResponse2 defines model for PublicGetFundingChartDataResponse.
-type PublicGetFundingChartDataResponse2 = PublicGetFundingChartDataResponse
-
-// PublicGetFundingRateHistoryResponse2 defines model for PublicGetFundingRateHistoryResponse.
-type PublicGetFundingRateHistoryResponse2 = PublicGetFundingRateHistoryResponse
-
-// PublicGetFundingRateValueResponse2 defines model for PublicGetFundingRateValueResponse.
-type PublicGetFundingRateValueResponse2 = PublicGetFundingRateValueResponse
-
-// PublicGetHistoricalVolatilityResponse2 defines model for PublicGetHistoricalVolatilityResponse.
-type PublicGetHistoricalVolatilityResponse2 = PublicGetHistoricalVolatilityResponse
-
-// PublicGetIndexChartDataResponse2 defines model for PublicGetIndexChartDataResponse.
-type PublicGetIndexChartDataResponse2 = PublicGetIndexChartDataResponse
-
-// PublicGetIndexPriceNamesResponse2 defines model for PublicGetIndexPriceNamesResponse.
-type PublicGetIndexPriceNamesResponse2 = PublicGetIndexPriceNamesResponse
-
-// PublicGetIndexPriceResponse2 defines model for PublicGetIndexPriceResponse.
-type PublicGetIndexPriceResponse2 = PublicGetIndexPriceResponse
-
-// PublicGetInstrumentResponse2 defines model for PublicGetInstrumentResponse.
-type PublicGetInstrumentResponse2 = PublicGetInstrumentResponse
-
-// PublicGetInstrumentsResponse2 defines model for PublicGetInstrumentsResponse.
-type PublicGetInstrumentsResponse2 = PublicGetInstrumentsResponse
-
-// PublicGetMarkPriceHistoryResponse2 defines model for PublicGetMarkPriceHistoryResponse.
-type PublicGetMarkPriceHistoryResponse2 = PublicGetMarkPriceHistoryResponse
-
-// PublicGetOrderBookResponse2 defines model for PublicGetOrderBookResponse.
-type PublicGetOrderBookResponse2 = PublicGetOrderBookResponse
-
-// PublicGetTimeResponse2 defines model for PublicGetTimeResponse.
-type PublicGetTimeResponse2 = PublicGetTimeResponse
-
-// PublicGetTradesVolumesResponse2 defines model for PublicGetTradesVolumesResponse.
-type PublicGetTradesVolumesResponse2 = PublicGetTradesVolumesResponse
-
-// PublicGetTradingviewChartDataResponse2 defines model for PublicGetTradingviewChartDataResponse.
-type PublicGetTradingviewChartDataResponse2 = PublicGetTradingviewChartDataResponse
-
-// PublicGetVolatilityIndexDataResponse2 defines model for PublicGetVolatilityIndexDataResponse.
-type PublicGetVolatilityIndexDataResponse2 = PublicGetVolatilityIndexDataResponse
-
-// PublicListApiKeysResponse2 defines model for PublicListApiKeysResponse.
-type PublicListApiKeysResponse2 = PublicListApiKeysResponse
-
-// PublicSettlementResponse2 defines model for PublicSettlementResponse.
-type PublicSettlementResponse2 = PublicSettlementResponse
-
-// PublicStatusResponse2 defines model for PublicStatusResponse.
-type PublicStatusResponse2 = PublicStatusResponse
-
-// PublicTestResponse2 defines model for PublicTestResponse.
-type PublicTestResponse2 = PublicTestResponse
-
-// PublicTickerResponse2 defines model for PublicTickerResponse.
-type PublicTickerResponse2 = PublicTickerResponse
-
-// PublicTokenResponse2 defines model for PublicTokenResponse.
-type PublicTokenResponse2 = PublicTokenResponse
-
-// PublicTradesHistoryResponse2 defines model for PublicTradesHistoryResponse.
-type PublicTradesHistoryResponse2 = PublicTradesHistoryResponse
-
-// DepositResponse defines model for deposit.
-type DepositResponse = Deposit
 
 // PrivateAcceptBlockRfqParams defines parameters for PrivateAcceptBlockRfq.
 type PrivateAcceptBlockRfqParams struct {
@@ -13335,7 +12946,7 @@ type PrivateAddToAddressBookParams struct {
 	// Address Address in currency format. **Required for legacy wallet type.** **Coinbase wallet type:** required when `counterparty_id` is not provided, and must then be used together with `currency` and `network` (and `tag` for networks that require one). For Coinbase wallet type the same value is also stored as the beneficiary address travel rule field.
 	Address *CurrencyAddress `form:"address,omitempty" json:"address,omitempty"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
@@ -13441,18 +13052,18 @@ type PrivateBuyParams struct {
 	// Label user defined label for the order (maximum 64 characters)
 	Label *string `form:"label,omitempty" json:"label,omitempty"`
 
-	// Price <p>The order price in base currency (Only for limit and stop_limit orders)</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+	// Price <p>Order price in the instrument's price units (quote currency for futures and spot). Required for limit, stop_limit and take_limit; not used for market-like types.</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
 	Price *float64 `form:"price,omitempty" json:"price,omitempty"`
 
 	// TimeInForce <p>Specifies how long the order remains in effect. Default `"good_til_cancelled"`</p> <ul> <li>`"good_til_cancelled"` - unfilled order remains in order book until cancelled</li> <li>`"good_til_day"` - unfilled order remains in order book till the end of the trading session</li> <li>`"fill_or_kill"` - execute a transaction immediately and completely or not at all</li> <li>`"immediate_or_cancel"` - execute a transaction immediately, and any portion of the order that cannot be immediately filled is cancelled</li> </ul> <p>For spot trading, only `"good_til_cancelled"`, `"immediate_or_cancel"` and `"fill_or_kill"` are supported. `"good_til_day"` is not supported and will be rejected.</p>
 	TimeInForce *PrivateBuyParamsTimeInForce `form:"time_in_force,omitempty" json:"time_in_force,omitempty"`
 
-	// DisplayAmount Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+	// DisplayAmount Initial visible amount for an iceberg order. Must meet the instrument's minimum iceberg amount and amount step, not exceed total amount, and satisfy the instrument's maximum total-to-display ratio.
 	//
 	// Iceberg orders are not supported for `option`, `future_combo`, and `option_combo` instruments.
 	DisplayAmount *float64 `form:"display_amount,omitempty" json:"display_amount,omitempty"`
 
-	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below the spread.</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
+	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below the spread.</p> <p>Only valid for non-market, non-advanced orders with time_in_force=good_til_cancelled or good_til_day.</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
 	PostOnly *bool `form:"post_only,omitempty" json:"post_only,omitempty"`
 
 	// RejectPostOnly <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p> <p>For spot trading routed to Coinbase Exchange, this must be set to true whenever `"post_only"` is true; otherwise the request is rejected with `post_only_not_allowed`.</p>
@@ -13464,7 +13075,7 @@ type PrivateBuyParams struct {
 	// TriggerPrice Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
 	TriggerPrice *float64 `form:"trigger_price,omitempty" json:"trigger_price,omitempty"`
 
-	// TriggerOffset The maximum deviation from the price peak beyond which the order will be triggered
+	// TriggerOffset Positive deviation from the price peak at which the order triggers; required for trailing_stop.
 	TriggerOffset *float64 `form:"trigger_offset,omitempty" json:"trigger_offset,omitempty"`
 
 	// Trigger <p>Defines the trigger type. Required for `"Stop-Loss"`, `"Take-Profit"` and `"Trailing"` trigger orders</p> <p>For stop-limit orders routed to Coinbase Exchange, only `"last_price"` is allowed.</p>
@@ -13485,7 +13096,7 @@ type PrivateBuyParams struct {
 	// TriggerFillCondition <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *PrivateBuyParamsTriggerFillCondition `form:"trigger_fill_condition,omitempty" json:"trigger_fill_condition,omitempty"`
 
-	// OtocoConfig List of secondary orders to place or cancel when the primary order is filled. Each entry in the array defines one secondary order. `amount` and `direction` are required; all other fields are optional.
+	// OtocoConfig List of secondary orders. Each requires positive `amount` and `direction`. Non-market types (including `take_limit`) require `price`. Stop/take orders require `trigger` and `trigger_price`; trailing-stop orders require `trigger` and positive `trigger_offset`.
 	OtocoConfig *[]struct {
 		// Amount **Required.** The secondary order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 		Amount *float64 `json:"amount,omitempty"`
@@ -13939,7 +13550,7 @@ type PrivateCreateDepositAddressParams struct {
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	Currency Currency `form:"currency" json:"currency"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Label Label of the deposit address. **Coinbase wallet type only.**
@@ -13992,10 +13603,10 @@ type PrivateEditParams struct {
 	// Contracts It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
 	Contracts *float64 `form:"contracts,omitempty" json:"contracts,omitempty"`
 
-	// Price <p>The order price in base currency.</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+	// Price <p>The order price in the instrument's price units (quote currency for futures and spot).</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
 	Price *float64 `form:"price,omitempty" json:"price,omitempty"`
 
-	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
+	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Omitted means unchanged. Only valid for non-market, non-advanced orders with time_in_force=good_til_cancelled or good_til_day.</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
 	PostOnly *bool `form:"post_only,omitempty" json:"post_only,omitempty"`
 
 	// ReduceOnly If `true`, the order is considered reduce-only which is intended to only reduce a current position
@@ -14010,7 +13621,7 @@ type PrivateEditParams struct {
 	// TriggerPrice Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
 	TriggerPrice *float64 `form:"trigger_price,omitempty" json:"trigger_price,omitempty"`
 
-	// TriggerOffset The maximum deviation from the price peak beyond which the order will be triggered
+	// TriggerOffset Positive deviation from the price peak at which the order triggers; required for trailing_stop.
 	TriggerOffset *float64 `form:"trigger_offset,omitempty" json:"trigger_offset,omitempty"`
 
 	// Mmp Order MMP flag, only for order_type 'limit'
@@ -14019,7 +13630,7 @@ type PrivateEditParams struct {
 	// ValidUntil Timestamp, when provided server will start processing request in Matching Engine only before given timestamp, in other cases `timed_out` error will be responded. Remember that the given timestamp should be consistent with the server's time, use <a href='#public-get_time'>/public/time</a> method to obtain current server time.
 	ValidUntil *int `form:"valid_until,omitempty" json:"valid_until,omitempty"`
 
-	// DisplayAmount Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+	// DisplayAmount Initial visible amount for an iceberg order. Must meet the instrument's minimum iceberg amount and amount step, not exceed total amount, and satisfy the instrument's maximum total-to-display ratio.
 	//
 	// Iceberg orders are not supported for `option`, `future_combo`, and `option_combo` instruments.
 	DisplayAmount *float64 `form:"display_amount,omitempty" json:"display_amount,omitempty"`
@@ -14103,10 +13714,10 @@ type PrivateEditByLabelParams struct {
 	// Contracts It represents the requested order size in contract units and can be passed instead of `amount`. The `contracts` is a mandatory parameter if `amount` parameter is missing. If both `contracts` and `amount` parameter are passed they must match each other otherwise error is returned.
 	Contracts *float64 `form:"contracts,omitempty" json:"contracts,omitempty"`
 
-	// Price <p>The order price in base currency.</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+	// Price <p>The order price in the instrument's price units (quote currency for futures and spot).</p> <p>When editing an option order with advanced=usd, the field price should be the option price value in USD.</p> <p>When editing an option order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
 	Price *float64 `form:"price,omitempty" json:"price,omitempty"`
 
-	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
+	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just below or above the spread (accordingly to the original order type).</p> <p>Omitted means unchanged. Only valid for non-market, non-advanced orders with time_in_force=good_til_cancelled or good_til_day.</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
 	PostOnly *bool `form:"post_only,omitempty" json:"post_only,omitempty"`
 
 	// ReduceOnly If `true`, the order is considered reduce-only which is intended to only reduce a current position
@@ -14342,7 +13953,7 @@ type PrivateGetCurrentDepositAddressParams struct {
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	Currency Currency `form:"currency" json:"currency"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 }
 
@@ -14800,13 +14411,13 @@ type PrivateGetUserTradesByCurrencyParams struct {
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch); cannot be combined with a start_id or start_seq bound.
 	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch).
 	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 
 	// Historical Determines whether historical trade and order records should be retrieved.
@@ -14831,16 +14442,16 @@ type PrivateGetUserTradesByCurrencyAndTimeParams struct {
 	// Kind Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
 	Kind *KindWithComboAll `form:"kind,omitempty" json:"kind,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
-	StartTimestamp Timestamp `form:"start_timestamp" json:"start_timestamp"`
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
-	EndTimestamp Timestamp `form:"end_timestamp" json:"end_timestamp"`
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 
 	// Historical Determines whether historical trade and order records should be retrieved.
@@ -14860,19 +14471,19 @@ type PrivateGetUserTradesByInstrumentParams struct {
 	// InstrumentName Instrument name
 	InstrumentName InstrumentName `form:"instrument_name" json:"instrument_name"`
 
-	// StartSeq The sequence number of the first trade to be returned
+	// StartSeq Inclusive sequence number of the first trade to return; cannot be combined with start_timestamp.
 	StartSeq *int `form:"start_seq,omitempty" json:"start_seq,omitempty"`
 
-	// EndSeq The sequence number of the last trade to be returned
+	// EndSeq Inclusive sequence number of the last trade to return; cannot be combined with end_timestamp.
 	EndSeq *int `form:"end_seq,omitempty" json:"end_seq,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch); cannot be combined with a start_id or start_seq bound.
 	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch).
 	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Historical Determines whether historical trade and order records should be retrieved.
@@ -14883,7 +14494,7 @@ type PrivateGetUserTradesByInstrumentParams struct {
 	// **📖 Related Article:** [Accessing Historical Trades and Orders Using API](https://docs.deribit.com/articles/accessing-historical-trades-orders)
 	Historical *bool `form:"historical,omitempty" json:"historical,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 
 	// SubaccountId Id of a subaccount
@@ -14895,16 +14506,16 @@ type PrivateGetUserTradesByInstrumentAndTimeParams struct {
 	// InstrumentName Instrument name
 	InstrumentName InstrumentName `form:"instrument_name" json:"instrument_name"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
-	StartTimestamp Timestamp `form:"start_timestamp" json:"start_timestamp"`
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
-	EndTimestamp Timestamp `form:"end_timestamp" json:"end_timestamp"`
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 
 	// Historical Determines whether historical trade and order records should be retrieved.
@@ -14924,7 +14535,7 @@ type PrivateGetUserTradesByOrderParams struct {
 	// OrderId The order id
 	OrderId OrderId `form:"order_id" json:"order_id"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 
 	// Historical Determines whether historical trade and order records should be retrieved.
@@ -15014,7 +14625,7 @@ type PrivateListCustodyAccountsParams struct {
 
 // PrivateLogoutParams defines parameters for PrivateLogout.
 type PrivateLogoutParams struct {
-	// InvalidateToken <b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>
+	// InvalidateToken Whether to invalidate session tokens (default true). If false, tokens remain subject to their scope, session and expiry; a connection-scope token cannot be used on a new connection.
 	InvalidateToken *bool `form:"invalidate_token,omitempty" json:"invalidate_token,omitempty"`
 }
 
@@ -15142,7 +14753,7 @@ type PrivateRemoveFromAddressBookParams struct {
 	// Address Address in currency format, it must be in address book. **Required for legacy wallet type.** **Coinbase wallet type:** required when `id` is not provided; use `network` and `tag` to disambiguate entries sharing the same address.
 	Address *CurrencyAddress `form:"address,omitempty" json:"address,omitempty"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
@@ -15251,18 +14862,18 @@ type PrivateSellParams struct {
 	// Label user defined label for the order (maximum 64 characters)
 	Label *string `form:"label,omitempty" json:"label,omitempty"`
 
-	// Price <p>The order price in base currency (Only for limit and stop_limit orders)</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
+	// Price <p>Order price in the instrument's price units (quote currency for futures and spot). Required for limit, stop_limit and take_limit; not used for market-like types.</p> <p>When adding an order with advanced=usd, the field price should be the option price value in USD.</p> <p>When adding an order with advanced=implv, the field price should be a value of implied volatility in percentages. For example,  price=100, means implied volatility of 100%</p>
 	Price *float64 `form:"price,omitempty" json:"price,omitempty"`
 
 	// TimeInForce <p>Specifies how long the order remains in effect. Default `"good_til_cancelled"`</p> <ul> <li>`"good_til_cancelled"` - unfilled order remains in order book until cancelled</li> <li>`"good_til_day"` - unfilled order remains in order book till the end of the trading session</li> <li>`"fill_or_kill"` - execute a transaction immediately and completely or not at all</li> <li>`"immediate_or_cancel"` - execute a transaction immediately, and any portion of the order that cannot be immediately filled is cancelled</li> </ul> <p>For spot trading, only `"good_til_cancelled"`, `"immediate_or_cancel"` and `"fill_or_kill"` are supported. `"good_til_day"` is not supported and will be rejected.</p>
 	TimeInForce *PrivateSellParamsTimeInForce `form:"time_in_force,omitempty" json:"time_in_force,omitempty"`
 
-	// DisplayAmount Initial display amount for iceberg order. Has to be at least 100 times minimum amount for instrument and ratio of hidden part vs visible part has to be less than 100 as well.
+	// DisplayAmount Initial visible amount for an iceberg order. Must meet the instrument's minimum iceberg amount and amount step, not exceed total amount, and satisfy the instrument's maximum total-to-display ratio.
 	//
 	// Iceberg orders are not supported for `option`, `future_combo`, and `option_combo` instruments.
 	DisplayAmount *float64 `form:"display_amount,omitempty" json:"display_amount,omitempty"`
 
-	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just above the spread.</p> <p>Only valid in combination with time_in_force=`"good_til_cancelled"`</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
+	// PostOnly <p>If true, the order is considered post-only. If the new price would cause the order to be filled immediately (as taker), the price will be changed to be just above the spread.</p> <p>Only valid for non-market, non-advanced orders with time_in_force=good_til_cancelled or good_til_day.</p> <p>For spot trading routed to Coinbase Exchange, the price is never adjusted: `"post_only"` must be combined with `"reject_post_only"` set to true, and the order is rejected if it would be matched instantly.</p>
 	PostOnly *bool `form:"post_only,omitempty" json:"post_only,omitempty"`
 
 	// RejectPostOnly <p>If an order is considered post-only and this field is set to true then the order is put to the order book unmodified or the request is rejected.</p> <p>Only valid in combination with `"post_only"` set to true</p> <p>For spot trading routed to Coinbase Exchange, this must be set to true whenever `"post_only"` is true; otherwise the request is rejected with `post_only_not_allowed`.</p>
@@ -15274,7 +14885,7 @@ type PrivateSellParams struct {
 	// TriggerPrice Trigger price, required for trigger orders only (Stop-loss or Take-profit orders)
 	TriggerPrice *float64 `form:"trigger_price,omitempty" json:"trigger_price,omitempty"`
 
-	// TriggerOffset The maximum deviation from the price peak beyond which the order will be triggered
+	// TriggerOffset Positive deviation from the price peak at which the order triggers; required for trailing_stop.
 	TriggerOffset *float64 `form:"trigger_offset,omitempty" json:"trigger_offset,omitempty"`
 
 	// Trigger <p>Defines the trigger type. Required for `"Stop-Loss"`, `"Take-Profit"` and `"Trailing"` trigger orders</p> <p>For stop-limit orders routed to Coinbase Exchange, only `"last_price"` is allowed.</p>
@@ -15295,7 +14906,7 @@ type PrivateSellParams struct {
 	// TriggerFillCondition <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *PrivateSellParamsTriggerFillCondition `form:"trigger_fill_condition,omitempty" json:"trigger_fill_condition,omitempty"`
 
-	// OtocoConfig List of secondary orders to place or cancel when the primary order is filled. Each entry in the array defines one secondary order. `amount` and `direction` are required; all other fields are optional.
+	// OtocoConfig List of secondary orders. Each requires positive `amount` and `direction`. Non-market types (including `take_limit`) require `price`. Stop/take orders require `trigger` and `trigger_price`; trailing-stop orders require `trigger` and positive `trigger_offset`.
 	OtocoConfig *[]struct {
 		// Amount **Required.** The secondary order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 		Amount *float64 `json:"amount,omitempty"`
@@ -15370,7 +14981,7 @@ type PrivateSetAddressRequiresSecurityKeyParams struct {
 	// Address Address in currency format, it must be in address book. **Required for legacy wallet type.** **Coinbase wallet type:** required when `id` is not provided; use `network` and `tag` to disambiguate entries sharing the same address.
 	Address *CurrencyAddress `form:"address,omitempty" json:"address,omitempty"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
@@ -15590,7 +15201,7 @@ type PrivateSubmitTransferBetweenSubaccountsParams struct {
 	// Destination Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab
 	Destination int `form:"destination" json:"destination"`
 
-	// Source Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different "source" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source.
+	// Source Source account id, defaulting to the caller. With main-account authorization, either the main account or one of its subaccounts may be the source; a subaccount caller can transfer only from itself to its main account.
 	Source *int `form:"source,omitempty" json:"source,omitempty"`
 
 	// Nonce Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response.
@@ -15672,7 +15283,7 @@ type PrivateUpdateInAddressBookParams struct {
 	// Address Address in currency format, it must be in address book. **Required for legacy wallet type.** **Coinbase wallet type:** required when `id` is not provided; use `network` and `tag` to disambiguate entries sharing the same address. For Coinbase wallet type the same value is also stored as the beneficiary address travel rule field.
 	Address *CurrencyAddress `form:"address,omitempty" json:"address,omitempty"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
@@ -15784,7 +15395,7 @@ type PrivateWithdrawParams struct {
 	// Amount Amount of funds to be withdrawn
 	Amount float64 `form:"amount" json:"amount"`
 
-	// Network Blockchain network for the wallet operation, given as a network resource name (e.g. `"networks/ethereum-mainnet"`). **Coinbase wallet type only.** The networks available for each currency are returned by `public/get_currencies` in the `coinbase_networks` field. Required for operations that target an on-chain address or a deposit address; also used to disambiguate address book entries when the same address exists on multiple networks.
+	// Network Blockchain network resource name (e.g. networks/ethereum-mainnet), for Coinbase wallet types. Available networks are returned by public/get_currencies in coinbase_networks. Requiredness depends on the operation. When resolving an existing address-book entry, it is optional if the entry resolves uniquely; it disambiguates an address present on multiple networks.
 	Network *string `form:"network,omitempty" json:"network,omitempty"`
 
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
@@ -15793,7 +15404,7 @@ type PrivateWithdrawParams struct {
 	// Id Unique identifier (UUID7) of the address book entry, as returned in the `id` field of `private/get_address_book` results. **Coinbase wallet type only.** Can be used instead of `address` (with `network` and `tag`) to identify the entry.
 	Id *string `form:"id,omitempty" json:"id,omitempty"`
 
-	// Priority Withdrawal priority, optional for BTC, default: `high`
+	// Priority Withdrawal priority, default: `high`. Note: fee priority levels are only configured for BTC; other currencies default to standard ratio 1.0.
 	Priority *PrivateWithdrawParamsPriority `form:"priority,omitempty" json:"priority,omitempty"`
 
 	// Nonce Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response.
@@ -15808,50 +15419,59 @@ type PublicAuthParams struct {
 	// GrantType Method of authentication
 	GrantType PublicAuthParamsGrantType `form:"grant_type" json:"grant_type"`
 
-	// ClientId Required for grant type `` `client_credentials` `` and `` `client_signature` ``
-	ClientId string `form:"client_id" json:"client_id"`
+	// ClientId Required for grant types `client_credentials` and `client_signature`. Maximum length is 16 bytes.
+	ClientId *string `form:"client_id,omitempty" json:"client_id,omitempty"`
 
-	// ClientSecret Required for grant type `` `client_credentials` ``
-	ClientSecret string `form:"client_secret" json:"client_secret"`
+	// ClientSecret Required for grant type `client_credentials`.
+	ClientSecret *string `form:"client_secret,omitempty" json:"client_secret,omitempty"`
 
-	// RefreshToken Required for grant type `` `refresh_token` ``
-	RefreshToken string `form:"refresh_token" json:"refresh_token"`
+	// RefreshToken Required for grant type `refresh_token`. The token pair it belongs to is replaced by the new tokens returned (see above).
+	RefreshToken *string `form:"refresh_token,omitempty" json:"refresh_token,omitempty"`
 
-	// Timestamp Required for grant type `` `client_signature` ``.
+	// Timestamp Required for grant type `client_signature`.
 	//
-	// Provides time when request has been generated (milliseconds since the UNIX epoch).
-	Timestamp int `form:"timestamp" json:"timestamp"`
+	// Time when the request was generated, in milliseconds since the UNIX epoch. Must be within ±60 seconds (±60,000 ms) of the server time, otherwise the request is rejected with error `13009` (`unauthorized`).
+	Timestamp *int `form:"timestamp,omitempty" json:"timestamp,omitempty"`
 
-	// Signature Required for grant type `` `client_signature` ``.
+	// Signature Required for grant type `client_signature`.
 	//
-	// It's a cryptographic signature calculated over provided fields using user **secret key**. The signature should be calculated as an HMAC (Hash-based Message Authentication Code) with `` `SHA256` `` hash algorithm.
-	Signature string `form:"signature" json:"signature"`
+	// Signature calculated over `<timestamp>\n<nonce>\n<data>`:
+	// - **Shared-secret API keys:** HMAC-SHA256 with the client secret as key, encoded as hexadecimal (letter case is ignored).
+	// - **Asymmetric (RSA / Ed25519) API keys:** digital signature made with your private key (SHA-256), encoded as URL-safe base64 without padding.
+	//
+	// An invalid signature is rejected with error `13004` (`invalid_credentials`).
+	Signature *string `form:"signature,omitempty" json:"signature,omitempty"`
 
-	// Nonce Optional for grant type `` `client_signature` ``.
+	// Nonce Optional for grant type `client_signature`, but strongly recommended. Defaults to an empty string.
 	//
-	// Delivers user generated initialization vector for the server token.
+	// User-generated random string, up to 128 bytes. A non-empty nonce can be used only once for the same `client_id` and `timestamp` (a repeat is rejected with `13009`). With an empty or omitted nonce the timestamp window is still enforced but replay detection is not.
 	Nonce *string `form:"nonce,omitempty" json:"nonce,omitempty"`
 
-	// Data Optional for grant type `` `client_signature` ``.
+	// Data Optional for grant type `client_signature`. Defaults to an empty string.
 	//
-	// Contains any user specific value.
+	// Contains any user specific value; it is part of the signed string.
 	Data *string `form:"data,omitempty" json:"data,omitempty"`
 
 	// State Will be passed back in the response.
 	State *string `form:"state,omitempty" json:"state,omitempty"`
 
-	// Scope Describes type of the access for assigned token.
+	// Scope Describes type of the access for assigned token. Ignored for grant type `refresh_token`.
 	//
 	//
 	// **Possible values:**
 	//
-	// - `` `connection` ``
-	// - `` `session:name` ``
-	// - `` `trade:[read, read_write, none]` ``
-	// - `` `wallet:[read, read_write, none]` ``
-	// - `` `account:[read, read_write, none]` ``
-	// - `` `expires:NUMBER` ``
-	// - `` `ip:ADDR` ``
+	// - `connection`
+	// - `session:name` (names longer than 64 bytes are truncated)
+	// - `trade:[read, read_write, none]`
+	// - `wallet:[read, read_write, none]`
+	// - `account:[read, read_write, none]`
+	// - `block_trade:[read, read_write, none]`
+	// - `block_rfq:[read, read_write, none]`
+	// - `expires:NUMBER`
+	// - `ip:ADDR`
+	//
+	//
+	// `connection` and `session:name` are mutually exclusive. Permission scopes cannot exceed the permissions of the API key.
 	//
 	//
 	// Details are elucidated in [Access scope](https://docs.deribit.com/articles/access-scope)
@@ -15866,10 +15486,10 @@ type PublicExchangeTokenParams struct {
 	// RefreshToken Refresh token
 	RefreshToken string `form:"refresh_token" json:"refresh_token"`
 
-	// SubjectId New subject id
+	// SubjectId Id of the user (main account or subaccount) to switch to. Must differ from the current subject.
 	SubjectId int `form:"subject_id" json:"subject_id"`
 
-	// Scope Optional scope override for the new session. Cannot exceed caller's permissions. Supports `session` scope for direct session creation during token exchange.
+	// Scope Optional scope for the new token. Replaces (does not merge with) the scope of the refresh token and cannot exceed it (`13403` `scope_exceeded`). Supports `session:name` for direct session creation. If omitted, the scope of the refresh token is kept.
 	Scope *string `form:"scope,omitempty" json:"scope,omitempty"`
 }
 
@@ -15878,7 +15498,7 @@ type PublicForkTokenParams struct {
 	// RefreshToken Refresh token
 	RefreshToken string `form:"refresh_token" json:"refresh_token"`
 
-	// SessionName New session name
+	// SessionName Name of the new session (truncated to 64 bytes). Must differ from the current session name.
 	SessionName string `form:"session_name" json:"session_name"`
 }
 
@@ -15984,6 +15604,12 @@ type PublicGetDeliveryPricesParams struct {
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
+
+	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch)
+	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
+
+	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch)
+	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 }
 
 // PublicGetExpirationsParams defines parameters for PublicGetExpirations.
@@ -16089,7 +15715,7 @@ type PublicGetInstrumentsParams struct {
 	// Expired When `false` (default), return visible instruments plus inactive non-combo instruments. When `true`, return only instruments still in the live table with `state` `delivered` (recently expired, not archivized). Does not include the extra spot union used for a named `currency` when `expired=false`.
 	Expired *bool `form:"expired,omitempty" json:"expired,omitempty"`
 
-	// Extended When `true`, each instrument also includes `maker_max_commission`, `taker_max_commission`, `liquidation_max_commission`, and `settlement_max_commission`. Futures additionally include `margin_params` and `trading_bandwidth_fraction`; perpetuals also include `perpetual_dempener` and `perpetual_max_funding`. Default `false`. `public/get_instrument` does not accept this parameter.
+	// Extended When `true`, each instrument also includes `maker_max_commission`, `taker_max_commission`, `liquidation_max_commission`, and `settlement_max_commission`. Futures additionally include `trading_bandwidth_fraction`; perpetuals also include `perpetual_dempener` and `perpetual_max_funding`. Default `false`. `public/get_instrument` does not accept this parameter.
 	Extended *bool `form:"extended,omitempty" json:"extended,omitempty"`
 }
 
@@ -16147,16 +15773,16 @@ type PublicGetLastTradesByCurrencyParams struct {
 	// EndId The ID of the last trade to be returned. Number for BTC trades, or hyphen name in ex. `"ETH-15"` # `"ETH_USDC-16"`
 	EndId *TradeId `form:"end_id,omitempty" json:"end_id,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch); cannot be combined with a start_id or start_seq bound.
 	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch).
 	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 }
 
@@ -16170,16 +15796,16 @@ type PublicGetLastTradesByCurrencyAndTimeParams struct {
 	// Kind Instrument kind, `"combo"` for any combo or `"any"` for all. If not provided instruments of all kinds are considered
 	Kind *KindWithComboAll `form:"kind,omitempty" json:"kind,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
-	StartTimestamp Timestamp `form:"start_timestamp" json:"start_timestamp"`
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
-	EndTimestamp Timestamp `form:"end_timestamp" json:"end_timestamp"`
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 }
 
@@ -16188,22 +15814,22 @@ type PublicGetLastTradesByInstrumentParams struct {
 	// InstrumentName Instrument name
 	InstrumentName InstrumentName `form:"instrument_name" json:"instrument_name"`
 
-	// StartSeq The sequence number of the first trade to be returned
+	// StartSeq Inclusive sequence number of the first trade to return; cannot be combined with start_timestamp.
 	StartSeq *int `form:"start_seq,omitempty" json:"start_seq,omitempty"`
 
-	// EndSeq The sequence number of the last trade to be returned
+	// EndSeq Inclusive sequence number of the last trade to return; cannot be combined with end_timestamp.
 	EndSeq *int `form:"end_seq,omitempty" json:"end_seq,omitempty"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch); cannot be combined with a start_id or start_seq bound.
 	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch).
 	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 }
 
@@ -16212,16 +15838,16 @@ type PublicGetLastTradesByInstrumentAndTimeParams struct {
 	// InstrumentName Instrument name
 	InstrumentName InstrumentName `form:"instrument_name" json:"instrument_name"`
 
-	// StartTimestamp The earliest timestamp to return result from (milliseconds since the UNIX epoch). When param is provided trades are returned from the earliest
-	StartTimestamp Timestamp `form:"start_timestamp" json:"start_timestamp"`
+	// StartTimestamp Inclusive earliest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	StartTimestamp *Timestamp `form:"start_timestamp,omitempty" json:"start_timestamp,omitempty"`
 
-	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch). Only one of params: start_timestamp, end_timestamp is truly required
-	EndTimestamp Timestamp `form:"end_timestamp" json:"end_timestamp"`
+	// EndTimestamp Inclusive latest timestamp (milliseconds since the Unix epoch). Time-based methods require at least one of start_timestamp or end_timestamp.
+	EndTimestamp *Timestamp `form:"end_timestamp,omitempty" json:"end_timestamp,omitempty"`
 
 	// Count Number of requested items, default - `10`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// Sorting Direction of results sorting (`default` value means no sorting, results will be returned in order in which they left the database)
+	// Sorting Result ordering: asc, desc, or the method-specific default.
 	Sorting *Sorting `form:"sorting,omitempty" json:"sorting,omitempty"`
 }
 
@@ -16287,7 +15913,7 @@ type PublicGetTradingviewChartDataParams struct {
 	// EndTimestamp The most recent timestamp to return result from (milliseconds since the UNIX epoch)
 	EndTimestamp Timestamp `form:"end_timestamp" json:"end_timestamp"`
 
-	// Resolution Chart bars resolution given in full minutes or keyword `1D` (only some specific resolutions are supported)
+	// Resolution Chart bars resolution in minutes, or `1D` / `D` for daily bars.
 	Resolution PublicGetTradingviewChartDataParamsResolution `form:"resolution" json:"resolution"`
 }
 
@@ -16325,8 +15951,8 @@ type PublicHelloParams struct {
 
 // PublicSetHeartbeatParams defines parameters for PublicSetHeartbeat.
 type PublicSetHeartbeatParams struct {
-	// Interval The heartbeat interval in seconds, but not less than 10
-	Interval float64 `form:"interval" json:"interval"`
+	// Interval The heartbeat interval in seconds (allowed range: 10 to 300)
+	Interval int `form:"interval" json:"interval"`
 }
 
 // PublicSubscribeParams defines parameters for PublicSubscribe.
@@ -16337,7 +15963,7 @@ type PublicSubscribeParams struct {
 
 // PublicTestParams defines parameters for PublicTest.
 type PublicTestParams struct {
-	// ExpectedResult The value "exception" will trigger an error response. This may be useful for testing wrapper libraries.
+	// ExpectedResult The value "exception" will trigger an error response with code `11094` (`internal_server_error`). This may be useful for testing wrapper libraries.
 	ExpectedResult *PublicTestParamsExpectedResult `form:"expected_result,omitempty" json:"expected_result,omitempty"`
 }
 
@@ -17672,7 +17298,9 @@ type ClientInterface interface {
 	//
 	// Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).
 	//
-	// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.
+	// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it. A dry run runs the same checks as the actual change.
+	//
+	// Returns an error if a currency would be left with negative equity, an unfunded long option position, or insufficient funds.
 	//
 	// **📖 Related Article:** [Margin types and usage](https://support.deribit.com/hc/en-us/articles/25944811317149-Margin-types-and-usage)
 	//
@@ -17865,9 +17493,12 @@ type ClientInterface interface {
 	//
 	// When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// **Scope & transport:**
 	//
-	// **Scope:** `account:read_write`
+	// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+	//
+	// **Scope:** `account:read_write` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
 	PrivateDisableCancelOnDisconnect(ctx context.Context, params *PrivateDisableCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -17972,9 +17603,14 @@ type ClientInterface interface {
 	//
 	// **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// **Scope & transport:**
 	//
-	// **Scope:** `account:read_write`
+	// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+	//
+	// **Restrictions:** Not available for retail broker main accounts or their subaccounts: error `14021` (`not_allowed_for_retail_brokers`) is returned for both scopes.
+	//
+	// **Scope:** `account:read_write` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
 	PrivateEnableCancelOnDisconnect(ctx context.Context, params *PrivateEnableCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -18207,9 +17843,12 @@ type ClientInterface interface {
 
 	// PrivateGetCancelOnDisconnect performs a GET /private/get_cancel_on_disconnect (the `PrivateGetCancelOnDisconnect` operationId) request.
 	//
-	// Read current Cancel On Disconnect configuration for the account.
+	// Read the current Cancel On Disconnect configuration.
 	//
-	// **Scope:** `account:read`
+	// - `scope=connection` (the default) returns the state for the current WebSocket connection and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` returns the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read` scope.
+	//
+	// **Scope:** `account:read` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
 	PrivateGetCancelOnDisconnect(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -18836,6 +18475,8 @@ type ClientInterface interface {
 	//
 	// This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
 	//
+	// **Token invalidation:** With `invalidate_token=true` (default) the current token is invalidated. With `false` it stays valid but remains subject to its scope, session and expiry: a `connection` scope token stays bound to the connection it was issued on and cannot be used on a new connection; use a `session` scope token (or authenticate again) to continue after reconnecting.
+	//
 	// **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
@@ -19345,19 +18986,35 @@ type ClientInterface interface {
 	//
 	// **Authentication Methods:**
 	//
-	// Three methods of authentication are supported:
+	// Three methods of authentication are supported (selected with `grant_type`):
 	//
+	// - `client_credentials` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
 	//
-	// - ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
+	// - `client_signature` - Enhanced security method using a cryptographic signature instead of sending the client secret directly. The signature is calculated over `<timestamp>\n<nonce>\n<data>` (the three values joined with line-feed characters, `timestamp` exactly as sent). Keys with a shared secret use an HMAC-SHA256 signature encoded as hexadecimal; asymmetric (RSA / Ed25519) keys use a digital signature over the same string encoded as URL-safe base64 without padding. This method requires `client_id`, `timestamp` and `signature`; `nonce` and `data` are optional (`nonce` is strongly recommended for replay protection). See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
 	//
-	// - ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
+	// - `refresh_token` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
 	//
-	// - ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+	// **Refresh token behavior:**
 	//
+	// - Every successful refresh issues a **new** access token **and** a new refresh token, and invalidates the previously issued token pair. Always store the newest `refresh_token`; reusing an older one fails with `-32602` (`invalid token`), which also affects concurrent refreshes with the same token.
+	// - The `scope` parameter is ignored for this grant type: the new tokens keep the scope, session and lifetime of the original token.
+	// - A token with `connection` scope is bound to the connection it was issued on and cannot be refreshed or used from another connection.
+	//
+	// **Scope behavior (`client_credentials` and `client_signature`):**
+	//
+	// - Without a `session:` or `connection` scope item, a WebSocket request gets a `connection` scope token. An HTTP (REST) request gets a `session` scope token with a generated `rest-...` session name, unless `connection` was requested explicitly.
+	// - `connection` and `session:name` cannot be combined (`-32602`).
+	// - Requested permission scopes (`trade`, `wallet`, `account`, `block_trade`, `block_rfq`) never exceed the permissions of the API key: higher levels are silently reduced to the key's level, and permission scopes that are not requested inherit the key's permissions. This is not reported as an error.
 	//
 	// **Response:**
 	//
-	// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
+	// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens. Over WebSocket, a successful call also authenticates the current connection, so later private requests on it need no `access_token`.
+	//
+	// **Errors** (JSON-RPC `error.code`):
+	//
+	// - `13004` `invalid_credentials` - unknown `client_id`, wrong `client_secret`, invalid `signature`, or `client_id` longer than 16 bytes.
+	// - `13009` `unauthorized` - `timestamp` outside the allowed window, `nonce` longer than 128 bytes or already used, connecting IP not in the key's IP whitelist (`reason: bad_ip`).
+	// - `-32602` `Invalid params` - missing required parameter for the chosen `grant_type`, unknown `grant_type`, invalid `scope`, or an invalid / expired / already-replaced `refresh_token` (including `session_not_found`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)
 	PublicAuth(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -19366,7 +19023,9 @@ type ClientInterface interface {
 	//
 	// Stop sending heartbeat messages. This method takes no parameters.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// It also stops the server-side monitoring of client activity configured by [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat): after this call the server neither sends `test_request` messages nor closes the connection with code 4000. The regular WebSocket idle timeout (10 minutes without incoming data) still applies.
+	//
+	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
 	PublicDisableHeartbeat(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -19374,6 +19033,15 @@ type ClientInterface interface {
 	// PublicExchangeToken performs a GET /public/exchange_token (the `PublicExchangeToken` operationId) request.
 	//
 	// Generates a token for a new subject id. This method can be used to switch between subaccounts.
+	//
+	// **Rules:**
+	//
+	// - `subject_id` must differ from the subject of the supplied refresh token (otherwise `-32602`) and must identify an active user (otherwise `-32602`).
+	// - Regular clients can only switch within their own account family (the main account and its subaccounts). A token issued directly for a subaccount cannot switch to the main account or to sibling subaccounts (`-32602` on `subject_id`). Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Without `scope`, the new token inherits the scope of the supplied refresh token. A supplied `scope` **replaces** it (it is not merged), and cannot exceed the scope of the refresh token (`13403` `scope_exceeded`). If it contains neither `session:` nor `connection`, a session with a generated name is created.
+	// - The new access token's lifetime is counted from the issue time of the supplied refresh token.
+	// - Over WebSocket, the returned access token is also installed on the current connection, so subsequent private requests act as the new subject.
+	// - An invalid, expired or already-replaced refresh token (or one bound to another connection) returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 	//
 	// **📖 Related Articles:**
 	// - [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
@@ -19385,6 +19053,14 @@ type ClientInterface interface {
 	// PublicForkToken performs a GET /public/fork_token (the `PublicForkToken` operationId) request.
 	//
 	// Generates a token for a new named session. This method can be used only with session scoped tokens.
+	//
+	// **Rules:**
+	//
+	// - The refresh token must have `session` scope; a `connection` scope refresh token is rejected with `-32602` on `refresh_token`.
+	// - `session_name` longer than 64 bytes is truncated (not rejected). The truncated name must differ from the current session name, otherwise the call fails with `-32602` on `session_name`.
+	// - The forked session keeps the scope of the original token with only the session name replaced, and receives a fresh access token and refresh token.
+	// - Unlike `public/auth` and `public/exchange_token`, the forked access token is **not** installed on the current WebSocket connection: the connection keeps its current authentication until you authenticate it with the new token.
+	// - An invalid, expired or already-replaced refresh token returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 	//
 	// **📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
 	//
@@ -19524,7 +19200,7 @@ type ClientInterface interface {
 	//
 	// Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.
 	//
-	// Results can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
+	// Results can be paginated using the `offset` and `count` parameters. Optionally, results can be limited to a date range using `start_timestamp` and `end_timestamp` , each is mapped to the UTC calendar date of the delivery and both bounds are inclusive; `records_total` reflects the filtered set. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
 	//
 	// **📖 Related Article:** [Options Data Collection Best Practices](https://docs.deribit.com/articles/options-data-collection-best-practices)
 	//
@@ -19643,7 +19319,7 @@ type ClientInterface interface {
 	//
 	// Spot matching is different. A spot's settlement field is the pair symbol (for example `BTC_USDC`), not `BTC` or `USDC`. When `expired=false` and `kind` is omitted/`any` for a specific currency, the response unions (1) derivatives with that settlement currency and (2) spots whose base or quote is that currency. `kind=spot` with a specific currency matches spots on either side of the pair. `expired=true` does not apply that extra spot union, so recently delivered spots are not returned under `currency=BTC`.
 	//
-	// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) margin/perpetual fields that `public/get_instrument` does not return.
+	// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) trading bandwidth/perpetual fields that `public/get_instrument` does not return.
 	//
 	// **📖 Related Articles:**
 	// - [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
@@ -19821,18 +19497,27 @@ type ClientInterface interface {
 
 	// PublicHello performs a GET /public/hello (the `PublicHello` operationId) request.
 	//
-	// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+	// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself. This method is available only over WebSocket; calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
 	PublicHello(ctx context.Context, params *PublicHelloParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// PublicSetHeartbeat performs a GET /public/set_heartbeat (the `PublicSetHeartbeat` operationId) request.
 	//
-	// Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+	// Signals the WebSocket connection to send and request heartbeats. Heartbeats are used to detect stale or broken connections.
 	//
-	// When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+	// **Heartbeat & Disconnect Lifecycle:**
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// - When no message has been sent to the client for `interval` seconds, the server sends a `heartbeat` notification (`"params": {"type": "heartbeat"}`).
+	// - When no message has been received from the client for `interval` seconds (plus 500 ms), the server sends a `heartbeat` notification with `"params": {"type": "test_request"}`. Respond by sending a `/api/v2/public/test` request.
+	// - Any JSON text message from the client counts as activity and restarts this timer; WebSocket-level ping/pong frames and the plain-text `ping` / `PING` messages do not.
+	// - If the connection stays silent until `(2 * interval) + 500 ms` after the last client message, the server closes the WebSocket with **close code 4000** (`heartbeat close`).
+	// - If Cancel on Disconnect is enabled for the connection (connection or account scope), orders created over this connection are cancelled when it is closed.
+	// - Calling this method again replaces the previous interval.
+	//
+	// **Validation:** `interval` must be an integer between 10 and 300 seconds inclusive. Any other value (including fractional numbers) returns JSON-RPC error `-32602`.
+	//
+	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
 	PublicSetHeartbeat(ctx context.Context, params *PublicSetHeartbeatParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -19862,6 +19547,12 @@ type ClientInterface interface {
 	// PublicTest performs a GET /public/test (the `PublicTest` operationId) request.
 	//
 	// Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
+	//
+	// With `expected_result` set to `exception` the server returns error `11094` (`internal_server_error`) instead of the version, for example:
+	//
+	// ```json
+	// {"jsonrpc": "2.0", "id": 8213, "error": {"message": "internal_server_error", "code": 11094}}
+	// ```
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)
 	PublicTest(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -20392,7 +20083,9 @@ func (c *Client) PrivateChangeApiKeyName(ctx context.Context, params *PrivateCha
 //
 // Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).
 //
-// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.
+// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it. A dry run runs the same checks as the actual change.
+//
+// Returns an error if a currency would be left with negative equity, an unfunded long option position, or insufficient funds.
 //
 // **📖 Related Article:** [Margin types and usage](https://support.deribit.com/hc/en-us/articles/25944811317149-Margin-types-and-usage)
 //
@@ -20715,9 +20408,12 @@ func (c *Client) PrivateDisableApiKey(ctx context.Context, params *PrivateDisabl
 //
 // When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// **Scope & transport:**
 //
-// **Scope:** `account:read_write`
+// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+//
+// **Scope:** `account:read_write` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
 func (c *Client) PrivateDisableCancelOnDisconnect(ctx context.Context, params *PrivateDisableCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -20892,9 +20588,14 @@ func (c *Client) PrivateEnableApiKey(ctx context.Context, params *PrivateEnableA
 //
 // **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// **Scope & transport:**
 //
-// **Scope:** `account:read_write`
+// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+//
+// **Restrictions:** Not available for retail broker main accounts or their subaccounts: error `14021` (`not_allowed_for_retail_brokers`) is returned for both scopes.
+//
+// **Scope:** `account:read_write` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
 func (c *Client) PrivateEnableCancelOnDisconnect(ctx context.Context, params *PrivateEnableCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -21307,9 +21008,12 @@ func (c *Client) PrivateGetBrokerTrades(ctx context.Context, params *PrivateGetB
 
 // PrivateGetCancelOnDisconnect performs a GET /private/get_cancel_on_disconnect (the `PrivateGetCancelOnDisconnect` operationId) request.
 //
-// Read current Cancel On Disconnect configuration for the account.
+// Read the current Cancel On Disconnect configuration.
 //
-// **Scope:** `account:read`
+// - `scope=connection` (the default) returns the state for the current WebSocket connection and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` returns the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read` scope.
+//
+// **Scope:** `account:read` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
 func (c *Client) PrivateGetCancelOnDisconnect(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -22386,6 +22090,8 @@ func (c *Client) PrivateListCustodyAccounts(ctx context.Context, params *Private
 //
 // This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
 //
+// **Token invalidation:** With `invalidate_token=true` (default) the current token is invalidated. With `false` it stays valid but remains subject to its scope, session and expiry: a `connection` scope token stays bound to the connection it was issued on and cannot be used on a new connection; use a `session` scope token (or authenticate again) to continue after reconnecting.
+//
 // **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
@@ -23245,17 +22951,35 @@ func (c *Client) PrivateWithdraw(ctx context.Context, params *PrivateWithdrawPar
 //
 // **Authentication Methods:**
 //
-// Three methods of authentication are supported:
+// Three methods of authentication are supported (selected with `grant_type`):
 //
-// - “client_credentials“ - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
+// - `client_credentials` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
 //
-// - “client_signature“ - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires “ `client_id` “, “ `timestamp` “ (current time in milliseconds), “ `nonce` “, “ `signature` “, and optionally a “ `data` “ field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
+// - `client_signature` - Enhanced security method using a cryptographic signature instead of sending the client secret directly. The signature is calculated over `<timestamp>\n<nonce>\n<data>` (the three values joined with line-feed characters, `timestamp` exactly as sent). Keys with a shared secret use an HMAC-SHA256 signature encoded as hexadecimal; asymmetric (RSA / Ed25519) keys use a digital signature over the same string encoded as URL-safe base64 without padding. This method requires `client_id`, `timestamp` and `signature`; `nonce` and `data` are optional (`nonce` is strongly recommended for replay protection). See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
 //
-// - “refresh_token“ - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+// - `refresh_token` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+//
+// **Refresh token behavior:**
+//
+// - Every successful refresh issues a **new** access token **and** a new refresh token, and invalidates the previously issued token pair. Always store the newest `refresh_token`; reusing an older one fails with `-32602` (`invalid token`), which also affects concurrent refreshes with the same token.
+// - The `scope` parameter is ignored for this grant type: the new tokens keep the scope, session and lifetime of the original token.
+// - A token with `connection` scope is bound to the connection it was issued on and cannot be refreshed or used from another connection.
+//
+// **Scope behavior (`client_credentials` and `client_signature`):**
+//
+// - Without a `session:` or `connection` scope item, a WebSocket request gets a `connection` scope token. An HTTP (REST) request gets a `session` scope token with a generated `rest-...` session name, unless `connection` was requested explicitly.
+// - `connection` and `session:name` cannot be combined (`-32602`).
+// - Requested permission scopes (`trade`, `wallet`, `account`, `block_trade`, `block_rfq`) never exceed the permissions of the API key: higher levels are silently reduced to the key's level, and permission scopes that are not requested inherit the key's permissions. This is not reported as an error.
 //
 // **Response:**
 //
-// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
+// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens. Over WebSocket, a successful call also authenticates the current connection, so later private requests on it need no `access_token`.
+//
+// **Errors** (JSON-RPC `error.code`):
+//
+// - `13004` `invalid_credentials` - unknown `client_id`, wrong `client_secret`, invalid `signature`, or `client_id` longer than 16 bytes.
+// - `13009` `unauthorized` - `timestamp` outside the allowed window, `nonce` longer than 128 bytes or already used, connecting IP not in the key's IP whitelist (`reason: bad_ip`).
+// - `-32602` `Invalid params` - missing required parameter for the chosen `grant_type`, unknown `grant_type`, invalid `scope`, or an invalid / expired / already-replaced `refresh_token` (including `session_not_found`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)
 func (c *Client) PublicAuth(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -23274,7 +22998,9 @@ func (c *Client) PublicAuth(ctx context.Context, params *PublicAuthParams, reqEd
 //
 // Stop sending heartbeat messages. This method takes no parameters.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// It also stops the server-side monitoring of client activity configured by [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat): after this call the server neither sends `test_request` messages nor closes the connection with code 4000. The regular WebSocket idle timeout (10 minutes without incoming data) still applies.
+//
+// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
 func (c *Client) PublicDisableHeartbeat(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -23292,6 +23018,15 @@ func (c *Client) PublicDisableHeartbeat(ctx context.Context, reqEditors ...Reque
 // PublicExchangeToken performs a GET /public/exchange_token (the `PublicExchangeToken` operationId) request.
 //
 // Generates a token for a new subject id. This method can be used to switch between subaccounts.
+//
+// **Rules:**
+//
+// - `subject_id` must differ from the subject of the supplied refresh token (otherwise `-32602`) and must identify an active user (otherwise `-32602`).
+// - Regular clients can only switch within their own account family (the main account and its subaccounts). A token issued directly for a subaccount cannot switch to the main account or to sibling subaccounts (`-32602` on `subject_id`). Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Without `scope`, the new token inherits the scope of the supplied refresh token. A supplied `scope` **replaces** it (it is not merged), and cannot exceed the scope of the refresh token (`13403` `scope_exceeded`). If it contains neither `session:` nor `connection`, a session with a generated name is created.
+// - The new access token's lifetime is counted from the issue time of the supplied refresh token.
+// - Over WebSocket, the returned access token is also installed on the current connection, so subsequent private requests act as the new subject.
+// - An invalid, expired or already-replaced refresh token (or one bound to another connection) returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 //
 // **📖 Related Articles:**
 // - [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
@@ -23313,6 +23048,14 @@ func (c *Client) PublicExchangeToken(ctx context.Context, params *PublicExchange
 // PublicForkToken performs a GET /public/fork_token (the `PublicForkToken` operationId) request.
 //
 // Generates a token for a new named session. This method can be used only with session scoped tokens.
+//
+// **Rules:**
+//
+// - The refresh token must have `session` scope; a `connection` scope refresh token is rejected with `-32602` on `refresh_token`.
+// - `session_name` longer than 64 bytes is truncated (not rejected). The truncated name must differ from the current session name, otherwise the call fails with `-32602` on `session_name`.
+// - The forked session keeps the scope of the original token with only the session name replaced, and receives a fresh access token and refresh token.
+// - Unlike `public/auth` and `public/exchange_token`, the forked access token is **not** installed on the current WebSocket connection: the connection keeps its current authentication until you authenticate it with the new token.
+// - An invalid, expired or already-replaced refresh token returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 //
 // **📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
 //
@@ -23572,7 +23315,7 @@ func (c *Client) PublicGetCurrencies(ctx context.Context, reqEditors ...RequestE
 //
 // Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.
 //
-// Results can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
+// Results can be paginated using the `offset` and `count` parameters. Optionally, results can be limited to a date range using `start_timestamp` and `end_timestamp` , each is mapped to the UTC calendar date of the delivery and both bounds are inclusive; `records_total` reflects the filtered set. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
 //
 // **📖 Related Article:** [Options Data Collection Best Practices](https://docs.deribit.com/articles/options-data-collection-best-practices)
 //
@@ -23791,7 +23534,7 @@ func (c *Client) PublicGetInstrument(ctx context.Context, params *PublicGetInstr
 //
 // Spot matching is different. A spot's settlement field is the pair symbol (for example `BTC_USDC`), not `BTC` or `USDC`. When `expired=false` and `kind` is omitted/`any` for a specific currency, the response unions (1) derivatives with that settlement currency and (2) spots whose base or quote is that currency. `kind=spot` with a specific currency matches spots on either side of the pair. `expired=true` does not apply that extra spot union, so recently delivered spots are not returned under `currency=BTC`.
 //
-// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) margin/perpetual fields that `public/get_instrument` does not return.
+// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) trading bandwidth/perpetual fields that `public/get_instrument` does not return.
 //
 // **📖 Related Articles:**
 // - [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
@@ -24119,7 +23862,7 @@ func (c *Client) PublicGetVolatilityIndexData(ctx context.Context, params *Publi
 
 // PublicHello performs a GET /public/hello (the `PublicHello` operationId) request.
 //
-// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself. This method is available only over WebSocket; calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
 func (c *Client) PublicHello(ctx context.Context, params *PublicHelloParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -24136,11 +23879,20 @@ func (c *Client) PublicHello(ctx context.Context, params *PublicHelloParams, req
 
 // PublicSetHeartbeat performs a GET /public/set_heartbeat (the `PublicSetHeartbeat` operationId) request.
 //
-// Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+// Signals the WebSocket connection to send and request heartbeats. Heartbeats are used to detect stale or broken connections.
 //
-// When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+// **Heartbeat & Disconnect Lifecycle:**
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// - When no message has been sent to the client for `interval` seconds, the server sends a `heartbeat` notification (`"params": {"type": "heartbeat"}`).
+// - When no message has been received from the client for `interval` seconds (plus 500 ms), the server sends a `heartbeat` notification with `"params": {"type": "test_request"}`. Respond by sending a `/api/v2/public/test` request.
+// - Any JSON text message from the client counts as activity and restarts this timer; WebSocket-level ping/pong frames and the plain-text `ping` / `PING` messages do not.
+// - If the connection stays silent until `(2 * interval) + 500 ms` after the last client message, the server closes the WebSocket with **close code 4000** (`heartbeat close`).
+// - If Cancel on Disconnect is enabled for the connection (connection or account scope), orders created over this connection are cancelled when it is closed.
+// - Calling this method again replaces the previous interval.
+//
+// **Validation:** `interval` must be an integer between 10 and 300 seconds inclusive. Any other value (including fractional numbers) returns JSON-RPC error `-32602`.
+//
+// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
 func (c *Client) PublicSetHeartbeat(ctx context.Context, params *PublicSetHeartbeatParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -24200,6 +23952,12 @@ func (c *Client) PublicSubscribe(ctx context.Context, params *PublicSubscribePar
 // PublicTest performs a GET /public/test (the `PublicTest` operationId) request.
 //
 // Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
+//
+// With `expected_result` set to `exception` the server returns error `11094` (`internal_server_error`) instead of the version, for example:
+//
+// ```json
+// {"jsonrpc": "2.0", "id": 8213, "error": {"message": "internal_server_error", "code": 11094}}
+// ```
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)
 func (c *Client) PublicTest(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -31531,20 +31289,28 @@ func NewPrivateGetUserTradesByCurrencyAndTimeRequest(server string, params *Priv
 
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.StartTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", *params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.EndTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", *params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
 		if params.Count != nil {
@@ -31791,20 +31557,28 @@ func NewPrivateGetUserTradesByInstrumentAndTimeRequest(server string, params *Pr
 			}
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.StartTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", *params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.EndTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", *params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
 		if params.Count != nil {
@@ -35457,44 +35231,64 @@ func NewPublicAuthRequest(server string, params *PublicAuthParams) (*http.Reques
 			}
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "client_id", params.ClientId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.ClientId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "client_id", *params.ClientId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "client_secret", params.ClientSecret, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.ClientSecret != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "client_secret", *params.ClientSecret, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "refresh_token", params.RefreshToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.RefreshToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "refresh_token", *params.RefreshToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "timestamp", params.Timestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.Timestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "timestamp", *params.Timestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "signature", params.Signature, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.Signature != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "signature", *params.Signature, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
 		if params.Nonce != nil {
@@ -36380,6 +36174,30 @@ func NewPublicGetDeliveryPricesRequest(server string, params *PublicGetDeliveryP
 		if params.Count != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "count", *params.Count, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.StartTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", *params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.EndTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", *params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -37397,20 +37215,28 @@ func NewPublicGetLastTradesByCurrencyAndTimeRequest(server string, params *Publi
 
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.StartTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", *params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.EndTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", *params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
 		if params.Count != nil {
@@ -37609,20 +37435,28 @@ func NewPublicGetLastTradesByInstrumentAndTimeRequest(server string, params *Pub
 			}
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.StartTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start_timestamp", *params.StartTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
+		if params.EndTimestamp != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end_timestamp", *params.EndTimestamp, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
 			}
+
 		}
 
 		if params.Count != nil {
@@ -38222,7 +38056,7 @@ func NewPublicSetHeartbeatRequest(server string, params *PublicSetHeartbeatParam
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
 
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "interval", params.Interval, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "number", Format: ""}); err != nil {
+		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "interval", params.Interval, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: ""}); err != nil {
 			return nil, err
 		} else {
 			for _, qp := range strings.Split(queryFrag, "&") {
@@ -38571,7 +38405,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateAcceptBlockRfqWithResponse(ctx context.Context, params *PrivateAcceptBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateAcceptBlockRfqResponse3, error)
+	PrivateAcceptBlockRfqWithResponse(ctx context.Context, params *PrivateAcceptBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateAcceptBlockRfqResponse2, error)
 
 	// PrivateAddBlockRfqQuoteWithResponse performs a GET /private/add_block_rfq_quote (the `PrivateAddBlockRfqQuote` operationId) request.
 	//
@@ -38588,7 +38422,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateAddBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateAddBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateAddBlockRfqQuoteResponse3, error)
+	PrivateAddBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateAddBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateAddBlockRfqQuoteResponse2, error)
 
 	// PrivateAddToAddressBookWithResponse performs a GET /private/add_to_address_book (the `PrivateAddToAddressBook` operationId) request.
 	//
@@ -38613,7 +38447,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateAddToAddressBookWithResponse(ctx context.Context, params *PrivateAddToAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateAddToAddressBookResponse3, error)
+	PrivateAddToAddressBookWithResponse(ctx context.Context, params *PrivateAddToAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateAddToAddressBookResponse2, error)
 
 	// PrivateApproveBlockTradeWithResponse performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
 	//
@@ -38662,7 +38496,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelWithResponse(ctx context.Context, params *PrivateCancelParams, reqEditors ...RequestEditorFn) (*PrivateCancelResponse3, error)
+	PrivateCancelWithResponse(ctx context.Context, params *PrivateCancelParams, reqEditors ...RequestEditorFn) (*PrivateCancelResponse2, error)
 
 	// PrivateCancelAllWithResponse performs a GET /private/cancel_all (the `PrivateCancelAll` operationId) request.
 	//
@@ -38679,7 +38513,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelAllWithResponse(ctx context.Context, params *PrivateCancelAllParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllResponse3, error)
+	PrivateCancelAllWithResponse(ctx context.Context, params *PrivateCancelAllParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllResponse2, error)
 
 	// PrivateCancelAllBlockRfqQuotesWithResponse performs a GET /private/cancel_all_block_rfq_quotes (the `PrivateCancelAllBlockRfqQuotes` operationId) request.
 	//
@@ -38696,7 +38530,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelAllBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateCancelAllBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllBlockRfqQuotesResponse3, error)
+	PrivateCancelAllBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateCancelAllBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllBlockRfqQuotesResponse2, error)
 
 	// PrivateCancelAllByCurrencyWithResponse performs a GET /private/cancel_all_by_currency (the `PrivateCancelAllByCurrency` operationId) request.
 	//
@@ -38767,7 +38601,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelBlockRfqWithResponse(ctx context.Context, params *PrivateCancelBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqResponse3, error)
+	PrivateCancelBlockRfqWithResponse(ctx context.Context, params *PrivateCancelBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqResponse2, error)
 
 	// PrivateCancelBlockRfqQuoteWithResponse performs a GET /private/cancel_block_rfq_quote (the `PrivateCancelBlockRfqQuote` operationId) request.
 	//
@@ -38787,7 +38621,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateCancelBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqQuoteResponse3, error)
+	PrivateCancelBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateCancelBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqQuoteResponse2, error)
 
 	// PrivateCancelBlockRfqTriggerWithResponse performs a GET /private/cancel_block_rfq_trigger (the `PrivateCancelBlockRfqTrigger` operationId) request.
 	//
@@ -38804,7 +38638,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelBlockRfqTriggerWithResponse(ctx context.Context, params *PrivateCancelBlockRfqTriggerParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqTriggerResponse3, error)
+	PrivateCancelBlockRfqTriggerWithResponse(ctx context.Context, params *PrivateCancelBlockRfqTriggerParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqTriggerResponse2, error)
 
 	// PrivateCancelByLabelWithResponse performs a GET /private/cancel_by_label (the `PrivateCancelByLabel` operationId) request.
 	//
@@ -38840,7 +38674,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_quotes)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCancelQuotesWithResponse(ctx context.Context, params *PrivateCancelQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelQuotesResponse3, error)
+	PrivateCancelQuotesWithResponse(ctx context.Context, params *PrivateCancelQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelQuotesResponse2, error)
 
 	// PrivateCancelTransferByIdWithResponse performs a GET /private/cancel_transfer_by_id (the `PrivateCancelTransferById` operationId) request.
 	//
@@ -38885,7 +38719,9 @@ type ClientWithResponsesInterface interface {
 	//
 	// Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).
 	//
-	// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.
+	// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it. A dry run runs the same checks as the actual change.
+	//
+	// Returns an error if a currency would be left with negative equity, an unfunded long option position, or insufficient funds.
 	//
 	// **📖 Related Article:** [Margin types and usage](https://support.deribit.com/hc/en-us/articles/25944811317149-Margin-types-and-usage)
 	//
@@ -38894,7 +38730,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fchange_margin_model)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateChangeMarginModelWithResponse(ctx context.Context, params *PrivateChangeMarginModelParams, reqEditors ...RequestEditorFn) (*PrivateChangeMarginModelResponse3, error)
+	PrivateChangeMarginModelWithResponse(ctx context.Context, params *PrivateChangeMarginModelParams, reqEditors ...RequestEditorFn) (*PrivateChangeMarginModelResponse2, error)
 
 	// PrivateChangeScopeInApiKeyWithResponse performs a GET /private/change_scope_in_api_key (the `PrivateChangeScopeInApiKey` operationId) request.
 	//
@@ -38956,7 +38792,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcoinbase%2Festimate_withdrawal_fee)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCoinbaseEstimateWithdrawalFeeWithResponse(ctx context.Context, params *PrivateCoinbaseEstimateWithdrawalFeeParams, reqEditors ...RequestEditorFn) (*PrivateCoinbaseEstimateWithdrawalFeeResponse3, error)
+	PrivateCoinbaseEstimateWithdrawalFeeWithResponse(ctx context.Context, params *PrivateCoinbaseEstimateWithdrawalFeeParams, reqEditors ...RequestEditorFn) (*PrivateCoinbaseEstimateWithdrawalFeeResponse2, error)
 
 	// PrivateCreateApiKeyWithResponse performs a GET /private/create_api_key (the `PrivateCreateApiKey` operationId) request.
 	//
@@ -38994,7 +38830,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCreateBlockRfqWithResponse(ctx context.Context, params *PrivateCreateBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCreateBlockRfqResponse3, error)
+	PrivateCreateBlockRfqWithResponse(ctx context.Context, params *PrivateCreateBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCreateBlockRfqResponse2, error)
 
 	// PrivateCreateComboWithResponse performs a GET /private/create_combo (the `PrivateCreateCombo` operationId) request.
 	//
@@ -39007,7 +38843,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCreateComboWithResponse(ctx context.Context, params *PrivateCreateComboParams, reqEditors ...RequestEditorFn) (*PrivateCreateComboResponse3, error)
+	PrivateCreateComboWithResponse(ctx context.Context, params *PrivateCreateComboParams, reqEditors ...RequestEditorFn) (*PrivateCreateComboResponse2, error)
 
 	// PrivateCreateDepositAddressWithResponse performs a GET /private/create_deposit_address (the `PrivateCreateDepositAddress` operationId) request.
 	//
@@ -39049,7 +38885,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_subaccount)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateCreateSubaccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateCreateSubaccountResponse3, error)
+	PrivateCreateSubaccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateCreateSubaccountResponse2, error)
 
 	// PrivateDeleteAddressBeneficiaryWithResponse performs a GET /private/delete_address_beneficiary (the `PrivateDeleteAddressBeneficiary` operationId) request.
 	//
@@ -39062,7 +38898,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateDeleteAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateDeleteAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateDeleteAddressBeneficiaryResponse3, error)
+	PrivateDeleteAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateDeleteAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateDeleteAddressBeneficiaryResponse2, error)
 
 	// PrivateDeleteMemberWithResponse performs a GET /private/delete_member (the `PrivateDeleteMember` operationId) request.
 	//
@@ -39079,7 +38915,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_member)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateDeleteMemberWithResponse(ctx context.Context, params *PrivateDeleteMemberParams, reqEditors ...RequestEditorFn) (*PrivateDeleteMemberResponse3, error)
+	PrivateDeleteMemberWithResponse(ctx context.Context, params *PrivateDeleteMemberParams, reqEditors ...RequestEditorFn) (*PrivateDeleteMemberResponse2, error)
 
 	// PrivateDisableApiKeyWithResponse performs a GET /private/disable_api_key (the `PrivateDisableApiKey` operationId) request.
 	//
@@ -39104,9 +38940,12 @@ type ClientWithResponsesInterface interface {
 	//
 	// When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// **Scope & transport:**
 	//
-	// **Scope:** `account:read_write`
+	// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+	//
+	// **Scope:** `account:read_write` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
 	//
@@ -39130,7 +38969,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateEditWithResponse(ctx context.Context, params *PrivateEditParams, reqEditors ...RequestEditorFn) (*PrivateEditResponse3, error)
+	PrivateEditWithResponse(ctx context.Context, params *PrivateEditParams, reqEditors ...RequestEditorFn) (*PrivateEditResponse2, error)
 
 	// PrivateEditApiKeyWithResponse performs a GET /private/edit_api_key (the `PrivateEditApiKey` operationId) request.
 	//
@@ -39166,7 +39005,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateEditBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateEditBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateEditBlockRfqQuoteResponse3, error)
+	PrivateEditBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateEditBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateEditBlockRfqQuoteResponse2, error)
 
 	// PrivateEditByLabelWithResponse performs a GET /private/edit_by_label (the `PrivateEditByLabel` operationId) request.
 	//
@@ -39225,9 +39064,14 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// **Scope & transport:**
 	//
-	// **Scope:** `account:read_write`
+	// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+	//
+	// **Restrictions:** Not available for retail broker main accounts or their subaccounts: error `14021` (`not_allowed_for_retail_brokers`) is returned for both scopes.
+	//
+	// **Scope:** `account:read_write` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
 	//
@@ -39264,7 +39108,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_access_log)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetAccessLogWithResponse(ctx context.Context, params *PrivateGetAccessLogParams, reqEditors ...RequestEditorFn) (*PrivateGetAccessLogResponse3, error)
+	PrivateGetAccessLogWithResponse(ctx context.Context, params *PrivateGetAccessLogParams, reqEditors ...RequestEditorFn) (*PrivateGetAccessLogResponse2, error)
 
 	// PrivateGetAccountSummariesWithResponse performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
 	//
@@ -39309,7 +39153,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateGetAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateGetAddressBeneficiaryResponse3, error)
+	PrivateGetAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateGetAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateGetAddressBeneficiaryResponse2, error)
 
 	// PrivateGetAddressBookWithResponse performs a GET /private/get_address_book (the `PrivateGetAddressBook` operationId) request.
 	//
@@ -39341,7 +39185,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_affiliate_program_info)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetAffiliateProgramInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetAffiliateProgramInfoResponse3, error)
+	PrivateGetAffiliateProgramInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetAffiliateProgramInfoResponse2, error)
 
 	// PrivateGetBlockRfqMakersWithResponse performs a GET /private/get_block_rfq_makers (the `PrivateGetBlockRfqMakers` operationId) request.
 	//
@@ -39356,7 +39200,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockRfqMakersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqMakersResponse3, error)
+	PrivateGetBlockRfqMakersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqMakersResponse2, error)
 
 	// PrivateGetBlockRfqQuotesWithResponse performs a GET /private/get_block_rfq_quotes (the `PrivateGetBlockRfqQuotes` operationId) request.
 	//
@@ -39373,7 +39217,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateGetBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqQuotesResponse3, error)
+	PrivateGetBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateGetBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqQuotesResponse2, error)
 
 	// PrivateGetBlockRfqUserInfoWithResponse performs a GET /private/get_block_rfq_user_info (the `PrivateGetBlockRfqUserInfo` operationId) request.
 	//
@@ -39388,7 +39232,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockRfqUserInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqUserInfoResponse3, error)
+	PrivateGetBlockRfqUserInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqUserInfoResponse2, error)
 
 	// PrivateGetBlockRfqsWithResponse performs a GET /private/get_block_rfqs (the `PrivateGetBlockRfqs` operationId) request.
 	//
@@ -39405,7 +39249,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockRfqsWithResponse(ctx context.Context, params *PrivateGetBlockRfqsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqsResponse3, error)
+	PrivateGetBlockRfqsWithResponse(ctx context.Context, params *PrivateGetBlockRfqsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqsResponse2, error)
 
 	// PrivateGetBlockTradeWithResponse performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
 	//
@@ -39418,7 +39262,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockTradeWithResponse(ctx context.Context, params *PrivateGetBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeResponse3, error)
+	PrivateGetBlockTradeWithResponse(ctx context.Context, params *PrivateGetBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeResponse2, error)
 
 	// PrivateGetBlockTradeRequestsWithResponse performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
 	//
@@ -39435,7 +39279,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockTradeRequestsWithResponse(ctx context.Context, params *PrivateGetBlockTradeRequestsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeRequestsResponse3, error)
+	PrivateGetBlockTradeRequestsWithResponse(ctx context.Context, params *PrivateGetBlockTradeRequestsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeRequestsResponse2, error)
 
 	// PrivateGetBlockTradesWithResponse performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
 	//
@@ -39448,7 +39292,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBlockTradesWithResponse(ctx context.Context, params *PrivateGetBlockTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradesResponse3, error)
+	PrivateGetBlockTradesWithResponse(ctx context.Context, params *PrivateGetBlockTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradesResponse2, error)
 
 	// PrivateGetBrokerClientsWithResponse performs a GET /private/get_broker_clients (the `PrivateGetBrokerClients` operationId) request.
 	//
@@ -39470,7 +39314,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_clients)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBrokerClientsWithResponse(ctx context.Context, params *PrivateGetBrokerClientsParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerClientsResponse3, error)
+	PrivateGetBrokerClientsWithResponse(ctx context.Context, params *PrivateGetBrokerClientsParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerClientsResponse2, error)
 
 	// PrivateGetBrokerTradeRequestsWithResponse performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
 	//
@@ -39481,7 +39325,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBrokerTradeRequestsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradeRequestsResponse3, error)
+	PrivateGetBrokerTradeRequestsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradeRequestsResponse2, error)
 
 	// PrivateGetBrokerTradesWithResponse performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
 	//
@@ -39492,18 +39336,21 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetBrokerTradesWithResponse(ctx context.Context, params *PrivateGetBrokerTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradesResponse3, error)
+	PrivateGetBrokerTradesWithResponse(ctx context.Context, params *PrivateGetBrokerTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradesResponse2, error)
 
 	// PrivateGetCancelOnDisconnectWithResponse performs a GET /private/get_cancel_on_disconnect (the `PrivateGetCancelOnDisconnect` operationId) request.
 	//
-	// Read current Cancel On Disconnect configuration for the account.
+	// Read the current Cancel On Disconnect configuration.
 	//
-	// **Scope:** `account:read`
+	// - `scope=connection` (the default) returns the state for the current WebSocket connection and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+	// - `scope=account` returns the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read` scope.
+	//
+	// **Scope:** `account:read` (only for `scope=account`)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetCancelOnDisconnectWithResponse(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*PrivateGetCancelOnDisconnectResponse3, error)
+	PrivateGetCancelOnDisconnectWithResponse(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*PrivateGetCancelOnDisconnectResponse2, error)
 
 	// PrivateGetCurrenciesWithResponse performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
 	//
@@ -39516,7 +39363,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_currencies)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCurrenciesResponse3, error)
+	PrivateGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCurrenciesResponse2, error)
 
 	// PrivateGetCurrentDepositAddressWithResponse performs a GET /private/get_current_deposit_address (the `PrivateGetCurrentDepositAddress` operationId) request.
 	//
@@ -39546,7 +39393,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetDepositsWithResponse(ctx context.Context, params *PrivateGetDepositsParams, reqEditors ...RequestEditorFn) (*PrivateGetDepositsResponse3, error)
+	PrivateGetDepositsWithResponse(ctx context.Context, params *PrivateGetDepositsParams, reqEditors ...RequestEditorFn) (*PrivateGetDepositsResponse2, error)
 
 	// PrivateGetEmailLanguageWithResponse performs a GET /private/get_email_language (the `PrivateGetEmailLanguage` operationId) request.
 	//
@@ -39557,7 +39404,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_email_language)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetEmailLanguageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetEmailLanguageResponse3, error)
+	PrivateGetEmailLanguageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetEmailLanguageResponse2, error)
 
 	// PrivateGetLegPricesWithResponse performs a GET /private/get_leg_prices (the `PrivateGetLegPrices` operationId) request.
 	//
@@ -39570,7 +39417,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg_prices)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetLegPricesWithResponse(ctx context.Context, params *PrivateGetLegPricesParams, reqEditors ...RequestEditorFn) (*PrivateGetLegPricesResponse3, error)
+	PrivateGetLegPricesWithResponse(ctx context.Context, params *PrivateGetLegPricesParams, reqEditors ...RequestEditorFn) (*PrivateGetLegPricesResponse2, error)
 
 	// PrivateGetLspParticipantConfigWithResponse performs a GET /private/get_lsp_participant_config (the `PrivateGetLspParticipantConfig` operationId) request.
 	//
@@ -39587,7 +39434,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participant_config)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetLspParticipantConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantConfigResponse3, error)
+	PrivateGetLspParticipantConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantConfigResponse2, error)
 
 	// PrivateGetLspParticipantsWithResponse performs a GET /private/get_lsp_participants (the `PrivateGetLspParticipants` operationId) request.
 	//
@@ -39604,7 +39451,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participants)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetLspParticipantsWithResponse(ctx context.Context, params *PrivateGetLspParticipantsParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsResponse3, error)
+	PrivateGetLspParticipantsWithResponse(ctx context.Context, params *PrivateGetLspParticipantsParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsResponse2, error)
 
 	// PrivateGetLspParticipantsUsageWithResponse performs a GET /private/get_lsp_participants_usage (the `PrivateGetLspParticipantsUsage` operationId) request.
 	//
@@ -39621,7 +39468,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participants_usage)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetLspParticipantsUsageWithResponse(ctx context.Context, params *PrivateGetLspParticipantsUsageParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsUsageResponse3, error)
+	PrivateGetLspParticipantsUsageWithResponse(ctx context.Context, params *PrivateGetLspParticipantsUsageParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsUsageResponse2, error)
 
 	// PrivateGetLspUsageWithResponse performs a GET /private/get_lsp_usage (the `PrivateGetLspUsage` operationId) request.
 	//
@@ -39638,7 +39485,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_usage)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetLspUsageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspUsageResponse3, error)
+	PrivateGetLspUsageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspUsageResponse2, error)
 
 	// PrivateGetMarginsWithResponse performs a GET /private/get_margins (the `PrivateGetMargins` operationId) request.
 	//
@@ -39655,7 +39502,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_margins)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetMarginsWithResponse(ctx context.Context, params *PrivateGetMarginsParams, reqEditors ...RequestEditorFn) (*PrivateGetMarginsResponse3, error)
+	PrivateGetMarginsWithResponse(ctx context.Context, params *PrivateGetMarginsParams, reqEditors ...RequestEditorFn) (*PrivateGetMarginsResponse2, error)
 
 	// PrivateGetMembersWithResponse performs a GET /private/get_members (the `PrivateGetMembers` operationId) request.
 	//
@@ -39674,7 +39521,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_members)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetMembersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetMembersResponse3, error)
+	PrivateGetMembersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetMembersResponse2, error)
 
 	// PrivateGetMmpConfigWithResponse performs a GET /private/get_mmp_config (the `PrivateGetMmpConfig` operationId) request.
 	//
@@ -39693,7 +39540,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_config)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetMmpConfigWithResponse(ctx context.Context, params *PrivateGetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpConfigResponse3, error)
+	PrivateGetMmpConfigWithResponse(ctx context.Context, params *PrivateGetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpConfigResponse2, error)
 
 	// PrivateGetMmpStatusWithResponse performs a GET /private/get_mmp_status (the `PrivateGetMmpStatus` operationId) request.
 	//
@@ -39710,7 +39557,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_status)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetMmpStatusWithResponse(ctx context.Context, params *PrivateGetMmpStatusParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpStatusResponse3, error)
+	PrivateGetMmpStatusWithResponse(ctx context.Context, params *PrivateGetMmpStatusParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpStatusResponse2, error)
 
 	// PrivateGetNewAnnouncementsWithResponse performs a GET /private/get_new_announcements (the `PrivateGetNewAnnouncements` operationId) request.
 	//
@@ -39736,7 +39583,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetOpenOrdersWithResponse(ctx context.Context, params *PrivateGetOpenOrdersParams, reqEditors ...RequestEditorFn) (*PrivateGetOpenOrdersResponse3, error)
+	PrivateGetOpenOrdersWithResponse(ctx context.Context, params *PrivateGetOpenOrdersParams, reqEditors ...RequestEditorFn) (*PrivateGetOpenOrdersResponse2, error)
 
 	// PrivateGetOpenOrdersByCurrencyWithResponse performs a GET /private/get_open_orders_by_currency (the `PrivateGetOpenOrdersByCurrency` operationId) request.
 	//
@@ -39820,7 +39667,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_margin_by_ids)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetOrderMarginByIdsWithResponse(ctx context.Context, params *PrivateGetOrderMarginByIdsParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderMarginByIdsResponse3, error)
+	PrivateGetOrderMarginByIdsWithResponse(ctx context.Context, params *PrivateGetOrderMarginByIdsParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderMarginByIdsResponse2, error)
 
 	// PrivateGetOrderStateWithResponse performs a GET /private/get_order_state (the `PrivateGetOrderState` operationId) request.
 	//
@@ -39837,7 +39684,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetOrderStateWithResponse(ctx context.Context, params *PrivateGetOrderStateParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateResponse3, error)
+	PrivateGetOrderStateWithResponse(ctx context.Context, params *PrivateGetOrderStateParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateResponse2, error)
 
 	// PrivateGetOrderStateByLabelWithResponse performs a GET /private/get_order_state_by_label (the `PrivateGetOrderStateByLabel` operationId) request.
 	//
@@ -39854,7 +39701,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state_by_label)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetOrderStateByLabelWithResponse(ctx context.Context, params *PrivateGetOrderStateByLabelParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateByLabelResponse3, error)
+	PrivateGetOrderStateByLabelWithResponse(ctx context.Context, params *PrivateGetOrderStateByLabelParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateByLabelResponse2, error)
 
 	// PrivateGetPositionWithResponse performs a GET /private/get_position (the `PrivateGetPosition` operationId) request.
 	//
@@ -39867,7 +39714,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_position)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetPositionWithResponse(ctx context.Context, params *PrivateGetPositionParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionResponse3, error)
+	PrivateGetPositionWithResponse(ctx context.Context, params *PrivateGetPositionParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionResponse2, error)
 
 	// PrivateGetPositionsWithResponse performs a GET /private/get_positions (the `PrivateGetPositions` operationId) request.
 	//
@@ -39884,7 +39731,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_positions)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetPositionsWithResponse(ctx context.Context, params *PrivateGetPositionsParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionsResponse3, error)
+	PrivateGetPositionsWithResponse(ctx context.Context, params *PrivateGetPositionsParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionsResponse2, error)
 
 	// PrivateGetRewardEligibilityWithResponse performs a GET /private/get_reward_eligibility (the `PrivateGetRewardEligibility` operationId) request.
 	//
@@ -39897,7 +39744,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetRewardEligibilityWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetRewardEligibilityResponse3, error)
+	PrivateGetRewardEligibilityWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetRewardEligibilityResponse2, error)
 
 	// PrivateGetSettlementHistoryByCurrencyWithResponse performs a GET /private/get_settlement_history_by_currency (the `PrivateGetSettlementHistoryByCurrency` operationId) request.
 	//
@@ -39944,7 +39791,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_subaccounts)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetSubaccountsWithResponse(ctx context.Context, params *PrivateGetSubaccountsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsResponse3, error)
+	PrivateGetSubaccountsWithResponse(ctx context.Context, params *PrivateGetSubaccountsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsResponse2, error)
 
 	// PrivateGetSubaccountsDetailsWithResponse performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
 	//
@@ -39959,7 +39806,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_subaccounts_details)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetSubaccountsDetailsWithResponse(ctx context.Context, params *PrivateGetSubaccountsDetailsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsDetailsResponse3, error)
+	PrivateGetSubaccountsDetailsWithResponse(ctx context.Context, params *PrivateGetSubaccountsDetailsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsDetailsResponse2, error)
 
 	// PrivateGetTransactionLogWithResponse performs a GET /private/get_transaction_log (the `PrivateGetTransactionLog` operationId) request.
 	//
@@ -39992,7 +39839,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transaction_log)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetTransactionLogWithResponse(ctx context.Context, params *PrivateGetTransactionLogParams, reqEditors ...RequestEditorFn) (*PrivateGetTransactionLogResponse3, error)
+	PrivateGetTransactionLogWithResponse(ctx context.Context, params *PrivateGetTransactionLogParams, reqEditors ...RequestEditorFn) (*PrivateGetTransactionLogResponse2, error)
 
 	// PrivateGetTransfersWithResponse performs a GET /private/get_transfers (the `PrivateGetTransfers` operationId) request.
 	//
@@ -40005,7 +39852,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetTransfersWithResponse(ctx context.Context, params *PrivateGetTransfersParams, reqEditors ...RequestEditorFn) (*PrivateGetTransfersResponse3, error)
+	PrivateGetTransfersWithResponse(ctx context.Context, params *PrivateGetTransfersParams, reqEditors ...RequestEditorFn) (*PrivateGetTransfersResponse2, error)
 
 	// PrivateGetTriggerOrderHistoryWithResponse performs a GET /private/get_trigger_order_history (the `PrivateGetTriggerOrderHistory` operationId) request.
 	//
@@ -40018,7 +39865,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_trigger_order_history)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetTriggerOrderHistoryWithResponse(ctx context.Context, params *PrivateGetTriggerOrderHistoryParams, reqEditors ...RequestEditorFn) (*PrivateGetTriggerOrderHistoryResponse3, error)
+	PrivateGetTriggerOrderHistoryWithResponse(ctx context.Context, params *PrivateGetTriggerOrderHistoryParams, reqEditors ...RequestEditorFn) (*PrivateGetTriggerOrderHistoryResponse2, error)
 
 	// PrivateGetUserLocksWithResponse performs a GET /private/get_user_locks (the `PrivateGetUserLocks` operationId) request.
 	//
@@ -40033,7 +39880,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_locks)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetUserLocksWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetUserLocksResponse3, error)
+	PrivateGetUserLocksWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetUserLocksResponse2, error)
 
 	// PrivateGetUserTradesByCurrencyWithResponse performs a GET /private/get_user_trades_by_currency (the `PrivateGetUserTradesByCurrency` operationId) request.
 	//
@@ -40116,7 +39963,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_order)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetUserTradesByOrderWithResponse(ctx context.Context, params *PrivateGetUserTradesByOrderParams, reqEditors ...RequestEditorFn) (*PrivateGetUserTradesByOrderResponse3, error)
+	PrivateGetUserTradesByOrderWithResponse(ctx context.Context, params *PrivateGetUserTradesByOrderParams, reqEditors ...RequestEditorFn) (*PrivateGetUserTradesByOrderResponse2, error)
 
 	// PrivateGetWithdrawalsWithResponse performs a GET /private/get_withdrawals (the `PrivateGetWithdrawals` operationId) request.
 	//
@@ -40129,7 +39976,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateGetWithdrawalsWithResponse(ctx context.Context, params *PrivateGetWithdrawalsParams, reqEditors ...RequestEditorFn) (*PrivateGetWithdrawalsResponse3, error)
+	PrivateGetWithdrawalsWithResponse(ctx context.Context, params *PrivateGetWithdrawalsParams, reqEditors ...RequestEditorFn) (*PrivateGetWithdrawalsResponse2, error)
 
 	// PrivateInvalidateBlockTradeSignatureWithResponse performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
 	//
@@ -40155,7 +40002,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateListAddressBeneficiariesWithResponse(ctx context.Context, params *PrivateListAddressBeneficiariesParams, reqEditors ...RequestEditorFn) (*PrivateListAddressBeneficiariesResponse3, error)
+	PrivateListAddressBeneficiariesWithResponse(ctx context.Context, params *PrivateListAddressBeneficiariesParams, reqEditors ...RequestEditorFn) (*PrivateListAddressBeneficiariesResponse2, error)
 
 	// PrivateListApiKeysWithResponse performs a GET /private/list_api_keys (the `PrivateListApiKeys` operationId) request.
 	//
@@ -40215,6 +40062,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
 	//
+	// **Token invalidation:** With `invalidate_token=true` (default) the current token is invalidated. With `false` it stays valid but remains subject to its scope, session and expiry: a `connection` scope token stays bound to the connection it was issued on and cannot be used on a new connection; use a `session` scope token (or authenticate again) to continue after reconnecting.
+	//
 	// **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
@@ -40241,7 +40090,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmass_quote)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateMassQuoteWithResponse(ctx context.Context, params *PrivateMassQuoteParams, reqEditors ...RequestEditorFn) (*PrivateMassQuoteResponse3, error)
+	PrivateMassQuoteWithResponse(ctx context.Context, params *PrivateMassQuoteParams, reqEditors ...RequestEditorFn) (*PrivateMassQuoteResponse2, error)
 
 	// PrivateMovePositionsWithResponse performs a GET /private/move_positions (the `PrivateMovePositions` operationId) request.
 	//
@@ -40281,7 +40130,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fpme%2Fsimulate)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivatePmeSimulateWithResponse(ctx context.Context, params *PrivatePmeSimulateParams, reqEditors ...RequestEditorFn) (*PrivatePmeSimulateResponse3, error)
+	PrivatePmeSimulateWithResponse(ctx context.Context, params *PrivatePmeSimulateParams, reqEditors ...RequestEditorFn) (*PrivatePmeSimulateResponse2, error)
 
 	// PrivateRejectBlockTradeWithResponse performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
 	//
@@ -40330,7 +40179,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateRemoveFromAddressBookWithResponse(ctx context.Context, params *PrivateRemoveFromAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateRemoveFromAddressBookResponse3, error)
+	PrivateRemoveFromAddressBookWithResponse(ctx context.Context, params *PrivateRemoveFromAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateRemoveFromAddressBookResponse2, error)
 
 	// PrivateRemoveSubaccountWithResponse performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
 	//
@@ -40392,7 +40241,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSaveAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateSaveAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateSaveAddressBeneficiaryResponse3, error)
+	PrivateSaveAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateSaveAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateSaveAddressBeneficiaryResponse2, error)
 
 	// PrivateSellWithResponse performs a GET /private/sell (the `PrivateSell` operationId) request.
 	//
@@ -40428,7 +40277,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_address_requires_security_key)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSetAddressRequiresSecurityKeyWithResponse(ctx context.Context, params *PrivateSetAddressRequiresSecurityKeyParams, reqEditors ...RequestEditorFn) (*PrivateSetAddressRequiresSecurityKeyResponse3, error)
+	PrivateSetAddressRequiresSecurityKeyWithResponse(ctx context.Context, params *PrivateSetAddressRequiresSecurityKeyParams, reqEditors ...RequestEditorFn) (*PrivateSetAddressRequiresSecurityKeyResponse2, error)
 
 	// PrivateSetAnnouncementAsReadWithResponse performs a GET /private/set_announcement_as_read (the `PrivateSetAnnouncementAsRead` operationId) request.
 	//
@@ -40465,7 +40314,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_coinbase_subaccount_withdrawals_allowed)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse(ctx context.Context, params *PrivateSetCoinbaseSubaccountWithdrawalsAllowedParams, reqEditors ...RequestEditorFn) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3, error)
+	PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse(ctx context.Context, params *PrivateSetCoinbaseSubaccountWithdrawalsAllowedParams, reqEditors ...RequestEditorFn) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2, error)
 
 	// PrivateSetDisabledTradingProductsWithResponse performs a GET /private/set_disabled_trading_products (the `PrivateSetDisabledTradingProducts` operationId) request.
 	//
@@ -40533,7 +40382,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_member)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSetMemberWithResponse(ctx context.Context, params *PrivateSetMemberParams, reqEditors ...RequestEditorFn) (*PrivateSetMemberResponse3, error)
+	PrivateSetMemberWithResponse(ctx context.Context, params *PrivateSetMemberParams, reqEditors ...RequestEditorFn) (*PrivateSetMemberResponse2, error)
 
 	// PrivateSetMmpConfigWithResponse performs a GET /private/set_mmp_config (the `PrivateSetMmpConfig` operationId) request.
 	//
@@ -40558,7 +40407,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_mmp_config)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSetMmpConfigWithResponse(ctx context.Context, params *PrivateSetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateSetMmpConfigResponse3, error)
+	PrivateSetMmpConfigWithResponse(ctx context.Context, params *PrivateSetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateSetMmpConfigResponse2, error)
 
 	// PrivateSetSelfTradingConfigWithResponse performs a GET /private/set_self_trading_config (the `PrivateSetSelfTradingConfig` operationId) request.
 	//
@@ -40586,7 +40435,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSimulateBlockTradeWithResponse(ctx context.Context, params *PrivateSimulateBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateSimulateBlockTradeResponse3, error)
+	PrivateSimulateBlockTradeWithResponse(ctx context.Context, params *PrivateSimulateBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateSimulateBlockTradeResponse2, error)
 
 	// PrivateSimulatePortfolioWithResponse performs a GET /private/simulate_portfolio (the `PrivateSimulatePortfolio` operationId) request.
 	//
@@ -40603,7 +40452,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_portfolio)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSimulatePortfolioWithResponse(ctx context.Context, params *PrivateSimulatePortfolioParams, reqEditors ...RequestEditorFn) (*PrivateSimulatePortfolioResponse3, error)
+	PrivateSimulatePortfolioWithResponse(ctx context.Context, params *PrivateSimulatePortfolioParams, reqEditors ...RequestEditorFn) (*PrivateSimulatePortfolioResponse2, error)
 
 	// PrivateSubmitTransferBetweenSubaccountsWithResponse performs a GET /private/submit_transfer_between_subaccounts (the `PrivateSubmitTransferBetweenSubaccounts` operationId) request.
 	//
@@ -40659,7 +40508,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateSubscribeWithResponse(ctx context.Context, params *PrivateSubscribeParams, reqEditors ...RequestEditorFn) (*PrivateSubscribeResponse3, error)
+	PrivateSubscribeWithResponse(ctx context.Context, params *PrivateSubscribeParams, reqEditors ...RequestEditorFn) (*PrivateSubscribeResponse2, error)
 
 	// PrivateToggleNotificationsFromSubaccountWithResponse performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
 	//
@@ -40738,7 +40587,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateUpdateInAddressBookWithResponse(ctx context.Context, params *PrivateUpdateInAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateUpdateInAddressBookResponse3, error)
+	PrivateUpdateInAddressBookWithResponse(ctx context.Context, params *PrivateUpdateInAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateUpdateInAddressBookResponse2, error)
 
 	// PrivateVerifyBlockTradeWithResponse performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
 	//
@@ -40753,7 +40602,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateVerifyBlockTradeWithResponse(ctx context.Context, params *PrivateVerifyBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateVerifyBlockTradeResponse3, error)
+	PrivateVerifyBlockTradeWithResponse(ctx context.Context, params *PrivateVerifyBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateVerifyBlockTradeResponse2, error)
 
 	// PrivateWithdrawWithResponse performs a GET /private/withdraw (the `PrivateWithdraw` operationId) request.
 	//
@@ -40784,7 +40633,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fwithdraw)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PrivateWithdrawWithResponse(ctx context.Context, params *PrivateWithdrawParams, reqEditors ...RequestEditorFn) (*PrivateWithdrawResponse3, error)
+	PrivateWithdrawWithResponse(ctx context.Context, params *PrivateWithdrawParams, reqEditors ...RequestEditorFn) (*PrivateWithdrawResponse2, error)
 
 	// PublicAuthWithResponse performs a GET /public/auth (the `PublicAuth` operationId) request.
 	//
@@ -40794,30 +40643,48 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Authentication Methods:**
 	//
-	// Three methods of authentication are supported:
+	// Three methods of authentication are supported (selected with `grant_type`):
 	//
+	// - `client_credentials` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
 	//
-	// - ``client_credentials`` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
+	// - `client_signature` - Enhanced security method using a cryptographic signature instead of sending the client secret directly. The signature is calculated over `<timestamp>\n<nonce>\n<data>` (the three values joined with line-feed characters, `timestamp` exactly as sent). Keys with a shared secret use an HMAC-SHA256 signature encoded as hexadecimal; asymmetric (RSA / Ed25519) keys use a digital signature over the same string encoded as URL-safe base64 without padding. This method requires `client_id`, `timestamp` and `signature`; `nonce` and `data` are optional (`nonce` is strongly recommended for replay protection). See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
 	//
-	// - ``client_signature`` - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires `` `client_id` ``, `` `timestamp` `` (current time in milliseconds), `` `nonce` ``, `` `signature` ``, and optionally a `` `data` `` field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
+	// - `refresh_token` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
 	//
-	// - ``refresh_token`` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+	// **Refresh token behavior:**
 	//
+	// - Every successful refresh issues a **new** access token **and** a new refresh token, and invalidates the previously issued token pair. Always store the newest `refresh_token`; reusing an older one fails with `-32602` (`invalid token`), which also affects concurrent refreshes with the same token.
+	// - The `scope` parameter is ignored for this grant type: the new tokens keep the scope, session and lifetime of the original token.
+	// - A token with `connection` scope is bound to the connection it was issued on and cannot be refreshed or used from another connection.
+	//
+	// **Scope behavior (`client_credentials` and `client_signature`):**
+	//
+	// - Without a `session:` or `connection` scope item, a WebSocket request gets a `connection` scope token. An HTTP (REST) request gets a `session` scope token with a generated `rest-...` session name, unless `connection` was requested explicitly.
+	// - `connection` and `session:name` cannot be combined (`-32602`).
+	// - Requested permission scopes (`trade`, `wallet`, `account`, `block_trade`, `block_rfq`) never exceed the permissions of the API key: higher levels are silently reduced to the key's level, and permission scopes that are not requested inherit the key's permissions. This is not reported as an error.
 	//
 	// **Response:**
 	//
-	// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
+	// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens. Over WebSocket, a successful call also authenticates the current connection, so later private requests on it need no `access_token`.
+	//
+	// **Errors** (JSON-RPC `error.code`):
+	//
+	// - `13004` `invalid_credentials` - unknown `client_id`, wrong `client_secret`, invalid `signature`, or `client_id` longer than 16 bytes.
+	// - `13009` `unauthorized` - `timestamp` outside the allowed window, `nonce` longer than 128 bytes or already used, connecting IP not in the key's IP whitelist (`reason: bad_ip`).
+	// - `-32602` `Invalid params` - missing required parameter for the chosen `grant_type`, unknown `grant_type`, invalid `scope`, or an invalid / expired / already-replaced `refresh_token` (including `session_not_found`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicAuthWithResponse(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*PublicAuthResponse3, error)
+	PublicAuthWithResponse(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*PublicAuthResponse2, error)
 
 	// PublicDisableHeartbeatWithResponse performs a GET /public/disable_heartbeat (the `PublicDisableHeartbeat` operationId) request.
 	//
 	// Stop sending heartbeat messages. This method takes no parameters.
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// It also stops the server-side monitoring of client activity configured by [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat): after this call the server neither sends `test_request` messages nor closes the connection with code 4000. The regular WebSocket idle timeout (10 minutes without incoming data) still applies.
+	//
+	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
 	//
@@ -40827,6 +40694,15 @@ type ClientWithResponsesInterface interface {
 	// PublicExchangeTokenWithResponse performs a GET /public/exchange_token (the `PublicExchangeToken` operationId) request.
 	//
 	// Generates a token for a new subject id. This method can be used to switch between subaccounts.
+	//
+	// **Rules:**
+	//
+	// - `subject_id` must differ from the subject of the supplied refresh token (otherwise `-32602`) and must identify an active user (otherwise `-32602`).
+	// - Regular clients can only switch within their own account family (the main account and its subaccounts). A token issued directly for a subaccount cannot switch to the main account or to sibling subaccounts (`-32602` on `subject_id`). Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Without `scope`, the new token inherits the scope of the supplied refresh token. A supplied `scope` **replaces** it (it is not merged), and cannot exceed the scope of the refresh token (`13403` `scope_exceeded`). If it contains neither `session:` nor `connection`, a session with a generated name is created.
+	// - The new access token's lifetime is counted from the issue time of the supplied refresh token.
+	// - Over WebSocket, the returned access token is also installed on the current connection, so subsequent private requests act as the new subject.
+	// - An invalid, expired or already-replaced refresh token (or one bound to another connection) returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 	//
 	// **📖 Related Articles:**
 	// - [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
@@ -40840,6 +40716,14 @@ type ClientWithResponsesInterface interface {
 	// PublicForkTokenWithResponse performs a GET /public/fork_token (the `PublicForkToken` operationId) request.
 	//
 	// Generates a token for a new named session. This method can be used only with session scoped tokens.
+	//
+	// **Rules:**
+	//
+	// - The refresh token must have `session` scope; a `connection` scope refresh token is rejected with `-32602` on `refresh_token`.
+	// - `session_name` longer than 64 bytes is truncated (not rejected). The truncated name must differ from the current session name, otherwise the call fails with `-32602` on `session_name`.
+	// - The forked session keeps the scope of the original token with only the session name replaced, and receives a fresh access token and refresh token.
+	// - Unlike `public/auth` and `public/exchange_token`, the forked access token is **not** installed on the current WebSocket connection: the connection keeps its current authentication until you authenticate it with the new token.
+	// - An invalid, expired or already-replaced refresh token returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 	//
 	// **📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
 	//
@@ -40857,7 +40741,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_announcements)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetAnnouncementsWithResponse(ctx context.Context, params *PublicGetAnnouncementsParams, reqEditors ...RequestEditorFn) (*PublicGetAnnouncementsResponse3, error)
+	PublicGetAnnouncementsWithResponse(ctx context.Context, params *PublicGetAnnouncementsParams, reqEditors ...RequestEditorFn) (*PublicGetAnnouncementsResponse2, error)
 
 	// PublicGetAprHistoryWithResponse performs a GET /public/get_apr_history (the `PublicGetAprHistory` operationId) request.
 	//
@@ -40870,7 +40754,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_apr_history)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetAprHistoryWithResponse(ctx context.Context, params *PublicGetAprHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetAprHistoryResponse3, error)
+	PublicGetAprHistoryWithResponse(ctx context.Context, params *PublicGetAprHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetAprHistoryResponse2, error)
 
 	// PublicGetBasketIndexCompositionWithResponse performs a GET /public/get_basket_index_composition (the `PublicGetBasketIndexComposition` operationId) request.
 	//
@@ -40881,7 +40765,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_basket_index_composition)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetBasketIndexCompositionWithResponse(ctx context.Context, params *PublicGetBasketIndexCompositionParams, reqEditors ...RequestEditorFn) (*PublicGetBasketIndexCompositionResponse3, error)
+	PublicGetBasketIndexCompositionWithResponse(ctx context.Context, params *PublicGetBasketIndexCompositionParams, reqEditors ...RequestEditorFn) (*PublicGetBasketIndexCompositionResponse2, error)
 
 	// PublicGetBlockRfqTradesWithResponse performs a GET /public/get_block_rfq_trades (the `PublicGetBlockRfqTrades` operationId) request.
 	//
@@ -40894,7 +40778,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetBlockRfqTradesWithResponse(ctx context.Context, params *PublicGetBlockRfqTradesParams, reqEditors ...RequestEditorFn) (*PublicGetBlockRfqTradesResponse3, error)
+	PublicGetBlockRfqTradesWithResponse(ctx context.Context, params *PublicGetBlockRfqTradesParams, reqEditors ...RequestEditorFn) (*PublicGetBlockRfqTradesResponse2, error)
 
 	// PublicGetBookSummaryByCurrencyWithResponse performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
 	//
@@ -40937,7 +40821,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetComboDetailsWithResponse(ctx context.Context, params *PublicGetComboDetailsParams, reqEditors ...RequestEditorFn) (*PublicGetComboDetailsResponse3, error)
+	PublicGetComboDetailsWithResponse(ctx context.Context, params *PublicGetComboDetailsParams, reqEditors ...RequestEditorFn) (*PublicGetComboDetailsResponse2, error)
 
 	// PublicGetComboIdsWithResponse performs a GET /public/get_combo_ids (the `PublicGetComboIds` operationId) request.
 	//
@@ -40952,7 +40836,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetComboIdsWithResponse(ctx context.Context, params *PublicGetComboIdsParams, reqEditors ...RequestEditorFn) (*PublicGetComboIdsResponse3, error)
+	PublicGetComboIdsWithResponse(ctx context.Context, params *PublicGetComboIdsParams, reqEditors ...RequestEditorFn) (*PublicGetComboIdsResponse2, error)
 
 	// PublicGetCombosWithResponse performs a GET /public/get_combos (the `PublicGetCombos` operationId) request.
 	//
@@ -40969,7 +40853,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combos)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetCombosWithResponse(ctx context.Context, params *PublicGetCombosParams, reqEditors ...RequestEditorFn) (*PublicGetCombosResponse3, error)
+	PublicGetCombosWithResponse(ctx context.Context, params *PublicGetCombosParams, reqEditors ...RequestEditorFn) (*PublicGetCombosResponse2, error)
 
 	// PublicGetContractSizeWithResponse performs a GET /public/get_contract_size (the `PublicGetContractSize` operationId) request.
 	//
@@ -40984,7 +40868,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetContractSizeWithResponse(ctx context.Context, params *PublicGetContractSizeParams, reqEditors ...RequestEditorFn) (*PublicGetContractSizeResponse3, error)
+	PublicGetContractSizeWithResponse(ctx context.Context, params *PublicGetContractSizeParams, reqEditors ...RequestEditorFn) (*PublicGetContractSizeResponse2, error)
 
 	// PublicGetCurrenciesWithResponse performs a GET /public/get_currencies (the `PublicGetCurrencies` operationId) request.
 	//
@@ -40997,20 +40881,20 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetCurrenciesResponse3, error)
+	PublicGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetCurrenciesResponse2, error)
 
 	// PublicGetDeliveryPricesWithResponse performs a GET /public/get_delivery_prices (the `PublicGetDeliveryPrices` operationId) request.
 	//
 	// Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.
 	//
-	// Results can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
+	// Results can be paginated using the `offset` and `count` parameters. Optionally, results can be limited to a date range using `start_timestamp` and `end_timestamp` , each is mapped to the UTC calendar date of the delivery and both bounds are inclusive; `records_total` reflects the filtered set. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
 	//
 	// **📖 Related Article:** [Options Data Collection Best Practices](https://docs.deribit.com/articles/options-data-collection-best-practices)
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_delivery_prices)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetDeliveryPricesWithResponse(ctx context.Context, params *PublicGetDeliveryPricesParams, reqEditors ...RequestEditorFn) (*PublicGetDeliveryPricesResponse3, error)
+	PublicGetDeliveryPricesWithResponse(ctx context.Context, params *PublicGetDeliveryPricesParams, reqEditors ...RequestEditorFn) (*PublicGetDeliveryPricesResponse2, error)
 
 	// PublicGetExpirationsWithResponse performs a GET /public/get_expirations (the `PublicGetExpirations` operationId) request.
 	//
@@ -41030,7 +40914,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetExpirationsWithResponse(ctx context.Context, params *PublicGetExpirationsParams, reqEditors ...RequestEditorFn) (*PublicGetExpirationsResponse3, error)
+	PublicGetExpirationsWithResponse(ctx context.Context, params *PublicGetExpirationsParams, reqEditors ...RequestEditorFn) (*PublicGetExpirationsResponse2, error)
 
 	// PublicGetFundingChartDataWithResponse performs a GET /public/get_funding_chart_data (the `PublicGetFundingChartData` operationId) request.
 	//
@@ -41041,7 +40925,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetFundingChartDataWithResponse(ctx context.Context, params *PublicGetFundingChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetFundingChartDataResponse3, error)
+	PublicGetFundingChartDataWithResponse(ctx context.Context, params *PublicGetFundingChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetFundingChartDataResponse2, error)
 
 	// PublicGetFundingRateHistoryWithResponse performs a GET /public/get_funding_rate_history (the `PublicGetFundingRateHistory` operationId) request.
 	//
@@ -41052,7 +40936,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_history)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetFundingRateHistoryWithResponse(ctx context.Context, params *PublicGetFundingRateHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateHistoryResponse3, error)
+	PublicGetFundingRateHistoryWithResponse(ctx context.Context, params *PublicGetFundingRateHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateHistoryResponse2, error)
 
 	// PublicGetFundingRateValueWithResponse performs a GET /public/get_funding_rate_value (the `PublicGetFundingRateValue` operationId) request.
 	//
@@ -41063,7 +40947,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_value)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetFundingRateValueWithResponse(ctx context.Context, params *PublicGetFundingRateValueParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateValueResponse3, error)
+	PublicGetFundingRateValueWithResponse(ctx context.Context, params *PublicGetFundingRateValueParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateValueResponse2, error)
 
 	// PublicGetHistoricalVolatilityWithResponse performs a GET /public/get_historical_volatility (the `PublicGetHistoricalVolatility` operationId) request.
 	//
@@ -41076,7 +40960,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetHistoricalVolatilityWithResponse(ctx context.Context, params *PublicGetHistoricalVolatilityParams, reqEditors ...RequestEditorFn) (*PublicGetHistoricalVolatilityResponse3, error)
+	PublicGetHistoricalVolatilityWithResponse(ctx context.Context, params *PublicGetHistoricalVolatilityParams, reqEditors ...RequestEditorFn) (*PublicGetHistoricalVolatilityResponse2, error)
 
 	// PublicGetIndexChartDataWithResponse performs a GET /public/get_index_chart_data (the `PublicGetIndexChartData` operationId) request.
 	//
@@ -41087,7 +40971,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetIndexChartDataWithResponse(ctx context.Context, params *PublicGetIndexChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetIndexChartDataResponse3, error)
+	PublicGetIndexChartDataWithResponse(ctx context.Context, params *PublicGetIndexChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetIndexChartDataResponse2, error)
 
 	// PublicGetIndexPriceWithResponse performs a GET /public/get_index_price (the `PublicGetIndexPrice` operationId) request.
 	//
@@ -41098,7 +40982,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetIndexPriceWithResponse(ctx context.Context, params *PublicGetIndexPriceParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceResponse3, error)
+	PublicGetIndexPriceWithResponse(ctx context.Context, params *PublicGetIndexPriceParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceResponse2, error)
 
 	// PublicGetIndexPriceNamesWithResponse performs a GET /public/get_index_price_names (the `PublicGetIndexPriceNames` operationId) request.
 	//
@@ -41109,7 +40993,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetIndexPriceNamesWithResponse(ctx context.Context, params *PublicGetIndexPriceNamesParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceNamesResponse3, error)
+	PublicGetIndexPriceNamesWithResponse(ctx context.Context, params *PublicGetIndexPriceNamesParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceNamesResponse2, error)
 
 	// PublicGetInstrumentWithResponse performs a GET /public/get_instrument (the `PublicGetInstrument` operationId) request.
 	//
@@ -41126,7 +41010,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetInstrumentWithResponse(ctx context.Context, params *PublicGetInstrumentParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentResponse3, error)
+	PublicGetInstrumentWithResponse(ctx context.Context, params *PublicGetInstrumentParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentResponse2, error)
 
 	// PublicGetInstrumentsWithResponse performs a GET /public/get_instruments (the `PublicGetInstruments` operationId) request.
 	//
@@ -41142,7 +41026,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Spot matching is different. A spot's settlement field is the pair symbol (for example `BTC_USDC`), not `BTC` or `USDC`. When `expired=false` and `kind` is omitted/`any` for a specific currency, the response unions (1) derivatives with that settlement currency and (2) spots whose base or quote is that currency. `kind=spot` with a specific currency matches spots on either side of the pair. `expired=true` does not apply that extra spot union, so recently delivered spots are not returned under `currency=BTC`.
 	//
-	// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) margin/perpetual fields that `public/get_instrument` does not return.
+	// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) trading bandwidth/perpetual fields that `public/get_instrument` does not return.
 	//
 	// **📖 Related Articles:**
 	// - [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
@@ -41152,7 +41036,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instruments)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetInstrumentsWithResponse(ctx context.Context, params *PublicGetInstrumentsParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentsResponse3, error)
+	PublicGetInstrumentsWithResponse(ctx context.Context, params *PublicGetInstrumentsParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentsResponse2, error)
 
 	// PublicGetLastSettlementsByCurrencyWithResponse performs a GET /public/get_last_settlements_by_currency (the `PublicGetLastSettlementsByCurrency` operationId) request.
 	//
@@ -41259,7 +41143,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetMarkPriceHistoryWithResponse(ctx context.Context, params *PublicGetMarkPriceHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetMarkPriceHistoryResponse3, error)
+	PublicGetMarkPriceHistoryWithResponse(ctx context.Context, params *PublicGetMarkPriceHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetMarkPriceHistoryResponse2, error)
 
 	// PublicGetOrderBookWithResponse performs a GET /public/get_order_book (the `PublicGetOrderBook` operationId) request.
 	//
@@ -41270,7 +41154,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetOrderBookWithResponse(ctx context.Context, params *PublicGetOrderBookParams, reqEditors ...RequestEditorFn) (*PublicGetOrderBookResponse3, error)
+	PublicGetOrderBookWithResponse(ctx context.Context, params *PublicGetOrderBookParams, reqEditors ...RequestEditorFn) (*PublicGetOrderBookResponse2, error)
 
 	// PublicGetOrderBookByInstrumentIdWithResponse performs a GET /public/get_order_book_by_instrument_id (the `PublicGetOrderBookByInstrumentId` operationId) request.
 	//
@@ -41301,7 +41185,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetTimeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetTimeResponse3, error)
+	PublicGetTimeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetTimeResponse2, error)
 
 	// PublicGetTradeVolumesWithResponse performs a GET /public/get_trade_volumes (the `PublicGetTradeVolumes` operationId) request.
 	//
@@ -41333,7 +41217,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetTradingviewChartDataWithResponse(ctx context.Context, params *PublicGetTradingviewChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetTradingviewChartDataResponse3, error)
+	PublicGetTradingviewChartDataWithResponse(ctx context.Context, params *PublicGetTradingviewChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetTradingviewChartDataResponse2, error)
 
 	// PublicGetVolatilityIndexDataWithResponse performs a GET /public/get_volatility_index_data (the `PublicGetVolatilityIndexData` operationId) request.
 	//
@@ -41346,11 +41230,11 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicGetVolatilityIndexDataWithResponse(ctx context.Context, params *PublicGetVolatilityIndexDataParams, reqEditors ...RequestEditorFn) (*PublicGetVolatilityIndexDataResponse3, error)
+	PublicGetVolatilityIndexDataWithResponse(ctx context.Context, params *PublicGetVolatilityIndexDataParams, reqEditors ...RequestEditorFn) (*PublicGetVolatilityIndexDataResponse2, error)
 
 	// PublicHelloWithResponse performs a GET /public/hello (the `PublicHello` operationId) request.
 	//
-	// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+	// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself. This method is available only over WebSocket; calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
 	//
@@ -41359,11 +41243,20 @@ type ClientWithResponsesInterface interface {
 
 	// PublicSetHeartbeatWithResponse performs a GET /public/set_heartbeat (the `PublicSetHeartbeat` operationId) request.
 	//
-	// Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+	// Signals the WebSocket connection to send and request heartbeats. Heartbeats are used to detect stale or broken connections.
 	//
-	// When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+	// **Heartbeat & Disconnect Lifecycle:**
 	//
-	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+	// - When no message has been sent to the client for `interval` seconds, the server sends a `heartbeat` notification (`"params": {"type": "heartbeat"}`).
+	// - When no message has been received from the client for `interval` seconds (plus 500 ms), the server sends a `heartbeat` notification with `"params": {"type": "test_request"}`. Respond by sending a `/api/v2/public/test` request.
+	// - Any JSON text message from the client counts as activity and restarts this timer; WebSocket-level ping/pong frames and the plain-text `ping` / `PING` messages do not.
+	// - If the connection stays silent until `(2 * interval) + 500 ms` after the last client message, the server closes the WebSocket with **close code 4000** (`heartbeat close`).
+	// - If Cancel on Disconnect is enabled for the connection (connection or account scope), orders created over this connection are cancelled when it is closed.
+	// - Calling this method again replaces the previous interval.
+	//
+	// **Validation:** `interval` must be an integer between 10 and 300 seconds inclusive. Any other value (including fractional numbers) returns JSON-RPC error `-32602`.
+	//
+	// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
 	//
@@ -41377,7 +41270,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicStatusWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicStatusResponse3, error)
+	PublicStatusWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicStatusResponse2, error)
 
 	// PublicSubscribeWithResponse performs a GET /public/subscribe (the `PublicSubscribe` operationId) request.
 	//
@@ -41400,10 +41293,16 @@ type ClientWithResponsesInterface interface {
 	//
 	// Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
 	//
+	// With `expected_result` set to `exception` the server returns error `11094` (`internal_server_error`) instead of the version, for example:
+	//
+	// ```json
+	// {"jsonrpc": "2.0", "id": 8213, "error": {"message": "internal_server_error", "code": 11094}}
+	// ```
+	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicTestWithResponse(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*PublicTestResponse3, error)
+	PublicTestWithResponse(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*PublicTestResponse2, error)
 
 	// PublicTickerWithResponse performs a GET /public/ticker (the `PublicTicker` operationId) request.
 	//
@@ -41420,7 +41319,7 @@ type ClientWithResponsesInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)
 	//
 	// Returns a wrapper object for the known response body format(s).
-	PublicTickerWithResponse(ctx context.Context, params *PublicTickerParams, reqEditors ...RequestEditorFn) (*PublicTickerResponse3, error)
+	PublicTickerWithResponse(ctx context.Context, params *PublicTickerParams, reqEditors ...RequestEditorFn) (*PublicTickerResponse2, error)
 
 	// PublicUnsubscribeWithResponse performs a GET /public/unsubscribe (the `PublicUnsubscribe` operationId) request.
 	//
@@ -41445,25 +41344,25 @@ type ClientWithResponsesInterface interface {
 	PublicUnsubscribeAllWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicUnsubscribeAllResponse, error)
 }
 
-type PrivateAcceptBlockRfqResponse3 struct {
+type PrivateAcceptBlockRfqResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAcceptBlockRfqResponse2
+	JSON200 *PrivateAcceptBlockRfqResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateAcceptBlockRfqResponse3) GetJSON200() *PrivateAcceptBlockRfqResponse2 {
+func (r PrivateAcceptBlockRfqResponse2) GetJSON200() *PrivateAcceptBlockRfqResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateAcceptBlockRfqResponse3) GetBody() []byte {
+func (r PrivateAcceptBlockRfqResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateAcceptBlockRfqResponse3) Status() string {
+func (r PrivateAcceptBlockRfqResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41471,7 +41370,7 @@ func (r PrivateAcceptBlockRfqResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateAcceptBlockRfqResponse3) StatusCode() int {
+func (r PrivateAcceptBlockRfqResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41479,32 +41378,32 @@ func (r PrivateAcceptBlockRfqResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateAcceptBlockRfqResponse3) ContentType() string {
+func (r PrivateAcceptBlockRfqResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateAddBlockRfqQuoteResponse3 struct {
+type PrivateAddBlockRfqQuoteResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAddBlockRfqQuoteResponse2
+	JSON200 *PrivateAddBlockRfqQuoteResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateAddBlockRfqQuoteResponse3) GetJSON200() *PrivateAddBlockRfqQuoteResponse2 {
+func (r PrivateAddBlockRfqQuoteResponse2) GetJSON200() *PrivateAddBlockRfqQuoteResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateAddBlockRfqQuoteResponse3) GetBody() []byte {
+func (r PrivateAddBlockRfqQuoteResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateAddBlockRfqQuoteResponse3) Status() string {
+func (r PrivateAddBlockRfqQuoteResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41512,7 +41411,7 @@ func (r PrivateAddBlockRfqQuoteResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateAddBlockRfqQuoteResponse3) StatusCode() int {
+func (r PrivateAddBlockRfqQuoteResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41520,32 +41419,32 @@ func (r PrivateAddBlockRfqQuoteResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateAddBlockRfqQuoteResponse3) ContentType() string {
+func (r PrivateAddBlockRfqQuoteResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateAddToAddressBookResponse3 struct {
+type PrivateAddToAddressBookResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAddToAddressBookResponse2
+	JSON200 *PrivateAddToAddressBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateAddToAddressBookResponse3) GetJSON200() *PrivateAddToAddressBookResponse2 {
+func (r PrivateAddToAddressBookResponse2) GetJSON200() *PrivateAddToAddressBookResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateAddToAddressBookResponse3) GetBody() []byte {
+func (r PrivateAddToAddressBookResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateAddToAddressBookResponse3) Status() string {
+func (r PrivateAddToAddressBookResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41553,7 +41452,7 @@ func (r PrivateAddToAddressBookResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateAddToAddressBookResponse3) StatusCode() int {
+func (r PrivateAddToAddressBookResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41561,7 +41460,7 @@ func (r PrivateAddToAddressBookResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateAddToAddressBookResponse3) ContentType() string {
+func (r PrivateAddToAddressBookResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -41572,11 +41471,11 @@ type PrivateApproveBlockTradeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateApproveBlockTradeResponse) GetJSON200() *OkResponse2 {
+func (r PrivateApproveBlockTradeResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -41613,11 +41512,11 @@ type PrivateBuyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateBuyAndSellResponse2
+	JSON200 *PrivateBuyAndSellResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateBuyResponse) GetJSON200() *PrivateBuyAndSellResponse2 {
+func (r PrivateBuyResponse) GetJSON200() *PrivateBuyAndSellResponse {
 	return r.JSON200
 }
 
@@ -41650,25 +41549,25 @@ func (r PrivateBuyResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCancelResponse3 struct {
+type PrivateCancelResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelResponse2
+	JSON200 *PrivateCancelResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelResponse3) GetJSON200() *PrivateCancelResponse2 {
+func (r PrivateCancelResponse2) GetJSON200() *PrivateCancelResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelResponse3) GetBody() []byte {
+func (r PrivateCancelResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelResponse3) Status() string {
+func (r PrivateCancelResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41676,7 +41575,7 @@ func (r PrivateCancelResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelResponse3) StatusCode() int {
+func (r PrivateCancelResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41684,32 +41583,32 @@ func (r PrivateCancelResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelResponse3) ContentType() string {
+func (r PrivateCancelResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateCancelAllResponse3 struct {
+type PrivateCancelAllResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllResponse3) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelAllResponse2) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelAllResponse3) GetBody() []byte {
+func (r PrivateCancelAllResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelAllResponse3) Status() string {
+func (r PrivateCancelAllResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41717,7 +41616,7 @@ func (r PrivateCancelAllResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelAllResponse3) StatusCode() int {
+func (r PrivateCancelAllResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41725,32 +41624,32 @@ func (r PrivateCancelAllResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelAllResponse3) ContentType() string {
+func (r PrivateCancelAllResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateCancelAllBlockRfqQuotesResponse3 struct {
+type PrivateCancelAllBlockRfqQuotesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllBlockRfqQuotesResponse2
+	JSON200 *PrivateCancelAllBlockRfqQuotesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllBlockRfqQuotesResponse3) GetJSON200() *PrivateCancelAllBlockRfqQuotesResponse2 {
+func (r PrivateCancelAllBlockRfqQuotesResponse2) GetJSON200() *PrivateCancelAllBlockRfqQuotesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelAllBlockRfqQuotesResponse3) GetBody() []byte {
+func (r PrivateCancelAllBlockRfqQuotesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelAllBlockRfqQuotesResponse3) Status() string {
+func (r PrivateCancelAllBlockRfqQuotesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41758,7 +41657,7 @@ func (r PrivateCancelAllBlockRfqQuotesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelAllBlockRfqQuotesResponse3) StatusCode() int {
+func (r PrivateCancelAllBlockRfqQuotesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41766,7 +41665,7 @@ func (r PrivateCancelAllBlockRfqQuotesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelAllBlockRfqQuotesResponse3) ContentType() string {
+func (r PrivateCancelAllBlockRfqQuotesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -41777,11 +41676,11 @@ type PrivateCancelAllByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllByCurrencyResponse) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelAllByCurrencyResponse) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
@@ -41818,11 +41717,11 @@ type PrivateCancelAllByCurrencyPairResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllByCurrencyPairResponse) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelAllByCurrencyPairResponse) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
@@ -41859,11 +41758,11 @@ type PrivateCancelAllByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllByInstrumentResponse) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelAllByInstrumentResponse) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
@@ -41900,11 +41799,11 @@ type PrivateCancelAllByKindOrTypeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelAllByKindOrTypeResponse) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelAllByKindOrTypeResponse) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
@@ -41937,25 +41836,25 @@ func (r PrivateCancelAllByKindOrTypeResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCancelBlockRfqResponse3 struct {
+type PrivateCancelBlockRfqResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelBlockRfqResponse2
+	JSON200 *PrivateCancelBlockRfqResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelBlockRfqResponse3) GetJSON200() *PrivateCancelBlockRfqResponse2 {
+func (r PrivateCancelBlockRfqResponse2) GetJSON200() *PrivateCancelBlockRfqResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelBlockRfqResponse3) GetBody() []byte {
+func (r PrivateCancelBlockRfqResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelBlockRfqResponse3) Status() string {
+func (r PrivateCancelBlockRfqResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -41963,7 +41862,7 @@ func (r PrivateCancelBlockRfqResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelBlockRfqResponse3) StatusCode() int {
+func (r PrivateCancelBlockRfqResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -41971,32 +41870,32 @@ func (r PrivateCancelBlockRfqResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelBlockRfqResponse3) ContentType() string {
+func (r PrivateCancelBlockRfqResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateCancelBlockRfqQuoteResponse3 struct {
+type PrivateCancelBlockRfqQuoteResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelBlockRfqQuoteResponse2
+	JSON200 *PrivateCancelBlockRfqQuoteResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelBlockRfqQuoteResponse3) GetJSON200() *PrivateCancelBlockRfqQuoteResponse2 {
+func (r PrivateCancelBlockRfqQuoteResponse2) GetJSON200() *PrivateCancelBlockRfqQuoteResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelBlockRfqQuoteResponse3) GetBody() []byte {
+func (r PrivateCancelBlockRfqQuoteResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelBlockRfqQuoteResponse3) Status() string {
+func (r PrivateCancelBlockRfqQuoteResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42004,7 +41903,7 @@ func (r PrivateCancelBlockRfqQuoteResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelBlockRfqQuoteResponse3) StatusCode() int {
+func (r PrivateCancelBlockRfqQuoteResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42012,32 +41911,32 @@ func (r PrivateCancelBlockRfqQuoteResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelBlockRfqQuoteResponse3) ContentType() string {
+func (r PrivateCancelBlockRfqQuoteResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateCancelBlockRfqTriggerResponse3 struct {
+type PrivateCancelBlockRfqTriggerResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelBlockRfqTriggerResponse2
+	JSON200 *PrivateCancelBlockRfqTriggerResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelBlockRfqTriggerResponse3) GetJSON200() *PrivateCancelBlockRfqTriggerResponse2 {
+func (r PrivateCancelBlockRfqTriggerResponse2) GetJSON200() *PrivateCancelBlockRfqTriggerResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelBlockRfqTriggerResponse3) GetBody() []byte {
+func (r PrivateCancelBlockRfqTriggerResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelBlockRfqTriggerResponse3) Status() string {
+func (r PrivateCancelBlockRfqTriggerResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42045,7 +41944,7 @@ func (r PrivateCancelBlockRfqTriggerResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelBlockRfqTriggerResponse3) StatusCode() int {
+func (r PrivateCancelBlockRfqTriggerResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42053,7 +41952,7 @@ func (r PrivateCancelBlockRfqTriggerResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelBlockRfqTriggerResponse3) ContentType() string {
+func (r PrivateCancelBlockRfqTriggerResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42064,11 +41963,11 @@ type PrivateCancelByLabelResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelAllResponse2
+	JSON200 *PrivateCancelAllResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelByLabelResponse) GetJSON200() *PrivateCancelAllResponse2 {
+func (r PrivateCancelByLabelResponse) GetJSON200() *PrivateCancelAllResponse {
 	return r.JSON200
 }
 
@@ -42101,25 +42000,25 @@ func (r PrivateCancelByLabelResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCancelQuotesResponse3 struct {
+type PrivateCancelQuotesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCancelQuotesResponse2
+	JSON200 *PrivateCancelQuotesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelQuotesResponse3) GetJSON200() *PrivateCancelQuotesResponse2 {
+func (r PrivateCancelQuotesResponse2) GetJSON200() *PrivateCancelQuotesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCancelQuotesResponse3) GetBody() []byte {
+func (r PrivateCancelQuotesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCancelQuotesResponse3) Status() string {
+func (r PrivateCancelQuotesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42127,7 +42026,7 @@ func (r PrivateCancelQuotesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCancelQuotesResponse3) StatusCode() int {
+func (r PrivateCancelQuotesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42135,7 +42034,7 @@ func (r PrivateCancelQuotesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCancelQuotesResponse3) ContentType() string {
+func (r PrivateCancelQuotesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42146,11 +42045,11 @@ type PrivateCancelTransferByIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubmitTransferResponse2
+	JSON200 *PrivateSubmitTransferResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelTransferByIdResponse) GetJSON200() *PrivateSubmitTransferResponse2 {
+func (r PrivateCancelTransferByIdResponse) GetJSON200() *PrivateSubmitTransferResponse {
 	return r.JSON200
 }
 
@@ -42187,11 +42086,11 @@ type PrivateCancelWithdrawalResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateWithdrawResponse2
+	JSON200 *PrivateWithdrawResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCancelWithdrawalResponse) GetJSON200() *PrivateWithdrawResponse2 {
+func (r PrivateCancelWithdrawalResponse) GetJSON200() *PrivateWithdrawResponse {
 	return r.JSON200
 }
 
@@ -42228,11 +42127,11 @@ type PrivateChangeApiKeyNameResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateChangeApiKeyNameResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateChangeApiKeyNameResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -42265,25 +42164,25 @@ func (r PrivateChangeApiKeyNameResponse) ContentType() string {
 	return ""
 }
 
-type PrivateChangeMarginModelResponse3 struct {
+type PrivateChangeMarginModelResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateChangeMarginModelResponse2
+	JSON200 *PrivateChangeMarginModelResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateChangeMarginModelResponse3) GetJSON200() *PrivateChangeMarginModelResponse2 {
+func (r PrivateChangeMarginModelResponse2) GetJSON200() *PrivateChangeMarginModelResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateChangeMarginModelResponse3) GetBody() []byte {
+func (r PrivateChangeMarginModelResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateChangeMarginModelResponse3) Status() string {
+func (r PrivateChangeMarginModelResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42291,7 +42190,7 @@ func (r PrivateChangeMarginModelResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateChangeMarginModelResponse3) StatusCode() int {
+func (r PrivateChangeMarginModelResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42299,7 +42198,7 @@ func (r PrivateChangeMarginModelResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateChangeMarginModelResponse3) ContentType() string {
+func (r PrivateChangeMarginModelResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42310,11 +42209,11 @@ type PrivateChangeScopeInApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateChangeScopeInApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateChangeScopeInApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -42351,11 +42250,11 @@ type PrivateChangeSubaccountNameResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateChangeSubaccountNameResponse) GetJSON200() *OkResponse2 {
+func (r PrivateChangeSubaccountNameResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -42392,11 +42291,11 @@ type PrivateClosePositionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateBuyAndSellResponse2
+	JSON200 *PrivateBuyAndSellResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateClosePositionResponse) GetJSON200() *PrivateBuyAndSellResponse2 {
+func (r PrivateClosePositionResponse) GetJSON200() *PrivateBuyAndSellResponse {
 	return r.JSON200
 }
 
@@ -42429,25 +42328,25 @@ func (r PrivateClosePositionResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCoinbaseEstimateWithdrawalFeeResponse3 struct {
+type PrivateCoinbaseEstimateWithdrawalFeeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCoinbaseEstimateWithdrawalFeeResponse2
+	JSON200 *PrivateCoinbaseEstimateWithdrawalFeeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) GetJSON200() *PrivateCoinbaseEstimateWithdrawalFeeResponse2 {
+func (r PrivateCoinbaseEstimateWithdrawalFeeResponse2) GetJSON200() *PrivateCoinbaseEstimateWithdrawalFeeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) GetBody() []byte {
+func (r PrivateCoinbaseEstimateWithdrawalFeeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) Status() string {
+func (r PrivateCoinbaseEstimateWithdrawalFeeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42455,7 +42354,7 @@ func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) StatusCode() int {
+func (r PrivateCoinbaseEstimateWithdrawalFeeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42463,7 +42362,7 @@ func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCoinbaseEstimateWithdrawalFeeResponse3) ContentType() string {
+func (r PrivateCoinbaseEstimateWithdrawalFeeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42474,11 +42373,11 @@ type PrivateCreateApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCreateApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateCreateApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -42511,25 +42410,25 @@ func (r PrivateCreateApiKeyResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCreateBlockRfqResponse3 struct {
+type PrivateCreateBlockRfqResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCreateBlockRfqResponse2
+	JSON200 *PrivateCreateBlockRfqResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCreateBlockRfqResponse3) GetJSON200() *PrivateCreateBlockRfqResponse2 {
+func (r PrivateCreateBlockRfqResponse2) GetJSON200() *PrivateCreateBlockRfqResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCreateBlockRfqResponse3) GetBody() []byte {
+func (r PrivateCreateBlockRfqResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCreateBlockRfqResponse3) Status() string {
+func (r PrivateCreateBlockRfqResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42537,7 +42436,7 @@ func (r PrivateCreateBlockRfqResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCreateBlockRfqResponse3) StatusCode() int {
+func (r PrivateCreateBlockRfqResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42545,32 +42444,32 @@ func (r PrivateCreateBlockRfqResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCreateBlockRfqResponse3) ContentType() string {
+func (r PrivateCreateBlockRfqResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateCreateComboResponse3 struct {
+type PrivateCreateComboResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCreateComboResponse2
+	JSON200 *PrivateCreateComboResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCreateComboResponse3) GetJSON200() *PrivateCreateComboResponse2 {
+func (r PrivateCreateComboResponse2) GetJSON200() *PrivateCreateComboResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCreateComboResponse3) GetBody() []byte {
+func (r PrivateCreateComboResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCreateComboResponse3) Status() string {
+func (r PrivateCreateComboResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42578,7 +42477,7 @@ func (r PrivateCreateComboResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCreateComboResponse3) StatusCode() int {
+func (r PrivateCreateComboResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42586,7 +42485,7 @@ func (r PrivateCreateComboResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCreateComboResponse3) ContentType() string {
+func (r PrivateCreateComboResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42597,11 +42496,11 @@ type PrivateCreateDepositAddressResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateDepositAddressResponse2
+	JSON200 *PrivateDepositAddressResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCreateDepositAddressResponse) GetJSON200() *PrivateDepositAddressResponse2 {
+func (r PrivateCreateDepositAddressResponse) GetJSON200() *PrivateDepositAddressResponse {
 	return r.JSON200
 }
 
@@ -42634,25 +42533,25 @@ func (r PrivateCreateDepositAddressResponse) ContentType() string {
 	return ""
 }
 
-type PrivateCreateSubaccountResponse3 struct {
+type PrivateCreateSubaccountResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateCreateSubaccountResponse2
+	JSON200 *PrivateCreateSubaccountResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateCreateSubaccountResponse3) GetJSON200() *PrivateCreateSubaccountResponse2 {
+func (r PrivateCreateSubaccountResponse2) GetJSON200() *PrivateCreateSubaccountResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateCreateSubaccountResponse3) GetBody() []byte {
+func (r PrivateCreateSubaccountResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateCreateSubaccountResponse3) Status() string {
+func (r PrivateCreateSubaccountResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42660,7 +42559,7 @@ func (r PrivateCreateSubaccountResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateCreateSubaccountResponse3) StatusCode() int {
+func (r PrivateCreateSubaccountResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42668,32 +42567,32 @@ func (r PrivateCreateSubaccountResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateCreateSubaccountResponse3) ContentType() string {
+func (r PrivateCreateSubaccountResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateDeleteAddressBeneficiaryResponse3 struct {
+type PrivateDeleteAddressBeneficiaryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateDeleteAddressBeneficiaryResponse2
+	JSON200 *PrivateDeleteAddressBeneficiaryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateDeleteAddressBeneficiaryResponse3) GetJSON200() *PrivateDeleteAddressBeneficiaryResponse2 {
+func (r PrivateDeleteAddressBeneficiaryResponse2) GetJSON200() *PrivateDeleteAddressBeneficiaryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateDeleteAddressBeneficiaryResponse3) GetBody() []byte {
+func (r PrivateDeleteAddressBeneficiaryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateDeleteAddressBeneficiaryResponse3) Status() string {
+func (r PrivateDeleteAddressBeneficiaryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42701,7 +42600,7 @@ func (r PrivateDeleteAddressBeneficiaryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateDeleteAddressBeneficiaryResponse3) StatusCode() int {
+func (r PrivateDeleteAddressBeneficiaryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42709,32 +42608,32 @@ func (r PrivateDeleteAddressBeneficiaryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateDeleteAddressBeneficiaryResponse3) ContentType() string {
+func (r PrivateDeleteAddressBeneficiaryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateDeleteMemberResponse3 struct {
+type PrivateDeleteMemberResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateDeleteMemberResponse2
+	JSON200 *PrivateDeleteMemberResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateDeleteMemberResponse3) GetJSON200() *PrivateDeleteMemberResponse2 {
+func (r PrivateDeleteMemberResponse2) GetJSON200() *PrivateDeleteMemberResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateDeleteMemberResponse3) GetBody() []byte {
+func (r PrivateDeleteMemberResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateDeleteMemberResponse3) Status() string {
+func (r PrivateDeleteMemberResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42742,7 +42641,7 @@ func (r PrivateDeleteMemberResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateDeleteMemberResponse3) StatusCode() int {
+func (r PrivateDeleteMemberResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42750,7 +42649,7 @@ func (r PrivateDeleteMemberResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateDeleteMemberResponse3) ContentType() string {
+func (r PrivateDeleteMemberResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42761,11 +42660,11 @@ type PrivateDisableApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateDisableApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateDisableApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -42802,11 +42701,11 @@ type PrivateDisableCancelOnDisconnectResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateDisableCancelOnDisconnectResponse) GetJSON200() *OkResponse2 {
+func (r PrivateDisableCancelOnDisconnectResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -42839,25 +42738,25 @@ func (r PrivateDisableCancelOnDisconnectResponse) ContentType() string {
 	return ""
 }
 
-type PrivateEditResponse3 struct {
+type PrivateEditResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateEditResponse2
+	JSON200 *PrivateEditResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEditResponse3) GetJSON200() *PrivateEditResponse2 {
+func (r PrivateEditResponse2) GetJSON200() *PrivateEditResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateEditResponse3) GetBody() []byte {
+func (r PrivateEditResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateEditResponse3) Status() string {
+func (r PrivateEditResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42865,7 +42764,7 @@ func (r PrivateEditResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateEditResponse3) StatusCode() int {
+func (r PrivateEditResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42873,7 +42772,7 @@ func (r PrivateEditResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateEditResponse3) ContentType() string {
+func (r PrivateEditResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42884,11 +42783,11 @@ type PrivateEditApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEditApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateEditApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -42921,25 +42820,25 @@ func (r PrivateEditApiKeyResponse) ContentType() string {
 	return ""
 }
 
-type PrivateEditBlockRfqQuoteResponse3 struct {
+type PrivateEditBlockRfqQuoteResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateEditBlockRfqQuoteResponse2
+	JSON200 *PrivateEditBlockRfqQuoteResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEditBlockRfqQuoteResponse3) GetJSON200() *PrivateEditBlockRfqQuoteResponse2 {
+func (r PrivateEditBlockRfqQuoteResponse2) GetJSON200() *PrivateEditBlockRfqQuoteResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateEditBlockRfqQuoteResponse3) GetBody() []byte {
+func (r PrivateEditBlockRfqQuoteResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateEditBlockRfqQuoteResponse3) Status() string {
+func (r PrivateEditBlockRfqQuoteResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -42947,7 +42846,7 @@ func (r PrivateEditBlockRfqQuoteResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateEditBlockRfqQuoteResponse3) StatusCode() int {
+func (r PrivateEditBlockRfqQuoteResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -42955,7 +42854,7 @@ func (r PrivateEditBlockRfqQuoteResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateEditBlockRfqQuoteResponse3) ContentType() string {
+func (r PrivateEditBlockRfqQuoteResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -42966,11 +42865,11 @@ type PrivateEditByLabelResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateEditResponse2
+	JSON200 *PrivateEditResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEditByLabelResponse) GetJSON200() *PrivateEditResponse2 {
+func (r PrivateEditByLabelResponse) GetJSON200() *PrivateEditResponse {
 	return r.JSON200
 }
 
@@ -43007,11 +42906,11 @@ type PrivateEnableAffiliateProgramResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEnableAffiliateProgramResponse) GetJSON200() *OkResponse2 {
+func (r PrivateEnableAffiliateProgramResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -43048,11 +42947,11 @@ type PrivateEnableApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEnableApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateEnableApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -43089,11 +42988,11 @@ type PrivateEnableCancelOnDisconnectResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateEnableCancelOnDisconnectResponse) GetJSON200() *OkResponse2 {
+func (r PrivateEnableCancelOnDisconnectResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -43130,11 +43029,11 @@ type PrivateExecuteBlockTradeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockTradeResponse2
+	JSON200 *PrivateGetBlockTradeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateExecuteBlockTradeResponse) GetJSON200() *PrivateGetBlockTradeResponse2 {
+func (r PrivateExecuteBlockTradeResponse) GetJSON200() *PrivateGetBlockTradeResponse {
 	return r.JSON200
 }
 
@@ -43167,25 +43066,25 @@ func (r PrivateExecuteBlockTradeResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetAccessLogResponse3 struct {
+type PrivateGetAccessLogResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetAccessLogResponse2
+	JSON200 *PrivateGetAccessLogResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAccessLogResponse3) GetJSON200() *PrivateGetAccessLogResponse2 {
+func (r PrivateGetAccessLogResponse2) GetJSON200() *PrivateGetAccessLogResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetAccessLogResponse3) GetBody() []byte {
+func (r PrivateGetAccessLogResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetAccessLogResponse3) Status() string {
+func (r PrivateGetAccessLogResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43193,7 +43092,7 @@ func (r PrivateGetAccessLogResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetAccessLogResponse3) StatusCode() int {
+func (r PrivateGetAccessLogResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43201,7 +43100,7 @@ func (r PrivateGetAccessLogResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetAccessLogResponse3) ContentType() string {
+func (r PrivateGetAccessLogResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -43212,11 +43111,11 @@ type PrivateGetAccountSummariesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAccountSummariesResponse2
+	JSON200 *PrivateAccountSummariesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAccountSummariesResponse) GetJSON200() *PrivateAccountSummariesResponse2 {
+func (r PrivateGetAccountSummariesResponse) GetJSON200() *PrivateAccountSummariesResponse {
 	return r.JSON200
 }
 
@@ -43253,11 +43152,11 @@ type PrivateGetAccountSummaryResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAccountResponse2
+	JSON200 *PrivateAccountResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAccountSummaryResponse) GetJSON200() *PrivateAccountResponse2 {
+func (r PrivateGetAccountSummaryResponse) GetJSON200() *PrivateAccountResponse {
 	return r.JSON200
 }
 
@@ -43290,25 +43189,25 @@ func (r PrivateGetAccountSummaryResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetAddressBeneficiaryResponse3 struct {
+type PrivateGetAddressBeneficiaryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetAddressBeneficiaryResponse2
+	JSON200 *PrivateGetAddressBeneficiaryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAddressBeneficiaryResponse3) GetJSON200() *PrivateGetAddressBeneficiaryResponse2 {
+func (r PrivateGetAddressBeneficiaryResponse2) GetJSON200() *PrivateGetAddressBeneficiaryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetAddressBeneficiaryResponse3) GetBody() []byte {
+func (r PrivateGetAddressBeneficiaryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetAddressBeneficiaryResponse3) Status() string {
+func (r PrivateGetAddressBeneficiaryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43316,7 +43215,7 @@ func (r PrivateGetAddressBeneficiaryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetAddressBeneficiaryResponse3) StatusCode() int {
+func (r PrivateGetAddressBeneficiaryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43324,7 +43223,7 @@ func (r PrivateGetAddressBeneficiaryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetAddressBeneficiaryResponse3) ContentType() string {
+func (r PrivateGetAddressBeneficiaryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -43335,11 +43234,11 @@ type PrivateGetAddressBookResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateAddressBookResponse2
+	JSON200 *PrivateAddressBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAddressBookResponse) GetJSON200() *PrivateAddressBookResponse2 {
+func (r PrivateGetAddressBookResponse) GetJSON200() *PrivateAddressBookResponse {
 	return r.JSON200
 }
 
@@ -43372,25 +43271,25 @@ func (r PrivateGetAddressBookResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetAffiliateProgramInfoResponse3 struct {
+type PrivateGetAffiliateProgramInfoResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetAffiliateProgramInfoResponse2
+	JSON200 *PrivateGetAffiliateProgramInfoResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetAffiliateProgramInfoResponse3) GetJSON200() *PrivateGetAffiliateProgramInfoResponse2 {
+func (r PrivateGetAffiliateProgramInfoResponse2) GetJSON200() *PrivateGetAffiliateProgramInfoResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetAffiliateProgramInfoResponse3) GetBody() []byte {
+func (r PrivateGetAffiliateProgramInfoResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetAffiliateProgramInfoResponse3) Status() string {
+func (r PrivateGetAffiliateProgramInfoResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43398,7 +43297,7 @@ func (r PrivateGetAffiliateProgramInfoResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetAffiliateProgramInfoResponse3) StatusCode() int {
+func (r PrivateGetAffiliateProgramInfoResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43406,32 +43305,32 @@ func (r PrivateGetAffiliateProgramInfoResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetAffiliateProgramInfoResponse3) ContentType() string {
+func (r PrivateGetAffiliateProgramInfoResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockRfqMakersResponse3 struct {
+type PrivateGetBlockRfqMakersResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockRfqMakersResponse2
+	JSON200 *PrivateGetBlockRfqMakersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockRfqMakersResponse3) GetJSON200() *PrivateGetBlockRfqMakersResponse2 {
+func (r PrivateGetBlockRfqMakersResponse2) GetJSON200() *PrivateGetBlockRfqMakersResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockRfqMakersResponse3) GetBody() []byte {
+func (r PrivateGetBlockRfqMakersResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockRfqMakersResponse3) Status() string {
+func (r PrivateGetBlockRfqMakersResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43439,7 +43338,7 @@ func (r PrivateGetBlockRfqMakersResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockRfqMakersResponse3) StatusCode() int {
+func (r PrivateGetBlockRfqMakersResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43447,32 +43346,32 @@ func (r PrivateGetBlockRfqMakersResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockRfqMakersResponse3) ContentType() string {
+func (r PrivateGetBlockRfqMakersResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockRfqQuotesResponse3 struct {
+type PrivateGetBlockRfqQuotesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockRfqQuotesResponse2
+	JSON200 *PrivateGetBlockRfqQuotesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockRfqQuotesResponse3) GetJSON200() *PrivateGetBlockRfqQuotesResponse2 {
+func (r PrivateGetBlockRfqQuotesResponse2) GetJSON200() *PrivateGetBlockRfqQuotesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockRfqQuotesResponse3) GetBody() []byte {
+func (r PrivateGetBlockRfqQuotesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockRfqQuotesResponse3) Status() string {
+func (r PrivateGetBlockRfqQuotesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43480,7 +43379,7 @@ func (r PrivateGetBlockRfqQuotesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockRfqQuotesResponse3) StatusCode() int {
+func (r PrivateGetBlockRfqQuotesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43488,32 +43387,32 @@ func (r PrivateGetBlockRfqQuotesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockRfqQuotesResponse3) ContentType() string {
+func (r PrivateGetBlockRfqQuotesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockRfqUserInfoResponse3 struct {
+type PrivateGetBlockRfqUserInfoResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockRfqUserInfoResponse2
+	JSON200 *PrivateGetBlockRfqUserInfoResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockRfqUserInfoResponse3) GetJSON200() *PrivateGetBlockRfqUserInfoResponse2 {
+func (r PrivateGetBlockRfqUserInfoResponse2) GetJSON200() *PrivateGetBlockRfqUserInfoResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockRfqUserInfoResponse3) GetBody() []byte {
+func (r PrivateGetBlockRfqUserInfoResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockRfqUserInfoResponse3) Status() string {
+func (r PrivateGetBlockRfqUserInfoResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43521,7 +43420,7 @@ func (r PrivateGetBlockRfqUserInfoResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockRfqUserInfoResponse3) StatusCode() int {
+func (r PrivateGetBlockRfqUserInfoResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43529,32 +43428,32 @@ func (r PrivateGetBlockRfqUserInfoResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockRfqUserInfoResponse3) ContentType() string {
+func (r PrivateGetBlockRfqUserInfoResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockRfqsResponse3 struct {
+type PrivateGetBlockRfqsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockRfqsResponse2
+	JSON200 *PrivateGetBlockRfqsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockRfqsResponse3) GetJSON200() *PrivateGetBlockRfqsResponse2 {
+func (r PrivateGetBlockRfqsResponse2) GetJSON200() *PrivateGetBlockRfqsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockRfqsResponse3) GetBody() []byte {
+func (r PrivateGetBlockRfqsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockRfqsResponse3) Status() string {
+func (r PrivateGetBlockRfqsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43562,7 +43461,7 @@ func (r PrivateGetBlockRfqsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockRfqsResponse3) StatusCode() int {
+func (r PrivateGetBlockRfqsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43570,32 +43469,32 @@ func (r PrivateGetBlockRfqsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockRfqsResponse3) ContentType() string {
+func (r PrivateGetBlockRfqsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockTradeResponse3 struct {
+type PrivateGetBlockTradeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockTradeResponse2
+	JSON200 *PrivateGetBlockTradeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockTradeResponse3) GetJSON200() *PrivateGetBlockTradeResponse2 {
+func (r PrivateGetBlockTradeResponse2) GetJSON200() *PrivateGetBlockTradeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockTradeResponse3) GetBody() []byte {
+func (r PrivateGetBlockTradeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockTradeResponse3) Status() string {
+func (r PrivateGetBlockTradeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43603,7 +43502,7 @@ func (r PrivateGetBlockTradeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockTradeResponse3) StatusCode() int {
+func (r PrivateGetBlockTradeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43611,32 +43510,32 @@ func (r PrivateGetBlockTradeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockTradeResponse3) ContentType() string {
+func (r PrivateGetBlockTradeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockTradeRequestsResponse3 struct {
+type PrivateGetBlockTradeRequestsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockTradeRequestsResponse2
+	JSON200 *PrivateGetBlockTradeRequestsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockTradeRequestsResponse3) GetJSON200() *PrivateGetBlockTradeRequestsResponse2 {
+func (r PrivateGetBlockTradeRequestsResponse2) GetJSON200() *PrivateGetBlockTradeRequestsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockTradeRequestsResponse3) GetBody() []byte {
+func (r PrivateGetBlockTradeRequestsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockTradeRequestsResponse3) Status() string {
+func (r PrivateGetBlockTradeRequestsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43644,7 +43543,7 @@ func (r PrivateGetBlockTradeRequestsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockTradeRequestsResponse3) StatusCode() int {
+func (r PrivateGetBlockTradeRequestsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43652,32 +43551,32 @@ func (r PrivateGetBlockTradeRequestsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockTradeRequestsResponse3) ContentType() string {
+func (r PrivateGetBlockTradeRequestsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBlockTradesResponse3 struct {
+type PrivateGetBlockTradesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBlockTradesResponse2
+	JSON200 *PrivateGetBlockTradesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBlockTradesResponse3) GetJSON200() *PrivateGetBlockTradesResponse2 {
+func (r PrivateGetBlockTradesResponse2) GetJSON200() *PrivateGetBlockTradesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBlockTradesResponse3) GetBody() []byte {
+func (r PrivateGetBlockTradesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBlockTradesResponse3) Status() string {
+func (r PrivateGetBlockTradesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43685,7 +43584,7 @@ func (r PrivateGetBlockTradesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBlockTradesResponse3) StatusCode() int {
+func (r PrivateGetBlockTradesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43693,32 +43592,32 @@ func (r PrivateGetBlockTradesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBlockTradesResponse3) ContentType() string {
+func (r PrivateGetBlockTradesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBrokerClientsResponse3 struct {
+type PrivateGetBrokerClientsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBrokerClientsResponse2
+	JSON200 *PrivateGetBrokerClientsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBrokerClientsResponse3) GetJSON200() *PrivateGetBrokerClientsResponse2 {
+func (r PrivateGetBrokerClientsResponse2) GetJSON200() *PrivateGetBrokerClientsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBrokerClientsResponse3) GetBody() []byte {
+func (r PrivateGetBrokerClientsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBrokerClientsResponse3) Status() string {
+func (r PrivateGetBrokerClientsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43726,7 +43625,7 @@ func (r PrivateGetBrokerClientsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBrokerClientsResponse3) StatusCode() int {
+func (r PrivateGetBrokerClientsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43734,32 +43633,32 @@ func (r PrivateGetBrokerClientsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBrokerClientsResponse3) ContentType() string {
+func (r PrivateGetBrokerClientsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBrokerTradeRequestsResponse3 struct {
+type PrivateGetBrokerTradeRequestsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBrokerTradeRequestsResponse2
+	JSON200 *PrivateGetBrokerTradeRequestsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBrokerTradeRequestsResponse3) GetJSON200() *PrivateGetBrokerTradeRequestsResponse2 {
+func (r PrivateGetBrokerTradeRequestsResponse2) GetJSON200() *PrivateGetBrokerTradeRequestsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBrokerTradeRequestsResponse3) GetBody() []byte {
+func (r PrivateGetBrokerTradeRequestsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBrokerTradeRequestsResponse3) Status() string {
+func (r PrivateGetBrokerTradeRequestsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43767,7 +43666,7 @@ func (r PrivateGetBrokerTradeRequestsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBrokerTradeRequestsResponse3) StatusCode() int {
+func (r PrivateGetBrokerTradeRequestsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43775,32 +43674,32 @@ func (r PrivateGetBrokerTradeRequestsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBrokerTradeRequestsResponse3) ContentType() string {
+func (r PrivateGetBrokerTradeRequestsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetBrokerTradesResponse3 struct {
+type PrivateGetBrokerTradesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetBrokerTradesResponse2
+	JSON200 *PrivateGetBrokerTradesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetBrokerTradesResponse3) GetJSON200() *PrivateGetBrokerTradesResponse2 {
+func (r PrivateGetBrokerTradesResponse2) GetJSON200() *PrivateGetBrokerTradesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetBrokerTradesResponse3) GetBody() []byte {
+func (r PrivateGetBrokerTradesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetBrokerTradesResponse3) Status() string {
+func (r PrivateGetBrokerTradesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43808,7 +43707,7 @@ func (r PrivateGetBrokerTradesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetBrokerTradesResponse3) StatusCode() int {
+func (r PrivateGetBrokerTradesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43816,32 +43715,32 @@ func (r PrivateGetBrokerTradesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetBrokerTradesResponse3) ContentType() string {
+func (r PrivateGetBrokerTradesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetCancelOnDisconnectResponse3 struct {
+type PrivateGetCancelOnDisconnectResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetCancelOnDisconnectResponse2
+	JSON200 *PrivateGetCancelOnDisconnectResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetCancelOnDisconnectResponse3) GetJSON200() *PrivateGetCancelOnDisconnectResponse2 {
+func (r PrivateGetCancelOnDisconnectResponse2) GetJSON200() *PrivateGetCancelOnDisconnectResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetCancelOnDisconnectResponse3) GetBody() []byte {
+func (r PrivateGetCancelOnDisconnectResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetCancelOnDisconnectResponse3) Status() string {
+func (r PrivateGetCancelOnDisconnectResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43849,7 +43748,7 @@ func (r PrivateGetCancelOnDisconnectResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetCancelOnDisconnectResponse3) StatusCode() int {
+func (r PrivateGetCancelOnDisconnectResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43857,32 +43756,32 @@ func (r PrivateGetCancelOnDisconnectResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetCancelOnDisconnectResponse3) ContentType() string {
+func (r PrivateGetCancelOnDisconnectResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetCurrenciesResponse3 struct {
+type PrivateGetCurrenciesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetCurrenciesResponse2
+	JSON200 *PrivateGetCurrenciesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetCurrenciesResponse3) GetJSON200() *PrivateGetCurrenciesResponse2 {
+func (r PrivateGetCurrenciesResponse2) GetJSON200() *PrivateGetCurrenciesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetCurrenciesResponse3) GetBody() []byte {
+func (r PrivateGetCurrenciesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetCurrenciesResponse3) Status() string {
+func (r PrivateGetCurrenciesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43890,7 +43789,7 @@ func (r PrivateGetCurrenciesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetCurrenciesResponse3) StatusCode() int {
+func (r PrivateGetCurrenciesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43898,7 +43797,7 @@ func (r PrivateGetCurrenciesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetCurrenciesResponse3) ContentType() string {
+func (r PrivateGetCurrenciesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -43909,11 +43808,11 @@ type PrivateGetCurrentDepositAddressResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateDepositAddressResponse2
+	JSON200 *PrivateDepositAddressResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetCurrentDepositAddressResponse) GetJSON200() *PrivateDepositAddressResponse2 {
+func (r PrivateGetCurrentDepositAddressResponse) GetJSON200() *PrivateDepositAddressResponse {
 	return r.JSON200
 }
 
@@ -43946,25 +43845,25 @@ func (r PrivateGetCurrentDepositAddressResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetDepositsResponse3 struct {
+type PrivateGetDepositsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetDepositsResponse2
+	JSON200 *PrivateGetDepositsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetDepositsResponse3) GetJSON200() *PrivateGetDepositsResponse2 {
+func (r PrivateGetDepositsResponse2) GetJSON200() *PrivateGetDepositsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetDepositsResponse3) GetBody() []byte {
+func (r PrivateGetDepositsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetDepositsResponse3) Status() string {
+func (r PrivateGetDepositsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -43972,7 +43871,7 @@ func (r PrivateGetDepositsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetDepositsResponse3) StatusCode() int {
+func (r PrivateGetDepositsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -43980,32 +43879,32 @@ func (r PrivateGetDepositsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetDepositsResponse3) ContentType() string {
+func (r PrivateGetDepositsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetEmailLanguageResponse3 struct {
+type PrivateGetEmailLanguageResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetEmailLanguageResponse2
+	JSON200 *PrivateGetEmailLanguageResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetEmailLanguageResponse3) GetJSON200() *PrivateGetEmailLanguageResponse2 {
+func (r PrivateGetEmailLanguageResponse2) GetJSON200() *PrivateGetEmailLanguageResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetEmailLanguageResponse3) GetBody() []byte {
+func (r PrivateGetEmailLanguageResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetEmailLanguageResponse3) Status() string {
+func (r PrivateGetEmailLanguageResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44013,7 +43912,7 @@ func (r PrivateGetEmailLanguageResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetEmailLanguageResponse3) StatusCode() int {
+func (r PrivateGetEmailLanguageResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44021,32 +43920,32 @@ func (r PrivateGetEmailLanguageResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetEmailLanguageResponse3) ContentType() string {
+func (r PrivateGetEmailLanguageResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetLegPricesResponse3 struct {
+type PrivateGetLegPricesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetLegPricesResponse2
+	JSON200 *PrivateGetLegPricesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetLegPricesResponse3) GetJSON200() *PrivateGetLegPricesResponse2 {
+func (r PrivateGetLegPricesResponse2) GetJSON200() *PrivateGetLegPricesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetLegPricesResponse3) GetBody() []byte {
+func (r PrivateGetLegPricesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetLegPricesResponse3) Status() string {
+func (r PrivateGetLegPricesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44054,7 +43953,7 @@ func (r PrivateGetLegPricesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetLegPricesResponse3) StatusCode() int {
+func (r PrivateGetLegPricesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44062,39 +43961,39 @@ func (r PrivateGetLegPricesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetLegPricesResponse3) ContentType() string {
+func (r PrivateGetLegPricesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetLspParticipantConfigResponse3 struct {
+type PrivateGetLspParticipantConfigResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetLspParticipantConfigResponse2
+	JSON200 *PrivateGetLspParticipantConfigResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetLspParticipantConfigResponse3) GetJSON200() *PrivateGetLspParticipantConfigResponse2 {
+func (r PrivateGetLspParticipantConfigResponse2) GetJSON200() *PrivateGetLspParticipantConfigResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetLspParticipantConfigResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetLspParticipantConfigResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetLspParticipantConfigResponse3) GetBody() []byte {
+func (r PrivateGetLspParticipantConfigResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetLspParticipantConfigResponse3) Status() string {
+func (r PrivateGetLspParticipantConfigResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44102,7 +44001,7 @@ func (r PrivateGetLspParticipantConfigResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetLspParticipantConfigResponse3) StatusCode() int {
+func (r PrivateGetLspParticipantConfigResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44110,39 +44009,39 @@ func (r PrivateGetLspParticipantConfigResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetLspParticipantConfigResponse3) ContentType() string {
+func (r PrivateGetLspParticipantConfigResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetLspParticipantsResponse3 struct {
+type PrivateGetLspParticipantsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetLspParticipantsResponse2
+	JSON200 *PrivateGetLspParticipantsResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetLspParticipantsResponse3) GetJSON200() *PrivateGetLspParticipantsResponse2 {
+func (r PrivateGetLspParticipantsResponse2) GetJSON200() *PrivateGetLspParticipantsResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetLspParticipantsResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetLspParticipantsResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetLspParticipantsResponse3) GetBody() []byte {
+func (r PrivateGetLspParticipantsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetLspParticipantsResponse3) Status() string {
+func (r PrivateGetLspParticipantsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44150,7 +44049,7 @@ func (r PrivateGetLspParticipantsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetLspParticipantsResponse3) StatusCode() int {
+func (r PrivateGetLspParticipantsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44158,39 +44057,39 @@ func (r PrivateGetLspParticipantsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetLspParticipantsResponse3) ContentType() string {
+func (r PrivateGetLspParticipantsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetLspParticipantsUsageResponse3 struct {
+type PrivateGetLspParticipantsUsageResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetLspParticipantsUsageResponse2
+	JSON200 *PrivateGetLspParticipantsUsageResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetLspParticipantsUsageResponse3) GetJSON200() *PrivateGetLspParticipantsUsageResponse2 {
+func (r PrivateGetLspParticipantsUsageResponse2) GetJSON200() *PrivateGetLspParticipantsUsageResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetLspParticipantsUsageResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetLspParticipantsUsageResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetLspParticipantsUsageResponse3) GetBody() []byte {
+func (r PrivateGetLspParticipantsUsageResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetLspParticipantsUsageResponse3) Status() string {
+func (r PrivateGetLspParticipantsUsageResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44198,7 +44097,7 @@ func (r PrivateGetLspParticipantsUsageResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetLspParticipantsUsageResponse3) StatusCode() int {
+func (r PrivateGetLspParticipantsUsageResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44206,39 +44105,39 @@ func (r PrivateGetLspParticipantsUsageResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetLspParticipantsUsageResponse3) ContentType() string {
+func (r PrivateGetLspParticipantsUsageResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetLspUsageResponse3 struct {
+type PrivateGetLspUsageResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetLspUsageResponse2
+	JSON200 *PrivateGetLspUsageResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetLspUsageResponse3) GetJSON200() *PrivateGetLspUsageResponse2 {
+func (r PrivateGetLspUsageResponse2) GetJSON200() *PrivateGetLspUsageResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetLspUsageResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetLspUsageResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetLspUsageResponse3) GetBody() []byte {
+func (r PrivateGetLspUsageResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetLspUsageResponse3) Status() string {
+func (r PrivateGetLspUsageResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44246,7 +44145,7 @@ func (r PrivateGetLspUsageResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetLspUsageResponse3) StatusCode() int {
+func (r PrivateGetLspUsageResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44254,32 +44153,32 @@ func (r PrivateGetLspUsageResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetLspUsageResponse3) ContentType() string {
+func (r PrivateGetLspUsageResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetMarginsResponse3 struct {
+type PrivateGetMarginsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetMarginsResponse2
+	JSON200 *PrivateGetMarginsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetMarginsResponse3) GetJSON200() *PrivateGetMarginsResponse2 {
+func (r PrivateGetMarginsResponse2) GetJSON200() *PrivateGetMarginsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetMarginsResponse3) GetBody() []byte {
+func (r PrivateGetMarginsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetMarginsResponse3) Status() string {
+func (r PrivateGetMarginsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44287,7 +44186,7 @@ func (r PrivateGetMarginsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetMarginsResponse3) StatusCode() int {
+func (r PrivateGetMarginsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44295,32 +44194,32 @@ func (r PrivateGetMarginsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetMarginsResponse3) ContentType() string {
+func (r PrivateGetMarginsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetMembersResponse3 struct {
+type PrivateGetMembersResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetMembersResponse2
+	JSON200 *PrivateGetMembersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetMembersResponse3) GetJSON200() *PrivateGetMembersResponse2 {
+func (r PrivateGetMembersResponse2) GetJSON200() *PrivateGetMembersResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetMembersResponse3) GetBody() []byte {
+func (r PrivateGetMembersResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetMembersResponse3) Status() string {
+func (r PrivateGetMembersResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44328,7 +44227,7 @@ func (r PrivateGetMembersResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetMembersResponse3) StatusCode() int {
+func (r PrivateGetMembersResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44336,32 +44235,32 @@ func (r PrivateGetMembersResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetMembersResponse3) ContentType() string {
+func (r PrivateGetMembersResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetMmpConfigResponse3 struct {
+type PrivateGetMmpConfigResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetMmpConfigResponse2
+	JSON200 *PrivateGetMmpConfigResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetMmpConfigResponse3) GetJSON200() *PrivateGetMmpConfigResponse2 {
+func (r PrivateGetMmpConfigResponse2) GetJSON200() *PrivateGetMmpConfigResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetMmpConfigResponse3) GetBody() []byte {
+func (r PrivateGetMmpConfigResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetMmpConfigResponse3) Status() string {
+func (r PrivateGetMmpConfigResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44369,7 +44268,7 @@ func (r PrivateGetMmpConfigResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetMmpConfigResponse3) StatusCode() int {
+func (r PrivateGetMmpConfigResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44377,32 +44276,32 @@ func (r PrivateGetMmpConfigResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetMmpConfigResponse3) ContentType() string {
+func (r PrivateGetMmpConfigResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetMmpStatusResponse3 struct {
+type PrivateGetMmpStatusResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetMmpStatusResponse2
+	JSON200 *PrivateGetMmpStatusResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetMmpStatusResponse3) GetJSON200() *PrivateGetMmpStatusResponse2 {
+func (r PrivateGetMmpStatusResponse2) GetJSON200() *PrivateGetMmpStatusResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetMmpStatusResponse3) GetBody() []byte {
+func (r PrivateGetMmpStatusResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetMmpStatusResponse3) Status() string {
+func (r PrivateGetMmpStatusResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44410,7 +44309,7 @@ func (r PrivateGetMmpStatusResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetMmpStatusResponse3) StatusCode() int {
+func (r PrivateGetMmpStatusResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44418,7 +44317,7 @@ func (r PrivateGetMmpStatusResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetMmpStatusResponse3) ContentType() string {
+func (r PrivateGetMmpStatusResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -44429,11 +44328,11 @@ type PrivateGetNewAnnouncementsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetAnnouncementsResponse2
+	JSON200 *PublicGetAnnouncementsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetNewAnnouncementsResponse) GetJSON200() *PublicGetAnnouncementsResponse2 {
+func (r PrivateGetNewAnnouncementsResponse) GetJSON200() *PublicGetAnnouncementsResponse {
 	return r.JSON200
 }
 
@@ -44466,25 +44365,25 @@ func (r PrivateGetNewAnnouncementsResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetOpenOrdersResponse3 struct {
+type PrivateGetOpenOrdersResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOpenOrdersResponse2
+	JSON200 *PrivateGetOpenOrdersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOpenOrdersResponse3) GetJSON200() *PrivateGetOpenOrdersResponse2 {
+func (r PrivateGetOpenOrdersResponse2) GetJSON200() *PrivateGetOpenOrdersResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetOpenOrdersResponse3) GetBody() []byte {
+func (r PrivateGetOpenOrdersResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetOpenOrdersResponse3) Status() string {
+func (r PrivateGetOpenOrdersResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44492,7 +44391,7 @@ func (r PrivateGetOpenOrdersResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetOpenOrdersResponse3) StatusCode() int {
+func (r PrivateGetOpenOrdersResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44500,7 +44399,7 @@ func (r PrivateGetOpenOrdersResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetOpenOrdersResponse3) ContentType() string {
+func (r PrivateGetOpenOrdersResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -44511,11 +44410,11 @@ type PrivateGetOpenOrdersByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOpenOrdersResponse2
+	JSON200 *PrivateGetOpenOrdersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOpenOrdersByCurrencyResponse) GetJSON200() *PrivateGetOpenOrdersResponse2 {
+func (r PrivateGetOpenOrdersByCurrencyResponse) GetJSON200() *PrivateGetOpenOrdersResponse {
 	return r.JSON200
 }
 
@@ -44552,11 +44451,11 @@ type PrivateGetOpenOrdersByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOpenOrdersResponse2
+	JSON200 *PrivateGetOpenOrdersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOpenOrdersByInstrumentResponse) GetJSON200() *PrivateGetOpenOrdersResponse2 {
+func (r PrivateGetOpenOrdersByInstrumentResponse) GetJSON200() *PrivateGetOpenOrdersResponse {
 	return r.JSON200
 }
 
@@ -44593,11 +44492,11 @@ type PrivateGetOpenOrdersByLabelResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOpenOrdersResponse2
+	JSON200 *PrivateGetOpenOrdersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOpenOrdersByLabelResponse) GetJSON200() *PrivateGetOpenOrdersResponse2 {
+func (r PrivateGetOpenOrdersByLabelResponse) GetJSON200() *PrivateGetOpenOrdersResponse {
 	return r.JSON200
 }
 
@@ -44634,11 +44533,11 @@ type PrivateGetOrderHistoryByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOrderHistoryResponse2
+	JSON200 *PrivateGetOrderHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOrderHistoryByCurrencyResponse) GetJSON200() *PrivateGetOrderHistoryResponse2 {
+func (r PrivateGetOrderHistoryByCurrencyResponse) GetJSON200() *PrivateGetOrderHistoryResponse {
 	return r.JSON200
 }
 
@@ -44675,11 +44574,11 @@ type PrivateGetOrderHistoryByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOrderHistoryResponse2
+	JSON200 *PrivateGetOrderHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOrderHistoryByInstrumentResponse) GetJSON200() *PrivateGetOrderHistoryResponse2 {
+func (r PrivateGetOrderHistoryByInstrumentResponse) GetJSON200() *PrivateGetOrderHistoryResponse {
 	return r.JSON200
 }
 
@@ -44712,25 +44611,25 @@ func (r PrivateGetOrderHistoryByInstrumentResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetOrderMarginByIdsResponse3 struct {
+type PrivateGetOrderMarginByIdsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOrderMarginByIdsResponse2
+	JSON200 *PrivateGetOrderMarginByIdsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOrderMarginByIdsResponse3) GetJSON200() *PrivateGetOrderMarginByIdsResponse2 {
+func (r PrivateGetOrderMarginByIdsResponse2) GetJSON200() *PrivateGetOrderMarginByIdsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetOrderMarginByIdsResponse3) GetBody() []byte {
+func (r PrivateGetOrderMarginByIdsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetOrderMarginByIdsResponse3) Status() string {
+func (r PrivateGetOrderMarginByIdsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44738,7 +44637,7 @@ func (r PrivateGetOrderMarginByIdsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetOrderMarginByIdsResponse3) StatusCode() int {
+func (r PrivateGetOrderMarginByIdsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44746,39 +44645,39 @@ func (r PrivateGetOrderMarginByIdsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetOrderMarginByIdsResponse3) ContentType() string {
+func (r PrivateGetOrderMarginByIdsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetOrderStateResponse3 struct {
+type PrivateGetOrderStateResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOrderStateResponse2
+	JSON200 *PrivateGetOrderStateResponse
 	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOrderStateResponse3) GetJSON200() *PrivateGetOrderStateResponse2 {
+func (r PrivateGetOrderStateResponse2) GetJSON200() *PrivateGetOrderStateResponse {
 	return r.JSON200
 }
 
 // GetJSON400 returns the response for an HTTP 400 `application/json` response
-func (r PrivateGetOrderStateResponse3) GetJSON400() *ErrorMessageResponse2 {
+func (r PrivateGetOrderStateResponse2) GetJSON400() *ErrorMessageResponse2 {
 	return r.JSON400
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetOrderStateResponse3) GetBody() []byte {
+func (r PrivateGetOrderStateResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetOrderStateResponse3) Status() string {
+func (r PrivateGetOrderStateResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44786,7 +44685,7 @@ func (r PrivateGetOrderStateResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetOrderStateResponse3) StatusCode() int {
+func (r PrivateGetOrderStateResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44794,39 +44693,39 @@ func (r PrivateGetOrderStateResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetOrderStateResponse3) ContentType() string {
+func (r PrivateGetOrderStateResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetOrderStateByLabelResponse3 struct {
+type PrivateGetOrderStateByLabelResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetOrderStateByLabelResponse2
+	JSON200 *PrivateGetOrderStateByLabelResponse
 	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetOrderStateByLabelResponse3) GetJSON200() *PrivateGetOrderStateByLabelResponse2 {
+func (r PrivateGetOrderStateByLabelResponse2) GetJSON200() *PrivateGetOrderStateByLabelResponse {
 	return r.JSON200
 }
 
 // GetJSON400 returns the response for an HTTP 400 `application/json` response
-func (r PrivateGetOrderStateByLabelResponse3) GetJSON400() *ErrorMessageResponse2 {
+func (r PrivateGetOrderStateByLabelResponse2) GetJSON400() *ErrorMessageResponse2 {
 	return r.JSON400
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetOrderStateByLabelResponse3) GetBody() []byte {
+func (r PrivateGetOrderStateByLabelResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetOrderStateByLabelResponse3) Status() string {
+func (r PrivateGetOrderStateByLabelResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44834,7 +44733,7 @@ func (r PrivateGetOrderStateByLabelResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetOrderStateByLabelResponse3) StatusCode() int {
+func (r PrivateGetOrderStateByLabelResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44842,39 +44741,39 @@ func (r PrivateGetOrderStateByLabelResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetOrderStateByLabelResponse3) ContentType() string {
+func (r PrivateGetOrderStateByLabelResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetPositionResponse3 struct {
+type PrivateGetPositionResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetPositionResponse2
+	JSON200 *PrivateGetPositionResponse
 	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetPositionResponse3) GetJSON200() *PrivateGetPositionResponse2 {
+func (r PrivateGetPositionResponse2) GetJSON200() *PrivateGetPositionResponse {
 	return r.JSON200
 }
 
 // GetJSON400 returns the response for an HTTP 400 `application/json` response
-func (r PrivateGetPositionResponse3) GetJSON400() *ErrorMessageResponse2 {
+func (r PrivateGetPositionResponse2) GetJSON400() *ErrorMessageResponse2 {
 	return r.JSON400
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetPositionResponse3) GetBody() []byte {
+func (r PrivateGetPositionResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetPositionResponse3) Status() string {
+func (r PrivateGetPositionResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44882,7 +44781,7 @@ func (r PrivateGetPositionResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetPositionResponse3) StatusCode() int {
+func (r PrivateGetPositionResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44890,39 +44789,39 @@ func (r PrivateGetPositionResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetPositionResponse3) ContentType() string {
+func (r PrivateGetPositionResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetPositionsResponse3 struct {
+type PrivateGetPositionsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetPositionsResponse2
+	JSON200 *PrivateGetPositionsResponse
 	// JSON400 the response for an HTTP 400 `application/json` response
 	JSON400 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetPositionsResponse3) GetJSON200() *PrivateGetPositionsResponse2 {
+func (r PrivateGetPositionsResponse2) GetJSON200() *PrivateGetPositionsResponse {
 	return r.JSON200
 }
 
 // GetJSON400 returns the response for an HTTP 400 `application/json` response
-func (r PrivateGetPositionsResponse3) GetJSON400() *ErrorMessageResponse2 {
+func (r PrivateGetPositionsResponse2) GetJSON400() *ErrorMessageResponse2 {
 	return r.JSON400
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetPositionsResponse3) GetBody() []byte {
+func (r PrivateGetPositionsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetPositionsResponse3) Status() string {
+func (r PrivateGetPositionsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44930,7 +44829,7 @@ func (r PrivateGetPositionsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetPositionsResponse3) StatusCode() int {
+func (r PrivateGetPositionsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44938,32 +44837,32 @@ func (r PrivateGetPositionsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetPositionsResponse3) ContentType() string {
+func (r PrivateGetPositionsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetRewardEligibilityResponse3 struct {
+type PrivateGetRewardEligibilityResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetRewardEligibilityResponse2
+	JSON200 *PrivateGetRewardEligibilityResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetRewardEligibilityResponse3) GetJSON200() *PrivateGetRewardEligibilityResponse2 {
+func (r PrivateGetRewardEligibilityResponse2) GetJSON200() *PrivateGetRewardEligibilityResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetRewardEligibilityResponse3) GetBody() []byte {
+func (r PrivateGetRewardEligibilityResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetRewardEligibilityResponse3) Status() string {
+func (r PrivateGetRewardEligibilityResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -44971,7 +44870,7 @@ func (r PrivateGetRewardEligibilityResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetRewardEligibilityResponse3) StatusCode() int {
+func (r PrivateGetRewardEligibilityResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -44979,7 +44878,7 @@ func (r PrivateGetRewardEligibilityResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetRewardEligibilityResponse3) ContentType() string {
+func (r PrivateGetRewardEligibilityResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -44990,11 +44889,11 @@ type PrivateGetSettlementHistoryByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSettlementResponse2
+	JSON200 *PrivateSettlementResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetSettlementHistoryByCurrencyResponse) GetJSON200() *PrivateSettlementResponse2 {
+func (r PrivateGetSettlementHistoryByCurrencyResponse) GetJSON200() *PrivateSettlementResponse {
 	return r.JSON200
 }
 
@@ -45031,11 +44930,11 @@ type PrivateGetSettlementHistoryByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSettlementResponse2
+	JSON200 *PrivateSettlementResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetSettlementHistoryByInstrumentResponse) GetJSON200() *PrivateSettlementResponse2 {
+func (r PrivateGetSettlementHistoryByInstrumentResponse) GetJSON200() *PrivateSettlementResponse {
 	return r.JSON200
 }
 
@@ -45068,32 +44967,32 @@ func (r PrivateGetSettlementHistoryByInstrumentResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetSubaccountsResponse3 struct {
+type PrivateGetSubaccountsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetSubaccountsResponse2
+	JSON200 *PrivateGetSubaccountsResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetSubaccountsResponse3) GetJSON200() *PrivateGetSubaccountsResponse2 {
+func (r PrivateGetSubaccountsResponse2) GetJSON200() *PrivateGetSubaccountsResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetSubaccountsResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetSubaccountsResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetSubaccountsResponse3) GetBody() []byte {
+func (r PrivateGetSubaccountsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetSubaccountsResponse3) Status() string {
+func (r PrivateGetSubaccountsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45101,7 +45000,7 @@ func (r PrivateGetSubaccountsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetSubaccountsResponse3) StatusCode() int {
+func (r PrivateGetSubaccountsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45109,39 +45008,39 @@ func (r PrivateGetSubaccountsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetSubaccountsResponse3) ContentType() string {
+func (r PrivateGetSubaccountsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetSubaccountsDetailsResponse3 struct {
+type PrivateGetSubaccountsDetailsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetSubaccountsDetailsResponse2
+	JSON200 *PrivateGetSubaccountsDetailsResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetSubaccountsDetailsResponse3) GetJSON200() *PrivateGetSubaccountsDetailsResponse2 {
+func (r PrivateGetSubaccountsDetailsResponse2) GetJSON200() *PrivateGetSubaccountsDetailsResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateGetSubaccountsDetailsResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateGetSubaccountsDetailsResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetSubaccountsDetailsResponse3) GetBody() []byte {
+func (r PrivateGetSubaccountsDetailsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetSubaccountsDetailsResponse3) Status() string {
+func (r PrivateGetSubaccountsDetailsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45149,7 +45048,7 @@ func (r PrivateGetSubaccountsDetailsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetSubaccountsDetailsResponse3) StatusCode() int {
+func (r PrivateGetSubaccountsDetailsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45157,32 +45056,32 @@ func (r PrivateGetSubaccountsDetailsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetSubaccountsDetailsResponse3) ContentType() string {
+func (r PrivateGetSubaccountsDetailsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetTransactionLogResponse3 struct {
+type PrivateGetTransactionLogResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetTransactionLogResponse2
+	JSON200 *PrivateGetTransactionLogResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetTransactionLogResponse3) GetJSON200() *PrivateGetTransactionLogResponse2 {
+func (r PrivateGetTransactionLogResponse2) GetJSON200() *PrivateGetTransactionLogResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetTransactionLogResponse3) GetBody() []byte {
+func (r PrivateGetTransactionLogResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetTransactionLogResponse3) Status() string {
+func (r PrivateGetTransactionLogResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45190,7 +45089,7 @@ func (r PrivateGetTransactionLogResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetTransactionLogResponse3) StatusCode() int {
+func (r PrivateGetTransactionLogResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45198,32 +45097,32 @@ func (r PrivateGetTransactionLogResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetTransactionLogResponse3) ContentType() string {
+func (r PrivateGetTransactionLogResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetTransfersResponse3 struct {
+type PrivateGetTransfersResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetTransfersResponse2
+	JSON200 *PrivateGetTransfersResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetTransfersResponse3) GetJSON200() *PrivateGetTransfersResponse2 {
+func (r PrivateGetTransfersResponse2) GetJSON200() *PrivateGetTransfersResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetTransfersResponse3) GetBody() []byte {
+func (r PrivateGetTransfersResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetTransfersResponse3) Status() string {
+func (r PrivateGetTransfersResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45231,7 +45130,7 @@ func (r PrivateGetTransfersResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetTransfersResponse3) StatusCode() int {
+func (r PrivateGetTransfersResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45239,32 +45138,32 @@ func (r PrivateGetTransfersResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetTransfersResponse3) ContentType() string {
+func (r PrivateGetTransfersResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetTriggerOrderHistoryResponse3 struct {
+type PrivateGetTriggerOrderHistoryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetTriggerOrderHistoryResponse2
+	JSON200 *PrivateGetTriggerOrderHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetTriggerOrderHistoryResponse3) GetJSON200() *PrivateGetTriggerOrderHistoryResponse2 {
+func (r PrivateGetTriggerOrderHistoryResponse2) GetJSON200() *PrivateGetTriggerOrderHistoryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetTriggerOrderHistoryResponse3) GetBody() []byte {
+func (r PrivateGetTriggerOrderHistoryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetTriggerOrderHistoryResponse3) Status() string {
+func (r PrivateGetTriggerOrderHistoryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45272,7 +45171,7 @@ func (r PrivateGetTriggerOrderHistoryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetTriggerOrderHistoryResponse3) StatusCode() int {
+func (r PrivateGetTriggerOrderHistoryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45280,32 +45179,32 @@ func (r PrivateGetTriggerOrderHistoryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetTriggerOrderHistoryResponse3) ContentType() string {
+func (r PrivateGetTriggerOrderHistoryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetUserLocksResponse3 struct {
+type PrivateGetUserLocksResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserLocksResponse2
+	JSON200 *PrivateGetUserLocksResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserLocksResponse3) GetJSON200() *PrivateGetUserLocksResponse2 {
+func (r PrivateGetUserLocksResponse2) GetJSON200() *PrivateGetUserLocksResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetUserLocksResponse3) GetBody() []byte {
+func (r PrivateGetUserLocksResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetUserLocksResponse3) Status() string {
+func (r PrivateGetUserLocksResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45313,7 +45212,7 @@ func (r PrivateGetUserLocksResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetUserLocksResponse3) StatusCode() int {
+func (r PrivateGetUserLocksResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45321,7 +45220,7 @@ func (r PrivateGetUserLocksResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetUserLocksResponse3) ContentType() string {
+func (r PrivateGetUserLocksResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45332,11 +45231,11 @@ type PrivateGetUserTradesByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserTradesHistoryResponse2
+	JSON200 *PrivateGetUserTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserTradesByCurrencyResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse2 {
+func (r PrivateGetUserTradesByCurrencyResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -45373,11 +45272,11 @@ type PrivateGetUserTradesByCurrencyAndTimeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserTradesHistoryResponse2
+	JSON200 *PrivateGetUserTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserTradesByCurrencyAndTimeResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse2 {
+func (r PrivateGetUserTradesByCurrencyAndTimeResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -45414,11 +45313,11 @@ type PrivateGetUserTradesByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserTradesHistoryResponse2
+	JSON200 *PrivateGetUserTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserTradesByInstrumentResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse2 {
+func (r PrivateGetUserTradesByInstrumentResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -45455,11 +45354,11 @@ type PrivateGetUserTradesByInstrumentAndTimeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserTradesHistoryResponse2
+	JSON200 *PrivateGetUserTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserTradesByInstrumentAndTimeResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse2 {
+func (r PrivateGetUserTradesByInstrumentAndTimeResponse) GetJSON200() *PrivateGetUserTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -45492,25 +45391,25 @@ func (r PrivateGetUserTradesByInstrumentAndTimeResponse) ContentType() string {
 	return ""
 }
 
-type PrivateGetUserTradesByOrderResponse3 struct {
+type PrivateGetUserTradesByOrderResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetUserTradesByOrderResponse2
+	JSON200 *PrivateGetUserTradesByOrderResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetUserTradesByOrderResponse3) GetJSON200() *PrivateGetUserTradesByOrderResponse2 {
+func (r PrivateGetUserTradesByOrderResponse2) GetJSON200() *PrivateGetUserTradesByOrderResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetUserTradesByOrderResponse3) GetBody() []byte {
+func (r PrivateGetUserTradesByOrderResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetUserTradesByOrderResponse3) Status() string {
+func (r PrivateGetUserTradesByOrderResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45518,7 +45417,7 @@ func (r PrivateGetUserTradesByOrderResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetUserTradesByOrderResponse3) StatusCode() int {
+func (r PrivateGetUserTradesByOrderResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45526,32 +45425,32 @@ func (r PrivateGetUserTradesByOrderResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetUserTradesByOrderResponse3) ContentType() string {
+func (r PrivateGetUserTradesByOrderResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateGetWithdrawalsResponse3 struct {
+type PrivateGetWithdrawalsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateGetWithdrawalsResponse2
+	JSON200 *PrivateGetWithdrawalsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateGetWithdrawalsResponse3) GetJSON200() *PrivateGetWithdrawalsResponse2 {
+func (r PrivateGetWithdrawalsResponse2) GetJSON200() *PrivateGetWithdrawalsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateGetWithdrawalsResponse3) GetBody() []byte {
+func (r PrivateGetWithdrawalsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateGetWithdrawalsResponse3) Status() string {
+func (r PrivateGetWithdrawalsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45559,7 +45458,7 @@ func (r PrivateGetWithdrawalsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateGetWithdrawalsResponse3) StatusCode() int {
+func (r PrivateGetWithdrawalsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45567,7 +45466,7 @@ func (r PrivateGetWithdrawalsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateGetWithdrawalsResponse3) ContentType() string {
+func (r PrivateGetWithdrawalsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45578,11 +45477,11 @@ type PrivateInvalidateBlockTradeSignatureResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateInvalidateBlockTradeSignatureResponse) GetJSON200() *OkResponse2 {
+func (r PrivateInvalidateBlockTradeSignatureResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -45615,25 +45514,25 @@ func (r PrivateInvalidateBlockTradeSignatureResponse) ContentType() string {
 	return ""
 }
 
-type PrivateListAddressBeneficiariesResponse3 struct {
+type PrivateListAddressBeneficiariesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateListAddressBeneficiariesResponse2
+	JSON200 *PrivateListAddressBeneficiariesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateListAddressBeneficiariesResponse3) GetJSON200() *PrivateListAddressBeneficiariesResponse2 {
+func (r PrivateListAddressBeneficiariesResponse2) GetJSON200() *PrivateListAddressBeneficiariesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateListAddressBeneficiariesResponse3) GetBody() []byte {
+func (r PrivateListAddressBeneficiariesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateListAddressBeneficiariesResponse3) Status() string {
+func (r PrivateListAddressBeneficiariesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45641,7 +45540,7 @@ func (r PrivateListAddressBeneficiariesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateListAddressBeneficiariesResponse3) StatusCode() int {
+func (r PrivateListAddressBeneficiariesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45649,7 +45548,7 @@ func (r PrivateListAddressBeneficiariesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateListAddressBeneficiariesResponse3) ContentType() string {
+func (r PrivateListAddressBeneficiariesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45660,11 +45559,11 @@ type PrivateListApiKeysResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicListApiKeysResponse2
+	JSON200 *PublicListApiKeysResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateListApiKeysResponse) GetJSON200() *PublicListApiKeysResponse2 {
+func (r PrivateListApiKeysResponse) GetJSON200() *PublicListApiKeysResponse {
 	return r.JSON200
 }
 
@@ -45701,11 +45600,11 @@ type PrivateListCustodyAccountsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GetlistCustodyAccounts200responseResponse
+	JSON200 *GetlistCustodyAccounts200response
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateListCustodyAccountsResponse) GetJSON200() *GetlistCustodyAccounts200responseResponse {
+func (r PrivateListCustodyAccountsResponse) GetJSON200() *GetlistCustodyAccounts200response {
 	return r.JSON200
 }
 
@@ -45772,25 +45671,25 @@ func (r PrivateLogoutResponse) ContentType() string {
 	return ""
 }
 
-type PrivateMassQuoteResponse3 struct {
+type PrivateMassQuoteResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateMassQuoteResponse2
+	JSON200 *PrivateMassQuoteResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateMassQuoteResponse3) GetJSON200() *PrivateMassQuoteResponse2 {
+func (r PrivateMassQuoteResponse2) GetJSON200() *PrivateMassQuoteResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateMassQuoteResponse3) GetBody() []byte {
+func (r PrivateMassQuoteResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateMassQuoteResponse3) Status() string {
+func (r PrivateMassQuoteResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45798,7 +45697,7 @@ func (r PrivateMassQuoteResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateMassQuoteResponse3) StatusCode() int {
+func (r PrivateMassQuoteResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45806,7 +45705,7 @@ func (r PrivateMassQuoteResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateMassQuoteResponse3) ContentType() string {
+func (r PrivateMassQuoteResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45817,11 +45716,11 @@ type PrivateMovePositionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivatePositionMoveResponse2
+	JSON200 *PrivatePositionMoveResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateMovePositionsResponse) GetJSON200() *PrivatePositionMoveResponse2 {
+func (r PrivateMovePositionsResponse) GetJSON200() *PrivatePositionMoveResponse {
 	return r.JSON200
 }
 
@@ -45854,25 +45753,25 @@ func (r PrivateMovePositionsResponse) ContentType() string {
 	return ""
 }
 
-type PrivatePmeSimulateResponse3 struct {
+type PrivatePmeSimulateResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivatePmeSimulateResponse2
+	JSON200 *PrivatePmeSimulateResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivatePmeSimulateResponse3) GetJSON200() *PrivatePmeSimulateResponse2 {
+func (r PrivatePmeSimulateResponse2) GetJSON200() *PrivatePmeSimulateResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivatePmeSimulateResponse3) GetBody() []byte {
+func (r PrivatePmeSimulateResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivatePmeSimulateResponse3) Status() string {
+func (r PrivatePmeSimulateResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -45880,7 +45779,7 @@ func (r PrivatePmeSimulateResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivatePmeSimulateResponse3) StatusCode() int {
+func (r PrivatePmeSimulateResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -45888,7 +45787,7 @@ func (r PrivatePmeSimulateResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivatePmeSimulateResponse3) ContentType() string {
+func (r PrivatePmeSimulateResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -45899,11 +45798,11 @@ type PrivateRejectBlockTradeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateRejectBlockTradeResponse) GetJSON200() *OkResponse2 {
+func (r PrivateRejectBlockTradeResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -45940,11 +45839,11 @@ type PrivateRemoveApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateRemoveApiKeyResponse) GetJSON200() *OkResponse2 {
+func (r PrivateRemoveApiKeyResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -45977,25 +45876,25 @@ func (r PrivateRemoveApiKeyResponse) ContentType() string {
 	return ""
 }
 
-type PrivateRemoveFromAddressBookResponse3 struct {
+type PrivateRemoveFromAddressBookResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateRemoveFromAddressBookResponse2
+	JSON200 *PrivateRemoveFromAddressBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateRemoveFromAddressBookResponse3) GetJSON200() *PrivateRemoveFromAddressBookResponse2 {
+func (r PrivateRemoveFromAddressBookResponse2) GetJSON200() *PrivateRemoveFromAddressBookResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateRemoveFromAddressBookResponse3) GetBody() []byte {
+func (r PrivateRemoveFromAddressBookResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateRemoveFromAddressBookResponse3) Status() string {
+func (r PrivateRemoveFromAddressBookResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46003,7 +45902,7 @@ func (r PrivateRemoveFromAddressBookResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateRemoveFromAddressBookResponse3) StatusCode() int {
+func (r PrivateRemoveFromAddressBookResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46011,7 +45910,7 @@ func (r PrivateRemoveFromAddressBookResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateRemoveFromAddressBookResponse3) ContentType() string {
+func (r PrivateRemoveFromAddressBookResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46022,11 +45921,11 @@ type PrivateRemoveSubaccountResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateRemoveSubaccountResponse) GetJSON200() *OkResponse2 {
+func (r PrivateRemoveSubaccountResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46063,11 +45962,11 @@ type PrivateResetApiKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateApiKeyResponse2
+	JSON200 *PrivateApiKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateResetApiKeyResponse) GetJSON200() *PrivateApiKeyResponse2 {
+func (r PrivateResetApiKeyResponse) GetJSON200() *PrivateApiKeyResponse {
 	return r.JSON200
 }
 
@@ -46104,11 +46003,11 @@ type PrivateResetMmpResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateResetMmpResponse) GetJSON200() *OkResponse2 {
+func (r PrivateResetMmpResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46141,25 +46040,25 @@ func (r PrivateResetMmpResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSaveAddressBeneficiaryResponse3 struct {
+type PrivateSaveAddressBeneficiaryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSaveAddressBeneficiaryResponse2
+	JSON200 *PrivateSaveAddressBeneficiaryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSaveAddressBeneficiaryResponse3) GetJSON200() *PrivateSaveAddressBeneficiaryResponse2 {
+func (r PrivateSaveAddressBeneficiaryResponse2) GetJSON200() *PrivateSaveAddressBeneficiaryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSaveAddressBeneficiaryResponse3) GetBody() []byte {
+func (r PrivateSaveAddressBeneficiaryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSaveAddressBeneficiaryResponse3) Status() string {
+func (r PrivateSaveAddressBeneficiaryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46167,7 +46066,7 @@ func (r PrivateSaveAddressBeneficiaryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSaveAddressBeneficiaryResponse3) StatusCode() int {
+func (r PrivateSaveAddressBeneficiaryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46175,7 +46074,7 @@ func (r PrivateSaveAddressBeneficiaryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSaveAddressBeneficiaryResponse3) ContentType() string {
+func (r PrivateSaveAddressBeneficiaryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46186,11 +46085,11 @@ type PrivateSellResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateBuyAndSellResponse2
+	JSON200 *PrivateBuyAndSellResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSellResponse) GetJSON200() *PrivateBuyAndSellResponse2 {
+func (r PrivateSellResponse) GetJSON200() *PrivateBuyAndSellResponse {
 	return r.JSON200
 }
 
@@ -46223,25 +46122,25 @@ func (r PrivateSellResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSetAddressRequiresSecurityKeyResponse3 struct {
+type PrivateSetAddressRequiresSecurityKeyResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSetAddressRequiresSecurityKeyResponse2
+	JSON200 *PrivateSetAddressRequiresSecurityKeyResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetAddressRequiresSecurityKeyResponse3) GetJSON200() *PrivateSetAddressRequiresSecurityKeyResponse2 {
+func (r PrivateSetAddressRequiresSecurityKeyResponse2) GetJSON200() *PrivateSetAddressRequiresSecurityKeyResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSetAddressRequiresSecurityKeyResponse3) GetBody() []byte {
+func (r PrivateSetAddressRequiresSecurityKeyResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSetAddressRequiresSecurityKeyResponse3) Status() string {
+func (r PrivateSetAddressRequiresSecurityKeyResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46249,7 +46148,7 @@ func (r PrivateSetAddressRequiresSecurityKeyResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSetAddressRequiresSecurityKeyResponse3) StatusCode() int {
+func (r PrivateSetAddressRequiresSecurityKeyResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46257,7 +46156,7 @@ func (r PrivateSetAddressRequiresSecurityKeyResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSetAddressRequiresSecurityKeyResponse3) ContentType() string {
+func (r PrivateSetAddressRequiresSecurityKeyResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46268,11 +46167,11 @@ type PrivateSetAnnouncementAsReadResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetAnnouncementAsReadResponse) GetJSON200() *OkResponse2 {
+func (r PrivateSetAnnouncementAsReadResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46309,11 +46208,11 @@ type PrivateSetClearanceOriginatorResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *DepositResponse
+	JSON200 *Deposit
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetClearanceOriginatorResponse) GetJSON200() *DepositResponse {
+func (r PrivateSetClearanceOriginatorResponse) GetJSON200() *Deposit {
 	return r.JSON200
 }
 
@@ -46346,25 +46245,25 @@ func (r PrivateSetClearanceOriginatorResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3 struct {
+type PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2
+	JSON200 *PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) GetJSON200() *PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2 {
+func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2) GetJSON200() *PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) GetBody() []byte {
+func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) Status() string {
+func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46372,7 +46271,7 @@ func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) Status() string
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) StatusCode() int {
+func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46380,7 +46279,7 @@ func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) StatusCode() in
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3) ContentType() string {
+func (r PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46391,11 +46290,11 @@ type PrivateSetDisabledTradingProductsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetDisabledTradingProductsResponse) GetJSON200() *OkResponse2 {
+func (r PrivateSetDisabledTradingProductsResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46432,11 +46331,11 @@ type PrivateSetEmailForSubaccountResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetEmailForSubaccountResponse) GetJSON200() *OkResponse2 {
+func (r PrivateSetEmailForSubaccountResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46473,11 +46372,11 @@ type PrivateSetEmailLanguageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetEmailLanguageResponse) GetJSON200() *OkResponse2 {
+func (r PrivateSetEmailLanguageResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46510,25 +46409,25 @@ func (r PrivateSetEmailLanguageResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSetMemberResponse3 struct {
+type PrivateSetMemberResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSetMemberResponse2
+	JSON200 *PrivateSetMemberResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetMemberResponse3) GetJSON200() *PrivateSetMemberResponse2 {
+func (r PrivateSetMemberResponse2) GetJSON200() *PrivateSetMemberResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSetMemberResponse3) GetBody() []byte {
+func (r PrivateSetMemberResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSetMemberResponse3) Status() string {
+func (r PrivateSetMemberResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46536,7 +46435,7 @@ func (r PrivateSetMemberResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSetMemberResponse3) StatusCode() int {
+func (r PrivateSetMemberResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46544,32 +46443,32 @@ func (r PrivateSetMemberResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSetMemberResponse3) ContentType() string {
+func (r PrivateSetMemberResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateSetMmpConfigResponse3 struct {
+type PrivateSetMmpConfigResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSetMmpConfigResponse2
+	JSON200 *PrivateSetMmpConfigResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetMmpConfigResponse3) GetJSON200() *PrivateSetMmpConfigResponse2 {
+func (r PrivateSetMmpConfigResponse2) GetJSON200() *PrivateSetMmpConfigResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSetMmpConfigResponse3) GetBody() []byte {
+func (r PrivateSetMmpConfigResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSetMmpConfigResponse3) Status() string {
+func (r PrivateSetMmpConfigResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46577,7 +46476,7 @@ func (r PrivateSetMmpConfigResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSetMmpConfigResponse3) StatusCode() int {
+func (r PrivateSetMmpConfigResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46585,7 +46484,7 @@ func (r PrivateSetMmpConfigResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSetMmpConfigResponse3) ContentType() string {
+func (r PrivateSetMmpConfigResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46596,11 +46495,11 @@ type PrivateSetSelfTradingConfigResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSetSelfTradingConfigResponse) GetJSON200() *OkResponse2 {
+func (r PrivateSetSelfTradingConfigResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46633,25 +46532,25 @@ func (r PrivateSetSelfTradingConfigResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSimulateBlockTradeResponse3 struct {
+type PrivateSimulateBlockTradeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSimulateBlockTradeResponse2
+	JSON200 *PrivateSimulateBlockTradeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSimulateBlockTradeResponse3) GetJSON200() *PrivateSimulateBlockTradeResponse2 {
+func (r PrivateSimulateBlockTradeResponse2) GetJSON200() *PrivateSimulateBlockTradeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSimulateBlockTradeResponse3) GetBody() []byte {
+func (r PrivateSimulateBlockTradeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSimulateBlockTradeResponse3) Status() string {
+func (r PrivateSimulateBlockTradeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46659,7 +46558,7 @@ func (r PrivateSimulateBlockTradeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSimulateBlockTradeResponse3) StatusCode() int {
+func (r PrivateSimulateBlockTradeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46667,32 +46566,32 @@ func (r PrivateSimulateBlockTradeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSimulateBlockTradeResponse3) ContentType() string {
+func (r PrivateSimulateBlockTradeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateSimulatePortfolioResponse3 struct {
+type PrivateSimulatePortfolioResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSimulatePortfolioResponse2
+	JSON200 *PrivateSimulatePortfolioResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSimulatePortfolioResponse3) GetJSON200() *PrivateSimulatePortfolioResponse2 {
+func (r PrivateSimulatePortfolioResponse2) GetJSON200() *PrivateSimulatePortfolioResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSimulatePortfolioResponse3) GetBody() []byte {
+func (r PrivateSimulatePortfolioResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSimulatePortfolioResponse3) Status() string {
+func (r PrivateSimulatePortfolioResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46700,7 +46599,7 @@ func (r PrivateSimulatePortfolioResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSimulatePortfolioResponse3) StatusCode() int {
+func (r PrivateSimulatePortfolioResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46708,7 +46607,7 @@ func (r PrivateSimulatePortfolioResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSimulatePortfolioResponse3) ContentType() string {
+func (r PrivateSimulatePortfolioResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46719,11 +46618,11 @@ type PrivateSubmitTransferBetweenSubaccountsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubmitTransferResponse2
+	JSON200 *PrivateSubmitTransferResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSubmitTransferBetweenSubaccountsResponse) GetJSON200() *PrivateSubmitTransferResponse2 {
+func (r PrivateSubmitTransferBetweenSubaccountsResponse) GetJSON200() *PrivateSubmitTransferResponse {
 	return r.JSON200
 }
 
@@ -46760,11 +46659,11 @@ type PrivateSubmitTransferToSubaccountResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubmitTransferResponse2
+	JSON200 *PrivateSubmitTransferResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSubmitTransferToSubaccountResponse) GetJSON200() *PrivateSubmitTransferResponse2 {
+func (r PrivateSubmitTransferToSubaccountResponse) GetJSON200() *PrivateSubmitTransferResponse {
 	return r.JSON200
 }
 
@@ -46801,11 +46700,11 @@ type PrivateSubmitTransferToUserResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubmitTransferResponse2
+	JSON200 *PrivateSubmitTransferResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSubmitTransferToUserResponse) GetJSON200() *PrivateSubmitTransferResponse2 {
+func (r PrivateSubmitTransferToUserResponse) GetJSON200() *PrivateSubmitTransferResponse {
 	return r.JSON200
 }
 
@@ -46838,32 +46737,32 @@ func (r PrivateSubmitTransferToUserResponse) ContentType() string {
 	return ""
 }
 
-type PrivateSubscribeResponse3 struct {
+type PrivateSubscribeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubscribeResponse2
+	JSON200 *PrivateSubscribeResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateSubscribeResponse3) GetJSON200() *PrivateSubscribeResponse2 {
+func (r PrivateSubscribeResponse2) GetJSON200() *PrivateSubscribeResponse {
 	return r.JSON200
 }
 
 // GetJSON401 returns the response for an HTTP 401 `application/json` response
-func (r PrivateSubscribeResponse3) GetJSON401() *ErrorMessageResponse2 {
+func (r PrivateSubscribeResponse2) GetJSON401() *ErrorMessageResponse2 {
 	return r.JSON401
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateSubscribeResponse3) GetBody() []byte {
+func (r PrivateSubscribeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateSubscribeResponse3) Status() string {
+func (r PrivateSubscribeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -46871,7 +46770,7 @@ func (r PrivateSubscribeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateSubscribeResponse3) StatusCode() int {
+func (r PrivateSubscribeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -46879,7 +46778,7 @@ func (r PrivateSubscribeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateSubscribeResponse3) ContentType() string {
+func (r PrivateSubscribeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -46890,11 +46789,11 @@ type PrivateToggleNotificationsFromSubaccountResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateToggleNotificationsFromSubaccountResponse) GetJSON200() *OkResponse2 {
+func (r PrivateToggleNotificationsFromSubaccountResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46931,11 +46830,11 @@ type PrivateToggleSubaccountLoginResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateToggleSubaccountLoginResponse) GetJSON200() *OkResponse2 {
+func (r PrivateToggleSubaccountLoginResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -46972,13 +46871,13 @@ type PrivateUnsubscribeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *Getunsubscribe200responseResponse
+	JSON200 *Getunsubscribe200response
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateUnsubscribeResponse) GetJSON200() *Getunsubscribe200responseResponse {
+func (r PrivateUnsubscribeResponse) GetJSON200() *Getunsubscribe200response {
 	return r.JSON200
 }
 
@@ -47020,11 +46919,11 @@ type PrivateUnsubscribeAllResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateUnsubscribeAllResponse) GetJSON200() *OkResponse2 {
+func (r PrivateUnsubscribeAllResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -47057,25 +46956,25 @@ func (r PrivateUnsubscribeAllResponse) ContentType() string {
 	return ""
 }
 
-type PrivateUpdateInAddressBookResponse3 struct {
+type PrivateUpdateInAddressBookResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateUpdateInAddressBookResponse2
+	JSON200 *PrivateUpdateInAddressBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateUpdateInAddressBookResponse3) GetJSON200() *PrivateUpdateInAddressBookResponse2 {
+func (r PrivateUpdateInAddressBookResponse2) GetJSON200() *PrivateUpdateInAddressBookResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateUpdateInAddressBookResponse3) GetBody() []byte {
+func (r PrivateUpdateInAddressBookResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateUpdateInAddressBookResponse3) Status() string {
+func (r PrivateUpdateInAddressBookResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47083,7 +46982,7 @@ func (r PrivateUpdateInAddressBookResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateUpdateInAddressBookResponse3) StatusCode() int {
+func (r PrivateUpdateInAddressBookResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47091,32 +46990,32 @@ func (r PrivateUpdateInAddressBookResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateUpdateInAddressBookResponse3) ContentType() string {
+func (r PrivateUpdateInAddressBookResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateVerifyBlockTradeResponse3 struct {
+type PrivateVerifyBlockTradeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateVerifyBlockTradeResponse2
+	JSON200 *PrivateVerifyBlockTradeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateVerifyBlockTradeResponse3) GetJSON200() *PrivateVerifyBlockTradeResponse2 {
+func (r PrivateVerifyBlockTradeResponse2) GetJSON200() *PrivateVerifyBlockTradeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateVerifyBlockTradeResponse3) GetBody() []byte {
+func (r PrivateVerifyBlockTradeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateVerifyBlockTradeResponse3) Status() string {
+func (r PrivateVerifyBlockTradeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47124,7 +47023,7 @@ func (r PrivateVerifyBlockTradeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateVerifyBlockTradeResponse3) StatusCode() int {
+func (r PrivateVerifyBlockTradeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47132,32 +47031,32 @@ func (r PrivateVerifyBlockTradeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateVerifyBlockTradeResponse3) ContentType() string {
+func (r PrivateVerifyBlockTradeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PrivateWithdrawResponse3 struct {
+type PrivateWithdrawResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateWithdrawResponse2
+	JSON200 *PrivateWithdrawResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PrivateWithdrawResponse3) GetJSON200() *PrivateWithdrawResponse2 {
+func (r PrivateWithdrawResponse2) GetJSON200() *PrivateWithdrawResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PrivateWithdrawResponse3) GetBody() []byte {
+func (r PrivateWithdrawResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PrivateWithdrawResponse3) Status() string {
+func (r PrivateWithdrawResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47165,7 +47064,7 @@ func (r PrivateWithdrawResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PrivateWithdrawResponse3) StatusCode() int {
+func (r PrivateWithdrawResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47173,32 +47072,32 @@ func (r PrivateWithdrawResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PrivateWithdrawResponse3) ContentType() string {
+func (r PrivateWithdrawResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicAuthResponse3 struct {
+type PublicAuthResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicAuthResponse2
+	JSON200 *PublicAuthResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicAuthResponse3) GetJSON200() *PublicAuthResponse2 {
+func (r PublicAuthResponse2) GetJSON200() *PublicAuthResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicAuthResponse3) GetBody() []byte {
+func (r PublicAuthResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicAuthResponse3) Status() string {
+func (r PublicAuthResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47206,7 +47105,7 @@ func (r PublicAuthResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicAuthResponse3) StatusCode() int {
+func (r PublicAuthResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47214,7 +47113,7 @@ func (r PublicAuthResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicAuthResponse3) ContentType() string {
+func (r PublicAuthResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -47225,11 +47124,11 @@ type PublicDisableHeartbeatResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicDisableHeartbeatResponse) GetJSON200() *OkResponse2 {
+func (r PublicDisableHeartbeatResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -47266,11 +47165,11 @@ type PublicExchangeTokenResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTokenResponse2
+	JSON200 *PublicTokenResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicExchangeTokenResponse) GetJSON200() *PublicTokenResponse2 {
+func (r PublicExchangeTokenResponse) GetJSON200() *PublicTokenResponse {
 	return r.JSON200
 }
 
@@ -47307,11 +47206,11 @@ type PublicForkTokenResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTokenResponse2
+	JSON200 *PublicTokenResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicForkTokenResponse) GetJSON200() *PublicTokenResponse2 {
+func (r PublicForkTokenResponse) GetJSON200() *PublicTokenResponse {
 	return r.JSON200
 }
 
@@ -47344,25 +47243,25 @@ func (r PublicForkTokenResponse) ContentType() string {
 	return ""
 }
 
-type PublicGetAnnouncementsResponse3 struct {
+type PublicGetAnnouncementsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetAnnouncementsResponse2
+	JSON200 *PublicGetAnnouncementsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetAnnouncementsResponse3) GetJSON200() *PublicGetAnnouncementsResponse2 {
+func (r PublicGetAnnouncementsResponse2) GetJSON200() *PublicGetAnnouncementsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetAnnouncementsResponse3) GetBody() []byte {
+func (r PublicGetAnnouncementsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetAnnouncementsResponse3) Status() string {
+func (r PublicGetAnnouncementsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47370,7 +47269,7 @@ func (r PublicGetAnnouncementsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetAnnouncementsResponse3) StatusCode() int {
+func (r PublicGetAnnouncementsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47378,32 +47277,32 @@ func (r PublicGetAnnouncementsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetAnnouncementsResponse3) ContentType() string {
+func (r PublicGetAnnouncementsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetAprHistoryResponse3 struct {
+type PublicGetAprHistoryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetAprHistoryResponse2
+	JSON200 *PublicGetAprHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetAprHistoryResponse3) GetJSON200() *PublicGetAprHistoryResponse2 {
+func (r PublicGetAprHistoryResponse2) GetJSON200() *PublicGetAprHistoryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetAprHistoryResponse3) GetBody() []byte {
+func (r PublicGetAprHistoryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetAprHistoryResponse3) Status() string {
+func (r PublicGetAprHistoryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47411,7 +47310,7 @@ func (r PublicGetAprHistoryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetAprHistoryResponse3) StatusCode() int {
+func (r PublicGetAprHistoryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47419,32 +47318,32 @@ func (r PublicGetAprHistoryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetAprHistoryResponse3) ContentType() string {
+func (r PublicGetAprHistoryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetBasketIndexCompositionResponse3 struct {
+type PublicGetBasketIndexCompositionResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetBasketIndexCompositionResponse2
+	JSON200 *PublicGetBasketIndexCompositionResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetBasketIndexCompositionResponse3) GetJSON200() *PublicGetBasketIndexCompositionResponse2 {
+func (r PublicGetBasketIndexCompositionResponse2) GetJSON200() *PublicGetBasketIndexCompositionResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetBasketIndexCompositionResponse3) GetBody() []byte {
+func (r PublicGetBasketIndexCompositionResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetBasketIndexCompositionResponse3) Status() string {
+func (r PublicGetBasketIndexCompositionResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47452,7 +47351,7 @@ func (r PublicGetBasketIndexCompositionResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetBasketIndexCompositionResponse3) StatusCode() int {
+func (r PublicGetBasketIndexCompositionResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47460,32 +47359,32 @@ func (r PublicGetBasketIndexCompositionResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetBasketIndexCompositionResponse3) ContentType() string {
+func (r PublicGetBasketIndexCompositionResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetBlockRfqTradesResponse3 struct {
+type PublicGetBlockRfqTradesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetBlockRfqTradesResponse2
+	JSON200 *PublicGetBlockRfqTradesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetBlockRfqTradesResponse3) GetJSON200() *PublicGetBlockRfqTradesResponse2 {
+func (r PublicGetBlockRfqTradesResponse2) GetJSON200() *PublicGetBlockRfqTradesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetBlockRfqTradesResponse3) GetBody() []byte {
+func (r PublicGetBlockRfqTradesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetBlockRfqTradesResponse3) Status() string {
+func (r PublicGetBlockRfqTradesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47493,7 +47392,7 @@ func (r PublicGetBlockRfqTradesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetBlockRfqTradesResponse3) StatusCode() int {
+func (r PublicGetBlockRfqTradesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47501,7 +47400,7 @@ func (r PublicGetBlockRfqTradesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetBlockRfqTradesResponse3) ContentType() string {
+func (r PublicGetBlockRfqTradesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -47512,11 +47411,11 @@ type PublicGetBookSummaryByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetBookSummaryResponse2
+	JSON200 *PublicGetBookSummaryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetBookSummaryByCurrencyResponse) GetJSON200() *PublicGetBookSummaryResponse2 {
+func (r PublicGetBookSummaryByCurrencyResponse) GetJSON200() *PublicGetBookSummaryResponse {
 	return r.JSON200
 }
 
@@ -47553,11 +47452,11 @@ type PublicGetBookSummaryByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetBookSummaryResponse2
+	JSON200 *PublicGetBookSummaryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetBookSummaryByInstrumentResponse) GetJSON200() *PublicGetBookSummaryResponse2 {
+func (r PublicGetBookSummaryByInstrumentResponse) GetJSON200() *PublicGetBookSummaryResponse {
 	return r.JSON200
 }
 
@@ -47590,25 +47489,25 @@ func (r PublicGetBookSummaryByInstrumentResponse) ContentType() string {
 	return ""
 }
 
-type PublicGetComboDetailsResponse3 struct {
+type PublicGetComboDetailsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetComboDetailsResponse2
+	JSON200 *PublicGetComboDetailsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetComboDetailsResponse3) GetJSON200() *PublicGetComboDetailsResponse2 {
+func (r PublicGetComboDetailsResponse2) GetJSON200() *PublicGetComboDetailsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetComboDetailsResponse3) GetBody() []byte {
+func (r PublicGetComboDetailsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetComboDetailsResponse3) Status() string {
+func (r PublicGetComboDetailsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47616,7 +47515,7 @@ func (r PublicGetComboDetailsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetComboDetailsResponse3) StatusCode() int {
+func (r PublicGetComboDetailsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47624,32 +47523,32 @@ func (r PublicGetComboDetailsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetComboDetailsResponse3) ContentType() string {
+func (r PublicGetComboDetailsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetComboIdsResponse3 struct {
+type PublicGetComboIdsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetComboIdsResponse2
+	JSON200 *PublicGetComboIdsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetComboIdsResponse3) GetJSON200() *PublicGetComboIdsResponse2 {
+func (r PublicGetComboIdsResponse2) GetJSON200() *PublicGetComboIdsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetComboIdsResponse3) GetBody() []byte {
+func (r PublicGetComboIdsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetComboIdsResponse3) Status() string {
+func (r PublicGetComboIdsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47657,7 +47556,7 @@ func (r PublicGetComboIdsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetComboIdsResponse3) StatusCode() int {
+func (r PublicGetComboIdsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47665,32 +47564,32 @@ func (r PublicGetComboIdsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetComboIdsResponse3) ContentType() string {
+func (r PublicGetComboIdsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetCombosResponse3 struct {
+type PublicGetCombosResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetCombosResponse2
+	JSON200 *PublicGetCombosResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetCombosResponse3) GetJSON200() *PublicGetCombosResponse2 {
+func (r PublicGetCombosResponse2) GetJSON200() *PublicGetCombosResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetCombosResponse3) GetBody() []byte {
+func (r PublicGetCombosResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetCombosResponse3) Status() string {
+func (r PublicGetCombosResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47698,7 +47597,7 @@ func (r PublicGetCombosResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetCombosResponse3) StatusCode() int {
+func (r PublicGetCombosResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47706,32 +47605,32 @@ func (r PublicGetCombosResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetCombosResponse3) ContentType() string {
+func (r PublicGetCombosResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetContractSizeResponse3 struct {
+type PublicGetContractSizeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetContractSizeResponse2
+	JSON200 *PublicGetContractSizeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetContractSizeResponse3) GetJSON200() *PublicGetContractSizeResponse2 {
+func (r PublicGetContractSizeResponse2) GetJSON200() *PublicGetContractSizeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetContractSizeResponse3) GetBody() []byte {
+func (r PublicGetContractSizeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetContractSizeResponse3) Status() string {
+func (r PublicGetContractSizeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47739,7 +47638,7 @@ func (r PublicGetContractSizeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetContractSizeResponse3) StatusCode() int {
+func (r PublicGetContractSizeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47747,32 +47646,32 @@ func (r PublicGetContractSizeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetContractSizeResponse3) ContentType() string {
+func (r PublicGetContractSizeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetCurrenciesResponse3 struct {
+type PublicGetCurrenciesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetCurrenciesResponse2
+	JSON200 *PublicGetCurrenciesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetCurrenciesResponse3) GetJSON200() *PublicGetCurrenciesResponse2 {
+func (r PublicGetCurrenciesResponse2) GetJSON200() *PublicGetCurrenciesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetCurrenciesResponse3) GetBody() []byte {
+func (r PublicGetCurrenciesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetCurrenciesResponse3) Status() string {
+func (r PublicGetCurrenciesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47780,7 +47679,7 @@ func (r PublicGetCurrenciesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetCurrenciesResponse3) StatusCode() int {
+func (r PublicGetCurrenciesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47788,32 +47687,32 @@ func (r PublicGetCurrenciesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetCurrenciesResponse3) ContentType() string {
+func (r PublicGetCurrenciesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetDeliveryPricesResponse3 struct {
+type PublicGetDeliveryPricesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetDeliveryPricesResponse2
+	JSON200 *PublicGetDeliveryPricesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetDeliveryPricesResponse3) GetJSON200() *PublicGetDeliveryPricesResponse2 {
+func (r PublicGetDeliveryPricesResponse2) GetJSON200() *PublicGetDeliveryPricesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetDeliveryPricesResponse3) GetBody() []byte {
+func (r PublicGetDeliveryPricesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetDeliveryPricesResponse3) Status() string {
+func (r PublicGetDeliveryPricesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47821,7 +47720,7 @@ func (r PublicGetDeliveryPricesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetDeliveryPricesResponse3) StatusCode() int {
+func (r PublicGetDeliveryPricesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47829,32 +47728,32 @@ func (r PublicGetDeliveryPricesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetDeliveryPricesResponse3) ContentType() string {
+func (r PublicGetDeliveryPricesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetExpirationsResponse3 struct {
+type PublicGetExpirationsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetExpirationsResponse2
+	JSON200 *PublicGetExpirationsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetExpirationsResponse3) GetJSON200() *PublicGetExpirationsResponse2 {
+func (r PublicGetExpirationsResponse2) GetJSON200() *PublicGetExpirationsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetExpirationsResponse3) GetBody() []byte {
+func (r PublicGetExpirationsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetExpirationsResponse3) Status() string {
+func (r PublicGetExpirationsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47862,7 +47761,7 @@ func (r PublicGetExpirationsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetExpirationsResponse3) StatusCode() int {
+func (r PublicGetExpirationsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47870,32 +47769,32 @@ func (r PublicGetExpirationsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetExpirationsResponse3) ContentType() string {
+func (r PublicGetExpirationsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetFundingChartDataResponse3 struct {
+type PublicGetFundingChartDataResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetFundingChartDataResponse2
+	JSON200 *PublicGetFundingChartDataResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetFundingChartDataResponse3) GetJSON200() *PublicGetFundingChartDataResponse2 {
+func (r PublicGetFundingChartDataResponse2) GetJSON200() *PublicGetFundingChartDataResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetFundingChartDataResponse3) GetBody() []byte {
+func (r PublicGetFundingChartDataResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetFundingChartDataResponse3) Status() string {
+func (r PublicGetFundingChartDataResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47903,7 +47802,7 @@ func (r PublicGetFundingChartDataResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetFundingChartDataResponse3) StatusCode() int {
+func (r PublicGetFundingChartDataResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47911,32 +47810,32 @@ func (r PublicGetFundingChartDataResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetFundingChartDataResponse3) ContentType() string {
+func (r PublicGetFundingChartDataResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetFundingRateHistoryResponse3 struct {
+type PublicGetFundingRateHistoryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetFundingRateHistoryResponse2
+	JSON200 *PublicGetFundingRateHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetFundingRateHistoryResponse3) GetJSON200() *PublicGetFundingRateHistoryResponse2 {
+func (r PublicGetFundingRateHistoryResponse2) GetJSON200() *PublicGetFundingRateHistoryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetFundingRateHistoryResponse3) GetBody() []byte {
+func (r PublicGetFundingRateHistoryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetFundingRateHistoryResponse3) Status() string {
+func (r PublicGetFundingRateHistoryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47944,7 +47843,7 @@ func (r PublicGetFundingRateHistoryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetFundingRateHistoryResponse3) StatusCode() int {
+func (r PublicGetFundingRateHistoryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47952,32 +47851,32 @@ func (r PublicGetFundingRateHistoryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetFundingRateHistoryResponse3) ContentType() string {
+func (r PublicGetFundingRateHistoryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetFundingRateValueResponse3 struct {
+type PublicGetFundingRateValueResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetFundingRateValueResponse2
+	JSON200 *PublicGetFundingRateValueResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetFundingRateValueResponse3) GetJSON200() *PublicGetFundingRateValueResponse2 {
+func (r PublicGetFundingRateValueResponse2) GetJSON200() *PublicGetFundingRateValueResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetFundingRateValueResponse3) GetBody() []byte {
+func (r PublicGetFundingRateValueResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetFundingRateValueResponse3) Status() string {
+func (r PublicGetFundingRateValueResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -47985,7 +47884,7 @@ func (r PublicGetFundingRateValueResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetFundingRateValueResponse3) StatusCode() int {
+func (r PublicGetFundingRateValueResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -47993,32 +47892,32 @@ func (r PublicGetFundingRateValueResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetFundingRateValueResponse3) ContentType() string {
+func (r PublicGetFundingRateValueResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetHistoricalVolatilityResponse3 struct {
+type PublicGetHistoricalVolatilityResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetHistoricalVolatilityResponse2
+	JSON200 *PublicGetHistoricalVolatilityResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetHistoricalVolatilityResponse3) GetJSON200() *PublicGetHistoricalVolatilityResponse2 {
+func (r PublicGetHistoricalVolatilityResponse2) GetJSON200() *PublicGetHistoricalVolatilityResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetHistoricalVolatilityResponse3) GetBody() []byte {
+func (r PublicGetHistoricalVolatilityResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetHistoricalVolatilityResponse3) Status() string {
+func (r PublicGetHistoricalVolatilityResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48026,7 +47925,7 @@ func (r PublicGetHistoricalVolatilityResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetHistoricalVolatilityResponse3) StatusCode() int {
+func (r PublicGetHistoricalVolatilityResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48034,32 +47933,32 @@ func (r PublicGetHistoricalVolatilityResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetHistoricalVolatilityResponse3) ContentType() string {
+func (r PublicGetHistoricalVolatilityResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetIndexChartDataResponse3 struct {
+type PublicGetIndexChartDataResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetIndexChartDataResponse2
+	JSON200 *PublicGetIndexChartDataResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetIndexChartDataResponse3) GetJSON200() *PublicGetIndexChartDataResponse2 {
+func (r PublicGetIndexChartDataResponse2) GetJSON200() *PublicGetIndexChartDataResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetIndexChartDataResponse3) GetBody() []byte {
+func (r PublicGetIndexChartDataResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetIndexChartDataResponse3) Status() string {
+func (r PublicGetIndexChartDataResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48067,7 +47966,7 @@ func (r PublicGetIndexChartDataResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetIndexChartDataResponse3) StatusCode() int {
+func (r PublicGetIndexChartDataResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48075,32 +47974,32 @@ func (r PublicGetIndexChartDataResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetIndexChartDataResponse3) ContentType() string {
+func (r PublicGetIndexChartDataResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetIndexPriceResponse3 struct {
+type PublicGetIndexPriceResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetIndexPriceResponse2
+	JSON200 *PublicGetIndexPriceResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetIndexPriceResponse3) GetJSON200() *PublicGetIndexPriceResponse2 {
+func (r PublicGetIndexPriceResponse2) GetJSON200() *PublicGetIndexPriceResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetIndexPriceResponse3) GetBody() []byte {
+func (r PublicGetIndexPriceResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetIndexPriceResponse3) Status() string {
+func (r PublicGetIndexPriceResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48108,7 +48007,7 @@ func (r PublicGetIndexPriceResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetIndexPriceResponse3) StatusCode() int {
+func (r PublicGetIndexPriceResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48116,32 +48015,32 @@ func (r PublicGetIndexPriceResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetIndexPriceResponse3) ContentType() string {
+func (r PublicGetIndexPriceResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetIndexPriceNamesResponse3 struct {
+type PublicGetIndexPriceNamesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetIndexPriceNamesResponse2
+	JSON200 *PublicGetIndexPriceNamesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetIndexPriceNamesResponse3) GetJSON200() *PublicGetIndexPriceNamesResponse2 {
+func (r PublicGetIndexPriceNamesResponse2) GetJSON200() *PublicGetIndexPriceNamesResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetIndexPriceNamesResponse3) GetBody() []byte {
+func (r PublicGetIndexPriceNamesResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetIndexPriceNamesResponse3) Status() string {
+func (r PublicGetIndexPriceNamesResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48149,7 +48048,7 @@ func (r PublicGetIndexPriceNamesResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetIndexPriceNamesResponse3) StatusCode() int {
+func (r PublicGetIndexPriceNamesResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48157,32 +48056,32 @@ func (r PublicGetIndexPriceNamesResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetIndexPriceNamesResponse3) ContentType() string {
+func (r PublicGetIndexPriceNamesResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetInstrumentResponse3 struct {
+type PublicGetInstrumentResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetInstrumentResponse2
+	JSON200 *PublicGetInstrumentResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetInstrumentResponse3) GetJSON200() *PublicGetInstrumentResponse2 {
+func (r PublicGetInstrumentResponse2) GetJSON200() *PublicGetInstrumentResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetInstrumentResponse3) GetBody() []byte {
+func (r PublicGetInstrumentResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetInstrumentResponse3) Status() string {
+func (r PublicGetInstrumentResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48190,7 +48089,7 @@ func (r PublicGetInstrumentResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetInstrumentResponse3) StatusCode() int {
+func (r PublicGetInstrumentResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48198,32 +48097,32 @@ func (r PublicGetInstrumentResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetInstrumentResponse3) ContentType() string {
+func (r PublicGetInstrumentResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetInstrumentsResponse3 struct {
+type PublicGetInstrumentsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetInstrumentsResponse2
+	JSON200 *PublicGetInstrumentsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetInstrumentsResponse3) GetJSON200() *PublicGetInstrumentsResponse2 {
+func (r PublicGetInstrumentsResponse2) GetJSON200() *PublicGetInstrumentsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetInstrumentsResponse3) GetBody() []byte {
+func (r PublicGetInstrumentsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetInstrumentsResponse3) Status() string {
+func (r PublicGetInstrumentsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48231,7 +48130,7 @@ func (r PublicGetInstrumentsResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetInstrumentsResponse3) StatusCode() int {
+func (r PublicGetInstrumentsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48239,7 +48138,7 @@ func (r PublicGetInstrumentsResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetInstrumentsResponse3) ContentType() string {
+func (r PublicGetInstrumentsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -48250,11 +48149,11 @@ type PublicGetLastSettlementsByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicSettlementResponse2
+	JSON200 *PublicSettlementResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastSettlementsByCurrencyResponse) GetJSON200() *PublicSettlementResponse2 {
+func (r PublicGetLastSettlementsByCurrencyResponse) GetJSON200() *PublicSettlementResponse {
 	return r.JSON200
 }
 
@@ -48291,11 +48190,11 @@ type PublicGetLastSettlementsByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicSettlementResponse2
+	JSON200 *PublicSettlementResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastSettlementsByInstrumentResponse) GetJSON200() *PublicSettlementResponse2 {
+func (r PublicGetLastSettlementsByInstrumentResponse) GetJSON200() *PublicSettlementResponse {
 	return r.JSON200
 }
 
@@ -48332,11 +48231,11 @@ type PublicGetLastTradesByCurrencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTradesHistoryResponse2
+	JSON200 *PublicTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastTradesByCurrencyResponse) GetJSON200() *PublicTradesHistoryResponse2 {
+func (r PublicGetLastTradesByCurrencyResponse) GetJSON200() *PublicTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -48373,11 +48272,11 @@ type PublicGetLastTradesByCurrencyAndTimeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTradesHistoryResponse2
+	JSON200 *PublicTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastTradesByCurrencyAndTimeResponse) GetJSON200() *PublicTradesHistoryResponse2 {
+func (r PublicGetLastTradesByCurrencyAndTimeResponse) GetJSON200() *PublicTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -48414,11 +48313,11 @@ type PublicGetLastTradesByInstrumentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTradesHistoryResponse2
+	JSON200 *PublicTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastTradesByInstrumentResponse) GetJSON200() *PublicTradesHistoryResponse2 {
+func (r PublicGetLastTradesByInstrumentResponse) GetJSON200() *PublicTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -48455,11 +48354,11 @@ type PublicGetLastTradesByInstrumentAndTimeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTradesHistoryResponse2
+	JSON200 *PublicTradesHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetLastTradesByInstrumentAndTimeResponse) GetJSON200() *PublicTradesHistoryResponse2 {
+func (r PublicGetLastTradesByInstrumentAndTimeResponse) GetJSON200() *PublicTradesHistoryResponse {
 	return r.JSON200
 }
 
@@ -48492,25 +48391,25 @@ func (r PublicGetLastTradesByInstrumentAndTimeResponse) ContentType() string {
 	return ""
 }
 
-type PublicGetMarkPriceHistoryResponse3 struct {
+type PublicGetMarkPriceHistoryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetMarkPriceHistoryResponse2
+	JSON200 *PublicGetMarkPriceHistoryResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetMarkPriceHistoryResponse3) GetJSON200() *PublicGetMarkPriceHistoryResponse2 {
+func (r PublicGetMarkPriceHistoryResponse2) GetJSON200() *PublicGetMarkPriceHistoryResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetMarkPriceHistoryResponse3) GetBody() []byte {
+func (r PublicGetMarkPriceHistoryResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetMarkPriceHistoryResponse3) Status() string {
+func (r PublicGetMarkPriceHistoryResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48518,7 +48417,7 @@ func (r PublicGetMarkPriceHistoryResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetMarkPriceHistoryResponse3) StatusCode() int {
+func (r PublicGetMarkPriceHistoryResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48526,32 +48425,32 @@ func (r PublicGetMarkPriceHistoryResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetMarkPriceHistoryResponse3) ContentType() string {
+func (r PublicGetMarkPriceHistoryResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetOrderBookResponse3 struct {
+type PublicGetOrderBookResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetOrderBookResponse2
+	JSON200 *PublicGetOrderBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetOrderBookResponse3) GetJSON200() *PublicGetOrderBookResponse2 {
+func (r PublicGetOrderBookResponse2) GetJSON200() *PublicGetOrderBookResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetOrderBookResponse3) GetBody() []byte {
+func (r PublicGetOrderBookResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetOrderBookResponse3) Status() string {
+func (r PublicGetOrderBookResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48559,7 +48458,7 @@ func (r PublicGetOrderBookResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetOrderBookResponse3) StatusCode() int {
+func (r PublicGetOrderBookResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48567,7 +48466,7 @@ func (r PublicGetOrderBookResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetOrderBookResponse3) ContentType() string {
+func (r PublicGetOrderBookResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -48578,11 +48477,11 @@ type PublicGetOrderBookByInstrumentIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetOrderBookResponse2
+	JSON200 *PublicGetOrderBookResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetOrderBookByInstrumentIdResponse) GetJSON200() *PublicGetOrderBookResponse2 {
+func (r PublicGetOrderBookByInstrumentIdResponse) GetJSON200() *PublicGetOrderBookResponse {
 	return r.JSON200
 }
 
@@ -48619,11 +48518,11 @@ type PublicGetSupportedIndexNamesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetIndexPriceNamesResponse2
+	JSON200 *PublicGetIndexPriceNamesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetSupportedIndexNamesResponse) GetJSON200() *PublicGetIndexPriceNamesResponse2 {
+func (r PublicGetSupportedIndexNamesResponse) GetJSON200() *PublicGetIndexPriceNamesResponse {
 	return r.JSON200
 }
 
@@ -48656,25 +48555,25 @@ func (r PublicGetSupportedIndexNamesResponse) ContentType() string {
 	return ""
 }
 
-type PublicGetTimeResponse3 struct {
+type PublicGetTimeResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetTimeResponse2
+	JSON200 *PublicGetTimeResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetTimeResponse3) GetJSON200() *PublicGetTimeResponse2 {
+func (r PublicGetTimeResponse2) GetJSON200() *PublicGetTimeResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetTimeResponse3) GetBody() []byte {
+func (r PublicGetTimeResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetTimeResponse3) Status() string {
+func (r PublicGetTimeResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48682,7 +48581,7 @@ func (r PublicGetTimeResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetTimeResponse3) StatusCode() int {
+func (r PublicGetTimeResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48690,7 +48589,7 @@ func (r PublicGetTimeResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetTimeResponse3) ContentType() string {
+func (r PublicGetTimeResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -48701,11 +48600,11 @@ type PublicGetTradeVolumesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetTradesVolumesResponse2
+	JSON200 *PublicGetTradesVolumesResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetTradeVolumesResponse) GetJSON200() *PublicGetTradesVolumesResponse2 {
+func (r PublicGetTradeVolumesResponse) GetJSON200() *PublicGetTradesVolumesResponse {
 	return r.JSON200
 }
 
@@ -48738,25 +48637,25 @@ func (r PublicGetTradeVolumesResponse) ContentType() string {
 	return ""
 }
 
-type PublicGetTradingviewChartDataResponse3 struct {
+type PublicGetTradingviewChartDataResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetTradingviewChartDataResponse2
+	JSON200 *PublicGetTradingviewChartDataResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetTradingviewChartDataResponse3) GetJSON200() *PublicGetTradingviewChartDataResponse2 {
+func (r PublicGetTradingviewChartDataResponse2) GetJSON200() *PublicGetTradingviewChartDataResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetTradingviewChartDataResponse3) GetBody() []byte {
+func (r PublicGetTradingviewChartDataResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetTradingviewChartDataResponse3) Status() string {
+func (r PublicGetTradingviewChartDataResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48764,7 +48663,7 @@ func (r PublicGetTradingviewChartDataResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetTradingviewChartDataResponse3) StatusCode() int {
+func (r PublicGetTradingviewChartDataResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48772,32 +48671,32 @@ func (r PublicGetTradingviewChartDataResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetTradingviewChartDataResponse3) ContentType() string {
+func (r PublicGetTradingviewChartDataResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicGetVolatilityIndexDataResponse3 struct {
+type PublicGetVolatilityIndexDataResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicGetVolatilityIndexDataResponse2
+	JSON200 *PublicGetVolatilityIndexDataResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicGetVolatilityIndexDataResponse3) GetJSON200() *PublicGetVolatilityIndexDataResponse2 {
+func (r PublicGetVolatilityIndexDataResponse2) GetJSON200() *PublicGetVolatilityIndexDataResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicGetVolatilityIndexDataResponse3) GetBody() []byte {
+func (r PublicGetVolatilityIndexDataResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicGetVolatilityIndexDataResponse3) Status() string {
+func (r PublicGetVolatilityIndexDataResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48805,7 +48704,7 @@ func (r PublicGetVolatilityIndexDataResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicGetVolatilityIndexDataResponse3) StatusCode() int {
+func (r PublicGetVolatilityIndexDataResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48813,7 +48712,7 @@ func (r PublicGetVolatilityIndexDataResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicGetVolatilityIndexDataResponse3) ContentType() string {
+func (r PublicGetVolatilityIndexDataResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -48824,11 +48723,11 @@ type PublicHelloResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTestResponse2
+	JSON200 *PublicTestResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicHelloResponse) GetJSON200() *PublicTestResponse2 {
+func (r PublicHelloResponse) GetJSON200() *PublicTestResponse {
 	return r.JSON200
 }
 
@@ -48865,11 +48764,11 @@ type PublicSetHeartbeatResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicSetHeartbeatResponse) GetJSON200() *OkResponse2 {
+func (r PublicSetHeartbeatResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -48902,25 +48801,25 @@ func (r PublicSetHeartbeatResponse) ContentType() string {
 	return ""
 }
 
-type PublicStatusResponse3 struct {
+type PublicStatusResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicStatusResponse2
+	JSON200 *PublicStatusResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicStatusResponse3) GetJSON200() *PublicStatusResponse2 {
+func (r PublicStatusResponse2) GetJSON200() *PublicStatusResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicStatusResponse3) GetBody() []byte {
+func (r PublicStatusResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicStatusResponse3) Status() string {
+func (r PublicStatusResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -48928,7 +48827,7 @@ func (r PublicStatusResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicStatusResponse3) StatusCode() int {
+func (r PublicStatusResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -48936,7 +48835,7 @@ func (r PublicStatusResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicStatusResponse3) ContentType() string {
+func (r PublicStatusResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -48947,13 +48846,13 @@ type PublicSubscribeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PrivateSubscribeResponse2
+	JSON200 *PrivateSubscribeResponse
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicSubscribeResponse) GetJSON200() *PrivateSubscribeResponse2 {
+func (r PublicSubscribeResponse) GetJSON200() *PrivateSubscribeResponse {
 	return r.JSON200
 }
 
@@ -48991,25 +48890,25 @@ func (r PublicSubscribeResponse) ContentType() string {
 	return ""
 }
 
-type PublicTestResponse3 struct {
+type PublicTestResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTestResponse2
+	JSON200 *PublicTestResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicTestResponse3) GetJSON200() *PublicTestResponse2 {
+func (r PublicTestResponse2) GetJSON200() *PublicTestResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicTestResponse3) GetBody() []byte {
+func (r PublicTestResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicTestResponse3) Status() string {
+func (r PublicTestResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49017,7 +48916,7 @@ func (r PublicTestResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicTestResponse3) StatusCode() int {
+func (r PublicTestResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49025,32 +48924,32 @@ func (r PublicTestResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicTestResponse3) ContentType() string {
+func (r PublicTestResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type PublicTickerResponse3 struct {
+type PublicTickerResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *PublicTickerResponse2
+	JSON200 *PublicTickerResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicTickerResponse3) GetJSON200() *PublicTickerResponse2 {
+func (r PublicTickerResponse2) GetJSON200() *PublicTickerResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r PublicTickerResponse3) GetBody() []byte {
+func (r PublicTickerResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r PublicTickerResponse3) Status() string {
+func (r PublicTickerResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -49058,7 +48957,7 @@ func (r PublicTickerResponse3) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PublicTickerResponse3) StatusCode() int {
+func (r PublicTickerResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -49066,7 +48965,7 @@ func (r PublicTickerResponse3) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r PublicTickerResponse3) ContentType() string {
+func (r PublicTickerResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -49077,13 +48976,13 @@ type PublicUnsubscribeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *Getunsubscribe200responseResponse
+	JSON200 *Getunsubscribe200response
 	// JSON401 the response for an HTTP 401 `application/json` response
 	JSON401 *ErrorMessageResponse2
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicUnsubscribeResponse) GetJSON200() *Getunsubscribe200responseResponse {
+func (r PublicUnsubscribeResponse) GetJSON200() *Getunsubscribe200response {
 	return r.JSON200
 }
 
@@ -49125,11 +49024,11 @@ type PublicUnsubscribeAllResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *OkResponse2
+	JSON200 *OkResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r PublicUnsubscribeAllResponse) GetJSON200() *OkResponse2 {
+func (r PublicUnsubscribeAllResponse) GetJSON200() *OkResponse {
 	return r.JSON200
 }
 
@@ -49179,12 +49078,12 @@ func (r PublicUnsubscribeAllResponse) ContentType() string {
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Faccept_block_rfq)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateAcceptBlockRfqWithResponse(ctx context.Context, params *PrivateAcceptBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateAcceptBlockRfqResponse3, error) {
+func (c *ClientWithResponses) PrivateAcceptBlockRfqWithResponse(ctx context.Context, params *PrivateAcceptBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateAcceptBlockRfqResponse2, error) {
 	rsp, err := c.PrivateAcceptBlockRfq(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateAcceptBlockRfqResponse3(rsp)
+	return ParsePrivateAcceptBlockRfqResponse2(rsp)
 }
 
 // PrivateAddBlockRfqQuoteWithResponse performs a GET /private/add_block_rfq_quote (the `PrivateAddBlockRfqQuote` operationId) request.
@@ -49202,12 +49101,12 @@ func (c *ClientWithResponses) PrivateAcceptBlockRfqWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_block_rfq_quote)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateAddBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateAddBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateAddBlockRfqQuoteResponse3, error) {
+func (c *ClientWithResponses) PrivateAddBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateAddBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateAddBlockRfqQuoteResponse2, error) {
 	rsp, err := c.PrivateAddBlockRfqQuote(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateAddBlockRfqQuoteResponse3(rsp)
+	return ParsePrivateAddBlockRfqQuoteResponse2(rsp)
 }
 
 // PrivateAddToAddressBookWithResponse performs a GET /private/add_to_address_book (the `PrivateAddToAddressBook` operationId) request.
@@ -49234,12 +49133,12 @@ func (c *ClientWithResponses) PrivateAddBlockRfqQuoteWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fadd_to_address_book)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateAddToAddressBookWithResponse(ctx context.Context, params *PrivateAddToAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateAddToAddressBookResponse3, error) {
+func (c *ClientWithResponses) PrivateAddToAddressBookWithResponse(ctx context.Context, params *PrivateAddToAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateAddToAddressBookResponse2, error) {
 	rsp, err := c.PrivateAddToAddressBook(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateAddToAddressBookResponse3(rsp)
+	return ParsePrivateAddToAddressBookResponse2(rsp)
 }
 
 // PrivateApproveBlockTradeWithResponse performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
@@ -49301,12 +49200,12 @@ func (c *ClientWithResponses) PrivateBuyWithResponse(ctx context.Context, params
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelWithResponse(ctx context.Context, params *PrivateCancelParams, reqEditors ...RequestEditorFn) (*PrivateCancelResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelWithResponse(ctx context.Context, params *PrivateCancelParams, reqEditors ...RequestEditorFn) (*PrivateCancelResponse2, error) {
 	rsp, err := c.PrivateCancel(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelResponse3(rsp)
+	return ParsePrivateCancelResponse2(rsp)
 }
 
 // PrivateCancelAllWithResponse performs a GET /private/cancel_all (the `PrivateCancelAll` operationId) request.
@@ -49324,12 +49223,12 @@ func (c *ClientWithResponses) PrivateCancelWithResponse(ctx context.Context, par
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelAllWithResponse(ctx context.Context, params *PrivateCancelAllParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelAllWithResponse(ctx context.Context, params *PrivateCancelAllParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllResponse2, error) {
 	rsp, err := c.PrivateCancelAll(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelAllResponse3(rsp)
+	return ParsePrivateCancelAllResponse2(rsp)
 }
 
 // PrivateCancelAllBlockRfqQuotesWithResponse performs a GET /private/cancel_all_block_rfq_quotes (the `PrivateCancelAllBlockRfqQuotes` operationId) request.
@@ -49347,12 +49246,12 @@ func (c *ClientWithResponses) PrivateCancelAllWithResponse(ctx context.Context, 
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_all_block_rfq_quotes)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelAllBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateCancelAllBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllBlockRfqQuotesResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelAllBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateCancelAllBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelAllBlockRfqQuotesResponse2, error) {
 	rsp, err := c.PrivateCancelAllBlockRfqQuotes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelAllBlockRfqQuotesResponse3(rsp)
+	return ParsePrivateCancelAllBlockRfqQuotesResponse2(rsp)
 }
 
 // PrivateCancelAllByCurrencyWithResponse performs a GET /private/cancel_all_by_currency (the `PrivateCancelAllByCurrency` operationId) request.
@@ -49448,12 +49347,12 @@ func (c *ClientWithResponses) PrivateCancelAllByKindOrTypeWithResponse(ctx conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelBlockRfqWithResponse(ctx context.Context, params *PrivateCancelBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelBlockRfqWithResponse(ctx context.Context, params *PrivateCancelBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqResponse2, error) {
 	rsp, err := c.PrivateCancelBlockRfq(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelBlockRfqResponse3(rsp)
+	return ParsePrivateCancelBlockRfqResponse2(rsp)
 }
 
 // PrivateCancelBlockRfqQuoteWithResponse performs a GET /private/cancel_block_rfq_quote (the `PrivateCancelBlockRfqQuote` operationId) request.
@@ -49474,12 +49373,12 @@ func (c *ClientWithResponses) PrivateCancelBlockRfqWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_quote)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateCancelBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqQuoteResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateCancelBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqQuoteResponse2, error) {
 	rsp, err := c.PrivateCancelBlockRfqQuote(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelBlockRfqQuoteResponse3(rsp)
+	return ParsePrivateCancelBlockRfqQuoteResponse2(rsp)
 }
 
 // PrivateCancelBlockRfqTriggerWithResponse performs a GET /private/cancel_block_rfq_trigger (the `PrivateCancelBlockRfqTrigger` operationId) request.
@@ -49497,12 +49396,12 @@ func (c *ClientWithResponses) PrivateCancelBlockRfqQuoteWithResponse(ctx context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_block_rfq_trigger)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelBlockRfqTriggerWithResponse(ctx context.Context, params *PrivateCancelBlockRfqTriggerParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqTriggerResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelBlockRfqTriggerWithResponse(ctx context.Context, params *PrivateCancelBlockRfqTriggerParams, reqEditors ...RequestEditorFn) (*PrivateCancelBlockRfqTriggerResponse2, error) {
 	rsp, err := c.PrivateCancelBlockRfqTrigger(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelBlockRfqTriggerResponse3(rsp)
+	return ParsePrivateCancelBlockRfqTriggerResponse2(rsp)
 }
 
 // PrivateCancelByLabelWithResponse performs a GET /private/cancel_by_label (the `PrivateCancelByLabel` operationId) request.
@@ -49545,12 +49444,12 @@ func (c *ClientWithResponses) PrivateCancelByLabelWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcancel_quotes)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCancelQuotesWithResponse(ctx context.Context, params *PrivateCancelQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelQuotesResponse3, error) {
+func (c *ClientWithResponses) PrivateCancelQuotesWithResponse(ctx context.Context, params *PrivateCancelQuotesParams, reqEditors ...RequestEditorFn) (*PrivateCancelQuotesResponse2, error) {
 	rsp, err := c.PrivateCancelQuotes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCancelQuotesResponse3(rsp)
+	return ParsePrivateCancelQuotesResponse2(rsp)
 }
 
 // PrivateCancelTransferByIdWithResponse performs a GET /private/cancel_transfer_by_id (the `PrivateCancelTransferById` operationId) request.
@@ -49614,7 +49513,9 @@ func (c *ClientWithResponses) PrivateChangeApiKeyNameWithResponse(ctx context.Co
 //
 // Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).
 //
-// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.
+// Changing the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it. A dry run runs the same checks as the actual change.
+//
+// Returns an error if a currency would be left with negative equity, an unfunded long option position, or insufficient funds.
 //
 // **📖 Related Article:** [Margin types and usage](https://support.deribit.com/hc/en-us/articles/25944811317149-Margin-types-and-usage)
 //
@@ -49623,12 +49524,12 @@ func (c *ClientWithResponses) PrivateChangeApiKeyNameWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fchange_margin_model)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateChangeMarginModelWithResponse(ctx context.Context, params *PrivateChangeMarginModelParams, reqEditors ...RequestEditorFn) (*PrivateChangeMarginModelResponse3, error) {
+func (c *ClientWithResponses) PrivateChangeMarginModelWithResponse(ctx context.Context, params *PrivateChangeMarginModelParams, reqEditors ...RequestEditorFn) (*PrivateChangeMarginModelResponse2, error) {
 	rsp, err := c.PrivateChangeMarginModel(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateChangeMarginModelResponse3(rsp)
+	return ParsePrivateChangeMarginModelResponse2(rsp)
 }
 
 // PrivateChangeScopeInApiKeyWithResponse performs a GET /private/change_scope_in_api_key (the `PrivateChangeScopeInApiKey` operationId) request.
@@ -49709,12 +49610,12 @@ func (c *ClientWithResponses) PrivateClosePositionWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcoinbase%2Festimate_withdrawal_fee)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCoinbaseEstimateWithdrawalFeeWithResponse(ctx context.Context, params *PrivateCoinbaseEstimateWithdrawalFeeParams, reqEditors ...RequestEditorFn) (*PrivateCoinbaseEstimateWithdrawalFeeResponse3, error) {
+func (c *ClientWithResponses) PrivateCoinbaseEstimateWithdrawalFeeWithResponse(ctx context.Context, params *PrivateCoinbaseEstimateWithdrawalFeeParams, reqEditors ...RequestEditorFn) (*PrivateCoinbaseEstimateWithdrawalFeeResponse2, error) {
 	rsp, err := c.PrivateCoinbaseEstimateWithdrawalFee(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCoinbaseEstimateWithdrawalFeeResponse3(rsp)
+	return ParsePrivateCoinbaseEstimateWithdrawalFeeResponse2(rsp)
 }
 
 // PrivateCreateApiKeyWithResponse performs a GET /private/create_api_key (the `PrivateCreateApiKey` operationId) request.
@@ -49759,12 +49660,12 @@ func (c *ClientWithResponses) PrivateCreateApiKeyWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_block_rfq)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCreateBlockRfqWithResponse(ctx context.Context, params *PrivateCreateBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCreateBlockRfqResponse3, error) {
+func (c *ClientWithResponses) PrivateCreateBlockRfqWithResponse(ctx context.Context, params *PrivateCreateBlockRfqParams, reqEditors ...RequestEditorFn) (*PrivateCreateBlockRfqResponse2, error) {
 	rsp, err := c.PrivateCreateBlockRfq(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCreateBlockRfqResponse3(rsp)
+	return ParsePrivateCreateBlockRfqResponse2(rsp)
 }
 
 // PrivateCreateComboWithResponse performs a GET /private/create_combo (the `PrivateCreateCombo` operationId) request.
@@ -49778,12 +49679,12 @@ func (c *ClientWithResponses) PrivateCreateBlockRfqWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_combo)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCreateComboWithResponse(ctx context.Context, params *PrivateCreateComboParams, reqEditors ...RequestEditorFn) (*PrivateCreateComboResponse3, error) {
+func (c *ClientWithResponses) PrivateCreateComboWithResponse(ctx context.Context, params *PrivateCreateComboParams, reqEditors ...RequestEditorFn) (*PrivateCreateComboResponse2, error) {
 	rsp, err := c.PrivateCreateCombo(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCreateComboResponse3(rsp)
+	return ParsePrivateCreateComboResponse2(rsp)
 }
 
 // PrivateCreateDepositAddressWithResponse performs a GET /private/create_deposit_address (the `PrivateCreateDepositAddress` operationId) request.
@@ -49832,12 +49733,12 @@ func (c *ClientWithResponses) PrivateCreateDepositAddressWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fcreate_subaccount)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateCreateSubaccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateCreateSubaccountResponse3, error) {
+func (c *ClientWithResponses) PrivateCreateSubaccountWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateCreateSubaccountResponse2, error) {
 	rsp, err := c.PrivateCreateSubaccount(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateCreateSubaccountResponse3(rsp)
+	return ParsePrivateCreateSubaccountResponse2(rsp)
 }
 
 // PrivateDeleteAddressBeneficiaryWithResponse performs a GET /private/delete_address_beneficiary (the `PrivateDeleteAddressBeneficiary` operationId) request.
@@ -49851,12 +49752,12 @@ func (c *ClientWithResponses) PrivateCreateSubaccountWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_address_beneficiary)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateDeleteAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateDeleteAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateDeleteAddressBeneficiaryResponse3, error) {
+func (c *ClientWithResponses) PrivateDeleteAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateDeleteAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateDeleteAddressBeneficiaryResponse2, error) {
 	rsp, err := c.PrivateDeleteAddressBeneficiary(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateDeleteAddressBeneficiaryResponse3(rsp)
+	return ParsePrivateDeleteAddressBeneficiaryResponse2(rsp)
 }
 
 // PrivateDeleteMemberWithResponse performs a GET /private/delete_member (the `PrivateDeleteMember` operationId) request.
@@ -49874,12 +49775,12 @@ func (c *ClientWithResponses) PrivateDeleteAddressBeneficiaryWithResponse(ctx co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdelete_member)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateDeleteMemberWithResponse(ctx context.Context, params *PrivateDeleteMemberParams, reqEditors ...RequestEditorFn) (*PrivateDeleteMemberResponse3, error) {
+func (c *ClientWithResponses) PrivateDeleteMemberWithResponse(ctx context.Context, params *PrivateDeleteMemberParams, reqEditors ...RequestEditorFn) (*PrivateDeleteMemberResponse2, error) {
 	rsp, err := c.PrivateDeleteMember(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateDeleteMemberResponse3(rsp)
+	return ParsePrivateDeleteMemberResponse2(rsp)
 }
 
 // PrivateDisableApiKeyWithResponse performs a GET /private/disable_api_key (the `PrivateDisableApiKey` operationId) request.
@@ -49911,9 +49812,12 @@ func (c *ClientWithResponses) PrivateDisableApiKeyWithResponse(ctx context.Conte
 //
 // When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// **Scope & transport:**
 //
-// **Scope:** `account:read_write`
+// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+//
+// **Scope:** `account:read_write` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fdisable_cancel_on_disconnect)
 //
@@ -49943,12 +49847,12 @@ func (c *ClientWithResponses) PrivateDisableCancelOnDisconnectWithResponse(ctx c
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateEditWithResponse(ctx context.Context, params *PrivateEditParams, reqEditors ...RequestEditorFn) (*PrivateEditResponse3, error) {
+func (c *ClientWithResponses) PrivateEditWithResponse(ctx context.Context, params *PrivateEditParams, reqEditors ...RequestEditorFn) (*PrivateEditResponse2, error) {
 	rsp, err := c.PrivateEdit(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateEditResponse3(rsp)
+	return ParsePrivateEditResponse2(rsp)
 }
 
 // PrivateEditApiKeyWithResponse performs a GET /private/edit_api_key (the `PrivateEditApiKey` operationId) request.
@@ -49991,12 +49895,12 @@ func (c *ClientWithResponses) PrivateEditApiKeyWithResponse(ctx context.Context,
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fedit_block_rfq_quote)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateEditBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateEditBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateEditBlockRfqQuoteResponse3, error) {
+func (c *ClientWithResponses) PrivateEditBlockRfqQuoteWithResponse(ctx context.Context, params *PrivateEditBlockRfqQuoteParams, reqEditors ...RequestEditorFn) (*PrivateEditBlockRfqQuoteResponse2, error) {
 	rsp, err := c.PrivateEditBlockRfqQuote(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateEditBlockRfqQuoteResponse3(rsp)
+	return ParsePrivateEditBlockRfqQuoteResponse2(rsp)
 }
 
 // PrivateEditByLabelWithResponse performs a GET /private/edit_by_label (the `PrivateEditByLabel` operationId) request.
@@ -50074,9 +49978,14 @@ func (c *ClientWithResponses) PrivateEnableApiKeyWithResponse(ctx context.Contex
 //
 // **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// **Scope & transport:**
 //
-// **Scope:** `account:read_write`
+// - `scope=connection` (the default) applies to the current WebSocket connection only and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` changes the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read_write` scope. Connection scope only requires an authenticated connection.
+//
+// **Restrictions:** Not available for retail broker main accounts or their subaccounts: error `14021` (`not_allowed_for_retail_brokers`) is returned for both scopes.
+//
+// **Scope:** `account:read_write` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fenable_cancel_on_disconnect)
 //
@@ -50125,12 +50034,12 @@ func (c *ClientWithResponses) PrivateExecuteBlockTradeWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_access_log)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetAccessLogWithResponse(ctx context.Context, params *PrivateGetAccessLogParams, reqEditors ...RequestEditorFn) (*PrivateGetAccessLogResponse3, error) {
+func (c *ClientWithResponses) PrivateGetAccessLogWithResponse(ctx context.Context, params *PrivateGetAccessLogParams, reqEditors ...RequestEditorFn) (*PrivateGetAccessLogResponse2, error) {
 	rsp, err := c.PrivateGetAccessLog(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetAccessLogResponse3(rsp)
+	return ParsePrivateGetAccessLogResponse2(rsp)
 }
 
 // PrivateGetAccountSummariesWithResponse performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
@@ -50188,12 +50097,12 @@ func (c *ClientWithResponses) PrivateGetAccountSummaryWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_address_beneficiary)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateGetAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateGetAddressBeneficiaryResponse3, error) {
+func (c *ClientWithResponses) PrivateGetAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateGetAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateGetAddressBeneficiaryResponse2, error) {
 	rsp, err := c.PrivateGetAddressBeneficiary(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetAddressBeneficiaryResponse3(rsp)
+	return ParsePrivateGetAddressBeneficiaryResponse2(rsp)
 }
 
 // PrivateGetAddressBookWithResponse performs a GET /private/get_address_book (the `PrivateGetAddressBook` operationId) request.
@@ -50232,12 +50141,12 @@ func (c *ClientWithResponses) PrivateGetAddressBookWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_affiliate_program_info)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetAffiliateProgramInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetAffiliateProgramInfoResponse3, error) {
+func (c *ClientWithResponses) PrivateGetAffiliateProgramInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetAffiliateProgramInfoResponse2, error) {
 	rsp, err := c.PrivateGetAffiliateProgramInfo(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetAffiliateProgramInfoResponse3(rsp)
+	return ParsePrivateGetAffiliateProgramInfoResponse2(rsp)
 }
 
 // PrivateGetBlockRfqMakersWithResponse performs a GET /private/get_block_rfq_makers (the `PrivateGetBlockRfqMakers` operationId) request.
@@ -50253,12 +50162,12 @@ func (c *ClientWithResponses) PrivateGetAffiliateProgramInfoWithResponse(ctx con
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_makers)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockRfqMakersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqMakersResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockRfqMakersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqMakersResponse2, error) {
 	rsp, err := c.PrivateGetBlockRfqMakers(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockRfqMakersResponse3(rsp)
+	return ParsePrivateGetBlockRfqMakersResponse2(rsp)
 }
 
 // PrivateGetBlockRfqQuotesWithResponse performs a GET /private/get_block_rfq_quotes (the `PrivateGetBlockRfqQuotes` operationId) request.
@@ -50276,12 +50185,12 @@ func (c *ClientWithResponses) PrivateGetBlockRfqMakersWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_quotes)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateGetBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqQuotesResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockRfqQuotesWithResponse(ctx context.Context, params *PrivateGetBlockRfqQuotesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqQuotesResponse2, error) {
 	rsp, err := c.PrivateGetBlockRfqQuotes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockRfqQuotesResponse3(rsp)
+	return ParsePrivateGetBlockRfqQuotesResponse2(rsp)
 }
 
 // PrivateGetBlockRfqUserInfoWithResponse performs a GET /private/get_block_rfq_user_info (the `PrivateGetBlockRfqUserInfo` operationId) request.
@@ -50297,12 +50206,12 @@ func (c *ClientWithResponses) PrivateGetBlockRfqQuotesWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfq_user_info)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockRfqUserInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqUserInfoResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockRfqUserInfoWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqUserInfoResponse2, error) {
 	rsp, err := c.PrivateGetBlockRfqUserInfo(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockRfqUserInfoResponse3(rsp)
+	return ParsePrivateGetBlockRfqUserInfoResponse2(rsp)
 }
 
 // PrivateGetBlockRfqsWithResponse performs a GET /private/get_block_rfqs (the `PrivateGetBlockRfqs` operationId) request.
@@ -50320,12 +50229,12 @@ func (c *ClientWithResponses) PrivateGetBlockRfqUserInfoWithResponse(ctx context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_rfqs)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockRfqsWithResponse(ctx context.Context, params *PrivateGetBlockRfqsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockRfqsWithResponse(ctx context.Context, params *PrivateGetBlockRfqsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockRfqsResponse2, error) {
 	rsp, err := c.PrivateGetBlockRfqs(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockRfqsResponse3(rsp)
+	return ParsePrivateGetBlockRfqsResponse2(rsp)
 }
 
 // PrivateGetBlockTradeWithResponse performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
@@ -50339,12 +50248,12 @@ func (c *ClientWithResponses) PrivateGetBlockRfqsWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockTradeWithResponse(ctx context.Context, params *PrivateGetBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockTradeWithResponse(ctx context.Context, params *PrivateGetBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeResponse2, error) {
 	rsp, err := c.PrivateGetBlockTrade(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockTradeResponse3(rsp)
+	return ParsePrivateGetBlockTradeResponse2(rsp)
 }
 
 // PrivateGetBlockTradeRequestsWithResponse performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
@@ -50362,12 +50271,12 @@ func (c *ClientWithResponses) PrivateGetBlockTradeWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trade_requests)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockTradeRequestsWithResponse(ctx context.Context, params *PrivateGetBlockTradeRequestsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeRequestsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockTradeRequestsWithResponse(ctx context.Context, params *PrivateGetBlockTradeRequestsParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradeRequestsResponse2, error) {
 	rsp, err := c.PrivateGetBlockTradeRequests(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockTradeRequestsResponse3(rsp)
+	return ParsePrivateGetBlockTradeRequestsResponse2(rsp)
 }
 
 // PrivateGetBlockTradesWithResponse performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
@@ -50381,12 +50290,12 @@ func (c *ClientWithResponses) PrivateGetBlockTradeRequestsWithResponse(ctx conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_block_trades)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBlockTradesWithResponse(ctx context.Context, params *PrivateGetBlockTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradesResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBlockTradesWithResponse(ctx context.Context, params *PrivateGetBlockTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBlockTradesResponse2, error) {
 	rsp, err := c.PrivateGetBlockTrades(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBlockTradesResponse3(rsp)
+	return ParsePrivateGetBlockTradesResponse2(rsp)
 }
 
 // PrivateGetBrokerClientsWithResponse performs a GET /private/get_broker_clients (the `PrivateGetBrokerClients` operationId) request.
@@ -50409,12 +50318,12 @@ func (c *ClientWithResponses) PrivateGetBlockTradesWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_clients)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBrokerClientsWithResponse(ctx context.Context, params *PrivateGetBrokerClientsParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerClientsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBrokerClientsWithResponse(ctx context.Context, params *PrivateGetBrokerClientsParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerClientsResponse2, error) {
 	rsp, err := c.PrivateGetBrokerClients(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBrokerClientsResponse3(rsp)
+	return ParsePrivateGetBrokerClientsResponse2(rsp)
 }
 
 // PrivateGetBrokerTradeRequestsWithResponse performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
@@ -50426,12 +50335,12 @@ func (c *ClientWithResponses) PrivateGetBrokerClientsWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trade_requests)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBrokerTradeRequestsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradeRequestsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBrokerTradeRequestsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradeRequestsResponse2, error) {
 	rsp, err := c.PrivateGetBrokerTradeRequests(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBrokerTradeRequestsResponse3(rsp)
+	return ParsePrivateGetBrokerTradeRequestsResponse2(rsp)
 }
 
 // PrivateGetBrokerTradesWithResponse performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
@@ -50443,29 +50352,32 @@ func (c *ClientWithResponses) PrivateGetBrokerTradeRequestsWithResponse(ctx cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_broker_trades)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetBrokerTradesWithResponse(ctx context.Context, params *PrivateGetBrokerTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradesResponse3, error) {
+func (c *ClientWithResponses) PrivateGetBrokerTradesWithResponse(ctx context.Context, params *PrivateGetBrokerTradesParams, reqEditors ...RequestEditorFn) (*PrivateGetBrokerTradesResponse2, error) {
 	rsp, err := c.PrivateGetBrokerTrades(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetBrokerTradesResponse3(rsp)
+	return ParsePrivateGetBrokerTradesResponse2(rsp)
 }
 
 // PrivateGetCancelOnDisconnectWithResponse performs a GET /private/get_cancel_on_disconnect (the `PrivateGetCancelOnDisconnect` operationId) request.
 //
-// Read current Cancel On Disconnect configuration for the account.
+// Read the current Cancel On Disconnect configuration.
 //
-// **Scope:** `account:read`
+// - `scope=connection` (the default) returns the state for the current WebSocket connection and is available over WebSocket only. Over REST/HTTP it fails with `10030` (`must_be_websocket_request`), so HTTP clients must pass `scope=account`.
+// - `scope=account` returns the account setting, works over both WebSocket and REST/HTTP, and requires the `account:read` scope.
+//
+// **Scope:** `account:read` (only for `scope=account`)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetCancelOnDisconnectWithResponse(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*PrivateGetCancelOnDisconnectResponse3, error) {
+func (c *ClientWithResponses) PrivateGetCancelOnDisconnectWithResponse(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*PrivateGetCancelOnDisconnectResponse2, error) {
 	rsp, err := c.PrivateGetCancelOnDisconnect(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetCancelOnDisconnectResponse3(rsp)
+	return ParsePrivateGetCancelOnDisconnectResponse2(rsp)
 }
 
 // PrivateGetCurrenciesWithResponse performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
@@ -50479,12 +50391,12 @@ func (c *ClientWithResponses) PrivateGetCancelOnDisconnectWithResponse(ctx conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_currencies)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCurrenciesResponse3, error) {
+func (c *ClientWithResponses) PrivateGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCurrenciesResponse2, error) {
 	rsp, err := c.PrivateGetCurrencies(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetCurrenciesResponse3(rsp)
+	return ParsePrivateGetCurrenciesResponse2(rsp)
 }
 
 // PrivateGetCurrentDepositAddressWithResponse performs a GET /private/get_current_deposit_address (the `PrivateGetCurrentDepositAddress` operationId) request.
@@ -50521,12 +50433,12 @@ func (c *ClientWithResponses) PrivateGetCurrentDepositAddressWithResponse(ctx co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_deposits)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetDepositsWithResponse(ctx context.Context, params *PrivateGetDepositsParams, reqEditors ...RequestEditorFn) (*PrivateGetDepositsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetDepositsWithResponse(ctx context.Context, params *PrivateGetDepositsParams, reqEditors ...RequestEditorFn) (*PrivateGetDepositsResponse2, error) {
 	rsp, err := c.PrivateGetDeposits(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetDepositsResponse3(rsp)
+	return ParsePrivateGetDepositsResponse2(rsp)
 }
 
 // PrivateGetEmailLanguageWithResponse performs a GET /private/get_email_language (the `PrivateGetEmailLanguage` operationId) request.
@@ -50538,12 +50450,12 @@ func (c *ClientWithResponses) PrivateGetDepositsWithResponse(ctx context.Context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_email_language)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetEmailLanguageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetEmailLanguageResponse3, error) {
+func (c *ClientWithResponses) PrivateGetEmailLanguageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetEmailLanguageResponse2, error) {
 	rsp, err := c.PrivateGetEmailLanguage(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetEmailLanguageResponse3(rsp)
+	return ParsePrivateGetEmailLanguageResponse2(rsp)
 }
 
 // PrivateGetLegPricesWithResponse performs a GET /private/get_leg_prices (the `PrivateGetLegPrices` operationId) request.
@@ -50557,12 +50469,12 @@ func (c *ClientWithResponses) PrivateGetEmailLanguageWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_leg_prices)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetLegPricesWithResponse(ctx context.Context, params *PrivateGetLegPricesParams, reqEditors ...RequestEditorFn) (*PrivateGetLegPricesResponse3, error) {
+func (c *ClientWithResponses) PrivateGetLegPricesWithResponse(ctx context.Context, params *PrivateGetLegPricesParams, reqEditors ...RequestEditorFn) (*PrivateGetLegPricesResponse2, error) {
 	rsp, err := c.PrivateGetLegPrices(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetLegPricesResponse3(rsp)
+	return ParsePrivateGetLegPricesResponse2(rsp)
 }
 
 // PrivateGetLspParticipantConfigWithResponse performs a GET /private/get_lsp_participant_config (the `PrivateGetLspParticipantConfig` operationId) request.
@@ -50580,12 +50492,12 @@ func (c *ClientWithResponses) PrivateGetLegPricesWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participant_config)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetLspParticipantConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantConfigResponse3, error) {
+func (c *ClientWithResponses) PrivateGetLspParticipantConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantConfigResponse2, error) {
 	rsp, err := c.PrivateGetLspParticipantConfig(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetLspParticipantConfigResponse3(rsp)
+	return ParsePrivateGetLspParticipantConfigResponse2(rsp)
 }
 
 // PrivateGetLspParticipantsWithResponse performs a GET /private/get_lsp_participants (the `PrivateGetLspParticipants` operationId) request.
@@ -50603,12 +50515,12 @@ func (c *ClientWithResponses) PrivateGetLspParticipantConfigWithResponse(ctx con
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participants)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetLspParticipantsWithResponse(ctx context.Context, params *PrivateGetLspParticipantsParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetLspParticipantsWithResponse(ctx context.Context, params *PrivateGetLspParticipantsParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsResponse2, error) {
 	rsp, err := c.PrivateGetLspParticipants(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetLspParticipantsResponse3(rsp)
+	return ParsePrivateGetLspParticipantsResponse2(rsp)
 }
 
 // PrivateGetLspParticipantsUsageWithResponse performs a GET /private/get_lsp_participants_usage (the `PrivateGetLspParticipantsUsage` operationId) request.
@@ -50626,12 +50538,12 @@ func (c *ClientWithResponses) PrivateGetLspParticipantsWithResponse(ctx context.
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_participants_usage)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetLspParticipantsUsageWithResponse(ctx context.Context, params *PrivateGetLspParticipantsUsageParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsUsageResponse3, error) {
+func (c *ClientWithResponses) PrivateGetLspParticipantsUsageWithResponse(ctx context.Context, params *PrivateGetLspParticipantsUsageParams, reqEditors ...RequestEditorFn) (*PrivateGetLspParticipantsUsageResponse2, error) {
 	rsp, err := c.PrivateGetLspParticipantsUsage(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetLspParticipantsUsageResponse3(rsp)
+	return ParsePrivateGetLspParticipantsUsageResponse2(rsp)
 }
 
 // PrivateGetLspUsageWithResponse performs a GET /private/get_lsp_usage (the `PrivateGetLspUsage` operationId) request.
@@ -50649,12 +50561,12 @@ func (c *ClientWithResponses) PrivateGetLspParticipantsUsageWithResponse(ctx con
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_lsp_usage)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetLspUsageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspUsageResponse3, error) {
+func (c *ClientWithResponses) PrivateGetLspUsageWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetLspUsageResponse2, error) {
 	rsp, err := c.PrivateGetLspUsage(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetLspUsageResponse3(rsp)
+	return ParsePrivateGetLspUsageResponse2(rsp)
 }
 
 // PrivateGetMarginsWithResponse performs a GET /private/get_margins (the `PrivateGetMargins` operationId) request.
@@ -50672,12 +50584,12 @@ func (c *ClientWithResponses) PrivateGetLspUsageWithResponse(ctx context.Context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_margins)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetMarginsWithResponse(ctx context.Context, params *PrivateGetMarginsParams, reqEditors ...RequestEditorFn) (*PrivateGetMarginsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetMarginsWithResponse(ctx context.Context, params *PrivateGetMarginsParams, reqEditors ...RequestEditorFn) (*PrivateGetMarginsResponse2, error) {
 	rsp, err := c.PrivateGetMargins(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetMarginsResponse3(rsp)
+	return ParsePrivateGetMarginsResponse2(rsp)
 }
 
 // PrivateGetMembersWithResponse performs a GET /private/get_members (the `PrivateGetMembers` operationId) request.
@@ -50697,12 +50609,12 @@ func (c *ClientWithResponses) PrivateGetMarginsWithResponse(ctx context.Context,
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_members)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetMembersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetMembersResponse3, error) {
+func (c *ClientWithResponses) PrivateGetMembersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetMembersResponse2, error) {
 	rsp, err := c.PrivateGetMembers(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetMembersResponse3(rsp)
+	return ParsePrivateGetMembersResponse2(rsp)
 }
 
 // PrivateGetMmpConfigWithResponse performs a GET /private/get_mmp_config (the `PrivateGetMmpConfig` operationId) request.
@@ -50722,12 +50634,12 @@ func (c *ClientWithResponses) PrivateGetMembersWithResponse(ctx context.Context,
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_config)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetMmpConfigWithResponse(ctx context.Context, params *PrivateGetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpConfigResponse3, error) {
+func (c *ClientWithResponses) PrivateGetMmpConfigWithResponse(ctx context.Context, params *PrivateGetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpConfigResponse2, error) {
 	rsp, err := c.PrivateGetMmpConfig(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetMmpConfigResponse3(rsp)
+	return ParsePrivateGetMmpConfigResponse2(rsp)
 }
 
 // PrivateGetMmpStatusWithResponse performs a GET /private/get_mmp_status (the `PrivateGetMmpStatus` operationId) request.
@@ -50745,12 +50657,12 @@ func (c *ClientWithResponses) PrivateGetMmpConfigWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_mmp_status)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetMmpStatusWithResponse(ctx context.Context, params *PrivateGetMmpStatusParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpStatusResponse3, error) {
+func (c *ClientWithResponses) PrivateGetMmpStatusWithResponse(ctx context.Context, params *PrivateGetMmpStatusParams, reqEditors ...RequestEditorFn) (*PrivateGetMmpStatusResponse2, error) {
 	rsp, err := c.PrivateGetMmpStatus(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetMmpStatusResponse3(rsp)
+	return ParsePrivateGetMmpStatusResponse2(rsp)
 }
 
 // PrivateGetNewAnnouncementsWithResponse performs a GET /private/get_new_announcements (the `PrivateGetNewAnnouncements` operationId) request.
@@ -50783,12 +50695,12 @@ func (c *ClientWithResponses) PrivateGetNewAnnouncementsWithResponse(ctx context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_open_orders)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetOpenOrdersWithResponse(ctx context.Context, params *PrivateGetOpenOrdersParams, reqEditors ...RequestEditorFn) (*PrivateGetOpenOrdersResponse3, error) {
+func (c *ClientWithResponses) PrivateGetOpenOrdersWithResponse(ctx context.Context, params *PrivateGetOpenOrdersParams, reqEditors ...RequestEditorFn) (*PrivateGetOpenOrdersResponse2, error) {
 	rsp, err := c.PrivateGetOpenOrders(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetOpenOrdersResponse3(rsp)
+	return ParsePrivateGetOpenOrdersResponse2(rsp)
 }
 
 // PrivateGetOpenOrdersByCurrencyWithResponse performs a GET /private/get_open_orders_by_currency (the `PrivateGetOpenOrdersByCurrency` operationId) request.
@@ -50903,12 +50815,12 @@ func (c *ClientWithResponses) PrivateGetOrderHistoryByInstrumentWithResponse(ctx
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_margin_by_ids)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetOrderMarginByIdsWithResponse(ctx context.Context, params *PrivateGetOrderMarginByIdsParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderMarginByIdsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetOrderMarginByIdsWithResponse(ctx context.Context, params *PrivateGetOrderMarginByIdsParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderMarginByIdsResponse2, error) {
 	rsp, err := c.PrivateGetOrderMarginByIds(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetOrderMarginByIdsResponse3(rsp)
+	return ParsePrivateGetOrderMarginByIdsResponse2(rsp)
 }
 
 // PrivateGetOrderStateWithResponse performs a GET /private/get_order_state (the `PrivateGetOrderState` operationId) request.
@@ -50926,12 +50838,12 @@ func (c *ClientWithResponses) PrivateGetOrderMarginByIdsWithResponse(ctx context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetOrderStateWithResponse(ctx context.Context, params *PrivateGetOrderStateParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateResponse3, error) {
+func (c *ClientWithResponses) PrivateGetOrderStateWithResponse(ctx context.Context, params *PrivateGetOrderStateParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateResponse2, error) {
 	rsp, err := c.PrivateGetOrderState(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetOrderStateResponse3(rsp)
+	return ParsePrivateGetOrderStateResponse2(rsp)
 }
 
 // PrivateGetOrderStateByLabelWithResponse performs a GET /private/get_order_state_by_label (the `PrivateGetOrderStateByLabel` operationId) request.
@@ -50949,12 +50861,12 @@ func (c *ClientWithResponses) PrivateGetOrderStateWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_order_state_by_label)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetOrderStateByLabelWithResponse(ctx context.Context, params *PrivateGetOrderStateByLabelParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateByLabelResponse3, error) {
+func (c *ClientWithResponses) PrivateGetOrderStateByLabelWithResponse(ctx context.Context, params *PrivateGetOrderStateByLabelParams, reqEditors ...RequestEditorFn) (*PrivateGetOrderStateByLabelResponse2, error) {
 	rsp, err := c.PrivateGetOrderStateByLabel(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetOrderStateByLabelResponse3(rsp)
+	return ParsePrivateGetOrderStateByLabelResponse2(rsp)
 }
 
 // PrivateGetPositionWithResponse performs a GET /private/get_position (the `PrivateGetPosition` operationId) request.
@@ -50968,12 +50880,12 @@ func (c *ClientWithResponses) PrivateGetOrderStateByLabelWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_position)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetPositionWithResponse(ctx context.Context, params *PrivateGetPositionParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionResponse3, error) {
+func (c *ClientWithResponses) PrivateGetPositionWithResponse(ctx context.Context, params *PrivateGetPositionParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionResponse2, error) {
 	rsp, err := c.PrivateGetPosition(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetPositionResponse3(rsp)
+	return ParsePrivateGetPositionResponse2(rsp)
 }
 
 // PrivateGetPositionsWithResponse performs a GET /private/get_positions (the `PrivateGetPositions` operationId) request.
@@ -50991,12 +50903,12 @@ func (c *ClientWithResponses) PrivateGetPositionWithResponse(ctx context.Context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_positions)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetPositionsWithResponse(ctx context.Context, params *PrivateGetPositionsParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetPositionsWithResponse(ctx context.Context, params *PrivateGetPositionsParams, reqEditors ...RequestEditorFn) (*PrivateGetPositionsResponse2, error) {
 	rsp, err := c.PrivateGetPositions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetPositionsResponse3(rsp)
+	return ParsePrivateGetPositionsResponse2(rsp)
 }
 
 // PrivateGetRewardEligibilityWithResponse performs a GET /private/get_reward_eligibility (the `PrivateGetRewardEligibility` operationId) request.
@@ -51010,12 +50922,12 @@ func (c *ClientWithResponses) PrivateGetPositionsWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_reward_eligibility)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetRewardEligibilityWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetRewardEligibilityResponse3, error) {
+func (c *ClientWithResponses) PrivateGetRewardEligibilityWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetRewardEligibilityResponse2, error) {
 	rsp, err := c.PrivateGetRewardEligibility(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetRewardEligibilityResponse3(rsp)
+	return ParsePrivateGetRewardEligibilityResponse2(rsp)
 }
 
 // PrivateGetSettlementHistoryByCurrencyWithResponse performs a GET /private/get_settlement_history_by_currency (the `PrivateGetSettlementHistoryByCurrency` operationId) request.
@@ -51075,12 +50987,12 @@ func (c *ClientWithResponses) PrivateGetSettlementHistoryByInstrumentWithRespons
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_subaccounts)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetSubaccountsWithResponse(ctx context.Context, params *PrivateGetSubaccountsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetSubaccountsWithResponse(ctx context.Context, params *PrivateGetSubaccountsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsResponse2, error) {
 	rsp, err := c.PrivateGetSubaccounts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetSubaccountsResponse3(rsp)
+	return ParsePrivateGetSubaccountsResponse2(rsp)
 }
 
 // PrivateGetSubaccountsDetailsWithResponse performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
@@ -51096,12 +51008,12 @@ func (c *ClientWithResponses) PrivateGetSubaccountsWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_subaccounts_details)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetSubaccountsDetailsWithResponse(ctx context.Context, params *PrivateGetSubaccountsDetailsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsDetailsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetSubaccountsDetailsWithResponse(ctx context.Context, params *PrivateGetSubaccountsDetailsParams, reqEditors ...RequestEditorFn) (*PrivateGetSubaccountsDetailsResponse2, error) {
 	rsp, err := c.PrivateGetSubaccountsDetails(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetSubaccountsDetailsResponse3(rsp)
+	return ParsePrivateGetSubaccountsDetailsResponse2(rsp)
 }
 
 // PrivateGetTransactionLogWithResponse performs a GET /private/get_transaction_log (the `PrivateGetTransactionLog` operationId) request.
@@ -51135,12 +51047,12 @@ func (c *ClientWithResponses) PrivateGetSubaccountsDetailsWithResponse(ctx conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transaction_log)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetTransactionLogWithResponse(ctx context.Context, params *PrivateGetTransactionLogParams, reqEditors ...RequestEditorFn) (*PrivateGetTransactionLogResponse3, error) {
+func (c *ClientWithResponses) PrivateGetTransactionLogWithResponse(ctx context.Context, params *PrivateGetTransactionLogParams, reqEditors ...RequestEditorFn) (*PrivateGetTransactionLogResponse2, error) {
 	rsp, err := c.PrivateGetTransactionLog(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetTransactionLogResponse3(rsp)
+	return ParsePrivateGetTransactionLogResponse2(rsp)
 }
 
 // PrivateGetTransfersWithResponse performs a GET /private/get_transfers (the `PrivateGetTransfers` operationId) request.
@@ -51154,12 +51066,12 @@ func (c *ClientWithResponses) PrivateGetTransactionLogWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_transfers)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetTransfersWithResponse(ctx context.Context, params *PrivateGetTransfersParams, reqEditors ...RequestEditorFn) (*PrivateGetTransfersResponse3, error) {
+func (c *ClientWithResponses) PrivateGetTransfersWithResponse(ctx context.Context, params *PrivateGetTransfersParams, reqEditors ...RequestEditorFn) (*PrivateGetTransfersResponse2, error) {
 	rsp, err := c.PrivateGetTransfers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetTransfersResponse3(rsp)
+	return ParsePrivateGetTransfersResponse2(rsp)
 }
 
 // PrivateGetTriggerOrderHistoryWithResponse performs a GET /private/get_trigger_order_history (the `PrivateGetTriggerOrderHistory` operationId) request.
@@ -51173,12 +51085,12 @@ func (c *ClientWithResponses) PrivateGetTransfersWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_trigger_order_history)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetTriggerOrderHistoryWithResponse(ctx context.Context, params *PrivateGetTriggerOrderHistoryParams, reqEditors ...RequestEditorFn) (*PrivateGetTriggerOrderHistoryResponse3, error) {
+func (c *ClientWithResponses) PrivateGetTriggerOrderHistoryWithResponse(ctx context.Context, params *PrivateGetTriggerOrderHistoryParams, reqEditors ...RequestEditorFn) (*PrivateGetTriggerOrderHistoryResponse2, error) {
 	rsp, err := c.PrivateGetTriggerOrderHistory(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetTriggerOrderHistoryResponse3(rsp)
+	return ParsePrivateGetTriggerOrderHistoryResponse2(rsp)
 }
 
 // PrivateGetUserLocksWithResponse performs a GET /private/get_user_locks (the `PrivateGetUserLocks` operationId) request.
@@ -51194,12 +51106,12 @@ func (c *ClientWithResponses) PrivateGetTriggerOrderHistoryWithResponse(ctx cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_locks)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetUserLocksWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetUserLocksResponse3, error) {
+func (c *ClientWithResponses) PrivateGetUserLocksWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetUserLocksResponse2, error) {
 	rsp, err := c.PrivateGetUserLocks(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetUserLocksResponse3(rsp)
+	return ParsePrivateGetUserLocksResponse2(rsp)
 }
 
 // PrivateGetUserTradesByCurrencyWithResponse performs a GET /private/get_user_trades_by_currency (the `PrivateGetUserTradesByCurrency` operationId) request.
@@ -51307,12 +51219,12 @@ func (c *ClientWithResponses) PrivateGetUserTradesByInstrumentAndTimeWithRespons
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_user_trades_by_order)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetUserTradesByOrderWithResponse(ctx context.Context, params *PrivateGetUserTradesByOrderParams, reqEditors ...RequestEditorFn) (*PrivateGetUserTradesByOrderResponse3, error) {
+func (c *ClientWithResponses) PrivateGetUserTradesByOrderWithResponse(ctx context.Context, params *PrivateGetUserTradesByOrderParams, reqEditors ...RequestEditorFn) (*PrivateGetUserTradesByOrderResponse2, error) {
 	rsp, err := c.PrivateGetUserTradesByOrder(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetUserTradesByOrderResponse3(rsp)
+	return ParsePrivateGetUserTradesByOrderResponse2(rsp)
 }
 
 // PrivateGetWithdrawalsWithResponse performs a GET /private/get_withdrawals (the `PrivateGetWithdrawals` operationId) request.
@@ -51326,12 +51238,12 @@ func (c *ClientWithResponses) PrivateGetUserTradesByOrderWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_withdrawals)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateGetWithdrawalsWithResponse(ctx context.Context, params *PrivateGetWithdrawalsParams, reqEditors ...RequestEditorFn) (*PrivateGetWithdrawalsResponse3, error) {
+func (c *ClientWithResponses) PrivateGetWithdrawalsWithResponse(ctx context.Context, params *PrivateGetWithdrawalsParams, reqEditors ...RequestEditorFn) (*PrivateGetWithdrawalsResponse2, error) {
 	rsp, err := c.PrivateGetWithdrawals(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateGetWithdrawalsResponse3(rsp)
+	return ParsePrivateGetWithdrawalsResponse2(rsp)
 }
 
 // PrivateInvalidateBlockTradeSignatureWithResponse performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
@@ -51364,12 +51276,12 @@ func (c *ClientWithResponses) PrivateInvalidateBlockTradeSignatureWithResponse(c
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_address_beneficiaries)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateListAddressBeneficiariesWithResponse(ctx context.Context, params *PrivateListAddressBeneficiariesParams, reqEditors ...RequestEditorFn) (*PrivateListAddressBeneficiariesResponse3, error) {
+func (c *ClientWithResponses) PrivateListAddressBeneficiariesWithResponse(ctx context.Context, params *PrivateListAddressBeneficiariesParams, reqEditors ...RequestEditorFn) (*PrivateListAddressBeneficiariesResponse2, error) {
 	rsp, err := c.PrivateListAddressBeneficiaries(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateListAddressBeneficiariesResponse3(rsp)
+	return ParsePrivateListAddressBeneficiariesResponse2(rsp)
 }
 
 // PrivateListApiKeysWithResponse performs a GET /private/list_api_keys (the `PrivateListApiKeys` operationId) request.
@@ -51442,6 +51354,8 @@ func (c *ClientWithResponses) PrivateListCustodyAccountsWithResponse(ctx context
 //
 // This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.
 //
+// **Token invalidation:** With `invalidate_token=true` (default) the current token is invalidated. With `false` it stays valid but remains subject to its scope, session and expiry: a `connection` scope token stays bound to the connection it was issued on and cannot be used on a new connection; use a `session` scope token (or authenticate again) to continue after reconnecting.
+//
 // **Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flogout)
@@ -51474,12 +51388,12 @@ func (c *ClientWithResponses) PrivateLogoutWithResponse(ctx context.Context, par
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fmass_quote)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateMassQuoteWithResponse(ctx context.Context, params *PrivateMassQuoteParams, reqEditors ...RequestEditorFn) (*PrivateMassQuoteResponse3, error) {
+func (c *ClientWithResponses) PrivateMassQuoteWithResponse(ctx context.Context, params *PrivateMassQuoteParams, reqEditors ...RequestEditorFn) (*PrivateMassQuoteResponse2, error) {
 	rsp, err := c.PrivateMassQuote(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateMassQuoteResponse3(rsp)
+	return ParsePrivateMassQuoteResponse2(rsp)
 }
 
 // PrivateMovePositionsWithResponse performs a GET /private/move_positions (the `PrivateMovePositions` operationId) request.
@@ -51526,12 +51440,12 @@ func (c *ClientWithResponses) PrivateMovePositionsWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fpme%2Fsimulate)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivatePmeSimulateWithResponse(ctx context.Context, params *PrivatePmeSimulateParams, reqEditors ...RequestEditorFn) (*PrivatePmeSimulateResponse3, error) {
+func (c *ClientWithResponses) PrivatePmeSimulateWithResponse(ctx context.Context, params *PrivatePmeSimulateParams, reqEditors ...RequestEditorFn) (*PrivatePmeSimulateResponse2, error) {
 	rsp, err := c.PrivatePmeSimulate(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivatePmeSimulateResponse3(rsp)
+	return ParsePrivatePmeSimulateResponse2(rsp)
 }
 
 // PrivateRejectBlockTradeWithResponse performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
@@ -51593,12 +51507,12 @@ func (c *ClientWithResponses) PrivateRemoveApiKeyWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fremove_from_address_book)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateRemoveFromAddressBookWithResponse(ctx context.Context, params *PrivateRemoveFromAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateRemoveFromAddressBookResponse3, error) {
+func (c *ClientWithResponses) PrivateRemoveFromAddressBookWithResponse(ctx context.Context, params *PrivateRemoveFromAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateRemoveFromAddressBookResponse2, error) {
 	rsp, err := c.PrivateRemoveFromAddressBook(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateRemoveFromAddressBookResponse3(rsp)
+	return ParsePrivateRemoveFromAddressBookResponse2(rsp)
 }
 
 // PrivateRemoveSubaccountWithResponse performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
@@ -51679,12 +51593,12 @@ func (c *ClientWithResponses) PrivateResetMmpWithResponse(ctx context.Context, p
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsave_address_beneficiary)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSaveAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateSaveAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateSaveAddressBeneficiaryResponse3, error) {
+func (c *ClientWithResponses) PrivateSaveAddressBeneficiaryWithResponse(ctx context.Context, params *PrivateSaveAddressBeneficiaryParams, reqEditors ...RequestEditorFn) (*PrivateSaveAddressBeneficiaryResponse2, error) {
 	rsp, err := c.PrivateSaveAddressBeneficiary(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSaveAddressBeneficiaryResponse3(rsp)
+	return ParsePrivateSaveAddressBeneficiaryResponse2(rsp)
 }
 
 // PrivateSellWithResponse performs a GET /private/sell (the `PrivateSell` operationId) request.
@@ -51727,12 +51641,12 @@ func (c *ClientWithResponses) PrivateSellWithResponse(ctx context.Context, param
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_address_requires_security_key)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSetAddressRequiresSecurityKeyWithResponse(ctx context.Context, params *PrivateSetAddressRequiresSecurityKeyParams, reqEditors ...RequestEditorFn) (*PrivateSetAddressRequiresSecurityKeyResponse3, error) {
+func (c *ClientWithResponses) PrivateSetAddressRequiresSecurityKeyWithResponse(ctx context.Context, params *PrivateSetAddressRequiresSecurityKeyParams, reqEditors ...RequestEditorFn) (*PrivateSetAddressRequiresSecurityKeyResponse2, error) {
 	rsp, err := c.PrivateSetAddressRequiresSecurityKey(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSetAddressRequiresSecurityKeyResponse3(rsp)
+	return ParsePrivateSetAddressRequiresSecurityKeyResponse2(rsp)
 }
 
 // PrivateSetAnnouncementAsReadWithResponse performs a GET /private/set_announcement_as_read (the `PrivateSetAnnouncementAsRead` operationId) request.
@@ -51782,12 +51696,12 @@ func (c *ClientWithResponses) PrivateSetClearanceOriginatorWithResponse(ctx cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_coinbase_subaccount_withdrawals_allowed)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse(ctx context.Context, params *PrivateSetCoinbaseSubaccountWithdrawalsAllowedParams, reqEditors ...RequestEditorFn) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3, error) {
+func (c *ClientWithResponses) PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse(ctx context.Context, params *PrivateSetCoinbaseSubaccountWithdrawalsAllowedParams, reqEditors ...RequestEditorFn) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2, error) {
 	rsp, err := c.PrivateSetCoinbaseSubaccountWithdrawalsAllowed(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3(rsp)
+	return ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2(rsp)
 }
 
 // PrivateSetDisabledTradingProductsWithResponse performs a GET /private/set_disabled_trading_products (the `PrivateSetDisabledTradingProducts` operationId) request.
@@ -51874,12 +51788,12 @@ func (c *ClientWithResponses) PrivateSetEmailLanguageWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_member)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSetMemberWithResponse(ctx context.Context, params *PrivateSetMemberParams, reqEditors ...RequestEditorFn) (*PrivateSetMemberResponse3, error) {
+func (c *ClientWithResponses) PrivateSetMemberWithResponse(ctx context.Context, params *PrivateSetMemberParams, reqEditors ...RequestEditorFn) (*PrivateSetMemberResponse2, error) {
 	rsp, err := c.PrivateSetMember(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSetMemberResponse3(rsp)
+	return ParsePrivateSetMemberResponse2(rsp)
 }
 
 // PrivateSetMmpConfigWithResponse performs a GET /private/set_mmp_config (the `PrivateSetMmpConfig` operationId) request.
@@ -51905,12 +51819,12 @@ func (c *ClientWithResponses) PrivateSetMemberWithResponse(ctx context.Context, 
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fset_mmp_config)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSetMmpConfigWithResponse(ctx context.Context, params *PrivateSetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateSetMmpConfigResponse3, error) {
+func (c *ClientWithResponses) PrivateSetMmpConfigWithResponse(ctx context.Context, params *PrivateSetMmpConfigParams, reqEditors ...RequestEditorFn) (*PrivateSetMmpConfigResponse2, error) {
 	rsp, err := c.PrivateSetMmpConfig(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSetMmpConfigResponse3(rsp)
+	return ParsePrivateSetMmpConfigResponse2(rsp)
 }
 
 // PrivateSetSelfTradingConfigWithResponse performs a GET /private/set_self_trading_config (the `PrivateSetSelfTradingConfig` operationId) request.
@@ -51945,12 +51859,12 @@ func (c *ClientWithResponses) PrivateSetSelfTradingConfigWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_block_trade)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSimulateBlockTradeWithResponse(ctx context.Context, params *PrivateSimulateBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateSimulateBlockTradeResponse3, error) {
+func (c *ClientWithResponses) PrivateSimulateBlockTradeWithResponse(ctx context.Context, params *PrivateSimulateBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateSimulateBlockTradeResponse2, error) {
 	rsp, err := c.PrivateSimulateBlockTrade(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSimulateBlockTradeResponse3(rsp)
+	return ParsePrivateSimulateBlockTradeResponse2(rsp)
 }
 
 // PrivateSimulatePortfolioWithResponse performs a GET /private/simulate_portfolio (the `PrivateSimulatePortfolio` operationId) request.
@@ -51968,12 +51882,12 @@ func (c *ClientWithResponses) PrivateSimulateBlockTradeWithResponse(ctx context.
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsimulate_portfolio)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSimulatePortfolioWithResponse(ctx context.Context, params *PrivateSimulatePortfolioParams, reqEditors ...RequestEditorFn) (*PrivateSimulatePortfolioResponse3, error) {
+func (c *ClientWithResponses) PrivateSimulatePortfolioWithResponse(ctx context.Context, params *PrivateSimulatePortfolioParams, reqEditors ...RequestEditorFn) (*PrivateSimulatePortfolioResponse2, error) {
 	rsp, err := c.PrivateSimulatePortfolio(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSimulatePortfolioResponse3(rsp)
+	return ParsePrivateSimulatePortfolioResponse2(rsp)
 }
 
 // PrivateSubmitTransferBetweenSubaccountsWithResponse performs a GET /private/submit_transfer_between_subaccounts (the `PrivateSubmitTransferBetweenSubaccounts` operationId) request.
@@ -52048,12 +51962,12 @@ func (c *ClientWithResponses) PrivateSubmitTransferToUserWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fsubscribe)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateSubscribeWithResponse(ctx context.Context, params *PrivateSubscribeParams, reqEditors ...RequestEditorFn) (*PrivateSubscribeResponse3, error) {
+func (c *ClientWithResponses) PrivateSubscribeWithResponse(ctx context.Context, params *PrivateSubscribeParams, reqEditors ...RequestEditorFn) (*PrivateSubscribeResponse2, error) {
 	rsp, err := c.PrivateSubscribe(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateSubscribeResponse3(rsp)
+	return ParsePrivateSubscribeResponse2(rsp)
 }
 
 // PrivateToggleNotificationsFromSubaccountWithResponse performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
@@ -52157,12 +52071,12 @@ func (c *ClientWithResponses) PrivateUnsubscribeAllWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fupdate_in_address_book)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateUpdateInAddressBookWithResponse(ctx context.Context, params *PrivateUpdateInAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateUpdateInAddressBookResponse3, error) {
+func (c *ClientWithResponses) PrivateUpdateInAddressBookWithResponse(ctx context.Context, params *PrivateUpdateInAddressBookParams, reqEditors ...RequestEditorFn) (*PrivateUpdateInAddressBookResponse2, error) {
 	rsp, err := c.PrivateUpdateInAddressBook(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateUpdateInAddressBookResponse3(rsp)
+	return ParsePrivateUpdateInAddressBookResponse2(rsp)
 }
 
 // PrivateVerifyBlockTradeWithResponse performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
@@ -52178,12 +52092,12 @@ func (c *ClientWithResponses) PrivateUpdateInAddressBookWithResponse(ctx context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fverify_block_trade)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateVerifyBlockTradeWithResponse(ctx context.Context, params *PrivateVerifyBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateVerifyBlockTradeResponse3, error) {
+func (c *ClientWithResponses) PrivateVerifyBlockTradeWithResponse(ctx context.Context, params *PrivateVerifyBlockTradeParams, reqEditors ...RequestEditorFn) (*PrivateVerifyBlockTradeResponse2, error) {
 	rsp, err := c.PrivateVerifyBlockTrade(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateVerifyBlockTradeResponse3(rsp)
+	return ParsePrivateVerifyBlockTradeResponse2(rsp)
 }
 
 // PrivateWithdrawWithResponse performs a GET /private/withdraw (the `PrivateWithdraw` operationId) request.
@@ -52215,12 +52129,12 @@ func (c *ClientWithResponses) PrivateVerifyBlockTradeWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fwithdraw)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PrivateWithdrawWithResponse(ctx context.Context, params *PrivateWithdrawParams, reqEditors ...RequestEditorFn) (*PrivateWithdrawResponse3, error) {
+func (c *ClientWithResponses) PrivateWithdrawWithResponse(ctx context.Context, params *PrivateWithdrawParams, reqEditors ...RequestEditorFn) (*PrivateWithdrawResponse2, error) {
 	rsp, err := c.PrivateWithdraw(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePrivateWithdrawResponse3(rsp)
+	return ParsePrivateWithdrawResponse2(rsp)
 }
 
 // PublicAuthWithResponse performs a GET /public/auth (the `PublicAuth` operationId) request.
@@ -52231,34 +52145,54 @@ func (c *ClientWithResponses) PrivateWithdrawWithResponse(ctx context.Context, p
 //
 // **Authentication Methods:**
 //
-// Three methods of authentication are supported:
+// Three methods of authentication are supported (selected with `grant_type`):
 //
-// - “client_credentials“ - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
+// - `client_credentials` - Using the client id and client secret that can be found on the API page on the website. This is the simplest method, suitable for server-to-server applications and quick setup.
 //
-// - “client_signature“ - Enhanced security method that uses a cryptographic signature instead of sending the client secret directly. You generate an HMAC-SHA256 signature of a string containing a timestamp, a random nonce, and optional data, using your Client Secret as the key. This method requires “ `client_id` “, “ `timestamp` “ (current time in milliseconds), “ `nonce` “, “ `signature` “, and optionally a “ `data` “ field. Deribit verifies the signature instead of requiring the raw secret. Best for enhanced security, asymmetric key pairs, and avoiding secret transmission. See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
+// - `client_signature` - Enhanced security method using a cryptographic signature instead of sending the client secret directly. The signature is calculated over `<timestamp>\n<nonce>\n<data>` (the three values joined with line-feed characters, `timestamp` exactly as sent). Keys with a shared secret use an HMAC-SHA256 signature encoded as hexadecimal; asymmetric (RSA / Ed25519) keys use a digital signature over the same string encoded as URL-safe base64 without padding. This method requires `client_id`, `timestamp` and `signature`; `nonce` and `data` are optional (`nonce` is strongly recommended for replay protection). See the [Client Signature (WebSocket) guide](https://docs.deribit.com/articles/authentication#client-signature-websocket) for detailed signature calculation instructions.
 //
-// - “refresh_token“ - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+// - `refresh_token` - Using a refresh token that was received from an earlier invocation. This allows you to obtain a new access token without re-supplying your Client ID and Client Secret. Best for long-lived sessions, token renewal, and avoiding re-authentication.
+//
+// **Refresh token behavior:**
+//
+// - Every successful refresh issues a **new** access token **and** a new refresh token, and invalidates the previously issued token pair. Always store the newest `refresh_token`; reusing an older one fails with `-32602` (`invalid token`), which also affects concurrent refreshes with the same token.
+// - The `scope` parameter is ignored for this grant type: the new tokens keep the scope, session and lifetime of the original token.
+// - A token with `connection` scope is bound to the connection it was issued on and cannot be refreshed or used from another connection.
+//
+// **Scope behavior (`client_credentials` and `client_signature`):**
+//
+// - Without a `session:` or `connection` scope item, a WebSocket request gets a `connection` scope token. An HTTP (REST) request gets a `session` scope token with a generated `rest-...` session name, unless `connection` was requested explicitly.
+// - `connection` and `session:name` cannot be combined (`-32602`).
+// - Requested permission scopes (`trade`, `wallet`, `account`, `block_trade`, `block_rfq`) never exceed the permissions of the API key: higher levels are silently reduced to the key's level, and permission scopes that are not requested inherit the key's permissions. This is not reported as an error.
 //
 // **Response:**
 //
-// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens.
+// The response will contain an access token, expiration period (number of seconds that the token is valid) and a refresh token that can be used to get a new set of tokens. Over WebSocket, a successful call also authenticates the current connection, so later private requests on it need no `access_token`.
+//
+// **Errors** (JSON-RPC `error.code`):
+//
+// - `13004` `invalid_credentials` - unknown `client_id`, wrong `client_secret`, invalid `signature`, or `client_id` longer than 16 bytes.
+// - `13009` `unauthorized` - `timestamp` outside the allowed window, `nonce` longer than 128 bytes or already used, connecting IP not in the key's IP whitelist (`reason: bad_ip`).
+// - `-32602` `Invalid params` - missing required parameter for the chosen `grant_type`, unknown `grant_type`, invalid `scope`, or an invalid / expired / already-replaced `refresh_token` (including `session_not_found`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fauth)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicAuthWithResponse(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*PublicAuthResponse3, error) {
+func (c *ClientWithResponses) PublicAuthWithResponse(ctx context.Context, params *PublicAuthParams, reqEditors ...RequestEditorFn) (*PublicAuthResponse2, error) {
 	rsp, err := c.PublicAuth(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicAuthResponse3(rsp)
+	return ParsePublicAuthResponse2(rsp)
 }
 
 // PublicDisableHeartbeatWithResponse performs a GET /public/disable_heartbeat (the `PublicDisableHeartbeat` operationId) request.
 //
 // Stop sending heartbeat messages. This method takes no parameters.
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// It also stops the server-side monitoring of client activity configured by [public/set_heartbeat](https://docs.deribit.com/api-reference/session-management/public-set_heartbeat): after this call the server neither sends `test_request` messages nor closes the connection with code 4000. The regular WebSocket idle timeout (10 minutes without incoming data) still applies.
+//
+// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fdisable_heartbeat)
 //
@@ -52274,6 +52208,15 @@ func (c *ClientWithResponses) PublicDisableHeartbeatWithResponse(ctx context.Con
 // PublicExchangeTokenWithResponse performs a GET /public/exchange_token (the `PublicExchangeToken` operationId) request.
 //
 // Generates a token for a new subject id. This method can be used to switch between subaccounts.
+//
+// **Rules:**
+//
+// - `subject_id` must differ from the subject of the supplied refresh token (otherwise `-32602`) and must identify an active user (otherwise `-32602`).
+// - Regular clients can only switch within their own account family (the main account and its subaccounts). A token issued directly for a subaccount cannot switch to the main account or to sibling subaccounts (`-32602` on `subject_id`). Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Without `scope`, the new token inherits the scope of the supplied refresh token. A supplied `scope` **replaces** it (it is not merged), and cannot exceed the scope of the refresh token (`13403` `scope_exceeded`). If it contains neither `session:` nor `connection`, a session with a generated name is created.
+// - The new access token's lifetime is counted from the issue time of the supplied refresh token.
+// - Over WebSocket, the returned access token is also installed on the current connection, so subsequent private requests act as the new subject.
+// - An invalid, expired or already-replaced refresh token (or one bound to another connection) returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 //
 // **📖 Related Articles:**
 // - [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
@@ -52293,6 +52236,14 @@ func (c *ClientWithResponses) PublicExchangeTokenWithResponse(ctx context.Contex
 // PublicForkTokenWithResponse performs a GET /public/fork_token (the `PublicForkToken` operationId) request.
 //
 // Generates a token for a new named session. This method can be used only with session scoped tokens.
+//
+// **Rules:**
+//
+// - The refresh token must have `session` scope; a `connection` scope refresh token is rejected with `-32602` on `refresh_token`.
+// - `session_name` longer than 64 bytes is truncated (not rejected). The truncated name must differ from the current session name, otherwise the call fails with `-32602` on `session_name`.
+// - The forked session keeps the scope of the original token with only the session name replaced, and receives a fresh access token and refresh token.
+// - Unlike `public/auth` and `public/exchange_token`, the forked access token is **not** installed on the current WebSocket connection: the connection keeps its current authentication until you authenticate it with the new token.
+// - An invalid, expired or already-replaced refresh token returns `-32602` on `refresh_token`; `session_not_found` means the session of the token no longer exists.
 //
 // **📖 More Details:** [Fork and Exchange Tokens](https://docs.deribit.com/articles/authentication#fork-and-exchange-tokens)
 //
@@ -52316,12 +52267,12 @@ func (c *ClientWithResponses) PublicForkTokenWithResponse(ctx context.Context, p
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_announcements)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetAnnouncementsWithResponse(ctx context.Context, params *PublicGetAnnouncementsParams, reqEditors ...RequestEditorFn) (*PublicGetAnnouncementsResponse3, error) {
+func (c *ClientWithResponses) PublicGetAnnouncementsWithResponse(ctx context.Context, params *PublicGetAnnouncementsParams, reqEditors ...RequestEditorFn) (*PublicGetAnnouncementsResponse2, error) {
 	rsp, err := c.PublicGetAnnouncements(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetAnnouncementsResponse3(rsp)
+	return ParsePublicGetAnnouncementsResponse2(rsp)
 }
 
 // PublicGetAprHistoryWithResponse performs a GET /public/get_apr_history (the `PublicGetAprHistory` operationId) request.
@@ -52335,12 +52286,12 @@ func (c *ClientWithResponses) PublicGetAnnouncementsWithResponse(ctx context.Con
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_apr_history)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetAprHistoryWithResponse(ctx context.Context, params *PublicGetAprHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetAprHistoryResponse3, error) {
+func (c *ClientWithResponses) PublicGetAprHistoryWithResponse(ctx context.Context, params *PublicGetAprHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetAprHistoryResponse2, error) {
 	rsp, err := c.PublicGetAprHistory(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetAprHistoryResponse3(rsp)
+	return ParsePublicGetAprHistoryResponse2(rsp)
 }
 
 // PublicGetBasketIndexCompositionWithResponse performs a GET /public/get_basket_index_composition (the `PublicGetBasketIndexComposition` operationId) request.
@@ -52352,12 +52303,12 @@ func (c *ClientWithResponses) PublicGetAprHistoryWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_basket_index_composition)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetBasketIndexCompositionWithResponse(ctx context.Context, params *PublicGetBasketIndexCompositionParams, reqEditors ...RequestEditorFn) (*PublicGetBasketIndexCompositionResponse3, error) {
+func (c *ClientWithResponses) PublicGetBasketIndexCompositionWithResponse(ctx context.Context, params *PublicGetBasketIndexCompositionParams, reqEditors ...RequestEditorFn) (*PublicGetBasketIndexCompositionResponse2, error) {
 	rsp, err := c.PublicGetBasketIndexComposition(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetBasketIndexCompositionResponse3(rsp)
+	return ParsePublicGetBasketIndexCompositionResponse2(rsp)
 }
 
 // PublicGetBlockRfqTradesWithResponse performs a GET /public/get_block_rfq_trades (the `PublicGetBlockRfqTrades` operationId) request.
@@ -52371,12 +52322,12 @@ func (c *ClientWithResponses) PublicGetBasketIndexCompositionWithResponse(ctx co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_block_rfq_trades)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetBlockRfqTradesWithResponse(ctx context.Context, params *PublicGetBlockRfqTradesParams, reqEditors ...RequestEditorFn) (*PublicGetBlockRfqTradesResponse3, error) {
+func (c *ClientWithResponses) PublicGetBlockRfqTradesWithResponse(ctx context.Context, params *PublicGetBlockRfqTradesParams, reqEditors ...RequestEditorFn) (*PublicGetBlockRfqTradesResponse2, error) {
 	rsp, err := c.PublicGetBlockRfqTrades(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetBlockRfqTradesResponse3(rsp)
+	return ParsePublicGetBlockRfqTradesResponse2(rsp)
 }
 
 // PublicGetBookSummaryByCurrencyWithResponse performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
@@ -52432,12 +52383,12 @@ func (c *ClientWithResponses) PublicGetBookSummaryByInstrumentWithResponse(ctx c
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_details)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetComboDetailsWithResponse(ctx context.Context, params *PublicGetComboDetailsParams, reqEditors ...RequestEditorFn) (*PublicGetComboDetailsResponse3, error) {
+func (c *ClientWithResponses) PublicGetComboDetailsWithResponse(ctx context.Context, params *PublicGetComboDetailsParams, reqEditors ...RequestEditorFn) (*PublicGetComboDetailsResponse2, error) {
 	rsp, err := c.PublicGetComboDetails(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetComboDetailsResponse3(rsp)
+	return ParsePublicGetComboDetailsResponse2(rsp)
 }
 
 // PublicGetComboIdsWithResponse performs a GET /public/get_combo_ids (the `PublicGetComboIds` operationId) request.
@@ -52453,12 +52404,12 @@ func (c *ClientWithResponses) PublicGetComboDetailsWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combo_ids)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetComboIdsWithResponse(ctx context.Context, params *PublicGetComboIdsParams, reqEditors ...RequestEditorFn) (*PublicGetComboIdsResponse3, error) {
+func (c *ClientWithResponses) PublicGetComboIdsWithResponse(ctx context.Context, params *PublicGetComboIdsParams, reqEditors ...RequestEditorFn) (*PublicGetComboIdsResponse2, error) {
 	rsp, err := c.PublicGetComboIds(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetComboIdsResponse3(rsp)
+	return ParsePublicGetComboIdsResponse2(rsp)
 }
 
 // PublicGetCombosWithResponse performs a GET /public/get_combos (the `PublicGetCombos` operationId) request.
@@ -52476,12 +52427,12 @@ func (c *ClientWithResponses) PublicGetComboIdsWithResponse(ctx context.Context,
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_combos)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetCombosWithResponse(ctx context.Context, params *PublicGetCombosParams, reqEditors ...RequestEditorFn) (*PublicGetCombosResponse3, error) {
+func (c *ClientWithResponses) PublicGetCombosWithResponse(ctx context.Context, params *PublicGetCombosParams, reqEditors ...RequestEditorFn) (*PublicGetCombosResponse2, error) {
 	rsp, err := c.PublicGetCombos(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetCombosResponse3(rsp)
+	return ParsePublicGetCombosResponse2(rsp)
 }
 
 // PublicGetContractSizeWithResponse performs a GET /public/get_contract_size (the `PublicGetContractSize` operationId) request.
@@ -52497,12 +52448,12 @@ func (c *ClientWithResponses) PublicGetCombosWithResponse(ctx context.Context, p
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_contract_size)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetContractSizeWithResponse(ctx context.Context, params *PublicGetContractSizeParams, reqEditors ...RequestEditorFn) (*PublicGetContractSizeResponse3, error) {
+func (c *ClientWithResponses) PublicGetContractSizeWithResponse(ctx context.Context, params *PublicGetContractSizeParams, reqEditors ...RequestEditorFn) (*PublicGetContractSizeResponse2, error) {
 	rsp, err := c.PublicGetContractSize(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetContractSizeResponse3(rsp)
+	return ParsePublicGetContractSizeResponse2(rsp)
 }
 
 // PublicGetCurrenciesWithResponse performs a GET /public/get_currencies (the `PublicGetCurrencies` operationId) request.
@@ -52516,31 +52467,31 @@ func (c *ClientWithResponses) PublicGetContractSizeWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_currencies)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetCurrenciesResponse3, error) {
+func (c *ClientWithResponses) PublicGetCurrenciesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetCurrenciesResponse2, error) {
 	rsp, err := c.PublicGetCurrencies(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetCurrenciesResponse3(rsp)
+	return ParsePublicGetCurrenciesResponse2(rsp)
 }
 
 // PublicGetDeliveryPricesWithResponse performs a GET /public/get_delivery_prices (the `PublicGetDeliveryPrices` operationId) request.
 //
 // Retrieves historical delivery prices for a given index. Delivery prices are the settlement prices used when futures or options contracts expire and are settled.
 //
-// Results can be paginated using the `offset` and `count` parameters. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
+// Results can be paginated using the `offset` and `count` parameters. Optionally, results can be limited to a date range using `start_timestamp` and `end_timestamp` , each is mapped to the UTC calendar date of the delivery and both bounds are inclusive; `records_total` reflects the filtered set. This method is useful for analyzing historical settlement prices and understanding how contracts have been settled over time.
 //
 // **📖 Related Article:** [Options Data Collection Best Practices](https://docs.deribit.com/articles/options-data-collection-best-practices)
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_delivery_prices)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetDeliveryPricesWithResponse(ctx context.Context, params *PublicGetDeliveryPricesParams, reqEditors ...RequestEditorFn) (*PublicGetDeliveryPricesResponse3, error) {
+func (c *ClientWithResponses) PublicGetDeliveryPricesWithResponse(ctx context.Context, params *PublicGetDeliveryPricesParams, reqEditors ...RequestEditorFn) (*PublicGetDeliveryPricesResponse2, error) {
 	rsp, err := c.PublicGetDeliveryPrices(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetDeliveryPricesResponse3(rsp)
+	return ParsePublicGetDeliveryPricesResponse2(rsp)
 }
 
 // PublicGetExpirationsWithResponse performs a GET /public/get_expirations (the `PublicGetExpirations` operationId) request.
@@ -52561,12 +52512,12 @@ func (c *ClientWithResponses) PublicGetDeliveryPricesWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_expirations)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetExpirationsWithResponse(ctx context.Context, params *PublicGetExpirationsParams, reqEditors ...RequestEditorFn) (*PublicGetExpirationsResponse3, error) {
+func (c *ClientWithResponses) PublicGetExpirationsWithResponse(ctx context.Context, params *PublicGetExpirationsParams, reqEditors ...RequestEditorFn) (*PublicGetExpirationsResponse2, error) {
 	rsp, err := c.PublicGetExpirations(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetExpirationsResponse3(rsp)
+	return ParsePublicGetExpirationsResponse2(rsp)
 }
 
 // PublicGetFundingChartDataWithResponse performs a GET /public/get_funding_chart_data (the `PublicGetFundingChartData` operationId) request.
@@ -52578,12 +52529,12 @@ func (c *ClientWithResponses) PublicGetExpirationsWithResponse(ctx context.Conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_chart_data)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetFundingChartDataWithResponse(ctx context.Context, params *PublicGetFundingChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetFundingChartDataResponse3, error) {
+func (c *ClientWithResponses) PublicGetFundingChartDataWithResponse(ctx context.Context, params *PublicGetFundingChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetFundingChartDataResponse2, error) {
 	rsp, err := c.PublicGetFundingChartData(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetFundingChartDataResponse3(rsp)
+	return ParsePublicGetFundingChartDataResponse2(rsp)
 }
 
 // PublicGetFundingRateHistoryWithResponse performs a GET /public/get_funding_rate_history (the `PublicGetFundingRateHistory` operationId) request.
@@ -52595,12 +52546,12 @@ func (c *ClientWithResponses) PublicGetFundingChartDataWithResponse(ctx context.
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_history)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetFundingRateHistoryWithResponse(ctx context.Context, params *PublicGetFundingRateHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateHistoryResponse3, error) {
+func (c *ClientWithResponses) PublicGetFundingRateHistoryWithResponse(ctx context.Context, params *PublicGetFundingRateHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateHistoryResponse2, error) {
 	rsp, err := c.PublicGetFundingRateHistory(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetFundingRateHistoryResponse3(rsp)
+	return ParsePublicGetFundingRateHistoryResponse2(rsp)
 }
 
 // PublicGetFundingRateValueWithResponse performs a GET /public/get_funding_rate_value (the `PublicGetFundingRateValue` operationId) request.
@@ -52612,12 +52563,12 @@ func (c *ClientWithResponses) PublicGetFundingRateHistoryWithResponse(ctx contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_funding_rate_value)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetFundingRateValueWithResponse(ctx context.Context, params *PublicGetFundingRateValueParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateValueResponse3, error) {
+func (c *ClientWithResponses) PublicGetFundingRateValueWithResponse(ctx context.Context, params *PublicGetFundingRateValueParams, reqEditors ...RequestEditorFn) (*PublicGetFundingRateValueResponse2, error) {
 	rsp, err := c.PublicGetFundingRateValue(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetFundingRateValueResponse3(rsp)
+	return ParsePublicGetFundingRateValueResponse2(rsp)
 }
 
 // PublicGetHistoricalVolatilityWithResponse performs a GET /public/get_historical_volatility (the `PublicGetHistoricalVolatility` operationId) request.
@@ -52631,12 +52582,12 @@ func (c *ClientWithResponses) PublicGetFundingRateValueWithResponse(ctx context.
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_historical_volatility)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetHistoricalVolatilityWithResponse(ctx context.Context, params *PublicGetHistoricalVolatilityParams, reqEditors ...RequestEditorFn) (*PublicGetHistoricalVolatilityResponse3, error) {
+func (c *ClientWithResponses) PublicGetHistoricalVolatilityWithResponse(ctx context.Context, params *PublicGetHistoricalVolatilityParams, reqEditors ...RequestEditorFn) (*PublicGetHistoricalVolatilityResponse2, error) {
 	rsp, err := c.PublicGetHistoricalVolatility(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetHistoricalVolatilityResponse3(rsp)
+	return ParsePublicGetHistoricalVolatilityResponse2(rsp)
 }
 
 // PublicGetIndexChartDataWithResponse performs a GET /public/get_index_chart_data (the `PublicGetIndexChartData` operationId) request.
@@ -52648,12 +52599,12 @@ func (c *ClientWithResponses) PublicGetHistoricalVolatilityWithResponse(ctx cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_chart_data)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetIndexChartDataWithResponse(ctx context.Context, params *PublicGetIndexChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetIndexChartDataResponse3, error) {
+func (c *ClientWithResponses) PublicGetIndexChartDataWithResponse(ctx context.Context, params *PublicGetIndexChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetIndexChartDataResponse2, error) {
 	rsp, err := c.PublicGetIndexChartData(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetIndexChartDataResponse3(rsp)
+	return ParsePublicGetIndexChartDataResponse2(rsp)
 }
 
 // PublicGetIndexPriceWithResponse performs a GET /public/get_index_price (the `PublicGetIndexPrice` operationId) request.
@@ -52665,12 +52616,12 @@ func (c *ClientWithResponses) PublicGetIndexChartDataWithResponse(ctx context.Co
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetIndexPriceWithResponse(ctx context.Context, params *PublicGetIndexPriceParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceResponse3, error) {
+func (c *ClientWithResponses) PublicGetIndexPriceWithResponse(ctx context.Context, params *PublicGetIndexPriceParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceResponse2, error) {
 	rsp, err := c.PublicGetIndexPrice(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetIndexPriceResponse3(rsp)
+	return ParsePublicGetIndexPriceResponse2(rsp)
 }
 
 // PublicGetIndexPriceNamesWithResponse performs a GET /public/get_index_price_names (the `PublicGetIndexPriceNames` operationId) request.
@@ -52682,12 +52633,12 @@ func (c *ClientWithResponses) PublicGetIndexPriceWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_index_price_names)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetIndexPriceNamesWithResponse(ctx context.Context, params *PublicGetIndexPriceNamesParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceNamesResponse3, error) {
+func (c *ClientWithResponses) PublicGetIndexPriceNamesWithResponse(ctx context.Context, params *PublicGetIndexPriceNamesParams, reqEditors ...RequestEditorFn) (*PublicGetIndexPriceNamesResponse2, error) {
 	rsp, err := c.PublicGetIndexPriceNames(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetIndexPriceNamesResponse3(rsp)
+	return ParsePublicGetIndexPriceNamesResponse2(rsp)
 }
 
 // PublicGetInstrumentWithResponse performs a GET /public/get_instrument (the `PublicGetInstrument` operationId) request.
@@ -52705,12 +52656,12 @@ func (c *ClientWithResponses) PublicGetIndexPriceNamesWithResponse(ctx context.C
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instrument)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetInstrumentWithResponse(ctx context.Context, params *PublicGetInstrumentParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentResponse3, error) {
+func (c *ClientWithResponses) PublicGetInstrumentWithResponse(ctx context.Context, params *PublicGetInstrumentParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentResponse2, error) {
 	rsp, err := c.PublicGetInstrument(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetInstrumentResponse3(rsp)
+	return ParsePublicGetInstrumentResponse2(rsp)
 }
 
 // PublicGetInstrumentsWithResponse performs a GET /public/get_instruments (the `PublicGetInstruments` operationId) request.
@@ -52727,7 +52678,7 @@ func (c *ClientWithResponses) PublicGetInstrumentWithResponse(ctx context.Contex
 //
 // Spot matching is different. A spot's settlement field is the pair symbol (for example `BTC_USDC`), not `BTC` or `USDC`. When `expired=false` and `kind` is omitted/`any` for a specific currency, the response unions (1) derivatives with that settlement currency and (2) spots whose base or quote is that currency. `kind=spot` with a specific currency matches spots on either side of the pair. `expired=true` does not apply that extra spot union, so recently delivered spots are not returned under `currency=BTC`.
 //
-// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) margin/perpetual fields that `public/get_instrument` does not return.
+// Results are sorted with perpetuals first, then by expiration. Each instrument includes `underlying_type`. Spot routed to Coinbase Exchange includes `is_cbe_routed` / `is_csr`. Set `extended=true` for extra commission and (on futures) trading bandwidth/perpetual fields that `public/get_instrument` does not return.
 //
 // **📖 Related Articles:**
 // - [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
@@ -52737,12 +52688,12 @@ func (c *ClientWithResponses) PublicGetInstrumentWithResponse(ctx context.Contex
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_instruments)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetInstrumentsWithResponse(ctx context.Context, params *PublicGetInstrumentsParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentsResponse3, error) {
+func (c *ClientWithResponses) PublicGetInstrumentsWithResponse(ctx context.Context, params *PublicGetInstrumentsParams, reqEditors ...RequestEditorFn) (*PublicGetInstrumentsResponse2, error) {
 	rsp, err := c.PublicGetInstruments(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetInstrumentsResponse3(rsp)
+	return ParsePublicGetInstrumentsResponse2(rsp)
 }
 
 // PublicGetLastSettlementsByCurrencyWithResponse performs a GET /public/get_last_settlements_by_currency (the `PublicGetLastSettlementsByCurrency` operationId) request.
@@ -52886,12 +52837,12 @@ func (c *ClientWithResponses) PublicGetLastTradesByInstrumentAndTimeWithResponse
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_mark_price_history)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetMarkPriceHistoryWithResponse(ctx context.Context, params *PublicGetMarkPriceHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetMarkPriceHistoryResponse3, error) {
+func (c *ClientWithResponses) PublicGetMarkPriceHistoryWithResponse(ctx context.Context, params *PublicGetMarkPriceHistoryParams, reqEditors ...RequestEditorFn) (*PublicGetMarkPriceHistoryResponse2, error) {
 	rsp, err := c.PublicGetMarkPriceHistory(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetMarkPriceHistoryResponse3(rsp)
+	return ParsePublicGetMarkPriceHistoryResponse2(rsp)
 }
 
 // PublicGetOrderBookWithResponse performs a GET /public/get_order_book (the `PublicGetOrderBook` operationId) request.
@@ -52903,12 +52854,12 @@ func (c *ClientWithResponses) PublicGetMarkPriceHistoryWithResponse(ctx context.
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_order_book)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetOrderBookWithResponse(ctx context.Context, params *PublicGetOrderBookParams, reqEditors ...RequestEditorFn) (*PublicGetOrderBookResponse3, error) {
+func (c *ClientWithResponses) PublicGetOrderBookWithResponse(ctx context.Context, params *PublicGetOrderBookParams, reqEditors ...RequestEditorFn) (*PublicGetOrderBookResponse2, error) {
 	rsp, err := c.PublicGetOrderBook(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetOrderBookResponse3(rsp)
+	return ParsePublicGetOrderBookResponse2(rsp)
 }
 
 // PublicGetOrderBookByInstrumentIdWithResponse performs a GET /public/get_order_book_by_instrument_id (the `PublicGetOrderBookByInstrumentId` operationId) request.
@@ -52952,12 +52903,12 @@ func (c *ClientWithResponses) PublicGetSupportedIndexNamesWithResponse(ctx conte
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_time)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetTimeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetTimeResponse3, error) {
+func (c *ClientWithResponses) PublicGetTimeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicGetTimeResponse2, error) {
 	rsp, err := c.PublicGetTime(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetTimeResponse3(rsp)
+	return ParsePublicGetTimeResponse2(rsp)
 }
 
 // PublicGetTradeVolumesWithResponse performs a GET /public/get_trade_volumes (the `PublicGetTradeVolumes` operationId) request.
@@ -52996,12 +52947,12 @@ func (c *ClientWithResponses) PublicGetTradeVolumesWithResponse(ctx context.Cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_tradingview_chart_data)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetTradingviewChartDataWithResponse(ctx context.Context, params *PublicGetTradingviewChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetTradingviewChartDataResponse3, error) {
+func (c *ClientWithResponses) PublicGetTradingviewChartDataWithResponse(ctx context.Context, params *PublicGetTradingviewChartDataParams, reqEditors ...RequestEditorFn) (*PublicGetTradingviewChartDataResponse2, error) {
 	rsp, err := c.PublicGetTradingviewChartData(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetTradingviewChartDataResponse3(rsp)
+	return ParsePublicGetTradingviewChartDataResponse2(rsp)
 }
 
 // PublicGetVolatilityIndexDataWithResponse performs a GET /public/get_volatility_index_data (the `PublicGetVolatilityIndexData` operationId) request.
@@ -53015,17 +52966,17 @@ func (c *ClientWithResponses) PublicGetTradingviewChartDataWithResponse(ctx cont
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fget_volatility_index_data)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicGetVolatilityIndexDataWithResponse(ctx context.Context, params *PublicGetVolatilityIndexDataParams, reqEditors ...RequestEditorFn) (*PublicGetVolatilityIndexDataResponse3, error) {
+func (c *ClientWithResponses) PublicGetVolatilityIndexDataWithResponse(ctx context.Context, params *PublicGetVolatilityIndexDataParams, reqEditors ...RequestEditorFn) (*PublicGetVolatilityIndexDataResponse2, error) {
 	rsp, err := c.PublicGetVolatilityIndexData(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicGetVolatilityIndexDataResponse3(rsp)
+	return ParsePublicGetVolatilityIndexDataResponse2(rsp)
 }
 
 // PublicHelloWithResponse performs a GET /public/hello (the `PublicHello` operationId) request.
 //
-// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+// Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself. This method is available only over WebSocket; calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fhello)
 //
@@ -53040,11 +52991,20 @@ func (c *ClientWithResponses) PublicHelloWithResponse(ctx context.Context, param
 
 // PublicSetHeartbeatWithResponse performs a GET /public/set_heartbeat (the `PublicSetHeartbeat` operationId) request.
 //
-// Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+// Signals the WebSocket connection to send and request heartbeats. Heartbeats are used to detect stale or broken connections.
 //
-// When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+// **Heartbeat & Disconnect Lifecycle:**
 //
-// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+// - When no message has been sent to the client for `interval` seconds, the server sends a `heartbeat` notification (`"params": {"type": "heartbeat"}`).
+// - When no message has been received from the client for `interval` seconds (plus 500 ms), the server sends a `heartbeat` notification with `"params": {"type": "test_request"}`. Respond by sending a `/api/v2/public/test` request.
+// - Any JSON text message from the client counts as activity and restarts this timer; WebSocket-level ping/pong frames and the plain-text `ping` / `PING` messages do not.
+// - If the connection stays silent until `(2 * interval) + 500 ms` after the last client message, the server closes the WebSocket with **close code 4000** (`heartbeat close`).
+// - If Cancel on Disconnect is enabled for the connection (connection or account scope), orders created over this connection are cancelled when it is closed.
+// - Calling this method again replaces the previous interval.
+//
+// **Validation:** `interval` must be an integer between 10 and 300 seconds inclusive. Any other value (including fractional numbers) returns JSON-RPC error `-32602`.
+//
+// **WebSocket Only:** This method is designed exclusively for WebSocket connections. Calling it over REST/HTTP returns error `10030` (`must_be_websocket_request`).
 //
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fset_heartbeat)
 //
@@ -53064,12 +53024,12 @@ func (c *ClientWithResponses) PublicSetHeartbeatWithResponse(ctx context.Context
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fstatus)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicStatusWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicStatusResponse3, error) {
+func (c *ClientWithResponses) PublicStatusWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PublicStatusResponse2, error) {
 	rsp, err := c.PublicStatus(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicStatusResponse3(rsp)
+	return ParsePublicStatusResponse2(rsp)
 }
 
 // PublicSubscribeWithResponse performs a GET /public/subscribe (the `PublicSubscribe` operationId) request.
@@ -53099,15 +53059,21 @@ func (c *ClientWithResponses) PublicSubscribeWithResponse(ctx context.Context, p
 //
 // Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
 //
+// With `expected_result` set to `exception` the server returns error `11094` (`internal_server_error`) instead of the version, for example:
+//
+// ```json
+// {"jsonrpc": "2.0", "id": 8213, "error": {"message": "internal_server_error", "code": 11094}}
+// ```
+//
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Ftest)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicTestWithResponse(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*PublicTestResponse3, error) {
+func (c *ClientWithResponses) PublicTestWithResponse(ctx context.Context, params *PublicTestParams, reqEditors ...RequestEditorFn) (*PublicTestResponse2, error) {
 	rsp, err := c.PublicTest(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicTestResponse3(rsp)
+	return ParsePublicTestResponse2(rsp)
 }
 
 // PublicTickerWithResponse performs a GET /public/ticker (the `PublicTicker` operationId) request.
@@ -53125,12 +53091,12 @@ func (c *ClientWithResponses) PublicTestWithResponse(ctx context.Context, params
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fpublic%2Fticker)
 //
 // Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) PublicTickerWithResponse(ctx context.Context, params *PublicTickerParams, reqEditors ...RequestEditorFn) (*PublicTickerResponse3, error) {
+func (c *ClientWithResponses) PublicTickerWithResponse(ctx context.Context, params *PublicTickerParams, reqEditors ...RequestEditorFn) (*PublicTickerResponse2, error) {
 	rsp, err := c.PublicTicker(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePublicTickerResponse3(rsp)
+	return ParsePublicTickerResponse2(rsp)
 }
 
 // PublicUnsubscribeWithResponse performs a GET /public/unsubscribe (the `PublicUnsubscribe` operationId) request.
@@ -53167,22 +53133,22 @@ func (c *ClientWithResponses) PublicUnsubscribeAllWithResponse(ctx context.Conte
 	return ParsePublicUnsubscribeAllResponse(rsp)
 }
 
-// ParsePrivateAcceptBlockRfqResponse3 parses an HTTP response from a PrivateAcceptBlockRfqWithResponse call
-func ParsePrivateAcceptBlockRfqResponse3(rsp *http.Response) (*PrivateAcceptBlockRfqResponse3, error) {
+// ParsePrivateAcceptBlockRfqResponse2 parses an HTTP response from a PrivateAcceptBlockRfqWithResponse call
+func ParsePrivateAcceptBlockRfqResponse2(rsp *http.Response) (*PrivateAcceptBlockRfqResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateAcceptBlockRfqResponse3{
+	response := &PrivateAcceptBlockRfqResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAcceptBlockRfqResponse2
+		var dest PrivateAcceptBlockRfqResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53193,22 +53159,22 @@ func ParsePrivateAcceptBlockRfqResponse3(rsp *http.Response) (*PrivateAcceptBloc
 	return response, nil
 }
 
-// ParsePrivateAddBlockRfqQuoteResponse3 parses an HTTP response from a PrivateAddBlockRfqQuoteWithResponse call
-func ParsePrivateAddBlockRfqQuoteResponse3(rsp *http.Response) (*PrivateAddBlockRfqQuoteResponse3, error) {
+// ParsePrivateAddBlockRfqQuoteResponse2 parses an HTTP response from a PrivateAddBlockRfqQuoteWithResponse call
+func ParsePrivateAddBlockRfqQuoteResponse2(rsp *http.Response) (*PrivateAddBlockRfqQuoteResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateAddBlockRfqQuoteResponse3{
+	response := &PrivateAddBlockRfqQuoteResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAddBlockRfqQuoteResponse2
+		var dest PrivateAddBlockRfqQuoteResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53219,22 +53185,22 @@ func ParsePrivateAddBlockRfqQuoteResponse3(rsp *http.Response) (*PrivateAddBlock
 	return response, nil
 }
 
-// ParsePrivateAddToAddressBookResponse3 parses an HTTP response from a PrivateAddToAddressBookWithResponse call
-func ParsePrivateAddToAddressBookResponse3(rsp *http.Response) (*PrivateAddToAddressBookResponse3, error) {
+// ParsePrivateAddToAddressBookResponse2 parses an HTTP response from a PrivateAddToAddressBookWithResponse call
+func ParsePrivateAddToAddressBookResponse2(rsp *http.Response) (*PrivateAddToAddressBookResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateAddToAddressBookResponse3{
+	response := &PrivateAddToAddressBookResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAddToAddressBookResponse2
+		var dest PrivateAddToAddressBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53260,7 +53226,7 @@ func ParsePrivateApproveBlockTradeResponse(rsp *http.Response) (*PrivateApproveB
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53286,7 +53252,7 @@ func ParsePrivateBuyResponse(rsp *http.Response) (*PrivateBuyResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateBuyAndSellResponse2
+		var dest PrivateBuyAndSellResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53297,22 +53263,22 @@ func ParsePrivateBuyResponse(rsp *http.Response) (*PrivateBuyResponse, error) {
 	return response, nil
 }
 
-// ParsePrivateCancelResponse3 parses an HTTP response from a PrivateCancelWithResponse call
-func ParsePrivateCancelResponse3(rsp *http.Response) (*PrivateCancelResponse3, error) {
+// ParsePrivateCancelResponse2 parses an HTTP response from a PrivateCancelWithResponse call
+func ParsePrivateCancelResponse2(rsp *http.Response) (*PrivateCancelResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelResponse3{
+	response := &PrivateCancelResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelResponse2
+		var dest PrivateCancelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53323,22 +53289,22 @@ func ParsePrivateCancelResponse3(rsp *http.Response) (*PrivateCancelResponse3, e
 	return response, nil
 }
 
-// ParsePrivateCancelAllResponse3 parses an HTTP response from a PrivateCancelAllWithResponse call
-func ParsePrivateCancelAllResponse3(rsp *http.Response) (*PrivateCancelAllResponse3, error) {
+// ParsePrivateCancelAllResponse2 parses an HTTP response from a PrivateCancelAllWithResponse call
+func ParsePrivateCancelAllResponse2(rsp *http.Response) (*PrivateCancelAllResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelAllResponse3{
+	response := &PrivateCancelAllResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53349,22 +53315,22 @@ func ParsePrivateCancelAllResponse3(rsp *http.Response) (*PrivateCancelAllRespon
 	return response, nil
 }
 
-// ParsePrivateCancelAllBlockRfqQuotesResponse3 parses an HTTP response from a PrivateCancelAllBlockRfqQuotesWithResponse call
-func ParsePrivateCancelAllBlockRfqQuotesResponse3(rsp *http.Response) (*PrivateCancelAllBlockRfqQuotesResponse3, error) {
+// ParsePrivateCancelAllBlockRfqQuotesResponse2 parses an HTTP response from a PrivateCancelAllBlockRfqQuotesWithResponse call
+func ParsePrivateCancelAllBlockRfqQuotesResponse2(rsp *http.Response) (*PrivateCancelAllBlockRfqQuotesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelAllBlockRfqQuotesResponse3{
+	response := &PrivateCancelAllBlockRfqQuotesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllBlockRfqQuotesResponse2
+		var dest PrivateCancelAllBlockRfqQuotesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53390,7 +53356,7 @@ func ParsePrivateCancelAllByCurrencyResponse(rsp *http.Response) (*PrivateCancel
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53416,7 +53382,7 @@ func ParsePrivateCancelAllByCurrencyPairResponse(rsp *http.Response) (*PrivateCa
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53442,7 +53408,7 @@ func ParsePrivateCancelAllByInstrumentResponse(rsp *http.Response) (*PrivateCanc
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53468,7 +53434,7 @@ func ParsePrivateCancelAllByKindOrTypeResponse(rsp *http.Response) (*PrivateCanc
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53479,22 +53445,22 @@ func ParsePrivateCancelAllByKindOrTypeResponse(rsp *http.Response) (*PrivateCanc
 	return response, nil
 }
 
-// ParsePrivateCancelBlockRfqResponse3 parses an HTTP response from a PrivateCancelBlockRfqWithResponse call
-func ParsePrivateCancelBlockRfqResponse3(rsp *http.Response) (*PrivateCancelBlockRfqResponse3, error) {
+// ParsePrivateCancelBlockRfqResponse2 parses an HTTP response from a PrivateCancelBlockRfqWithResponse call
+func ParsePrivateCancelBlockRfqResponse2(rsp *http.Response) (*PrivateCancelBlockRfqResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelBlockRfqResponse3{
+	response := &PrivateCancelBlockRfqResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelBlockRfqResponse2
+		var dest PrivateCancelBlockRfqResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53505,22 +53471,22 @@ func ParsePrivateCancelBlockRfqResponse3(rsp *http.Response) (*PrivateCancelBloc
 	return response, nil
 }
 
-// ParsePrivateCancelBlockRfqQuoteResponse3 parses an HTTP response from a PrivateCancelBlockRfqQuoteWithResponse call
-func ParsePrivateCancelBlockRfqQuoteResponse3(rsp *http.Response) (*PrivateCancelBlockRfqQuoteResponse3, error) {
+// ParsePrivateCancelBlockRfqQuoteResponse2 parses an HTTP response from a PrivateCancelBlockRfqQuoteWithResponse call
+func ParsePrivateCancelBlockRfqQuoteResponse2(rsp *http.Response) (*PrivateCancelBlockRfqQuoteResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelBlockRfqQuoteResponse3{
+	response := &PrivateCancelBlockRfqQuoteResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelBlockRfqQuoteResponse2
+		var dest PrivateCancelBlockRfqQuoteResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53531,22 +53497,22 @@ func ParsePrivateCancelBlockRfqQuoteResponse3(rsp *http.Response) (*PrivateCance
 	return response, nil
 }
 
-// ParsePrivateCancelBlockRfqTriggerResponse3 parses an HTTP response from a PrivateCancelBlockRfqTriggerWithResponse call
-func ParsePrivateCancelBlockRfqTriggerResponse3(rsp *http.Response) (*PrivateCancelBlockRfqTriggerResponse3, error) {
+// ParsePrivateCancelBlockRfqTriggerResponse2 parses an HTTP response from a PrivateCancelBlockRfqTriggerWithResponse call
+func ParsePrivateCancelBlockRfqTriggerResponse2(rsp *http.Response) (*PrivateCancelBlockRfqTriggerResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelBlockRfqTriggerResponse3{
+	response := &PrivateCancelBlockRfqTriggerResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelBlockRfqTriggerResponse2
+		var dest PrivateCancelBlockRfqTriggerResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53572,7 +53538,7 @@ func ParsePrivateCancelByLabelResponse(rsp *http.Response) (*PrivateCancelByLabe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelAllResponse2
+		var dest PrivateCancelAllResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53583,22 +53549,22 @@ func ParsePrivateCancelByLabelResponse(rsp *http.Response) (*PrivateCancelByLabe
 	return response, nil
 }
 
-// ParsePrivateCancelQuotesResponse3 parses an HTTP response from a PrivateCancelQuotesWithResponse call
-func ParsePrivateCancelQuotesResponse3(rsp *http.Response) (*PrivateCancelQuotesResponse3, error) {
+// ParsePrivateCancelQuotesResponse2 parses an HTTP response from a PrivateCancelQuotesWithResponse call
+func ParsePrivateCancelQuotesResponse2(rsp *http.Response) (*PrivateCancelQuotesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCancelQuotesResponse3{
+	response := &PrivateCancelQuotesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCancelQuotesResponse2
+		var dest PrivateCancelQuotesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53624,7 +53590,7 @@ func ParsePrivateCancelTransferByIdResponse(rsp *http.Response) (*PrivateCancelT
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubmitTransferResponse2
+		var dest PrivateSubmitTransferResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53650,7 +53616,7 @@ func ParsePrivateCancelWithdrawalResponse(rsp *http.Response) (*PrivateCancelWit
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateWithdrawResponse2
+		var dest PrivateWithdrawResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53676,7 +53642,7 @@ func ParsePrivateChangeApiKeyNameResponse(rsp *http.Response) (*PrivateChangeApi
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53687,22 +53653,22 @@ func ParsePrivateChangeApiKeyNameResponse(rsp *http.Response) (*PrivateChangeApi
 	return response, nil
 }
 
-// ParsePrivateChangeMarginModelResponse3 parses an HTTP response from a PrivateChangeMarginModelWithResponse call
-func ParsePrivateChangeMarginModelResponse3(rsp *http.Response) (*PrivateChangeMarginModelResponse3, error) {
+// ParsePrivateChangeMarginModelResponse2 parses an HTTP response from a PrivateChangeMarginModelWithResponse call
+func ParsePrivateChangeMarginModelResponse2(rsp *http.Response) (*PrivateChangeMarginModelResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateChangeMarginModelResponse3{
+	response := &PrivateChangeMarginModelResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateChangeMarginModelResponse2
+		var dest PrivateChangeMarginModelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53728,7 +53694,7 @@ func ParsePrivateChangeScopeInApiKeyResponse(rsp *http.Response) (*PrivateChange
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53754,7 +53720,7 @@ func ParsePrivateChangeSubaccountNameResponse(rsp *http.Response) (*PrivateChang
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53780,7 +53746,7 @@ func ParsePrivateClosePositionResponse(rsp *http.Response) (*PrivateClosePositio
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateBuyAndSellResponse2
+		var dest PrivateBuyAndSellResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53791,22 +53757,22 @@ func ParsePrivateClosePositionResponse(rsp *http.Response) (*PrivateClosePositio
 	return response, nil
 }
 
-// ParsePrivateCoinbaseEstimateWithdrawalFeeResponse3 parses an HTTP response from a PrivateCoinbaseEstimateWithdrawalFeeWithResponse call
-func ParsePrivateCoinbaseEstimateWithdrawalFeeResponse3(rsp *http.Response) (*PrivateCoinbaseEstimateWithdrawalFeeResponse3, error) {
+// ParsePrivateCoinbaseEstimateWithdrawalFeeResponse2 parses an HTTP response from a PrivateCoinbaseEstimateWithdrawalFeeWithResponse call
+func ParsePrivateCoinbaseEstimateWithdrawalFeeResponse2(rsp *http.Response) (*PrivateCoinbaseEstimateWithdrawalFeeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCoinbaseEstimateWithdrawalFeeResponse3{
+	response := &PrivateCoinbaseEstimateWithdrawalFeeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCoinbaseEstimateWithdrawalFeeResponse2
+		var dest PrivateCoinbaseEstimateWithdrawalFeeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53832,7 +53798,7 @@ func ParsePrivateCreateApiKeyResponse(rsp *http.Response) (*PrivateCreateApiKeyR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53843,22 +53809,22 @@ func ParsePrivateCreateApiKeyResponse(rsp *http.Response) (*PrivateCreateApiKeyR
 	return response, nil
 }
 
-// ParsePrivateCreateBlockRfqResponse3 parses an HTTP response from a PrivateCreateBlockRfqWithResponse call
-func ParsePrivateCreateBlockRfqResponse3(rsp *http.Response) (*PrivateCreateBlockRfqResponse3, error) {
+// ParsePrivateCreateBlockRfqResponse2 parses an HTTP response from a PrivateCreateBlockRfqWithResponse call
+func ParsePrivateCreateBlockRfqResponse2(rsp *http.Response) (*PrivateCreateBlockRfqResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCreateBlockRfqResponse3{
+	response := &PrivateCreateBlockRfqResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCreateBlockRfqResponse2
+		var dest PrivateCreateBlockRfqResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53869,22 +53835,22 @@ func ParsePrivateCreateBlockRfqResponse3(rsp *http.Response) (*PrivateCreateBloc
 	return response, nil
 }
 
-// ParsePrivateCreateComboResponse3 parses an HTTP response from a PrivateCreateComboWithResponse call
-func ParsePrivateCreateComboResponse3(rsp *http.Response) (*PrivateCreateComboResponse3, error) {
+// ParsePrivateCreateComboResponse2 parses an HTTP response from a PrivateCreateComboWithResponse call
+func ParsePrivateCreateComboResponse2(rsp *http.Response) (*PrivateCreateComboResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCreateComboResponse3{
+	response := &PrivateCreateComboResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCreateComboResponse2
+		var dest PrivateCreateComboResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53910,7 +53876,7 @@ func ParsePrivateCreateDepositAddressResponse(rsp *http.Response) (*PrivateCreat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateDepositAddressResponse2
+		var dest PrivateDepositAddressResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53921,22 +53887,22 @@ func ParsePrivateCreateDepositAddressResponse(rsp *http.Response) (*PrivateCreat
 	return response, nil
 }
 
-// ParsePrivateCreateSubaccountResponse3 parses an HTTP response from a PrivateCreateSubaccountWithResponse call
-func ParsePrivateCreateSubaccountResponse3(rsp *http.Response) (*PrivateCreateSubaccountResponse3, error) {
+// ParsePrivateCreateSubaccountResponse2 parses an HTTP response from a PrivateCreateSubaccountWithResponse call
+func ParsePrivateCreateSubaccountResponse2(rsp *http.Response) (*PrivateCreateSubaccountResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateCreateSubaccountResponse3{
+	response := &PrivateCreateSubaccountResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateCreateSubaccountResponse2
+		var dest PrivateCreateSubaccountResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53947,22 +53913,22 @@ func ParsePrivateCreateSubaccountResponse3(rsp *http.Response) (*PrivateCreateSu
 	return response, nil
 }
 
-// ParsePrivateDeleteAddressBeneficiaryResponse3 parses an HTTP response from a PrivateDeleteAddressBeneficiaryWithResponse call
-func ParsePrivateDeleteAddressBeneficiaryResponse3(rsp *http.Response) (*PrivateDeleteAddressBeneficiaryResponse3, error) {
+// ParsePrivateDeleteAddressBeneficiaryResponse2 parses an HTTP response from a PrivateDeleteAddressBeneficiaryWithResponse call
+func ParsePrivateDeleteAddressBeneficiaryResponse2(rsp *http.Response) (*PrivateDeleteAddressBeneficiaryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateDeleteAddressBeneficiaryResponse3{
+	response := &PrivateDeleteAddressBeneficiaryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateDeleteAddressBeneficiaryResponse2
+		var dest PrivateDeleteAddressBeneficiaryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -53973,22 +53939,22 @@ func ParsePrivateDeleteAddressBeneficiaryResponse3(rsp *http.Response) (*Private
 	return response, nil
 }
 
-// ParsePrivateDeleteMemberResponse3 parses an HTTP response from a PrivateDeleteMemberWithResponse call
-func ParsePrivateDeleteMemberResponse3(rsp *http.Response) (*PrivateDeleteMemberResponse3, error) {
+// ParsePrivateDeleteMemberResponse2 parses an HTTP response from a PrivateDeleteMemberWithResponse call
+func ParsePrivateDeleteMemberResponse2(rsp *http.Response) (*PrivateDeleteMemberResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateDeleteMemberResponse3{
+	response := &PrivateDeleteMemberResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateDeleteMemberResponse2
+		var dest PrivateDeleteMemberResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54014,7 +53980,7 @@ func ParsePrivateDisableApiKeyResponse(rsp *http.Response) (*PrivateDisableApiKe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54040,7 +54006,7 @@ func ParsePrivateDisableCancelOnDisconnectResponse(rsp *http.Response) (*Private
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54051,22 +54017,22 @@ func ParsePrivateDisableCancelOnDisconnectResponse(rsp *http.Response) (*Private
 	return response, nil
 }
 
-// ParsePrivateEditResponse3 parses an HTTP response from a PrivateEditWithResponse call
-func ParsePrivateEditResponse3(rsp *http.Response) (*PrivateEditResponse3, error) {
+// ParsePrivateEditResponse2 parses an HTTP response from a PrivateEditWithResponse call
+func ParsePrivateEditResponse2(rsp *http.Response) (*PrivateEditResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateEditResponse3{
+	response := &PrivateEditResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateEditResponse2
+		var dest PrivateEditResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54092,7 +54058,7 @@ func ParsePrivateEditApiKeyResponse(rsp *http.Response) (*PrivateEditApiKeyRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54103,22 +54069,22 @@ func ParsePrivateEditApiKeyResponse(rsp *http.Response) (*PrivateEditApiKeyRespo
 	return response, nil
 }
 
-// ParsePrivateEditBlockRfqQuoteResponse3 parses an HTTP response from a PrivateEditBlockRfqQuoteWithResponse call
-func ParsePrivateEditBlockRfqQuoteResponse3(rsp *http.Response) (*PrivateEditBlockRfqQuoteResponse3, error) {
+// ParsePrivateEditBlockRfqQuoteResponse2 parses an HTTP response from a PrivateEditBlockRfqQuoteWithResponse call
+func ParsePrivateEditBlockRfqQuoteResponse2(rsp *http.Response) (*PrivateEditBlockRfqQuoteResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateEditBlockRfqQuoteResponse3{
+	response := &PrivateEditBlockRfqQuoteResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateEditBlockRfqQuoteResponse2
+		var dest PrivateEditBlockRfqQuoteResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54144,7 +54110,7 @@ func ParsePrivateEditByLabelResponse(rsp *http.Response) (*PrivateEditByLabelRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateEditResponse2
+		var dest PrivateEditResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54170,7 +54136,7 @@ func ParsePrivateEnableAffiliateProgramResponse(rsp *http.Response) (*PrivateEna
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54196,7 +54162,7 @@ func ParsePrivateEnableApiKeyResponse(rsp *http.Response) (*PrivateEnableApiKeyR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54222,7 +54188,7 @@ func ParsePrivateEnableCancelOnDisconnectResponse(rsp *http.Response) (*PrivateE
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54248,7 +54214,7 @@ func ParsePrivateExecuteBlockTradeResponse(rsp *http.Response) (*PrivateExecuteB
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockTradeResponse2
+		var dest PrivateGetBlockTradeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54259,22 +54225,22 @@ func ParsePrivateExecuteBlockTradeResponse(rsp *http.Response) (*PrivateExecuteB
 	return response, nil
 }
 
-// ParsePrivateGetAccessLogResponse3 parses an HTTP response from a PrivateGetAccessLogWithResponse call
-func ParsePrivateGetAccessLogResponse3(rsp *http.Response) (*PrivateGetAccessLogResponse3, error) {
+// ParsePrivateGetAccessLogResponse2 parses an HTTP response from a PrivateGetAccessLogWithResponse call
+func ParsePrivateGetAccessLogResponse2(rsp *http.Response) (*PrivateGetAccessLogResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetAccessLogResponse3{
+	response := &PrivateGetAccessLogResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetAccessLogResponse2
+		var dest PrivateGetAccessLogResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54300,7 +54266,7 @@ func ParsePrivateGetAccountSummariesResponse(rsp *http.Response) (*PrivateGetAcc
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAccountSummariesResponse2
+		var dest PrivateAccountSummariesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54326,7 +54292,7 @@ func ParsePrivateGetAccountSummaryResponse(rsp *http.Response) (*PrivateGetAccou
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAccountResponse2
+		var dest PrivateAccountResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54337,22 +54303,22 @@ func ParsePrivateGetAccountSummaryResponse(rsp *http.Response) (*PrivateGetAccou
 	return response, nil
 }
 
-// ParsePrivateGetAddressBeneficiaryResponse3 parses an HTTP response from a PrivateGetAddressBeneficiaryWithResponse call
-func ParsePrivateGetAddressBeneficiaryResponse3(rsp *http.Response) (*PrivateGetAddressBeneficiaryResponse3, error) {
+// ParsePrivateGetAddressBeneficiaryResponse2 parses an HTTP response from a PrivateGetAddressBeneficiaryWithResponse call
+func ParsePrivateGetAddressBeneficiaryResponse2(rsp *http.Response) (*PrivateGetAddressBeneficiaryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetAddressBeneficiaryResponse3{
+	response := &PrivateGetAddressBeneficiaryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetAddressBeneficiaryResponse2
+		var dest PrivateGetAddressBeneficiaryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54378,7 +54344,7 @@ func ParsePrivateGetAddressBookResponse(rsp *http.Response) (*PrivateGetAddressB
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateAddressBookResponse2
+		var dest PrivateAddressBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54389,22 +54355,22 @@ func ParsePrivateGetAddressBookResponse(rsp *http.Response) (*PrivateGetAddressB
 	return response, nil
 }
 
-// ParsePrivateGetAffiliateProgramInfoResponse3 parses an HTTP response from a PrivateGetAffiliateProgramInfoWithResponse call
-func ParsePrivateGetAffiliateProgramInfoResponse3(rsp *http.Response) (*PrivateGetAffiliateProgramInfoResponse3, error) {
+// ParsePrivateGetAffiliateProgramInfoResponse2 parses an HTTP response from a PrivateGetAffiliateProgramInfoWithResponse call
+func ParsePrivateGetAffiliateProgramInfoResponse2(rsp *http.Response) (*PrivateGetAffiliateProgramInfoResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetAffiliateProgramInfoResponse3{
+	response := &PrivateGetAffiliateProgramInfoResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetAffiliateProgramInfoResponse2
+		var dest PrivateGetAffiliateProgramInfoResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54415,22 +54381,22 @@ func ParsePrivateGetAffiliateProgramInfoResponse3(rsp *http.Response) (*PrivateG
 	return response, nil
 }
 
-// ParsePrivateGetBlockRfqMakersResponse3 parses an HTTP response from a PrivateGetBlockRfqMakersWithResponse call
-func ParsePrivateGetBlockRfqMakersResponse3(rsp *http.Response) (*PrivateGetBlockRfqMakersResponse3, error) {
+// ParsePrivateGetBlockRfqMakersResponse2 parses an HTTP response from a PrivateGetBlockRfqMakersWithResponse call
+func ParsePrivateGetBlockRfqMakersResponse2(rsp *http.Response) (*PrivateGetBlockRfqMakersResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockRfqMakersResponse3{
+	response := &PrivateGetBlockRfqMakersResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockRfqMakersResponse2
+		var dest PrivateGetBlockRfqMakersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54441,22 +54407,22 @@ func ParsePrivateGetBlockRfqMakersResponse3(rsp *http.Response) (*PrivateGetBloc
 	return response, nil
 }
 
-// ParsePrivateGetBlockRfqQuotesResponse3 parses an HTTP response from a PrivateGetBlockRfqQuotesWithResponse call
-func ParsePrivateGetBlockRfqQuotesResponse3(rsp *http.Response) (*PrivateGetBlockRfqQuotesResponse3, error) {
+// ParsePrivateGetBlockRfqQuotesResponse2 parses an HTTP response from a PrivateGetBlockRfqQuotesWithResponse call
+func ParsePrivateGetBlockRfqQuotesResponse2(rsp *http.Response) (*PrivateGetBlockRfqQuotesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockRfqQuotesResponse3{
+	response := &PrivateGetBlockRfqQuotesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockRfqQuotesResponse2
+		var dest PrivateGetBlockRfqQuotesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54467,22 +54433,22 @@ func ParsePrivateGetBlockRfqQuotesResponse3(rsp *http.Response) (*PrivateGetBloc
 	return response, nil
 }
 
-// ParsePrivateGetBlockRfqUserInfoResponse3 parses an HTTP response from a PrivateGetBlockRfqUserInfoWithResponse call
-func ParsePrivateGetBlockRfqUserInfoResponse3(rsp *http.Response) (*PrivateGetBlockRfqUserInfoResponse3, error) {
+// ParsePrivateGetBlockRfqUserInfoResponse2 parses an HTTP response from a PrivateGetBlockRfqUserInfoWithResponse call
+func ParsePrivateGetBlockRfqUserInfoResponse2(rsp *http.Response) (*PrivateGetBlockRfqUserInfoResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockRfqUserInfoResponse3{
+	response := &PrivateGetBlockRfqUserInfoResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockRfqUserInfoResponse2
+		var dest PrivateGetBlockRfqUserInfoResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54493,22 +54459,22 @@ func ParsePrivateGetBlockRfqUserInfoResponse3(rsp *http.Response) (*PrivateGetBl
 	return response, nil
 }
 
-// ParsePrivateGetBlockRfqsResponse3 parses an HTTP response from a PrivateGetBlockRfqsWithResponse call
-func ParsePrivateGetBlockRfqsResponse3(rsp *http.Response) (*PrivateGetBlockRfqsResponse3, error) {
+// ParsePrivateGetBlockRfqsResponse2 parses an HTTP response from a PrivateGetBlockRfqsWithResponse call
+func ParsePrivateGetBlockRfqsResponse2(rsp *http.Response) (*PrivateGetBlockRfqsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockRfqsResponse3{
+	response := &PrivateGetBlockRfqsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockRfqsResponse2
+		var dest PrivateGetBlockRfqsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54519,22 +54485,22 @@ func ParsePrivateGetBlockRfqsResponse3(rsp *http.Response) (*PrivateGetBlockRfqs
 	return response, nil
 }
 
-// ParsePrivateGetBlockTradeResponse3 parses an HTTP response from a PrivateGetBlockTradeWithResponse call
-func ParsePrivateGetBlockTradeResponse3(rsp *http.Response) (*PrivateGetBlockTradeResponse3, error) {
+// ParsePrivateGetBlockTradeResponse2 parses an HTTP response from a PrivateGetBlockTradeWithResponse call
+func ParsePrivateGetBlockTradeResponse2(rsp *http.Response) (*PrivateGetBlockTradeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockTradeResponse3{
+	response := &PrivateGetBlockTradeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockTradeResponse2
+		var dest PrivateGetBlockTradeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54545,22 +54511,22 @@ func ParsePrivateGetBlockTradeResponse3(rsp *http.Response) (*PrivateGetBlockTra
 	return response, nil
 }
 
-// ParsePrivateGetBlockTradeRequestsResponse3 parses an HTTP response from a PrivateGetBlockTradeRequestsWithResponse call
-func ParsePrivateGetBlockTradeRequestsResponse3(rsp *http.Response) (*PrivateGetBlockTradeRequestsResponse3, error) {
+// ParsePrivateGetBlockTradeRequestsResponse2 parses an HTTP response from a PrivateGetBlockTradeRequestsWithResponse call
+func ParsePrivateGetBlockTradeRequestsResponse2(rsp *http.Response) (*PrivateGetBlockTradeRequestsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockTradeRequestsResponse3{
+	response := &PrivateGetBlockTradeRequestsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockTradeRequestsResponse2
+		var dest PrivateGetBlockTradeRequestsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54571,22 +54537,22 @@ func ParsePrivateGetBlockTradeRequestsResponse3(rsp *http.Response) (*PrivateGet
 	return response, nil
 }
 
-// ParsePrivateGetBlockTradesResponse3 parses an HTTP response from a PrivateGetBlockTradesWithResponse call
-func ParsePrivateGetBlockTradesResponse3(rsp *http.Response) (*PrivateGetBlockTradesResponse3, error) {
+// ParsePrivateGetBlockTradesResponse2 parses an HTTP response from a PrivateGetBlockTradesWithResponse call
+func ParsePrivateGetBlockTradesResponse2(rsp *http.Response) (*PrivateGetBlockTradesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBlockTradesResponse3{
+	response := &PrivateGetBlockTradesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBlockTradesResponse2
+		var dest PrivateGetBlockTradesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54597,22 +54563,22 @@ func ParsePrivateGetBlockTradesResponse3(rsp *http.Response) (*PrivateGetBlockTr
 	return response, nil
 }
 
-// ParsePrivateGetBrokerClientsResponse3 parses an HTTP response from a PrivateGetBrokerClientsWithResponse call
-func ParsePrivateGetBrokerClientsResponse3(rsp *http.Response) (*PrivateGetBrokerClientsResponse3, error) {
+// ParsePrivateGetBrokerClientsResponse2 parses an HTTP response from a PrivateGetBrokerClientsWithResponse call
+func ParsePrivateGetBrokerClientsResponse2(rsp *http.Response) (*PrivateGetBrokerClientsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBrokerClientsResponse3{
+	response := &PrivateGetBrokerClientsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBrokerClientsResponse2
+		var dest PrivateGetBrokerClientsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54623,22 +54589,22 @@ func ParsePrivateGetBrokerClientsResponse3(rsp *http.Response) (*PrivateGetBroke
 	return response, nil
 }
 
-// ParsePrivateGetBrokerTradeRequestsResponse3 parses an HTTP response from a PrivateGetBrokerTradeRequestsWithResponse call
-func ParsePrivateGetBrokerTradeRequestsResponse3(rsp *http.Response) (*PrivateGetBrokerTradeRequestsResponse3, error) {
+// ParsePrivateGetBrokerTradeRequestsResponse2 parses an HTTP response from a PrivateGetBrokerTradeRequestsWithResponse call
+func ParsePrivateGetBrokerTradeRequestsResponse2(rsp *http.Response) (*PrivateGetBrokerTradeRequestsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBrokerTradeRequestsResponse3{
+	response := &PrivateGetBrokerTradeRequestsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBrokerTradeRequestsResponse2
+		var dest PrivateGetBrokerTradeRequestsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54649,22 +54615,22 @@ func ParsePrivateGetBrokerTradeRequestsResponse3(rsp *http.Response) (*PrivateGe
 	return response, nil
 }
 
-// ParsePrivateGetBrokerTradesResponse3 parses an HTTP response from a PrivateGetBrokerTradesWithResponse call
-func ParsePrivateGetBrokerTradesResponse3(rsp *http.Response) (*PrivateGetBrokerTradesResponse3, error) {
+// ParsePrivateGetBrokerTradesResponse2 parses an HTTP response from a PrivateGetBrokerTradesWithResponse call
+func ParsePrivateGetBrokerTradesResponse2(rsp *http.Response) (*PrivateGetBrokerTradesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetBrokerTradesResponse3{
+	response := &PrivateGetBrokerTradesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetBrokerTradesResponse2
+		var dest PrivateGetBrokerTradesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54675,22 +54641,22 @@ func ParsePrivateGetBrokerTradesResponse3(rsp *http.Response) (*PrivateGetBroker
 	return response, nil
 }
 
-// ParsePrivateGetCancelOnDisconnectResponse3 parses an HTTP response from a PrivateGetCancelOnDisconnectWithResponse call
-func ParsePrivateGetCancelOnDisconnectResponse3(rsp *http.Response) (*PrivateGetCancelOnDisconnectResponse3, error) {
+// ParsePrivateGetCancelOnDisconnectResponse2 parses an HTTP response from a PrivateGetCancelOnDisconnectWithResponse call
+func ParsePrivateGetCancelOnDisconnectResponse2(rsp *http.Response) (*PrivateGetCancelOnDisconnectResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetCancelOnDisconnectResponse3{
+	response := &PrivateGetCancelOnDisconnectResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetCancelOnDisconnectResponse2
+		var dest PrivateGetCancelOnDisconnectResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54701,22 +54667,22 @@ func ParsePrivateGetCancelOnDisconnectResponse3(rsp *http.Response) (*PrivateGet
 	return response, nil
 }
 
-// ParsePrivateGetCurrenciesResponse3 parses an HTTP response from a PrivateGetCurrenciesWithResponse call
-func ParsePrivateGetCurrenciesResponse3(rsp *http.Response) (*PrivateGetCurrenciesResponse3, error) {
+// ParsePrivateGetCurrenciesResponse2 parses an HTTP response from a PrivateGetCurrenciesWithResponse call
+func ParsePrivateGetCurrenciesResponse2(rsp *http.Response) (*PrivateGetCurrenciesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetCurrenciesResponse3{
+	response := &PrivateGetCurrenciesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetCurrenciesResponse2
+		var dest PrivateGetCurrenciesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54742,7 +54708,7 @@ func ParsePrivateGetCurrentDepositAddressResponse(rsp *http.Response) (*PrivateG
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateDepositAddressResponse2
+		var dest PrivateDepositAddressResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54753,22 +54719,22 @@ func ParsePrivateGetCurrentDepositAddressResponse(rsp *http.Response) (*PrivateG
 	return response, nil
 }
 
-// ParsePrivateGetDepositsResponse3 parses an HTTP response from a PrivateGetDepositsWithResponse call
-func ParsePrivateGetDepositsResponse3(rsp *http.Response) (*PrivateGetDepositsResponse3, error) {
+// ParsePrivateGetDepositsResponse2 parses an HTTP response from a PrivateGetDepositsWithResponse call
+func ParsePrivateGetDepositsResponse2(rsp *http.Response) (*PrivateGetDepositsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetDepositsResponse3{
+	response := &PrivateGetDepositsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetDepositsResponse2
+		var dest PrivateGetDepositsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54779,22 +54745,22 @@ func ParsePrivateGetDepositsResponse3(rsp *http.Response) (*PrivateGetDepositsRe
 	return response, nil
 }
 
-// ParsePrivateGetEmailLanguageResponse3 parses an HTTP response from a PrivateGetEmailLanguageWithResponse call
-func ParsePrivateGetEmailLanguageResponse3(rsp *http.Response) (*PrivateGetEmailLanguageResponse3, error) {
+// ParsePrivateGetEmailLanguageResponse2 parses an HTTP response from a PrivateGetEmailLanguageWithResponse call
+func ParsePrivateGetEmailLanguageResponse2(rsp *http.Response) (*PrivateGetEmailLanguageResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetEmailLanguageResponse3{
+	response := &PrivateGetEmailLanguageResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetEmailLanguageResponse2
+		var dest PrivateGetEmailLanguageResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54805,22 +54771,22 @@ func ParsePrivateGetEmailLanguageResponse3(rsp *http.Response) (*PrivateGetEmail
 	return response, nil
 }
 
-// ParsePrivateGetLegPricesResponse3 parses an HTTP response from a PrivateGetLegPricesWithResponse call
-func ParsePrivateGetLegPricesResponse3(rsp *http.Response) (*PrivateGetLegPricesResponse3, error) {
+// ParsePrivateGetLegPricesResponse2 parses an HTTP response from a PrivateGetLegPricesWithResponse call
+func ParsePrivateGetLegPricesResponse2(rsp *http.Response) (*PrivateGetLegPricesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetLegPricesResponse3{
+	response := &PrivateGetLegPricesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetLegPricesResponse2
+		var dest PrivateGetLegPricesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54831,55 +54797,22 @@ func ParsePrivateGetLegPricesResponse3(rsp *http.Response) (*PrivateGetLegPrices
 	return response, nil
 }
 
-// ParsePrivateGetLspParticipantConfigResponse3 parses an HTTP response from a PrivateGetLspParticipantConfigWithResponse call
-func ParsePrivateGetLspParticipantConfigResponse3(rsp *http.Response) (*PrivateGetLspParticipantConfigResponse3, error) {
+// ParsePrivateGetLspParticipantConfigResponse2 parses an HTTP response from a PrivateGetLspParticipantConfigWithResponse call
+func ParsePrivateGetLspParticipantConfigResponse2(rsp *http.Response) (*PrivateGetLspParticipantConfigResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetLspParticipantConfigResponse3{
+	response := &PrivateGetLspParticipantConfigResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetLspParticipantConfigResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ErrorMessageResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParsePrivateGetLspParticipantsResponse3 parses an HTTP response from a PrivateGetLspParticipantsWithResponse call
-func ParsePrivateGetLspParticipantsResponse3(rsp *http.Response) (*PrivateGetLspParticipantsResponse3, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PrivateGetLspParticipantsResponse3{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetLspParticipantsResponse2
+		var dest PrivateGetLspParticipantConfigResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54897,22 +54830,22 @@ func ParsePrivateGetLspParticipantsResponse3(rsp *http.Response) (*PrivateGetLsp
 	return response, nil
 }
 
-// ParsePrivateGetLspParticipantsUsageResponse3 parses an HTTP response from a PrivateGetLspParticipantsUsageWithResponse call
-func ParsePrivateGetLspParticipantsUsageResponse3(rsp *http.Response) (*PrivateGetLspParticipantsUsageResponse3, error) {
+// ParsePrivateGetLspParticipantsResponse2 parses an HTTP response from a PrivateGetLspParticipantsWithResponse call
+func ParsePrivateGetLspParticipantsResponse2(rsp *http.Response) (*PrivateGetLspParticipantsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetLspParticipantsUsageResponse3{
+	response := &PrivateGetLspParticipantsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetLspParticipantsUsageResponse2
+		var dest PrivateGetLspParticipantsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54930,22 +54863,22 @@ func ParsePrivateGetLspParticipantsUsageResponse3(rsp *http.Response) (*PrivateG
 	return response, nil
 }
 
-// ParsePrivateGetLspUsageResponse3 parses an HTTP response from a PrivateGetLspUsageWithResponse call
-func ParsePrivateGetLspUsageResponse3(rsp *http.Response) (*PrivateGetLspUsageResponse3, error) {
+// ParsePrivateGetLspParticipantsUsageResponse2 parses an HTTP response from a PrivateGetLspParticipantsUsageWithResponse call
+func ParsePrivateGetLspParticipantsUsageResponse2(rsp *http.Response) (*PrivateGetLspParticipantsUsageResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetLspUsageResponse3{
+	response := &PrivateGetLspParticipantsUsageResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetLspUsageResponse2
+		var dest PrivateGetLspParticipantsUsageResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54963,22 +54896,55 @@ func ParsePrivateGetLspUsageResponse3(rsp *http.Response) (*PrivateGetLspUsageRe
 	return response, nil
 }
 
-// ParsePrivateGetMarginsResponse3 parses an HTTP response from a PrivateGetMarginsWithResponse call
-func ParsePrivateGetMarginsResponse3(rsp *http.Response) (*PrivateGetMarginsResponse3, error) {
+// ParsePrivateGetLspUsageResponse2 parses an HTTP response from a PrivateGetLspUsageWithResponse call
+func ParsePrivateGetLspUsageResponse2(rsp *http.Response) (*PrivateGetLspUsageResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetMarginsResponse3{
+	response := &PrivateGetLspUsageResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetMarginsResponse2
+		var dest PrivateGetLspUsageResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorMessageResponse2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePrivateGetMarginsResponse2 parses an HTTP response from a PrivateGetMarginsWithResponse call
+func ParsePrivateGetMarginsResponse2(rsp *http.Response) (*PrivateGetMarginsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PrivateGetMarginsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateGetMarginsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -54989,22 +54955,22 @@ func ParsePrivateGetMarginsResponse3(rsp *http.Response) (*PrivateGetMarginsResp
 	return response, nil
 }
 
-// ParsePrivateGetMembersResponse3 parses an HTTP response from a PrivateGetMembersWithResponse call
-func ParsePrivateGetMembersResponse3(rsp *http.Response) (*PrivateGetMembersResponse3, error) {
+// ParsePrivateGetMembersResponse2 parses an HTTP response from a PrivateGetMembersWithResponse call
+func ParsePrivateGetMembersResponse2(rsp *http.Response) (*PrivateGetMembersResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetMembersResponse3{
+	response := &PrivateGetMembersResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetMembersResponse2
+		var dest PrivateGetMembersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55015,22 +54981,22 @@ func ParsePrivateGetMembersResponse3(rsp *http.Response) (*PrivateGetMembersResp
 	return response, nil
 }
 
-// ParsePrivateGetMmpConfigResponse3 parses an HTTP response from a PrivateGetMmpConfigWithResponse call
-func ParsePrivateGetMmpConfigResponse3(rsp *http.Response) (*PrivateGetMmpConfigResponse3, error) {
+// ParsePrivateGetMmpConfigResponse2 parses an HTTP response from a PrivateGetMmpConfigWithResponse call
+func ParsePrivateGetMmpConfigResponse2(rsp *http.Response) (*PrivateGetMmpConfigResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetMmpConfigResponse3{
+	response := &PrivateGetMmpConfigResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetMmpConfigResponse2
+		var dest PrivateGetMmpConfigResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55041,22 +55007,22 @@ func ParsePrivateGetMmpConfigResponse3(rsp *http.Response) (*PrivateGetMmpConfig
 	return response, nil
 }
 
-// ParsePrivateGetMmpStatusResponse3 parses an HTTP response from a PrivateGetMmpStatusWithResponse call
-func ParsePrivateGetMmpStatusResponse3(rsp *http.Response) (*PrivateGetMmpStatusResponse3, error) {
+// ParsePrivateGetMmpStatusResponse2 parses an HTTP response from a PrivateGetMmpStatusWithResponse call
+func ParsePrivateGetMmpStatusResponse2(rsp *http.Response) (*PrivateGetMmpStatusResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetMmpStatusResponse3{
+	response := &PrivateGetMmpStatusResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetMmpStatusResponse2
+		var dest PrivateGetMmpStatusResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55082,7 +55048,7 @@ func ParsePrivateGetNewAnnouncementsResponse(rsp *http.Response) (*PrivateGetNew
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetAnnouncementsResponse2
+		var dest PublicGetAnnouncementsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55093,22 +55059,22 @@ func ParsePrivateGetNewAnnouncementsResponse(rsp *http.Response) (*PrivateGetNew
 	return response, nil
 }
 
-// ParsePrivateGetOpenOrdersResponse3 parses an HTTP response from a PrivateGetOpenOrdersWithResponse call
-func ParsePrivateGetOpenOrdersResponse3(rsp *http.Response) (*PrivateGetOpenOrdersResponse3, error) {
+// ParsePrivateGetOpenOrdersResponse2 parses an HTTP response from a PrivateGetOpenOrdersWithResponse call
+func ParsePrivateGetOpenOrdersResponse2(rsp *http.Response) (*PrivateGetOpenOrdersResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetOpenOrdersResponse3{
+	response := &PrivateGetOpenOrdersResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOpenOrdersResponse2
+		var dest PrivateGetOpenOrdersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55134,7 +55100,7 @@ func ParsePrivateGetOpenOrdersByCurrencyResponse(rsp *http.Response) (*PrivateGe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOpenOrdersResponse2
+		var dest PrivateGetOpenOrdersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55160,7 +55126,7 @@ func ParsePrivateGetOpenOrdersByInstrumentResponse(rsp *http.Response) (*Private
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOpenOrdersResponse2
+		var dest PrivateGetOpenOrdersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55186,7 +55152,7 @@ func ParsePrivateGetOpenOrdersByLabelResponse(rsp *http.Response) (*PrivateGetOp
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOpenOrdersResponse2
+		var dest PrivateGetOpenOrdersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55212,7 +55178,7 @@ func ParsePrivateGetOrderHistoryByCurrencyResponse(rsp *http.Response) (*Private
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOrderHistoryResponse2
+		var dest PrivateGetOrderHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55238,7 +55204,7 @@ func ParsePrivateGetOrderHistoryByInstrumentResponse(rsp *http.Response) (*Priva
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOrderHistoryResponse2
+		var dest PrivateGetOrderHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55249,22 +55215,22 @@ func ParsePrivateGetOrderHistoryByInstrumentResponse(rsp *http.Response) (*Priva
 	return response, nil
 }
 
-// ParsePrivateGetOrderMarginByIdsResponse3 parses an HTTP response from a PrivateGetOrderMarginByIdsWithResponse call
-func ParsePrivateGetOrderMarginByIdsResponse3(rsp *http.Response) (*PrivateGetOrderMarginByIdsResponse3, error) {
+// ParsePrivateGetOrderMarginByIdsResponse2 parses an HTTP response from a PrivateGetOrderMarginByIdsWithResponse call
+func ParsePrivateGetOrderMarginByIdsResponse2(rsp *http.Response) (*PrivateGetOrderMarginByIdsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetOrderMarginByIdsResponse3{
+	response := &PrivateGetOrderMarginByIdsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOrderMarginByIdsResponse2
+		var dest PrivateGetOrderMarginByIdsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55275,55 +55241,22 @@ func ParsePrivateGetOrderMarginByIdsResponse3(rsp *http.Response) (*PrivateGetOr
 	return response, nil
 }
 
-// ParsePrivateGetOrderStateResponse3 parses an HTTP response from a PrivateGetOrderStateWithResponse call
-func ParsePrivateGetOrderStateResponse3(rsp *http.Response) (*PrivateGetOrderStateResponse3, error) {
+// ParsePrivateGetOrderStateResponse2 parses an HTTP response from a PrivateGetOrderStateWithResponse call
+func ParsePrivateGetOrderStateResponse2(rsp *http.Response) (*PrivateGetOrderStateResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetOrderStateResponse3{
+	response := &PrivateGetOrderStateResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOrderStateResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest ErrorMessageResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParsePrivateGetOrderStateByLabelResponse3 parses an HTTP response from a PrivateGetOrderStateByLabelWithResponse call
-func ParsePrivateGetOrderStateByLabelResponse3(rsp *http.Response) (*PrivateGetOrderStateByLabelResponse3, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PrivateGetOrderStateByLabelResponse3{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetOrderStateByLabelResponse2
+		var dest PrivateGetOrderStateResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55341,22 +55274,22 @@ func ParsePrivateGetOrderStateByLabelResponse3(rsp *http.Response) (*PrivateGetO
 	return response, nil
 }
 
-// ParsePrivateGetPositionResponse3 parses an HTTP response from a PrivateGetPositionWithResponse call
-func ParsePrivateGetPositionResponse3(rsp *http.Response) (*PrivateGetPositionResponse3, error) {
+// ParsePrivateGetOrderStateByLabelResponse2 parses an HTTP response from a PrivateGetOrderStateByLabelWithResponse call
+func ParsePrivateGetOrderStateByLabelResponse2(rsp *http.Response) (*PrivateGetOrderStateByLabelResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetPositionResponse3{
+	response := &PrivateGetOrderStateByLabelResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetPositionResponse2
+		var dest PrivateGetOrderStateByLabelResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55374,22 +55307,22 @@ func ParsePrivateGetPositionResponse3(rsp *http.Response) (*PrivateGetPositionRe
 	return response, nil
 }
 
-// ParsePrivateGetPositionsResponse3 parses an HTTP response from a PrivateGetPositionsWithResponse call
-func ParsePrivateGetPositionsResponse3(rsp *http.Response) (*PrivateGetPositionsResponse3, error) {
+// ParsePrivateGetPositionResponse2 parses an HTTP response from a PrivateGetPositionWithResponse call
+func ParsePrivateGetPositionResponse2(rsp *http.Response) (*PrivateGetPositionResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetPositionsResponse3{
+	response := &PrivateGetPositionResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetPositionsResponse2
+		var dest PrivateGetPositionResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55407,22 +55340,55 @@ func ParsePrivateGetPositionsResponse3(rsp *http.Response) (*PrivateGetPositions
 	return response, nil
 }
 
-// ParsePrivateGetRewardEligibilityResponse3 parses an HTTP response from a PrivateGetRewardEligibilityWithResponse call
-func ParsePrivateGetRewardEligibilityResponse3(rsp *http.Response) (*PrivateGetRewardEligibilityResponse3, error) {
+// ParsePrivateGetPositionsResponse2 parses an HTTP response from a PrivateGetPositionsWithResponse call
+func ParsePrivateGetPositionsResponse2(rsp *http.Response) (*PrivateGetPositionsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetRewardEligibilityResponse3{
+	response := &PrivateGetPositionsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetRewardEligibilityResponse2
+		var dest PrivateGetPositionsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ErrorMessageResponse2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePrivateGetRewardEligibilityResponse2 parses an HTTP response from a PrivateGetRewardEligibilityWithResponse call
+func ParsePrivateGetRewardEligibilityResponse2(rsp *http.Response) (*PrivateGetRewardEligibilityResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PrivateGetRewardEligibilityResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateGetRewardEligibilityResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55448,7 +55414,7 @@ func ParsePrivateGetSettlementHistoryByCurrencyResponse(rsp *http.Response) (*Pr
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSettlementResponse2
+		var dest PrivateSettlementResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55474,7 +55440,7 @@ func ParsePrivateGetSettlementHistoryByInstrumentResponse(rsp *http.Response) (*
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSettlementResponse2
+		var dest PrivateSettlementResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55485,55 +55451,22 @@ func ParsePrivateGetSettlementHistoryByInstrumentResponse(rsp *http.Response) (*
 	return response, nil
 }
 
-// ParsePrivateGetSubaccountsResponse3 parses an HTTP response from a PrivateGetSubaccountsWithResponse call
-func ParsePrivateGetSubaccountsResponse3(rsp *http.Response) (*PrivateGetSubaccountsResponse3, error) {
+// ParsePrivateGetSubaccountsResponse2 parses an HTTP response from a PrivateGetSubaccountsWithResponse call
+func ParsePrivateGetSubaccountsResponse2(rsp *http.Response) (*PrivateGetSubaccountsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetSubaccountsResponse3{
+	response := &PrivateGetSubaccountsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetSubaccountsResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest ErrorMessageResponse2
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParsePrivateGetSubaccountsDetailsResponse3 parses an HTTP response from a PrivateGetSubaccountsDetailsWithResponse call
-func ParsePrivateGetSubaccountsDetailsResponse3(rsp *http.Response) (*PrivateGetSubaccountsDetailsResponse3, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PrivateGetSubaccountsDetailsResponse3{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetSubaccountsDetailsResponse2
+		var dest PrivateGetSubaccountsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55551,22 +55484,55 @@ func ParsePrivateGetSubaccountsDetailsResponse3(rsp *http.Response) (*PrivateGet
 	return response, nil
 }
 
-// ParsePrivateGetTransactionLogResponse3 parses an HTTP response from a PrivateGetTransactionLogWithResponse call
-func ParsePrivateGetTransactionLogResponse3(rsp *http.Response) (*PrivateGetTransactionLogResponse3, error) {
+// ParsePrivateGetSubaccountsDetailsResponse2 parses an HTTP response from a PrivateGetSubaccountsDetailsWithResponse call
+func ParsePrivateGetSubaccountsDetailsResponse2(rsp *http.Response) (*PrivateGetSubaccountsDetailsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetTransactionLogResponse3{
+	response := &PrivateGetSubaccountsDetailsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetTransactionLogResponse2
+		var dest PrivateGetSubaccountsDetailsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest ErrorMessageResponse2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePrivateGetTransactionLogResponse2 parses an HTTP response from a PrivateGetTransactionLogWithResponse call
+func ParsePrivateGetTransactionLogResponse2(rsp *http.Response) (*PrivateGetTransactionLogResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PrivateGetTransactionLogResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateGetTransactionLogResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55577,22 +55543,22 @@ func ParsePrivateGetTransactionLogResponse3(rsp *http.Response) (*PrivateGetTran
 	return response, nil
 }
 
-// ParsePrivateGetTransfersResponse3 parses an HTTP response from a PrivateGetTransfersWithResponse call
-func ParsePrivateGetTransfersResponse3(rsp *http.Response) (*PrivateGetTransfersResponse3, error) {
+// ParsePrivateGetTransfersResponse2 parses an HTTP response from a PrivateGetTransfersWithResponse call
+func ParsePrivateGetTransfersResponse2(rsp *http.Response) (*PrivateGetTransfersResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetTransfersResponse3{
+	response := &PrivateGetTransfersResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetTransfersResponse2
+		var dest PrivateGetTransfersResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55603,22 +55569,22 @@ func ParsePrivateGetTransfersResponse3(rsp *http.Response) (*PrivateGetTransfers
 	return response, nil
 }
 
-// ParsePrivateGetTriggerOrderHistoryResponse3 parses an HTTP response from a PrivateGetTriggerOrderHistoryWithResponse call
-func ParsePrivateGetTriggerOrderHistoryResponse3(rsp *http.Response) (*PrivateGetTriggerOrderHistoryResponse3, error) {
+// ParsePrivateGetTriggerOrderHistoryResponse2 parses an HTTP response from a PrivateGetTriggerOrderHistoryWithResponse call
+func ParsePrivateGetTriggerOrderHistoryResponse2(rsp *http.Response) (*PrivateGetTriggerOrderHistoryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetTriggerOrderHistoryResponse3{
+	response := &PrivateGetTriggerOrderHistoryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetTriggerOrderHistoryResponse2
+		var dest PrivateGetTriggerOrderHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55629,22 +55595,22 @@ func ParsePrivateGetTriggerOrderHistoryResponse3(rsp *http.Response) (*PrivateGe
 	return response, nil
 }
 
-// ParsePrivateGetUserLocksResponse3 parses an HTTP response from a PrivateGetUserLocksWithResponse call
-func ParsePrivateGetUserLocksResponse3(rsp *http.Response) (*PrivateGetUserLocksResponse3, error) {
+// ParsePrivateGetUserLocksResponse2 parses an HTTP response from a PrivateGetUserLocksWithResponse call
+func ParsePrivateGetUserLocksResponse2(rsp *http.Response) (*PrivateGetUserLocksResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetUserLocksResponse3{
+	response := &PrivateGetUserLocksResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserLocksResponse2
+		var dest PrivateGetUserLocksResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55670,7 +55636,7 @@ func ParsePrivateGetUserTradesByCurrencyResponse(rsp *http.Response) (*PrivateGe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserTradesHistoryResponse2
+		var dest PrivateGetUserTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55696,7 +55662,7 @@ func ParsePrivateGetUserTradesByCurrencyAndTimeResponse(rsp *http.Response) (*Pr
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserTradesHistoryResponse2
+		var dest PrivateGetUserTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55722,7 +55688,7 @@ func ParsePrivateGetUserTradesByInstrumentResponse(rsp *http.Response) (*Private
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserTradesHistoryResponse2
+		var dest PrivateGetUserTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55748,7 +55714,7 @@ func ParsePrivateGetUserTradesByInstrumentAndTimeResponse(rsp *http.Response) (*
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserTradesHistoryResponse2
+		var dest PrivateGetUserTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55759,22 +55725,22 @@ func ParsePrivateGetUserTradesByInstrumentAndTimeResponse(rsp *http.Response) (*
 	return response, nil
 }
 
-// ParsePrivateGetUserTradesByOrderResponse3 parses an HTTP response from a PrivateGetUserTradesByOrderWithResponse call
-func ParsePrivateGetUserTradesByOrderResponse3(rsp *http.Response) (*PrivateGetUserTradesByOrderResponse3, error) {
+// ParsePrivateGetUserTradesByOrderResponse2 parses an HTTP response from a PrivateGetUserTradesByOrderWithResponse call
+func ParsePrivateGetUserTradesByOrderResponse2(rsp *http.Response) (*PrivateGetUserTradesByOrderResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetUserTradesByOrderResponse3{
+	response := &PrivateGetUserTradesByOrderResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetUserTradesByOrderResponse2
+		var dest PrivateGetUserTradesByOrderResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55785,22 +55751,22 @@ func ParsePrivateGetUserTradesByOrderResponse3(rsp *http.Response) (*PrivateGetU
 	return response, nil
 }
 
-// ParsePrivateGetWithdrawalsResponse3 parses an HTTP response from a PrivateGetWithdrawalsWithResponse call
-func ParsePrivateGetWithdrawalsResponse3(rsp *http.Response) (*PrivateGetWithdrawalsResponse3, error) {
+// ParsePrivateGetWithdrawalsResponse2 parses an HTTP response from a PrivateGetWithdrawalsWithResponse call
+func ParsePrivateGetWithdrawalsResponse2(rsp *http.Response) (*PrivateGetWithdrawalsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateGetWithdrawalsResponse3{
+	response := &PrivateGetWithdrawalsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateGetWithdrawalsResponse2
+		var dest PrivateGetWithdrawalsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55826,7 +55792,7 @@ func ParsePrivateInvalidateBlockTradeSignatureResponse(rsp *http.Response) (*Pri
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55837,22 +55803,22 @@ func ParsePrivateInvalidateBlockTradeSignatureResponse(rsp *http.Response) (*Pri
 	return response, nil
 }
 
-// ParsePrivateListAddressBeneficiariesResponse3 parses an HTTP response from a PrivateListAddressBeneficiariesWithResponse call
-func ParsePrivateListAddressBeneficiariesResponse3(rsp *http.Response) (*PrivateListAddressBeneficiariesResponse3, error) {
+// ParsePrivateListAddressBeneficiariesResponse2 parses an HTTP response from a PrivateListAddressBeneficiariesWithResponse call
+func ParsePrivateListAddressBeneficiariesResponse2(rsp *http.Response) (*PrivateListAddressBeneficiariesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateListAddressBeneficiariesResponse3{
+	response := &PrivateListAddressBeneficiariesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateListAddressBeneficiariesResponse2
+		var dest PrivateListAddressBeneficiariesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55878,7 +55844,7 @@ func ParsePrivateListApiKeysResponse(rsp *http.Response) (*PrivateListApiKeysRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicListApiKeysResponse2
+		var dest PublicListApiKeysResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55904,7 +55870,7 @@ func ParsePrivateListCustodyAccountsResponse(rsp *http.Response) (*PrivateListCu
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GetlistCustodyAccounts200responseResponse
+		var dest GetlistCustodyAccounts200response
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55931,22 +55897,22 @@ func ParsePrivateLogoutResponse(rsp *http.Response) (*PrivateLogoutResponse, err
 	return response, nil
 }
 
-// ParsePrivateMassQuoteResponse3 parses an HTTP response from a PrivateMassQuoteWithResponse call
-func ParsePrivateMassQuoteResponse3(rsp *http.Response) (*PrivateMassQuoteResponse3, error) {
+// ParsePrivateMassQuoteResponse2 parses an HTTP response from a PrivateMassQuoteWithResponse call
+func ParsePrivateMassQuoteResponse2(rsp *http.Response) (*PrivateMassQuoteResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateMassQuoteResponse3{
+	response := &PrivateMassQuoteResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateMassQuoteResponse2
+		var dest PrivateMassQuoteResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55972,7 +55938,7 @@ func ParsePrivateMovePositionsResponse(rsp *http.Response) (*PrivateMovePosition
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivatePositionMoveResponse2
+		var dest PrivatePositionMoveResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -55983,22 +55949,22 @@ func ParsePrivateMovePositionsResponse(rsp *http.Response) (*PrivateMovePosition
 	return response, nil
 }
 
-// ParsePrivatePmeSimulateResponse3 parses an HTTP response from a PrivatePmeSimulateWithResponse call
-func ParsePrivatePmeSimulateResponse3(rsp *http.Response) (*PrivatePmeSimulateResponse3, error) {
+// ParsePrivatePmeSimulateResponse2 parses an HTTP response from a PrivatePmeSimulateWithResponse call
+func ParsePrivatePmeSimulateResponse2(rsp *http.Response) (*PrivatePmeSimulateResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivatePmeSimulateResponse3{
+	response := &PrivatePmeSimulateResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivatePmeSimulateResponse2
+		var dest PrivatePmeSimulateResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56024,7 +55990,7 @@ func ParsePrivateRejectBlockTradeResponse(rsp *http.Response) (*PrivateRejectBlo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56050,7 +56016,7 @@ func ParsePrivateRemoveApiKeyResponse(rsp *http.Response) (*PrivateRemoveApiKeyR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56061,22 +56027,22 @@ func ParsePrivateRemoveApiKeyResponse(rsp *http.Response) (*PrivateRemoveApiKeyR
 	return response, nil
 }
 
-// ParsePrivateRemoveFromAddressBookResponse3 parses an HTTP response from a PrivateRemoveFromAddressBookWithResponse call
-func ParsePrivateRemoveFromAddressBookResponse3(rsp *http.Response) (*PrivateRemoveFromAddressBookResponse3, error) {
+// ParsePrivateRemoveFromAddressBookResponse2 parses an HTTP response from a PrivateRemoveFromAddressBookWithResponse call
+func ParsePrivateRemoveFromAddressBookResponse2(rsp *http.Response) (*PrivateRemoveFromAddressBookResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateRemoveFromAddressBookResponse3{
+	response := &PrivateRemoveFromAddressBookResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateRemoveFromAddressBookResponse2
+		var dest PrivateRemoveFromAddressBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56102,7 +56068,7 @@ func ParsePrivateRemoveSubaccountResponse(rsp *http.Response) (*PrivateRemoveSub
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56128,7 +56094,7 @@ func ParsePrivateResetApiKeyResponse(rsp *http.Response) (*PrivateResetApiKeyRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateApiKeyResponse2
+		var dest PrivateApiKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56154,7 +56120,7 @@ func ParsePrivateResetMmpResponse(rsp *http.Response) (*PrivateResetMmpResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56165,22 +56131,22 @@ func ParsePrivateResetMmpResponse(rsp *http.Response) (*PrivateResetMmpResponse,
 	return response, nil
 }
 
-// ParsePrivateSaveAddressBeneficiaryResponse3 parses an HTTP response from a PrivateSaveAddressBeneficiaryWithResponse call
-func ParsePrivateSaveAddressBeneficiaryResponse3(rsp *http.Response) (*PrivateSaveAddressBeneficiaryResponse3, error) {
+// ParsePrivateSaveAddressBeneficiaryResponse2 parses an HTTP response from a PrivateSaveAddressBeneficiaryWithResponse call
+func ParsePrivateSaveAddressBeneficiaryResponse2(rsp *http.Response) (*PrivateSaveAddressBeneficiaryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSaveAddressBeneficiaryResponse3{
+	response := &PrivateSaveAddressBeneficiaryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSaveAddressBeneficiaryResponse2
+		var dest PrivateSaveAddressBeneficiaryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56206,7 +56172,7 @@ func ParsePrivateSellResponse(rsp *http.Response) (*PrivateSellResponse, error) 
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateBuyAndSellResponse2
+		var dest PrivateBuyAndSellResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56217,22 +56183,22 @@ func ParsePrivateSellResponse(rsp *http.Response) (*PrivateSellResponse, error) 
 	return response, nil
 }
 
-// ParsePrivateSetAddressRequiresSecurityKeyResponse3 parses an HTTP response from a PrivateSetAddressRequiresSecurityKeyWithResponse call
-func ParsePrivateSetAddressRequiresSecurityKeyResponse3(rsp *http.Response) (*PrivateSetAddressRequiresSecurityKeyResponse3, error) {
+// ParsePrivateSetAddressRequiresSecurityKeyResponse2 parses an HTTP response from a PrivateSetAddressRequiresSecurityKeyWithResponse call
+func ParsePrivateSetAddressRequiresSecurityKeyResponse2(rsp *http.Response) (*PrivateSetAddressRequiresSecurityKeyResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSetAddressRequiresSecurityKeyResponse3{
+	response := &PrivateSetAddressRequiresSecurityKeyResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSetAddressRequiresSecurityKeyResponse2
+		var dest PrivateSetAddressRequiresSecurityKeyResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56258,7 +56224,7 @@ func ParsePrivateSetAnnouncementAsReadResponse(rsp *http.Response) (*PrivateSetA
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56284,7 +56250,7 @@ func ParsePrivateSetClearanceOriginatorResponse(rsp *http.Response) (*PrivateSet
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest DepositResponse
+		var dest Deposit
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56295,22 +56261,22 @@ func ParsePrivateSetClearanceOriginatorResponse(rsp *http.Response) (*PrivateSet
 	return response, nil
 }
 
-// ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3 parses an HTTP response from a PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse call
-func ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3(rsp *http.Response) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3, error) {
+// ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2 parses an HTTP response from a PrivateSetCoinbaseSubaccountWithdrawalsAllowedWithResponse call
+func ParsePrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2(rsp *http.Response) (*PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse3{
+	response := &PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse2
+		var dest PrivateSetCoinbaseSubaccountWithdrawalsAllowedResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56336,7 +56302,7 @@ func ParsePrivateSetDisabledTradingProductsResponse(rsp *http.Response) (*Privat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56362,7 +56328,7 @@ func ParsePrivateSetEmailForSubaccountResponse(rsp *http.Response) (*PrivateSetE
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56388,7 +56354,7 @@ func ParsePrivateSetEmailLanguageResponse(rsp *http.Response) (*PrivateSetEmailL
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56399,22 +56365,22 @@ func ParsePrivateSetEmailLanguageResponse(rsp *http.Response) (*PrivateSetEmailL
 	return response, nil
 }
 
-// ParsePrivateSetMemberResponse3 parses an HTTP response from a PrivateSetMemberWithResponse call
-func ParsePrivateSetMemberResponse3(rsp *http.Response) (*PrivateSetMemberResponse3, error) {
+// ParsePrivateSetMemberResponse2 parses an HTTP response from a PrivateSetMemberWithResponse call
+func ParsePrivateSetMemberResponse2(rsp *http.Response) (*PrivateSetMemberResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSetMemberResponse3{
+	response := &PrivateSetMemberResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSetMemberResponse2
+		var dest PrivateSetMemberResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56425,22 +56391,22 @@ func ParsePrivateSetMemberResponse3(rsp *http.Response) (*PrivateSetMemberRespon
 	return response, nil
 }
 
-// ParsePrivateSetMmpConfigResponse3 parses an HTTP response from a PrivateSetMmpConfigWithResponse call
-func ParsePrivateSetMmpConfigResponse3(rsp *http.Response) (*PrivateSetMmpConfigResponse3, error) {
+// ParsePrivateSetMmpConfigResponse2 parses an HTTP response from a PrivateSetMmpConfigWithResponse call
+func ParsePrivateSetMmpConfigResponse2(rsp *http.Response) (*PrivateSetMmpConfigResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSetMmpConfigResponse3{
+	response := &PrivateSetMmpConfigResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSetMmpConfigResponse2
+		var dest PrivateSetMmpConfigResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56466,7 +56432,7 @@ func ParsePrivateSetSelfTradingConfigResponse(rsp *http.Response) (*PrivateSetSe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56477,22 +56443,22 @@ func ParsePrivateSetSelfTradingConfigResponse(rsp *http.Response) (*PrivateSetSe
 	return response, nil
 }
 
-// ParsePrivateSimulateBlockTradeResponse3 parses an HTTP response from a PrivateSimulateBlockTradeWithResponse call
-func ParsePrivateSimulateBlockTradeResponse3(rsp *http.Response) (*PrivateSimulateBlockTradeResponse3, error) {
+// ParsePrivateSimulateBlockTradeResponse2 parses an HTTP response from a PrivateSimulateBlockTradeWithResponse call
+func ParsePrivateSimulateBlockTradeResponse2(rsp *http.Response) (*PrivateSimulateBlockTradeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSimulateBlockTradeResponse3{
+	response := &PrivateSimulateBlockTradeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSimulateBlockTradeResponse2
+		var dest PrivateSimulateBlockTradeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56503,22 +56469,22 @@ func ParsePrivateSimulateBlockTradeResponse3(rsp *http.Response) (*PrivateSimula
 	return response, nil
 }
 
-// ParsePrivateSimulatePortfolioResponse3 parses an HTTP response from a PrivateSimulatePortfolioWithResponse call
-func ParsePrivateSimulatePortfolioResponse3(rsp *http.Response) (*PrivateSimulatePortfolioResponse3, error) {
+// ParsePrivateSimulatePortfolioResponse2 parses an HTTP response from a PrivateSimulatePortfolioWithResponse call
+func ParsePrivateSimulatePortfolioResponse2(rsp *http.Response) (*PrivateSimulatePortfolioResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSimulatePortfolioResponse3{
+	response := &PrivateSimulatePortfolioResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSimulatePortfolioResponse2
+		var dest PrivateSimulatePortfolioResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56544,7 +56510,7 @@ func ParsePrivateSubmitTransferBetweenSubaccountsResponse(rsp *http.Response) (*
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubmitTransferResponse2
+		var dest PrivateSubmitTransferResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56570,7 +56536,7 @@ func ParsePrivateSubmitTransferToSubaccountResponse(rsp *http.Response) (*Privat
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubmitTransferResponse2
+		var dest PrivateSubmitTransferResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56596,7 +56562,7 @@ func ParsePrivateSubmitTransferToUserResponse(rsp *http.Response) (*PrivateSubmi
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubmitTransferResponse2
+		var dest PrivateSubmitTransferResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56607,22 +56573,22 @@ func ParsePrivateSubmitTransferToUserResponse(rsp *http.Response) (*PrivateSubmi
 	return response, nil
 }
 
-// ParsePrivateSubscribeResponse3 parses an HTTP response from a PrivateSubscribeWithResponse call
-func ParsePrivateSubscribeResponse3(rsp *http.Response) (*PrivateSubscribeResponse3, error) {
+// ParsePrivateSubscribeResponse2 parses an HTTP response from a PrivateSubscribeWithResponse call
+func ParsePrivateSubscribeResponse2(rsp *http.Response) (*PrivateSubscribeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateSubscribeResponse3{
+	response := &PrivateSubscribeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubscribeResponse2
+		var dest PrivateSubscribeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56655,7 +56621,7 @@ func ParsePrivateToggleNotificationsFromSubaccountResponse(rsp *http.Response) (
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56681,7 +56647,7 @@ func ParsePrivateToggleSubaccountLoginResponse(rsp *http.Response) (*PrivateTogg
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56707,7 +56673,7 @@ func ParsePrivateUnsubscribeResponse(rsp *http.Response) (*PrivateUnsubscribeRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Getunsubscribe200responseResponse
+		var dest Getunsubscribe200response
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56740,7 +56706,7 @@ func ParsePrivateUnsubscribeAllResponse(rsp *http.Response) (*PrivateUnsubscribe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56751,22 +56717,22 @@ func ParsePrivateUnsubscribeAllResponse(rsp *http.Response) (*PrivateUnsubscribe
 	return response, nil
 }
 
-// ParsePrivateUpdateInAddressBookResponse3 parses an HTTP response from a PrivateUpdateInAddressBookWithResponse call
-func ParsePrivateUpdateInAddressBookResponse3(rsp *http.Response) (*PrivateUpdateInAddressBookResponse3, error) {
+// ParsePrivateUpdateInAddressBookResponse2 parses an HTTP response from a PrivateUpdateInAddressBookWithResponse call
+func ParsePrivateUpdateInAddressBookResponse2(rsp *http.Response) (*PrivateUpdateInAddressBookResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateUpdateInAddressBookResponse3{
+	response := &PrivateUpdateInAddressBookResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateUpdateInAddressBookResponse2
+		var dest PrivateUpdateInAddressBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56777,22 +56743,22 @@ func ParsePrivateUpdateInAddressBookResponse3(rsp *http.Response) (*PrivateUpdat
 	return response, nil
 }
 
-// ParsePrivateVerifyBlockTradeResponse3 parses an HTTP response from a PrivateVerifyBlockTradeWithResponse call
-func ParsePrivateVerifyBlockTradeResponse3(rsp *http.Response) (*PrivateVerifyBlockTradeResponse3, error) {
+// ParsePrivateVerifyBlockTradeResponse2 parses an HTTP response from a PrivateVerifyBlockTradeWithResponse call
+func ParsePrivateVerifyBlockTradeResponse2(rsp *http.Response) (*PrivateVerifyBlockTradeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateVerifyBlockTradeResponse3{
+	response := &PrivateVerifyBlockTradeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateVerifyBlockTradeResponse2
+		var dest PrivateVerifyBlockTradeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56803,22 +56769,22 @@ func ParsePrivateVerifyBlockTradeResponse3(rsp *http.Response) (*PrivateVerifyBl
 	return response, nil
 }
 
-// ParsePrivateWithdrawResponse3 parses an HTTP response from a PrivateWithdrawWithResponse call
-func ParsePrivateWithdrawResponse3(rsp *http.Response) (*PrivateWithdrawResponse3, error) {
+// ParsePrivateWithdrawResponse2 parses an HTTP response from a PrivateWithdrawWithResponse call
+func ParsePrivateWithdrawResponse2(rsp *http.Response) (*PrivateWithdrawResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PrivateWithdrawResponse3{
+	response := &PrivateWithdrawResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateWithdrawResponse2
+		var dest PrivateWithdrawResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56829,22 +56795,22 @@ func ParsePrivateWithdrawResponse3(rsp *http.Response) (*PrivateWithdrawResponse
 	return response, nil
 }
 
-// ParsePublicAuthResponse3 parses an HTTP response from a PublicAuthWithResponse call
-func ParsePublicAuthResponse3(rsp *http.Response) (*PublicAuthResponse3, error) {
+// ParsePublicAuthResponse2 parses an HTTP response from a PublicAuthWithResponse call
+func ParsePublicAuthResponse2(rsp *http.Response) (*PublicAuthResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicAuthResponse3{
+	response := &PublicAuthResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicAuthResponse2
+		var dest PublicAuthResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56870,7 +56836,7 @@ func ParsePublicDisableHeartbeatResponse(rsp *http.Response) (*PublicDisableHear
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56896,7 +56862,7 @@ func ParsePublicExchangeTokenResponse(rsp *http.Response) (*PublicExchangeTokenR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTokenResponse2
+		var dest PublicTokenResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56922,7 +56888,7 @@ func ParsePublicForkTokenResponse(rsp *http.Response) (*PublicForkTokenResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTokenResponse2
+		var dest PublicTokenResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56933,22 +56899,22 @@ func ParsePublicForkTokenResponse(rsp *http.Response) (*PublicForkTokenResponse,
 	return response, nil
 }
 
-// ParsePublicGetAnnouncementsResponse3 parses an HTTP response from a PublicGetAnnouncementsWithResponse call
-func ParsePublicGetAnnouncementsResponse3(rsp *http.Response) (*PublicGetAnnouncementsResponse3, error) {
+// ParsePublicGetAnnouncementsResponse2 parses an HTTP response from a PublicGetAnnouncementsWithResponse call
+func ParsePublicGetAnnouncementsResponse2(rsp *http.Response) (*PublicGetAnnouncementsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetAnnouncementsResponse3{
+	response := &PublicGetAnnouncementsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetAnnouncementsResponse2
+		var dest PublicGetAnnouncementsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56959,22 +56925,22 @@ func ParsePublicGetAnnouncementsResponse3(rsp *http.Response) (*PublicGetAnnounc
 	return response, nil
 }
 
-// ParsePublicGetAprHistoryResponse3 parses an HTTP response from a PublicGetAprHistoryWithResponse call
-func ParsePublicGetAprHistoryResponse3(rsp *http.Response) (*PublicGetAprHistoryResponse3, error) {
+// ParsePublicGetAprHistoryResponse2 parses an HTTP response from a PublicGetAprHistoryWithResponse call
+func ParsePublicGetAprHistoryResponse2(rsp *http.Response) (*PublicGetAprHistoryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetAprHistoryResponse3{
+	response := &PublicGetAprHistoryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetAprHistoryResponse2
+		var dest PublicGetAprHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -56985,22 +56951,22 @@ func ParsePublicGetAprHistoryResponse3(rsp *http.Response) (*PublicGetAprHistory
 	return response, nil
 }
 
-// ParsePublicGetBasketIndexCompositionResponse3 parses an HTTP response from a PublicGetBasketIndexCompositionWithResponse call
-func ParsePublicGetBasketIndexCompositionResponse3(rsp *http.Response) (*PublicGetBasketIndexCompositionResponse3, error) {
+// ParsePublicGetBasketIndexCompositionResponse2 parses an HTTP response from a PublicGetBasketIndexCompositionWithResponse call
+func ParsePublicGetBasketIndexCompositionResponse2(rsp *http.Response) (*PublicGetBasketIndexCompositionResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetBasketIndexCompositionResponse3{
+	response := &PublicGetBasketIndexCompositionResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetBasketIndexCompositionResponse2
+		var dest PublicGetBasketIndexCompositionResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57011,22 +56977,22 @@ func ParsePublicGetBasketIndexCompositionResponse3(rsp *http.Response) (*PublicG
 	return response, nil
 }
 
-// ParsePublicGetBlockRfqTradesResponse3 parses an HTTP response from a PublicGetBlockRfqTradesWithResponse call
-func ParsePublicGetBlockRfqTradesResponse3(rsp *http.Response) (*PublicGetBlockRfqTradesResponse3, error) {
+// ParsePublicGetBlockRfqTradesResponse2 parses an HTTP response from a PublicGetBlockRfqTradesWithResponse call
+func ParsePublicGetBlockRfqTradesResponse2(rsp *http.Response) (*PublicGetBlockRfqTradesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetBlockRfqTradesResponse3{
+	response := &PublicGetBlockRfqTradesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetBlockRfqTradesResponse2
+		var dest PublicGetBlockRfqTradesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57052,7 +57018,7 @@ func ParsePublicGetBookSummaryByCurrencyResponse(rsp *http.Response) (*PublicGet
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetBookSummaryResponse2
+		var dest PublicGetBookSummaryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57078,7 +57044,7 @@ func ParsePublicGetBookSummaryByInstrumentResponse(rsp *http.Response) (*PublicG
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetBookSummaryResponse2
+		var dest PublicGetBookSummaryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57089,22 +57055,22 @@ func ParsePublicGetBookSummaryByInstrumentResponse(rsp *http.Response) (*PublicG
 	return response, nil
 }
 
-// ParsePublicGetComboDetailsResponse3 parses an HTTP response from a PublicGetComboDetailsWithResponse call
-func ParsePublicGetComboDetailsResponse3(rsp *http.Response) (*PublicGetComboDetailsResponse3, error) {
+// ParsePublicGetComboDetailsResponse2 parses an HTTP response from a PublicGetComboDetailsWithResponse call
+func ParsePublicGetComboDetailsResponse2(rsp *http.Response) (*PublicGetComboDetailsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetComboDetailsResponse3{
+	response := &PublicGetComboDetailsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetComboDetailsResponse2
+		var dest PublicGetComboDetailsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57115,22 +57081,22 @@ func ParsePublicGetComboDetailsResponse3(rsp *http.Response) (*PublicGetComboDet
 	return response, nil
 }
 
-// ParsePublicGetComboIdsResponse3 parses an HTTP response from a PublicGetComboIdsWithResponse call
-func ParsePublicGetComboIdsResponse3(rsp *http.Response) (*PublicGetComboIdsResponse3, error) {
+// ParsePublicGetComboIdsResponse2 parses an HTTP response from a PublicGetComboIdsWithResponse call
+func ParsePublicGetComboIdsResponse2(rsp *http.Response) (*PublicGetComboIdsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetComboIdsResponse3{
+	response := &PublicGetComboIdsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetComboIdsResponse2
+		var dest PublicGetComboIdsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57141,22 +57107,22 @@ func ParsePublicGetComboIdsResponse3(rsp *http.Response) (*PublicGetComboIdsResp
 	return response, nil
 }
 
-// ParsePublicGetCombosResponse3 parses an HTTP response from a PublicGetCombosWithResponse call
-func ParsePublicGetCombosResponse3(rsp *http.Response) (*PublicGetCombosResponse3, error) {
+// ParsePublicGetCombosResponse2 parses an HTTP response from a PublicGetCombosWithResponse call
+func ParsePublicGetCombosResponse2(rsp *http.Response) (*PublicGetCombosResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetCombosResponse3{
+	response := &PublicGetCombosResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetCombosResponse2
+		var dest PublicGetCombosResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57167,22 +57133,22 @@ func ParsePublicGetCombosResponse3(rsp *http.Response) (*PublicGetCombosResponse
 	return response, nil
 }
 
-// ParsePublicGetContractSizeResponse3 parses an HTTP response from a PublicGetContractSizeWithResponse call
-func ParsePublicGetContractSizeResponse3(rsp *http.Response) (*PublicGetContractSizeResponse3, error) {
+// ParsePublicGetContractSizeResponse2 parses an HTTP response from a PublicGetContractSizeWithResponse call
+func ParsePublicGetContractSizeResponse2(rsp *http.Response) (*PublicGetContractSizeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetContractSizeResponse3{
+	response := &PublicGetContractSizeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetContractSizeResponse2
+		var dest PublicGetContractSizeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57193,22 +57159,22 @@ func ParsePublicGetContractSizeResponse3(rsp *http.Response) (*PublicGetContract
 	return response, nil
 }
 
-// ParsePublicGetCurrenciesResponse3 parses an HTTP response from a PublicGetCurrenciesWithResponse call
-func ParsePublicGetCurrenciesResponse3(rsp *http.Response) (*PublicGetCurrenciesResponse3, error) {
+// ParsePublicGetCurrenciesResponse2 parses an HTTP response from a PublicGetCurrenciesWithResponse call
+func ParsePublicGetCurrenciesResponse2(rsp *http.Response) (*PublicGetCurrenciesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetCurrenciesResponse3{
+	response := &PublicGetCurrenciesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetCurrenciesResponse2
+		var dest PublicGetCurrenciesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57219,22 +57185,22 @@ func ParsePublicGetCurrenciesResponse3(rsp *http.Response) (*PublicGetCurrencies
 	return response, nil
 }
 
-// ParsePublicGetDeliveryPricesResponse3 parses an HTTP response from a PublicGetDeliveryPricesWithResponse call
-func ParsePublicGetDeliveryPricesResponse3(rsp *http.Response) (*PublicGetDeliveryPricesResponse3, error) {
+// ParsePublicGetDeliveryPricesResponse2 parses an HTTP response from a PublicGetDeliveryPricesWithResponse call
+func ParsePublicGetDeliveryPricesResponse2(rsp *http.Response) (*PublicGetDeliveryPricesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetDeliveryPricesResponse3{
+	response := &PublicGetDeliveryPricesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetDeliveryPricesResponse2
+		var dest PublicGetDeliveryPricesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57245,22 +57211,22 @@ func ParsePublicGetDeliveryPricesResponse3(rsp *http.Response) (*PublicGetDelive
 	return response, nil
 }
 
-// ParsePublicGetExpirationsResponse3 parses an HTTP response from a PublicGetExpirationsWithResponse call
-func ParsePublicGetExpirationsResponse3(rsp *http.Response) (*PublicGetExpirationsResponse3, error) {
+// ParsePublicGetExpirationsResponse2 parses an HTTP response from a PublicGetExpirationsWithResponse call
+func ParsePublicGetExpirationsResponse2(rsp *http.Response) (*PublicGetExpirationsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetExpirationsResponse3{
+	response := &PublicGetExpirationsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetExpirationsResponse2
+		var dest PublicGetExpirationsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57271,22 +57237,22 @@ func ParsePublicGetExpirationsResponse3(rsp *http.Response) (*PublicGetExpiratio
 	return response, nil
 }
 
-// ParsePublicGetFundingChartDataResponse3 parses an HTTP response from a PublicGetFundingChartDataWithResponse call
-func ParsePublicGetFundingChartDataResponse3(rsp *http.Response) (*PublicGetFundingChartDataResponse3, error) {
+// ParsePublicGetFundingChartDataResponse2 parses an HTTP response from a PublicGetFundingChartDataWithResponse call
+func ParsePublicGetFundingChartDataResponse2(rsp *http.Response) (*PublicGetFundingChartDataResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetFundingChartDataResponse3{
+	response := &PublicGetFundingChartDataResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetFundingChartDataResponse2
+		var dest PublicGetFundingChartDataResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57297,22 +57263,22 @@ func ParsePublicGetFundingChartDataResponse3(rsp *http.Response) (*PublicGetFund
 	return response, nil
 }
 
-// ParsePublicGetFundingRateHistoryResponse3 parses an HTTP response from a PublicGetFundingRateHistoryWithResponse call
-func ParsePublicGetFundingRateHistoryResponse3(rsp *http.Response) (*PublicGetFundingRateHistoryResponse3, error) {
+// ParsePublicGetFundingRateHistoryResponse2 parses an HTTP response from a PublicGetFundingRateHistoryWithResponse call
+func ParsePublicGetFundingRateHistoryResponse2(rsp *http.Response) (*PublicGetFundingRateHistoryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetFundingRateHistoryResponse3{
+	response := &PublicGetFundingRateHistoryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetFundingRateHistoryResponse2
+		var dest PublicGetFundingRateHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57323,22 +57289,22 @@ func ParsePublicGetFundingRateHistoryResponse3(rsp *http.Response) (*PublicGetFu
 	return response, nil
 }
 
-// ParsePublicGetFundingRateValueResponse3 parses an HTTP response from a PublicGetFundingRateValueWithResponse call
-func ParsePublicGetFundingRateValueResponse3(rsp *http.Response) (*PublicGetFundingRateValueResponse3, error) {
+// ParsePublicGetFundingRateValueResponse2 parses an HTTP response from a PublicGetFundingRateValueWithResponse call
+func ParsePublicGetFundingRateValueResponse2(rsp *http.Response) (*PublicGetFundingRateValueResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetFundingRateValueResponse3{
+	response := &PublicGetFundingRateValueResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetFundingRateValueResponse2
+		var dest PublicGetFundingRateValueResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57349,22 +57315,22 @@ func ParsePublicGetFundingRateValueResponse3(rsp *http.Response) (*PublicGetFund
 	return response, nil
 }
 
-// ParsePublicGetHistoricalVolatilityResponse3 parses an HTTP response from a PublicGetHistoricalVolatilityWithResponse call
-func ParsePublicGetHistoricalVolatilityResponse3(rsp *http.Response) (*PublicGetHistoricalVolatilityResponse3, error) {
+// ParsePublicGetHistoricalVolatilityResponse2 parses an HTTP response from a PublicGetHistoricalVolatilityWithResponse call
+func ParsePublicGetHistoricalVolatilityResponse2(rsp *http.Response) (*PublicGetHistoricalVolatilityResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetHistoricalVolatilityResponse3{
+	response := &PublicGetHistoricalVolatilityResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetHistoricalVolatilityResponse2
+		var dest PublicGetHistoricalVolatilityResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57375,22 +57341,22 @@ func ParsePublicGetHistoricalVolatilityResponse3(rsp *http.Response) (*PublicGet
 	return response, nil
 }
 
-// ParsePublicGetIndexChartDataResponse3 parses an HTTP response from a PublicGetIndexChartDataWithResponse call
-func ParsePublicGetIndexChartDataResponse3(rsp *http.Response) (*PublicGetIndexChartDataResponse3, error) {
+// ParsePublicGetIndexChartDataResponse2 parses an HTTP response from a PublicGetIndexChartDataWithResponse call
+func ParsePublicGetIndexChartDataResponse2(rsp *http.Response) (*PublicGetIndexChartDataResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetIndexChartDataResponse3{
+	response := &PublicGetIndexChartDataResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetIndexChartDataResponse2
+		var dest PublicGetIndexChartDataResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57401,22 +57367,22 @@ func ParsePublicGetIndexChartDataResponse3(rsp *http.Response) (*PublicGetIndexC
 	return response, nil
 }
 
-// ParsePublicGetIndexPriceResponse3 parses an HTTP response from a PublicGetIndexPriceWithResponse call
-func ParsePublicGetIndexPriceResponse3(rsp *http.Response) (*PublicGetIndexPriceResponse3, error) {
+// ParsePublicGetIndexPriceResponse2 parses an HTTP response from a PublicGetIndexPriceWithResponse call
+func ParsePublicGetIndexPriceResponse2(rsp *http.Response) (*PublicGetIndexPriceResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetIndexPriceResponse3{
+	response := &PublicGetIndexPriceResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetIndexPriceResponse2
+		var dest PublicGetIndexPriceResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57427,22 +57393,22 @@ func ParsePublicGetIndexPriceResponse3(rsp *http.Response) (*PublicGetIndexPrice
 	return response, nil
 }
 
-// ParsePublicGetIndexPriceNamesResponse3 parses an HTTP response from a PublicGetIndexPriceNamesWithResponse call
-func ParsePublicGetIndexPriceNamesResponse3(rsp *http.Response) (*PublicGetIndexPriceNamesResponse3, error) {
+// ParsePublicGetIndexPriceNamesResponse2 parses an HTTP response from a PublicGetIndexPriceNamesWithResponse call
+func ParsePublicGetIndexPriceNamesResponse2(rsp *http.Response) (*PublicGetIndexPriceNamesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetIndexPriceNamesResponse3{
+	response := &PublicGetIndexPriceNamesResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetIndexPriceNamesResponse2
+		var dest PublicGetIndexPriceNamesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57453,22 +57419,22 @@ func ParsePublicGetIndexPriceNamesResponse3(rsp *http.Response) (*PublicGetIndex
 	return response, nil
 }
 
-// ParsePublicGetInstrumentResponse3 parses an HTTP response from a PublicGetInstrumentWithResponse call
-func ParsePublicGetInstrumentResponse3(rsp *http.Response) (*PublicGetInstrumentResponse3, error) {
+// ParsePublicGetInstrumentResponse2 parses an HTTP response from a PublicGetInstrumentWithResponse call
+func ParsePublicGetInstrumentResponse2(rsp *http.Response) (*PublicGetInstrumentResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetInstrumentResponse3{
+	response := &PublicGetInstrumentResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetInstrumentResponse2
+		var dest PublicGetInstrumentResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57479,22 +57445,22 @@ func ParsePublicGetInstrumentResponse3(rsp *http.Response) (*PublicGetInstrument
 	return response, nil
 }
 
-// ParsePublicGetInstrumentsResponse3 parses an HTTP response from a PublicGetInstrumentsWithResponse call
-func ParsePublicGetInstrumentsResponse3(rsp *http.Response) (*PublicGetInstrumentsResponse3, error) {
+// ParsePublicGetInstrumentsResponse2 parses an HTTP response from a PublicGetInstrumentsWithResponse call
+func ParsePublicGetInstrumentsResponse2(rsp *http.Response) (*PublicGetInstrumentsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetInstrumentsResponse3{
+	response := &PublicGetInstrumentsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetInstrumentsResponse2
+		var dest PublicGetInstrumentsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57520,7 +57486,7 @@ func ParsePublicGetLastSettlementsByCurrencyResponse(rsp *http.Response) (*Publi
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicSettlementResponse2
+		var dest PublicSettlementResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57546,7 +57512,7 @@ func ParsePublicGetLastSettlementsByInstrumentResponse(rsp *http.Response) (*Pub
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicSettlementResponse2
+		var dest PublicSettlementResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57572,7 +57538,7 @@ func ParsePublicGetLastTradesByCurrencyResponse(rsp *http.Response) (*PublicGetL
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTradesHistoryResponse2
+		var dest PublicTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57598,7 +57564,7 @@ func ParsePublicGetLastTradesByCurrencyAndTimeResponse(rsp *http.Response) (*Pub
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTradesHistoryResponse2
+		var dest PublicTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57624,7 +57590,7 @@ func ParsePublicGetLastTradesByInstrumentResponse(rsp *http.Response) (*PublicGe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTradesHistoryResponse2
+		var dest PublicTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57650,7 +57616,7 @@ func ParsePublicGetLastTradesByInstrumentAndTimeResponse(rsp *http.Response) (*P
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTradesHistoryResponse2
+		var dest PublicTradesHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57661,22 +57627,22 @@ func ParsePublicGetLastTradesByInstrumentAndTimeResponse(rsp *http.Response) (*P
 	return response, nil
 }
 
-// ParsePublicGetMarkPriceHistoryResponse3 parses an HTTP response from a PublicGetMarkPriceHistoryWithResponse call
-func ParsePublicGetMarkPriceHistoryResponse3(rsp *http.Response) (*PublicGetMarkPriceHistoryResponse3, error) {
+// ParsePublicGetMarkPriceHistoryResponse2 parses an HTTP response from a PublicGetMarkPriceHistoryWithResponse call
+func ParsePublicGetMarkPriceHistoryResponse2(rsp *http.Response) (*PublicGetMarkPriceHistoryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetMarkPriceHistoryResponse3{
+	response := &PublicGetMarkPriceHistoryResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetMarkPriceHistoryResponse2
+		var dest PublicGetMarkPriceHistoryResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57687,22 +57653,22 @@ func ParsePublicGetMarkPriceHistoryResponse3(rsp *http.Response) (*PublicGetMark
 	return response, nil
 }
 
-// ParsePublicGetOrderBookResponse3 parses an HTTP response from a PublicGetOrderBookWithResponse call
-func ParsePublicGetOrderBookResponse3(rsp *http.Response) (*PublicGetOrderBookResponse3, error) {
+// ParsePublicGetOrderBookResponse2 parses an HTTP response from a PublicGetOrderBookWithResponse call
+func ParsePublicGetOrderBookResponse2(rsp *http.Response) (*PublicGetOrderBookResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetOrderBookResponse3{
+	response := &PublicGetOrderBookResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetOrderBookResponse2
+		var dest PublicGetOrderBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57728,7 +57694,7 @@ func ParsePublicGetOrderBookByInstrumentIdResponse(rsp *http.Response) (*PublicG
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetOrderBookResponse2
+		var dest PublicGetOrderBookResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57754,7 +57720,7 @@ func ParsePublicGetSupportedIndexNamesResponse(rsp *http.Response) (*PublicGetSu
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetIndexPriceNamesResponse2
+		var dest PublicGetIndexPriceNamesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57765,22 +57731,22 @@ func ParsePublicGetSupportedIndexNamesResponse(rsp *http.Response) (*PublicGetSu
 	return response, nil
 }
 
-// ParsePublicGetTimeResponse3 parses an HTTP response from a PublicGetTimeWithResponse call
-func ParsePublicGetTimeResponse3(rsp *http.Response) (*PublicGetTimeResponse3, error) {
+// ParsePublicGetTimeResponse2 parses an HTTP response from a PublicGetTimeWithResponse call
+func ParsePublicGetTimeResponse2(rsp *http.Response) (*PublicGetTimeResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetTimeResponse3{
+	response := &PublicGetTimeResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetTimeResponse2
+		var dest PublicGetTimeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57806,7 +57772,7 @@ func ParsePublicGetTradeVolumesResponse(rsp *http.Response) (*PublicGetTradeVolu
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetTradesVolumesResponse2
+		var dest PublicGetTradesVolumesResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57817,22 +57783,22 @@ func ParsePublicGetTradeVolumesResponse(rsp *http.Response) (*PublicGetTradeVolu
 	return response, nil
 }
 
-// ParsePublicGetTradingviewChartDataResponse3 parses an HTTP response from a PublicGetTradingviewChartDataWithResponse call
-func ParsePublicGetTradingviewChartDataResponse3(rsp *http.Response) (*PublicGetTradingviewChartDataResponse3, error) {
+// ParsePublicGetTradingviewChartDataResponse2 parses an HTTP response from a PublicGetTradingviewChartDataWithResponse call
+func ParsePublicGetTradingviewChartDataResponse2(rsp *http.Response) (*PublicGetTradingviewChartDataResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetTradingviewChartDataResponse3{
+	response := &PublicGetTradingviewChartDataResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetTradingviewChartDataResponse2
+		var dest PublicGetTradingviewChartDataResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57843,22 +57809,22 @@ func ParsePublicGetTradingviewChartDataResponse3(rsp *http.Response) (*PublicGet
 	return response, nil
 }
 
-// ParsePublicGetVolatilityIndexDataResponse3 parses an HTTP response from a PublicGetVolatilityIndexDataWithResponse call
-func ParsePublicGetVolatilityIndexDataResponse3(rsp *http.Response) (*PublicGetVolatilityIndexDataResponse3, error) {
+// ParsePublicGetVolatilityIndexDataResponse2 parses an HTTP response from a PublicGetVolatilityIndexDataWithResponse call
+func ParsePublicGetVolatilityIndexDataResponse2(rsp *http.Response) (*PublicGetVolatilityIndexDataResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicGetVolatilityIndexDataResponse3{
+	response := &PublicGetVolatilityIndexDataResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicGetVolatilityIndexDataResponse2
+		var dest PublicGetVolatilityIndexDataResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57884,7 +57850,7 @@ func ParsePublicHelloResponse(rsp *http.Response) (*PublicHelloResponse, error) 
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTestResponse2
+		var dest PublicTestResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57910,7 +57876,7 @@ func ParsePublicSetHeartbeatResponse(rsp *http.Response) (*PublicSetHeartbeatRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57921,22 +57887,22 @@ func ParsePublicSetHeartbeatResponse(rsp *http.Response) (*PublicSetHeartbeatRes
 	return response, nil
 }
 
-// ParsePublicStatusResponse3 parses an HTTP response from a PublicStatusWithResponse call
-func ParsePublicStatusResponse3(rsp *http.Response) (*PublicStatusResponse3, error) {
+// ParsePublicStatusResponse2 parses an HTTP response from a PublicStatusWithResponse call
+func ParsePublicStatusResponse2(rsp *http.Response) (*PublicStatusResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicStatusResponse3{
+	response := &PublicStatusResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicStatusResponse2
+		var dest PublicStatusResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57962,7 +57928,7 @@ func ParsePublicSubscribeResponse(rsp *http.Response) (*PublicSubscribeResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PrivateSubscribeResponse2
+		var dest PrivateSubscribeResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -57980,22 +57946,22 @@ func ParsePublicSubscribeResponse(rsp *http.Response) (*PublicSubscribeResponse,
 	return response, nil
 }
 
-// ParsePublicTestResponse3 parses an HTTP response from a PublicTestWithResponse call
-func ParsePublicTestResponse3(rsp *http.Response) (*PublicTestResponse3, error) {
+// ParsePublicTestResponse2 parses an HTTP response from a PublicTestWithResponse call
+func ParsePublicTestResponse2(rsp *http.Response) (*PublicTestResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicTestResponse3{
+	response := &PublicTestResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTestResponse2
+		var dest PublicTestResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -58006,22 +57972,22 @@ func ParsePublicTestResponse3(rsp *http.Response) (*PublicTestResponse3, error) 
 	return response, nil
 }
 
-// ParsePublicTickerResponse3 parses an HTTP response from a PublicTickerWithResponse call
-func ParsePublicTickerResponse3(rsp *http.Response) (*PublicTickerResponse3, error) {
+// ParsePublicTickerResponse2 parses an HTTP response from a PublicTickerWithResponse call
+func ParsePublicTickerResponse2(rsp *http.Response) (*PublicTickerResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PublicTickerResponse3{
+	response := &PublicTickerResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest PublicTickerResponse2
+		var dest PublicTickerResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -58047,7 +58013,7 @@ func ParsePublicUnsubscribeResponse(rsp *http.Response) (*PublicUnsubscribeRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Getunsubscribe200responseResponse
+		var dest Getunsubscribe200response
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -58080,7 +58046,7 @@ func ParsePublicUnsubscribeAllResponse(rsp *http.Response) (*PublicUnsubscribeAl
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest OkResponse2
+		var dest OkResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

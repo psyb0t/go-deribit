@@ -76,7 +76,8 @@ func assertFixturePayload(t *testing.T, value any) {
 	case ws.QuoteInstrumentNameSubscriptionMessagePayload:
 		assert.Nil(t, payload.Params.Data.BestBidPrice)
 		assert.Nil(t, payload.Params.Data.BestAskPrice)
-		assert.Zero(t, payload.Params.Data.BestAskAmount)
+		require.NotNil(t, payload.Params.Data.BestAskAmount)
+		assert.Zero(t, *payload.Params.Data.BestAskAmount)
 	case ws.UserOrdersInstrumentNameRawSubscriptionMessagePayload:
 		assert.Equal(t, "example-order", payload.Params.Data.OrderID)
 		assert.Equal(t, "open", string(payload.Params.Data.OrderState))

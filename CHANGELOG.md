@@ -2,6 +2,13 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.0, 2026-10-29
+
+- Regenerated from Deribit's current OpenAPI and AsyncAPI specs. The AsyncAPI rewrite broke `scripts/patch-asyncapi.sh`, so scheduled regeneration had stopped.
+- Breaking, REST: 122 model types lose the numeric suffix oapi-codegen added to avoid name collisions, for example `PrivateBuyAndSellResponse2` is now `PrivateBuyAndSellResponse`. `ErrorResponse`, `DepositResponse`, `CurrencyPortfolioCurrency`, `GetlistCustodyAccounts200responseResponse` and `Getunsubscribe200responseResponse` are removed. The 186 operations are unchanged.
+- Breaking, WebSocket: the `user.changes` channels no longer have the singular `Position` field, only `Positions`. Nested arrays that were element types are now typed slices with `Item` types, such as the trades in the `block_rfq` channels and `trade_allocations`. Order `price` is a union type, and the quote `best_bid_amount` and `best_ask_amount` fields are pointers. The block trade confirmation `state` and `counterparty_state` fields, the `instrument.creation` payload and the `user.lsp` configuration are typed.
+- `scripts/patch-asyncapi.sh` makes `settlement_price` optional and adds `max_show` on the `positions` and `orders` arrays the spec now defines, instead of building `positions` from the singular `position` schema.
+
 ## v0.1.4, 2026-10-28
 
 - Updated Semgrep in the development image to 1.182.1 and refreshed its locked dependencies. certifi 2026.10.23 drops the emSign root CAs whose intermediate keys were compromised (GHSA-6q48-6c7w-9gw2).

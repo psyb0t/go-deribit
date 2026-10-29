@@ -952,14 +952,8 @@ type PlatformStateSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes PlatformStateSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *PlatformStateSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "PlatformStateSubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("PlatformStateSubscriptionMessagePayloadParamsData", members, "price_index", "locked", "maintenance"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "PlatformStateSubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -1213,7 +1207,6 @@ type PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData struct 
 
 // UnmarshalJSON decodes PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -1221,10 +1214,6 @@ func (v *PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData", members, "allow_unauthenticated_public_requests"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("PlatformStatePublicMethodsStateSubscriptionMessagePayloadParamsData", members, "allow_unauthenticated_public_requests"); err != nil {
 		return err
 	}
 
@@ -1492,7 +1481,6 @@ type AnnouncementsSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes AnnouncementsSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *AnnouncementsSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "AnnouncementsSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -1500,10 +1488,6 @@ func (v *AnnouncementsSubscriptionMessagePayloadParamsData) UnmarshalJSON(data [
 	}
 
 	if err := asyncapirt.RequireKeys("AnnouncementsSubscriptionMessagePayloadParamsData", members, "id", "title", "body", "publication_timestamp", "important", "action"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("AnnouncementsSubscriptionMessagePayloadParamsData", members, "id", "title", "body", "publication_timestamp", "important", "confirmation", "unread", "action"); err != nil {
 		return err
 	}
 
@@ -1778,9 +1762,9 @@ type BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 	// Identifier of the notification
 	ChangeID int64 `json:"change_id"`
 	// Identifier of the previous notification (it's **not** included for the first notification)
-	PrevChangeID *int64            `json:"prev_change_id,omitempty"`
-	Asks         []json.RawMessage `json:"asks"`
-	Bids         []json.RawMessage `json:"bids"`
+	PrevChangeID *int64              `json:"prev_change_id,omitempty"`
+	Asks         [][]json.RawMessage `json:"asks"`
+	Bids         [][]json.RawMessage `json:"bids"`
 	// The timestamp of last change (milliseconds since the Unix epoch)
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	// Type of notification: `snapshot` for initial, `change` for others
@@ -1789,7 +1773,6 @@ type BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -1797,10 +1780,6 @@ func (v *BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData) Unmarsh
 	}
 
 	if err := asyncapirt.RequireKeys("BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "change_id", "asks", "bids"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "change_id", "prev_change_id", "asks", "bids", "timestamp", "type"); err != nil {
 		return err
 	}
 
@@ -1818,6 +1797,22 @@ func (v *BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData) Unmarsh
 
 // Validate checks the constraints the schema declares for BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData.
 func (v BookInstrumentNameIntervalSubscriptionMessagePayloadParamsData) Validate() error {
+	for i0, item0 := range v.Asks {
+		if err := asyncapirt.CheckMinItems(fmt.Sprintf("%s[%d]", "asks", i0), len(item0), 3); err != nil {
+			return err
+		}
+		if err := asyncapirt.CheckMaxItems(fmt.Sprintf("%s[%d]", "asks", i0), len(item0), 3); err != nil {
+			return err
+		}
+	}
+	for i0, item0 := range v.Bids {
+		if err := asyncapirt.CheckMinItems(fmt.Sprintf("%s[%d]", "bids", i0), len(item0), 3); err != nil {
+			return err
+		}
+		if err := asyncapirt.CheckMaxItems(fmt.Sprintf("%s[%d]", "bids", i0), len(item0), 3); err != nil {
+			return err
+		}
+	}
 	if v.Type != nil {
 		if err := (*v.Type).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "type")
@@ -1948,7 +1943,7 @@ func (v BookInstrumentNameGroupDepthIntervalSubscribeRequestPayloadParams) Valid
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^book\\.[^.]+\\.(none|1|2|5|10|25|100|250)\\.(1|10|20)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^book\\.[^.]+\\.(none|1|2|5|10|25|100|250)\\.(1|10|20)\\.(100ms|agg2)$"); err != nil {
 			return err
 		}
 	}
@@ -2064,7 +2059,7 @@ func (v BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParams) Va
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^book\\.[^.]+\\.(none|1|2|5|10|25|100|250)\\.(1|10|20)\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^book\\.[^.]+\\.(none|1|2|5|10|25|100|250)\\.(1|10|20)\\.(100ms|agg2)$"); err != nil {
 		return err
 	}
 
@@ -2084,7 +2079,6 @@ type BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData st
 
 // UnmarshalJSON decodes BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -2092,10 +2086,6 @@ func (v *BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsDat
 	}
 
 	if err := asyncapirt.RequireKeys("BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "change_id", "bids", "asks"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "change_id", "bids", "asks", "timestamp"); err != nil {
 		return err
 	}
 
@@ -2235,7 +2225,7 @@ func (v TickerInstrumentNameIntervalSubscribeRequestPayloadParams) Validate() er
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^ticker\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^ticker\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -2351,7 +2341,7 @@ func (v TickerInstrumentNameIntervalSubscriptionMessagePayloadParams) Validate()
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^ticker\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^ticker\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -2378,14 +2368,14 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 	Stats TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats `json:"stats"`
 	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	OpenInterest float64 `json:"open_interest"`
-	// The current best bid price, `null` if there aren't any bids
+	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price"`
 	// It represents the requested order size of all best bids
-	BestBidAmount float64 `json:"best_bid_amount"`
-	// The current best ask price, `null` if there aren't any asks
+	BestBidAmount *float64 `json:"best_bid_amount"`
+	// The current best ask price, `0` if the ask side is empty
 	BestAskPrice *float64 `json:"best_ask_price"`
 	// It represents the requested order size of all best asks
-	BestAskAmount float64 `json:"best_ask_amount"`
+	BestAskAmount *float64 `json:"best_ask_amount"`
 	// Current index price
 	IndexPrice float64 `json:"index_price"`
 	// The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
@@ -2395,7 +2385,7 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 	// The mark price for the instrument
 	MarkPrice float64 `json:"mark_price"`
 	// The price for the last trade
-	LastPrice float64 `json:"last_price"`
+	LastPrice *float64 `json:"last_price"`
 	// Underlying price for implied volatility calculations (options only)
 	UnderlyingPrice *float64 `json:"underlying_price,omitempty"`
 	// Name of the underlying future, or `index_price` (options only)
@@ -2469,7 +2459,6 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -2477,10 +2466,6 @@ func (v *TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData) Unmar
 	}
 
 	if err := asyncapirt.RequireKeys("TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "timestamp", "state", "stats", "open_interest", "best_bid_price", "best_bid_amount", "best_ask_price", "best_ask_amount", "index_price", "min_price", "max_price", "mark_price", "last_price", "estimated_delivery_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "timestamp", "state", "stats", "open_interest", "best_bid_price", "best_bid_amount", "best_ask_price", "best_ask_amount", "index_price", "min_price", "max_price", "mark_price", "last_price", "underlying_price", "underlying_index", "interest_rate", "bid_iv", "ask_iv", "mark_iv", "greeks", "funding_8h", "current_funding", "interest_value", "delivery_price", "settlement_price", "estimated_delivery_price", "is_anchor_breached", "anchor_min_price", "anchor_max_price"); err != nil {
 		return err
 	}
 
@@ -2551,11 +2536,13 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats struc
 	// Volume during last 24h in base currency
 	Volume float64 `json:"volume"`
 	// Lowest price during 24h
-	Low float64 `json:"low"`
+	Low *float64 `json:"low"`
 	// Highest price during 24h
-	High float64 `json:"high"`
+	High *float64 `json:"high"`
 	// 24-hour price change expressed as a percentage, `null` if there weren't any trades
 	PriceChange *float64 `json:"price_change,omitempty"`
+	// 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
+	VolumeNotional *float64 `json:"volume_notional,omitempty"`
 	// Volume in usd (futures only)
 	VolumeUsd *float64 `json:"volume_usd,omitempty"`
 }
@@ -2930,11 +2917,11 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData struct 
 	Stats *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats `json:"stats,omitempty"`
 	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	OpenInterest *float64 `json:"open_interest,omitempty"`
-	// The current best bid price, `null` if there aren't any bids
+	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price,omitempty"`
 	// It represents the requested order size of all best bids
 	BestBidAmount *float64 `json:"best_bid_amount,omitempty"`
-	// The current best ask price, `null` if there aren't any asks
+	// The current best ask price, `0` if the ask side is empty
 	BestAskPrice *float64 `json:"best_ask_price,omitempty"`
 	// It represents the requested order size of all best asks
 	BestAskAmount *float64 `json:"best_ask_amount,omitempty"`
@@ -3013,7 +3000,6 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData struct 
 
 // UnmarshalJSON decodes IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -3021,10 +3007,6 @@ func (v *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData", members, "instrument_name", "timestamp"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData", members, "type", "instrument_name", "timestamp", "state", "stats", "open_interest", "best_bid_price", "best_bid_amount", "best_ask_price", "best_ask_amount", "index_price", "min_price", "max_price", "mark_price", "last_price", "underlying_price", "underlying_index", "interest_rate", "bid_iv", "ask_iv", "mark_iv", "greeks", "funding_8h", "current_funding", "delivery_price", "settlement_price", "estimated_delivery_price"); err != nil {
 		return err
 	}
 
@@ -3128,6 +3110,8 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats st
 	High *float64 `json:"high,omitempty"`
 	// 24-hour price change expressed as a percentage, `null` if there weren't any trades
 	PriceChange *float64 `json:"price_change,omitempty"`
+	// 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
+	VolumeNotional *float64 `json:"volume_notional,omitempty"`
 	// Volume in usd (futures only)
 	VolumeUsd *float64 `json:"volume_usd,omitempty"`
 }
@@ -3352,7 +3336,7 @@ func (v PerpetualInstrumentNameIntervalSubscribeRequestPayloadParams) Validate()
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^perpetual\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^perpetual\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -3468,7 +3452,7 @@ func (v PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParams) Validat
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^perpetual\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^perpetual\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -3486,7 +3470,6 @@ type PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct 
 
 // UnmarshalJSON decodes PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -3494,10 +3477,6 @@ func (v *PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "interest", "timestamp", "index_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("PerpetualInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "interest", "timestamp", "index_price"); err != nil {
 		return err
 	}
 
@@ -3749,19 +3728,18 @@ type QuoteInstrumentNameSubscriptionMessagePayloadParamsData struct {
 	Timestamp int64 `json:"timestamp"`
 	// Unique instrument identifier
 	InstrumentName string `json:"instrument_name"`
-	// The current best bid price, `null` if there aren't any bids
+	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price"`
 	// It represents the requested order size of all best bids
-	BestBidAmount float64 `json:"best_bid_amount"`
-	// The current best ask price, `null` if there aren't any asks
+	BestBidAmount *float64 `json:"best_bid_amount"`
+	// The current best ask price, `0` if the ask side is empty
 	BestAskPrice *float64 `json:"best_ask_price"`
 	// It represents the requested order size of all best asks
-	BestAskAmount float64 `json:"best_ask_amount"`
+	BestAskAmount *float64 `json:"best_ask_amount"`
 }
 
 // UnmarshalJSON decodes QuoteInstrumentNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *QuoteInstrumentNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "QuoteInstrumentNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -3769,10 +3747,6 @@ func (v *QuoteInstrumentNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(
 	}
 
 	if err := asyncapirt.RequireKeys("QuoteInstrumentNameSubscriptionMessagePayloadParamsData", members, "timestamp", "instrument_name", "best_bid_price", "best_bid_amount", "best_ask_price", "best_ask_amount"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("QuoteInstrumentNameSubscriptionMessagePayloadParamsData", members, "timestamp", "instrument_name", "best_bid_price", "best_bid_amount", "best_ask_price", "best_ask_amount"); err != nil {
 		return err
 	}
 
@@ -3896,7 +3870,7 @@ func (v TradesInstrumentNameIntervalSubscribeRequestPayloadParams) Validate() er
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -4014,7 +3988,7 @@ func (v TradesInstrumentNameIntervalSubscriptionMessagePayloadParams) Validate()
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -4030,15 +4004,15 @@ type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem struct
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the taker
 	Direction TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -4049,7 +4023,7 @@ type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem struct
 	// Optional field (only for trades caused by liquidation): `"M"` when maker side of trade was under liquidation, `"T"` when taker side was under liquidation, `"MT"` when both sides of trade were under liquidation
 	Liquidation *TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemLiquidation `json:"liquidation,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Block trade id - when trade was part of a block trade
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
@@ -4062,11 +4036,12 @@ type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem struct
 	StarbaseMatchID *int64 `json:"starbase_match_id,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
+	// Leg trades, present when querying only combo trades.
+	Legs []json.RawMessage `json:"legs,omitempty"`
 }
 
 // UnmarshalJSON decodes TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -4074,10 +4049,6 @@ func (v *TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) U
 	}
 
 	if err := asyncapirt.RequireKeys("TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "direction", "tick_direction", "index_price", "price", "amount", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "liquidation", "mark_price", "block_trade_id", "block_trade_leg_count", "combo_id", "combo_trade_id", "starbase_match_id", "block_rfq_id"); err != nil {
 		return err
 	}
 
@@ -4110,7 +4081,7 @@ func (v TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) Va
 	return nil
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the taker
 type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -4414,16 +4385,15 @@ type BlockTradeConfirmationsSubscriptionMessagePayloadParamsData struct {
 	// Name of the broker associated with the block trade.
 	BrokerName *string `json:"broker_name,omitempty"`
 	// State of the pending block trade for current user.
-	State map[string]any `json:"state"`
+	State BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState `json:"state"`
 	// State of the pending block trade for the other party (optional).
-	CounterpartyState map[string]any `json:"counterparty_state,omitempty"`
+	CounterpartyState *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState `json:"counterparty_state,omitempty"`
 	// Combo instrument identifier
 	ComboID *string `json:"combo_id,omitempty"`
 }
 
 // UnmarshalJSON decodes BlockTradeConfirmationsSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -4431,10 +4401,6 @@ func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsData) UnmarshalJ
 	}
 
 	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsData", members, "nonce", "timestamp", "trades", "role", "user_id", "state"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsData", members, "nonce", "timestamp", "trades", "app_name", "username", "role", "user_id", "broker_code", "broker_name", "state", "counterparty_state", "combo_id"); err != nil {
 		return err
 	}
 
@@ -4460,6 +4426,14 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsData) Validate() 
 	if err := v.Role.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "role")
 	}
+	if err := v.State.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "state")
+	}
+	if v.CounterpartyState != nil {
+		if err := (*v.CounterpartyState).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "counterparty_state")
+		}
+	}
 
 	return nil
 }
@@ -4467,9 +4441,9 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsData) Validate() 
 type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem struct {
 	// Unique instrument identifier
 	InstrumentName string `json:"instrument_name"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the maker
 	Direction BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -4477,7 +4451,6 @@ type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem struc
 
 // UnmarshalJSON decodes BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem")
 	if err != nil {
@@ -4485,10 +4458,6 @@ func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem) 
 	}
 
 	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem", members, "instrument_name", "direction", "price", "amount"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem", members, "instrument_name", "direction", "price", "amount"); err != nil {
 		return err
 	}
 
@@ -4513,7 +4482,7 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem) V
 	return nil
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the maker
 type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItemDirection string
 
 // Values of BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItemDirection.
@@ -4549,6 +4518,130 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataRole) Validat
 	}
 
 	return asyncapirt.Invalid("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataRole", fmt.Sprintf("unknown value %v", v))
+}
+
+// State of the pending block trade for current user.
+type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState struct {
+	// State value.
+	Value BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue `json:"value"`
+	// State timestamp.
+	Timestamp int64 `json:"timestamp"`
+}
+
+// UnmarshalJSON decodes BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState", members, "value", "timestamp"); err != nil {
+		return err
+	}
+
+	type plain BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState", err)
+	}
+
+	*v = BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState.
+func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState) Validate() error {
+	if err := v.Value.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "value")
+	}
+
+	return nil
+}
+
+// State value.
+type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue string
+
+// Values of BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue.
+const (
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueInitial  BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue = "initial"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueAccepted BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue = "accepted"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueRejected BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue = "rejected"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueExecuted BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue = "executed"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue) Validate() error {
+	switch v {
+	case BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueInitial, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueAccepted, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueRejected, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValueExecuted:
+		return nil
+	}
+
+	return asyncapirt.Invalid("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue", fmt.Sprintf("unknown value %v", v))
+}
+
+// State of the pending block trade for the other party (optional).
+type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState struct {
+	// State value.
+	Value BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue `json:"value"`
+	// State timestamp.
+	Timestamp int64 `json:"timestamp"`
+}
+
+// UnmarshalJSON decodes BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState", members, "value", "timestamp"); err != nil {
+		return err
+	}
+
+	type plain BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState", err)
+	}
+
+	*v = BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState.
+func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState) Validate() error {
+	if err := v.Value.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "value")
+	}
+
+	return nil
+}
+
+// State value.
+type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue string
+
+// Values of BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue.
+const (
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueInitial  BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue = "initial"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueAccepted BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue = "accepted"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueRejected BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue = "rejected"
+	BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueExecuted BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue = "executed"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue) Validate() error {
+	switch v {
+	case BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueInitial, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueAccepted, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueRejected, BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValueExecuted:
+		return nil
+	}
+
+	return asyncapirt.Invalid("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue", fmt.Sprintf("unknown value %v", v))
 }
 
 type BlockTradeConfirmationsCurrencySubscribeRequestPayload struct {
@@ -4795,16 +4888,15 @@ type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData struct 
 	// Name of the broker associated with the block trade.
 	BrokerName *string `json:"broker_name,omitempty"`
 	// State of the pending block trade for current user.
-	State map[string]any `json:"state"`
+	State BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState `json:"state"`
 	// State of the pending block trade for the other party (optional).
-	CounterpartyState map[string]any `json:"counterparty_state,omitempty"`
+	CounterpartyState *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState `json:"counterparty_state,omitempty"`
 	// Combo instrument identifier
 	ComboID *string `json:"combo_id,omitempty"`
 }
 
 // UnmarshalJSON decodes BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -4812,10 +4904,6 @@ func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData", members, "nonce", "timestamp", "trades", "role", "user_id", "state"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData", members, "nonce", "timestamp", "trades", "app_name", "username", "role", "user_id", "broker_code", "broker_name", "state", "counterparty_state", "combo_id"); err != nil {
 		return err
 	}
 
@@ -4841,6 +4929,14 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData) Val
 	if err := v.Role.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "role")
 	}
+	if err := v.State.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "state")
+	}
+	if v.CounterpartyState != nil {
+		if err := (*v.CounterpartyState).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "counterparty_state")
+		}
+	}
 
 	return nil
 }
@@ -4848,9 +4944,9 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData) Val
 type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem struct {
 	// Unique instrument identifier
 	InstrumentName string `json:"instrument_name"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the maker
 	Direction BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -4858,7 +4954,6 @@ type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesIt
 
 // UnmarshalJSON decodes BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem")
 	if err != nil {
@@ -4866,10 +4961,6 @@ func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTrad
 	}
 
 	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem", members, "instrument_name", "direction", "price", "amount"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem", members, "instrument_name", "direction", "price", "amount"); err != nil {
 		return err
 	}
 
@@ -4894,7 +4985,7 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTrade
 	return nil
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the maker
 type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection string
 
 // Values of BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection.
@@ -4930,6 +5021,130 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataRole)
 	}
 
 	return asyncapirt.Invalid("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataRole", fmt.Sprintf("unknown value %v", v))
+}
+
+// State of the pending block trade for current user.
+type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState struct {
+	// State value.
+	Value BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue `json:"value"`
+	// State timestamp.
+	Timestamp int64 `json:"timestamp"`
+}
+
+// UnmarshalJSON decodes BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState", members, "value", "timestamp"); err != nil {
+		return err
+	}
+
+	type plain BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState", err)
+	}
+
+	*v = BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState.
+func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState) Validate() error {
+	if err := v.Value.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "value")
+	}
+
+	return nil
+}
+
+// State value.
+type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue string
+
+// Values of BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue.
+const (
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueInitial  BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue = "initial"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueAccepted BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue = "accepted"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueRejected BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue = "rejected"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueExecuted BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue = "executed"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue) Validate() error {
+	switch v {
+	case BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueInitial, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueAccepted, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueRejected, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValueExecuted:
+		return nil
+	}
+
+	return asyncapirt.Invalid("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue", fmt.Sprintf("unknown value %v", v))
+}
+
+// State of the pending block trade for the other party (optional).
+type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState struct {
+	// State value.
+	Value BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue `json:"value"`
+	// State timestamp.
+	Timestamp int64 `json:"timestamp"`
+}
+
+// UnmarshalJSON decodes BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState", members, "value", "timestamp"); err != nil {
+		return err
+	}
+
+	type plain BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState", err)
+	}
+
+	*v = BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState.
+func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState) Validate() error {
+	if err := v.Value.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "value")
+	}
+
+	return nil
+}
+
+// State value.
+type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue string
+
+// Values of BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue.
+const (
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueInitial  BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue = "initial"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueAccepted BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue = "accepted"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueRejected BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue = "rejected"
+	BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueExecuted BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue = "executed"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue) Validate() error {
+	switch v {
+	case BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueInitial, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueAccepted, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueRejected, BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValueExecuted:
+		return nil
+	}
+
+	return asyncapirt.Invalid("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue", fmt.Sprintf("unknown value %v", v))
 }
 
 type TradesKindCurrencyIntervalSubscribeRequestPayload struct {
@@ -5034,7 +5249,7 @@ func (v TradesKindCurrencyIntervalSubscribeRequestPayloadParams) Validate() erro
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -5152,7 +5367,7 @@ func (v TradesKindCurrencyIntervalSubscriptionMessagePayloadParams) Validate() e
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -5168,15 +5383,15 @@ type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem struct {
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the taker
 	Direction TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -5187,7 +5402,7 @@ type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem struct {
 	// Optional field (only for trades caused by liquidation): `"M"` when maker side of trade was under liquidation, `"T"` when taker side was under liquidation, `"MT"` when both sides of trade were under liquidation
 	Liquidation *TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemLiquidation `json:"liquidation,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Block trade id - when trade was part of a block trade
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
@@ -5200,11 +5415,12 @@ type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem struct {
 	StarbaseMatchID *int64 `json:"starbase_match_id,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
+	// Leg trades, present when querying only combo trades.
+	Legs []json.RawMessage `json:"legs,omitempty"`
 }
 
 // UnmarshalJSON decodes TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -5212,10 +5428,6 @@ func (v *TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) Unm
 	}
 
 	if err := asyncapirt.RequireKeys("TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "direction", "tick_direction", "index_price", "price", "amount", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "liquidation", "mark_price", "block_trade_id", "block_trade_leg_count", "combo_id", "combo_trade_id", "starbase_match_id", "block_rfq_id"); err != nil {
 		return err
 	}
 
@@ -5248,7 +5460,7 @@ func (v TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) Vali
 	return nil
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the taker
 type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -5410,7 +5622,7 @@ func (v DeribitPriceIndexIndexNameSubscribeRequestPayloadParams) Validate() erro
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 			return err
 		}
 	}
@@ -5526,7 +5738,7 @@ func (v DeribitPriceIndexIndexNameSubscriptionMessagePayloadParams) Validate() e
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 		return err
 	}
 
@@ -5544,7 +5756,6 @@ type DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -5552,10 +5763,6 @@ func (v *DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData) Unmarsh
 	}
 
 	if err := asyncapirt.RequireKeys("DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData", members, "timestamp", "price", "index_name"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("DeribitPriceIndexIndexNameSubscriptionMessagePayloadParamsData", members, "timestamp", "price", "index_name"); err != nil {
 		return err
 	}
 
@@ -5747,7 +5954,7 @@ func (v DeribitPriceRankingIndexNameSubscribeRequestPayloadParams) Validate() er
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_ranking\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_ranking\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 			return err
 		}
 	}
@@ -5865,7 +6072,7 @@ func (v DeribitPriceRankingIndexNameSubscriptionMessagePayloadParams) Validate()
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_ranking\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_ranking\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 		return err
 	}
 
@@ -5889,14 +6096,8 @@ type DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem struct
 
 // UnmarshalJSON decodes DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem", members, "identifier", "enabled", "original_price", "price", "timestamp", "weight"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "DeribitPriceRankingIndexNameSubscriptionMessagePayloadParamsDataItem"); err != nil {
 		return err
 	}
 
@@ -6020,7 +6221,7 @@ func (v DeribitPriceStatisticsIndexNameSubscribeRequestPayloadParams) Validate()
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_statistics\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_price_statistics\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 			return err
 		}
 	}
@@ -6136,7 +6337,7 @@ func (v DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParams) Validat
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_statistics\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_price_statistics\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 		return err
 	}
 
@@ -6159,7 +6360,6 @@ type DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData struct 
 
 // UnmarshalJSON decodes DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -6167,10 +6367,6 @@ func (v *DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData", members, "index_name", "low24h", "high24h", "change24h"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("DeribitPriceStatisticsIndexNameSubscriptionMessagePayloadParamsData", members, "index_name", "low24h", "high24h", "change24h", "fast_market", "high_volatility"); err != nil {
 		return err
 	}
 
@@ -6362,7 +6558,7 @@ func (v DeribitVolatilityIndexIndexNameSubscribeRequestPayloadParams) Validate()
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_volatility_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^deribit_volatility_index\\.(btc_usd|eth_usd)$"); err != nil {
 			return err
 		}
 	}
@@ -6478,7 +6674,7 @@ func (v DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParams) Validat
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_volatility_index\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^deribit_volatility_index\\.(btc_usd|eth_usd)$"); err != nil {
 		return err
 	}
 
@@ -6496,7 +6692,6 @@ type DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData struct 
 
 // UnmarshalJSON decodes DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -6504,10 +6699,6 @@ func (v *DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData) Un
 	}
 
 	if err := asyncapirt.RequireKeys("DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData", members, "timestamp", "volatility", "index_name"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("DeribitVolatilityIndexIndexNameSubscriptionMessagePayloadParamsData", members, "timestamp", "volatility", "index_name"); err != nil {
 		return err
 	}
 
@@ -6653,7 +6844,7 @@ func (v MarkpriceOptionsIndexNameSubscribeRequestPayloadParams) Validate() error
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^markprice\\.options\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^markprice\\.options\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 			return err
 		}
 	}
@@ -6771,7 +6962,7 @@ func (v MarkpriceOptionsIndexNameSubscriptionMessagePayloadParams) Validate() er
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^markprice\\.options\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^markprice\\.options\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 		return err
 	}
 
@@ -6791,14 +6982,8 @@ type MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem struct {
 
 // UnmarshalJSON decodes MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem", members, "instrument_name", "mark_price", "iv", "timestamp"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "MarkpriceOptionsIndexNameSubscriptionMessagePayloadParamsDataItem"); err != nil {
 		return err
 	}
 
@@ -6922,7 +7107,7 @@ func (v EstimatedExpirationPriceIndexNameSubscribeRequestPayloadParams) Validate
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^estimated_expiration_price\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^estimated_expiration_price\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 			return err
 		}
 	}
@@ -7038,7 +7223,7 @@ func (v EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParams) Valid
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^estimated_expiration_price\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^estimated_expiration_price\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
 		return err
 	}
 
@@ -7060,7 +7245,6 @@ type EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData struc
 
 // UnmarshalJSON decodes EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -7068,10 +7252,6 @@ func (v *EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData) 
 	}
 
 	if err := asyncapirt.RequireKeys("EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData", members, "seconds", "price", "is_estimated"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("EstimatedExpirationPriceIndexNameSubscriptionMessagePayloadParamsData", members, "seconds", "price", "is_estimated", "left_ticks", "total_ticks"); err != nil {
 		return err
 	}
 
@@ -7195,7 +7375,7 @@ func (v ChartTradesInstrumentNameResolutionSubscribeRequestPayloadParams) Valida
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^chart\\.trades\\.[^.]+\\.(1|3|5|10|15|30|60|120|180|360|720|1D)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^chart\\.trades\\.[^.]+\\.(1|3|5|10|15|30|60|120|180|360|720|1D|D)$"); err != nil {
 			return err
 		}
 	}
@@ -7311,7 +7491,7 @@ func (v ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParams) Val
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^chart\\.trades\\.[^.]+\\.(1|3|5|10|15|30|60|120|180|360|720|1D)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^chart\\.trades\\.[^.]+\\.(1|3|5|10|15|30|60|120|180|360|720|1D|D)$"); err != nil {
 		return err
 	}
 
@@ -7337,7 +7517,6 @@ type ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData str
 
 // UnmarshalJSON decodes ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -7345,10 +7524,6 @@ func (v *ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData
 	}
 
 	if err := asyncapirt.RequireKeys("ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData", members, "tick", "volume", "cost", "open", "close", "high", "low"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("ChartTradesInstrumentNameResolutionSubscriptionMessagePayloadParamsData", members, "tick", "volume", "cost", "open", "close", "high", "low"); err != nil {
 		return err
 	}
 
@@ -7472,7 +7647,7 @@ func (v UserMmpTriggerIndexNameSubscribeRequestPayloadParams) Validate() error {
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.mmp_trigger\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.mmp_trigger\\.(btc_usd|eth_usd|btc_usdc|eth_usdc|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|doge_usdc|dot_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|ton_usdc|trx_usdc|trump_usdc|uni_usdc|xrp_usdc|usde_usdc|buidl_usdc|btcdvol_usdc|ethdvol_usdc|btc_usdt|eth_usdt|all)$"); err != nil {
 			return err
 		}
 	}
@@ -7588,7 +7763,7 @@ func (v UserMmpTriggerIndexNameSubscriptionMessagePayloadParams) Validate() erro
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.mmp_trigger\\.(btc_usd|eth_usd|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|btc_usdc|btcdvol_usdc|buidl_usdc|doge_usdc|dot_usdc|eurr_usdc|eth_usdc|ethdvol_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|steth_usdc|ton_usdc|trump_usdc|trx_usdc|uni_usdc|usde_usdc|usyc_usdc|xrp_usdc|btc_usdt|eth_usdt|eurr_usdt|sol_usdt|steth_usdt|usdc_usdt|usde_usdt|btc_eurr|btc_usde|btc_usyc|eth_btc|eth_eurr|eth_usde|eth_usyc|steth_eth|paxg_btc|drbfix-btc_usdc|drbfix-eth_usdc)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.mmp_trigger\\.(btc_usd|eth_usd|btc_usdc|eth_usdc|ada_usdc|algo_usdc|avax_usdc|bch_usdc|bnb_usdc|doge_usdc|dot_usdc|hype_usdc|link_usdc|ltc_usdc|near_usdc|paxg_usdc|shib_usdc|sol_usdc|ton_usdc|trx_usdc|trump_usdc|uni_usdc|xrp_usdc|usde_usdc|buidl_usdc|btcdvol_usdc|ethdvol_usdc|btc_usdt|eth_usdt|all)$"); err != nil {
 		return err
 	}
 
@@ -7608,7 +7783,6 @@ type UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -7616,10 +7790,6 @@ func (v *UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData) UnmarshalJ
 	}
 
 	if err := asyncapirt.RequireKeys("UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData", members, "frozen_until"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserMmpTriggerIndexNameSubscriptionMessagePayloadParamsData", members, "frozen_until", "index_name", "mmp_group", "block_rfq"); err != nil {
 		return err
 	}
 
@@ -7978,7 +8148,6 @@ type UserPortfolioCurrencySubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserPortfolioCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserPortfolioCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserPortfolioCurrencySubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -7986,10 +8155,6 @@ func (v *UserPortfolioCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSO
 	}
 
 	if err := asyncapirt.RequireKeys("UserPortfolioCurrencySubscriptionMessagePayloadParamsData", members, "currency", "equity", "maintenance_margin", "initial_margin", "available_funds", "available_withdrawal_funds", "balance", "margin_balance", "session_upl", "session_rpl", "total_pl", "options_pl", "options_session_rpl", "options_session_upl", "options_delta", "options_gamma", "options_theta", "options_value", "options_vega", "futures_pl", "futures_session_rpl", "futures_session_upl", "delta_total_map", "options_gamma_map", "options_theta_map", "options_vega_map", "projected_delta_total", "portfolio_margining_enabled", "cross_collateral_enabled", "margin_model", "projected_maintenance_margin"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserPortfolioCurrencySubscriptionMessagePayloadParamsData", members, "currency", "equity", "maintenance_margin", "initial_margin", "available_funds", "available_withdrawal_funds", "locked_balance", "balance", "fee_balance", "margin_balance", "session_upl", "session_rpl", "total_pl", "options_pl", "options_session_rpl", "options_session_upl", "options_delta", "options_gamma", "options_theta", "options_value", "options_vega", "futures_pl", "futures_session_rpl", "futures_session_upl", "delta_total", "delta_total_map", "options_gamma_map", "options_theta_map", "options_vega_map", "projected_delta_total", "portfolio_margining_enabled", "cross_collateral_enabled", "margin_model", "total_equity_usd", "total_initial_margin_usd", "total_maintenance_margin_usd", "total_margin_balance_usd", "total_delta_total_usd", "projected_initial_margin", "projected_maintenance_margin", "close_out_margin", "projected_close_out_margin", "additional_reserve", "spot_reserve"); err != nil {
 		return err
 	}
 
@@ -8113,7 +8278,7 @@ func (v UserTradesInstrumentNameIntervalSubscribeRequestPayloadParams) Validate(
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -8231,7 +8396,7 @@ func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParams) Valida
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -8247,7 +8412,7 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -8260,16 +8425,16 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -8299,7 +8464,7 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -8312,7 +8477,7 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -8326,12 +8491,11 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -8339,10 +8503,6 @@ func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIte
 	}
 
 	if err := asyncapirt.RequireKeys("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -8398,8 +8558,10 @@ func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -8464,7 +8626,7 @@ func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	return asyncapirt.Invalid("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -8588,8 +8750,7 @@ func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	return asyncapirt.Invalid("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations struct {
+type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -8597,40 +8758,35 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTra
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations")
+func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations
+	type plain UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", err)
 	}
 
-	*v = UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations(decoded)
+	*v = UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations.
-func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem.
+func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -8641,7 +8797,7 @@ func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 }
 
 // Optional client allocation info for brokers.
-type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo struct {
+type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -8650,27 +8806,27 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTra
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo
+	type plain UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo(decoded)
+	*v = UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo.
-func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo.
+func (v UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -8777,7 +8933,7 @@ func (v UserTradesKindCurrencyIntervalSubscribeRequestPayloadParams) Validate() 
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.trades\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -8895,7 +9051,7 @@ func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParams) Validate
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.trades\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -8911,7 +9067,7 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -8924,16 +9080,16 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -8963,7 +9119,7 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -8976,7 +9132,7 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -8990,12 +9146,11 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -9003,10 +9158,6 @@ func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem)
 	}
 
 	if err := asyncapirt.RequireKeys("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -9062,8 +9213,10 @@ func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) 
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -9128,7 +9281,7 @@ func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAd
 	return asyncapirt.Invalid("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -9252,8 +9405,7 @@ func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemSt
 	return asyncapirt.Invalid("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations struct {
+type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -9261,40 +9413,35 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTrade
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations")
+func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations
+	type plain UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", err)
 	}
 
-	*v = UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations(decoded)
+	*v = UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations.
-func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem.
+func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -9305,7 +9452,7 @@ func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTr
 }
 
 // Optional client allocation info for brokers.
-type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo struct {
+type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -9314,27 +9461,27 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTrade
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo
+	type plain UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo(decoded)
+	*v = UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo.
-func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo.
+func (v UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -9441,7 +9588,7 @@ func (v UserComboTradesInstrumentNameIntervalSubscribeRequestPayloadParams) Vali
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.combo_trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.combo_trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -9559,7 +9706,7 @@ func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParams) V
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.combo_trades\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.combo_trades\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -9575,7 +9722,7 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -9588,16 +9735,16 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -9627,7 +9774,7 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -9640,7 +9787,7 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -9654,12 +9801,11 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -9667,10 +9813,6 @@ func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDa
 	}
 
 	if err := asyncapirt.RequireKeys("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -9726,8 +9868,10 @@ func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDat
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -9792,7 +9936,7 @@ func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDat
 	return asyncapirt.Invalid("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -9916,8 +10060,7 @@ func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDat
 	return asyncapirt.Invalid("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations struct {
+type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -9925,40 +10068,35 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations")
+func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations
+	type plain UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", err)
 	}
 
-	*v = UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations(decoded)
+	*v = UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations.
-func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem.
+func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -9969,7 +10107,7 @@ func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDat
 }
 
 // Optional client allocation info for brokers.
-type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo struct {
+type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -9978,27 +10116,27 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo
+	type plain UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo(decoded)
+	*v = UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo.
-func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo.
+func (v UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -10105,7 +10243,7 @@ func (v UserComboTradesKindCurrencyIntervalSubscribeRequestPayloadParams) Valida
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.combo_trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.combo_trades\\.(future_combo|option_combo|combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -10223,7 +10361,7 @@ func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParams) Val
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.combo_trades\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.combo_trades\\.(future_combo|option_combo|combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -10239,7 +10377,7 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -10252,16 +10390,16 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -10291,7 +10429,7 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -10304,7 +10442,7 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -10318,12 +10456,11 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -10331,10 +10468,6 @@ func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsData
 	}
 
 	if err := asyncapirt.RequireKeys("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -10390,8 +10523,10 @@ func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataI
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -10456,7 +10591,7 @@ func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataI
 	return asyncapirt.Invalid("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection string
 
 // Values of UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection.
@@ -10580,8 +10715,7 @@ func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataI
 	return asyncapirt.Invalid("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations struct {
+type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -10589,40 +10723,35 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations")
+func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations
+	type plain UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem", err)
 	}
 
-	*v = UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations(decoded)
+	*v = UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations.
-func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem.
+func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -10633,7 +10762,7 @@ func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataI
 }
 
 // Optional client allocation info for brokers.
-type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo struct {
+type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -10642,27 +10771,27 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo
+	type plain UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo(decoded)
+	*v = UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo.
-func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo.
+func (v UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -10769,7 +10898,7 @@ func (v InstrumentCreationKindCurrencySubscribeRequestPayloadParams) Validate() 
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^instrument\\.creation\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^instrument\\.creation\\.(future|option|spot|future_combo|option_combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
 			return err
 		}
 	}
@@ -10780,7 +10909,7 @@ func (v InstrumentCreationKindCurrencySubscribeRequestPayloadParams) Validate() 
 type InstrumentCreationKindCurrencySubscriptionMessagePayload struct {
 	Jsonrpc string `json:"jsonrpc"`
 	Method  string `json:"method"`
-	// The actual notification data
+	// Response containing notification data
 	Params InstrumentCreationKindCurrencySubscriptionMessagePayloadParams `json:"params"`
 }
 
@@ -10845,11 +10974,10 @@ func (v InstrumentCreationKindCurrencySubscriptionMessagePayload) Validate() err
 	return nil
 }
 
-// The actual notification data
+// Response containing notification data
 type InstrumentCreationKindCurrencySubscriptionMessagePayloadParams struct {
-	// The actual notification data
-	Data    map[string]any `json:"data"`
-	Channel string         `json:"channel"`
+	Data    InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData `json:"data"`
+	Channel string                                                             `json:"channel"`
 }
 
 // UnmarshalJSON decodes InstrumentCreationKindCurrencySubscriptionMessagePayloadParams strictly. Required properties must be
@@ -10883,11 +11011,386 @@ func (v *InstrumentCreationKindCurrencySubscriptionMessagePayloadParams) Unmarsh
 
 // Validate checks the constraints the schema declares for InstrumentCreationKindCurrencySubscriptionMessagePayloadParams.
 func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParams) Validate() error {
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^instrument\\.creation\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
+	if err := v.Data.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "data")
+	}
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^instrument\\.creation\\.(future|option|spot|future_combo|option_combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
 		return err
 	}
 
 	return nil
+}
+
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData struct {
+	// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
+	Kind InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind `json:"kind"`
+	// Optional (omitted for spot). Settlement currency for the instrument. For inverse (reversed) contracts this is the base coin (e.g. BTC); for linear contracts it is typically the quote currency (e.g. USDC).
+	SettlementCurrency *string `json:"settlement_currency,omitempty"`
+	// Counter currency of the instrument's currency pair (e.g. USD or USDC).
+	CounterCurrency *string `json:"counter_currency,omitempty"`
+	// The underlying currency being traded. Not limited to BTC/ETH , altcoins, RWAs, and other listed bases are returned as their currency symbol.
+	BaseCurrency string `json:"base_currency"`
+	// The currency in which the instrument prices are quoted. Inverse options and futures are typically quoted in USD; linear and spot instruments are typically quoted in USDC or the quote coin.
+	QuoteCurrency string `json:"quote_currency"`
+	// Minimum amount for trading and the quantity increment (step size) for order amounts. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	//
+	// This is the JSON-RPC name for the Starbase quantity increment (`qty_tick_size` on Starbase REST, SBE `minOrderQuantity × 10^quantityExponent`). JSON-RPC does not return a `qty_tick_size` field. Distinct from `contract_size`; do not assume the two values are equal.
+	MinTradeAmount float64 `json:"min_trade_amount"`
+	// Unique instrument identifier
+	InstrumentName string `json:"instrument_name"`
+	// Instrument ID
+	InstrumentID *int64 `json:"instrument_id,omitempty"`
+	// `true` while the order book is visible (`open`, `settlement`, `locked`, or `halted`). `false` for `delivered`, `inactive`, and `archivized`.
+	//
+	// This is not the same as tradable. Only `state` `open` accepts new orders; `locked` allows cancels only, and `settlement` / `halted` reject new orders even when `is_active` is `true`.
+	IsActive bool `json:"is_active"`
+	// Optional (omitted for spot). Calendar unit of the instrument's settlement/expiration period (`minute`, `hour`, `day`, `week`, `month`, or `perpetual`). Biweekly contracts still report `week`.
+	SettlementPeriod *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod `json:"settlement_period,omitempty"`
+	// The time when the instrument was first created (milliseconds since the UNIX epoch).
+	CreationTimestamp int64 `json:"creation_timestamp"`
+	// Specifies minimal price change and, as follows, the number of decimal places for instrument prices.
+	TickSize      float64                                                                          `json:"tick_size"`
+	TickSizeSteps *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps `json:"tick_size_steps,omitempty"`
+	// The time when the instrument will expire (milliseconds since the UNIX epoch). Present for perpetuals as well (a far-future timestamp); do not treat a non-zero value as proof the instrument is dated.
+	ExpirationTimestamp int64 `json:"expiration_timestamp"`
+	// The strike value (only for options).
+	Strike *float64 `json:"strike,omitempty"`
+	// The option type (only for options).
+	OptionType *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType `json:"option_type,omitempty"`
+	// Future type (only for futures)(field is deprecated and will be removed in the future, `instrument_type` should be used instead).
+	FutureType *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType `json:"future_type,omitempty"`
+	// Type of the instrument. `linear` or `reversed`. Present for options and spots as well as futures; do not assume it is futures-only.
+	InstrumentType *string `json:"instrument_type,omitempty"`
+	// Contract size for the instrument, expressed in the same unit as the order amount. For inverse (reversed) futures and perpetuals this is USD , BTC-PERPETUAL has a contract size of 10 USD. For options, spots, and for linear futures and perpetuals it is the base currency coin , BTC_USDC-PERPETUAL has a contract size of 0.0001 BTC. Note that on an inverse instrument `base_currency` identifies the underlying and settlement coin and does not indicate the unit of `contract_size`.
+	//
+	// Distinct from `min_trade_amount`. `contract_size` converts between `amount` and `contracts`. Starbase matching uses the quantity increment, which JSON-RPC exposes as `min_trade_amount` (Starbase REST name: `qty_tick_size`). The two values may currently coincide on some instruments, but that is not a guarantee.
+	ContractSize float64 `json:"contract_size"`
+	// Lot size for instrument, used as the unit for fee lot counting. Omitted when the instrument has no configured lot size.
+	LotSize *float64 `json:"lot_size,omitempty"`
+	// Maker commission for instrument.
+	MakerCommission *float64 `json:"maker_commission,omitempty"`
+	// Taker commission for instrument.
+	TakerCommission *float64 `json:"taker_commission,omitempty"`
+	// Maximal liquidation trade commission for instrument (only for futures).
+	MaxLiquidationCommission *float64 `json:"max_liquidation_commission,omitempty"`
+	// Optional. Maximum maker commission. Returned only when `extended=true` on `public/get_instruments`.
+	MakerMaxCommission *float64 `json:"maker_max_commission,omitempty"`
+	// Optional. Maximum taker commission. Returned only when `extended=true` on `public/get_instruments`.
+	TakerMaxCommission *float64 `json:"taker_max_commission,omitempty"`
+	// Optional. Maximum liquidation commission. Returned only when `extended=true` on `public/get_instruments`. Distinct from `max_liquidation_commission`, which is present on futures without `extended`.
+	LiquidationMaxCommission *float64 `json:"liquidation_max_commission,omitempty"`
+	// Optional. Maximum settlement commission. Returned only when `extended=true` on `public/get_instruments`.
+	SettlementMaxCommission *float64 `json:"settlement_max_commission,omitempty"`
+	// Optional (futures only). Trading bandwidth fraction used in mark-price logic. Returned only when `extended=true` on `public/get_instruments`.
+	TradingBandwidthFraction *float64 `json:"trading_bandwidth_fraction,omitempty"`
+	// Optional (perpetual futures only). Perpetual funding dampener. Returned only when `extended=true` on `public/get_instruments`. The JSON field name is spelled `dempener`.
+	PerpetualDempener *float64 `json:"perpetual_dempener,omitempty"`
+	// Optional (perpetual futures only). Maximum funding rate. Returned only when `extended=true` on `public/get_instruments`.
+	PerpetualMaxFunding *float64 `json:"perpetual_max_funding,omitempty"`
+	// Block Trade commission for instrument. Omitted for spot routed to Coinbase Exchange (CSR), which does not support block trades.
+	BlockTradeCommission *float64 `json:"block_trade_commission,omitempty"`
+	// Specifies minimal price change for block trading.
+	BlockTradeTickSize *float64 `json:"block_trade_tick_size,omitempty"`
+	// Minimum amount for block trading.
+	BlockTradeMinTradeAmount *float64 `json:"block_trade_min_trade_amount,omitempty"`
+	// Maximal leverage for the default risk profile (futures). For spot, present only on cross pairs when spot margin loans are enabled: derived from the loan initial-margin rate for borrowable USDC-quoted pairs, otherwise 1. Omitted on other spots and options.
+	MaxLeverage *int64 `json:"max_leverage,omitempty"`
+	// Maximal leverage for the non-default risk profile (futures only). Omitted on options and spots.
+	MaxNonDefaultLeverage *int64 `json:"max_non_default_leverage,omitempty"`
+	// Name of price index that is used for this instrument
+	PriceIndex string `json:"price_index"`
+	// The type of the underlying asset.
+	UnderlyingType InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType `json:"underlying_type"`
+	// The state of the order book. Represents the current lifecycle stage of the instrument.
+	//
+	// **State Lifecycle and Meanings:**
+	//
+	// - `open`: Default state for running books. In this state book is accepting new orders, edits, cancels; prices should be updated, trading is live.
+	// - `settlement`: Books enters to this state during settlement/delivery. New orders, edits, cancels are not accepted. After this state normally next state should be `open` if it was settlement, or `delivered` if it was delivery. On enter to this state good till day orders in book are canceled.
+	// - `delivered`: Final state of book that has been delivered. New orders, edits, cancels are not accepted. After some time book process will be terminated and, instrument moved to `expired_instruments` and its `instrument_state` will become archivized. On enter to this all open orders in book are canceled.
+	// - `inactive`: After a book is deactivated, this state is set on book. New orders, edits, cancels are not accepted. On enter to this all open orders in book are canceled. Book in this state is not considered as open. This can be also final state for book.
+	// - `locked`: New orders, edits, are not accepted, only cancels ARE accepted. In some cases when configured books can start as locked or it may become locked on admin request. Settlement is possible on locked books.
+	// - `halted`: The state that books enter as a result of an error. Settlement is not possible when there is at least one book in this state.
+	// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
+	State *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState `json:"state,omitempty"`
+	// Internal identifier for the base currency. Absent if the base currency does not have an assigned identifier.
+	BaseCurrencyUUID *string `json:"base_currency_uuid,omitempty"`
+	// Internal identifier for the quote currency. Absent if the quote currency does not have an assigned identifier.
+	QuoteCurrencyUUID *string `json:"quote_currency_uuid,omitempty"`
+	// Numeric identifier of the price index used by this instrument. Derived from the index currency pair, so all instruments sharing the same `price_index` also share the same `index_id`.
+	IndexID int64 `json:"index_id"`
+	// Product group classification of the instrument's base currency. Determines gateway and multicast channel assignment , see [Underlying Tiers](https://docs.deribit.com/starbase/underlying-tiers).
+	ProductGroup InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup `json:"product_group"`
+	// Optional (only for spot routed to Coinbase Exchange). When present it is always `true`, meaning orders on this instrument are routed to Coinbase Exchange (CBE) for matching instead of the native Deribit matching engine. The field is omitted for every other instrument, so test for its presence rather than for a `false` value.
+	IsCsr *bool `json:"is_csr,omitempty"`
+	// Optional (only for spot routed to Coinbase Exchange). Alias of `is_csr` added by `public/get_instrument` and `public/get_instruments`; other surfaces that return instrument metadata, such as the `instrument.creation.{kind}.{currency}` notification, carry `is_csr` only. When present it is always `true` and is omitted for every other instrument, so test for its presence rather than for a `false` value.
+	IsCbeRouted *bool `json:"is_cbe_routed,omitempty"`
+	// The time when the instrument was created (milliseconds since the UNIX epoch).
+	Timestamp int64 `json:"timestamp"`
+}
+
+// UnmarshalJSON decodes InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData", members, "kind", "base_currency", "quote_currency", "min_trade_amount", "instrument_name", "is_active", "creation_timestamp", "tick_size", "expiration_timestamp", "contract_size", "price_index", "underlying_type", "index_id", "product_group", "timestamp"); err != nil {
+		return err
+	}
+
+	type plain InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData", err)
+	}
+
+	*v = InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsData) Validate() error {
+	if err := v.Kind.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "kind")
+	}
+	if v.SettlementPeriod != nil {
+		if err := (*v.SettlementPeriod).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "settlement_period")
+		}
+	}
+	if v.TickSizeSteps != nil {
+		if err := (*v.TickSizeSteps).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "tick_size_steps")
+		}
+	}
+	if v.OptionType != nil {
+		if err := (*v.OptionType).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "option_type")
+		}
+	}
+	if v.FutureType != nil {
+		if err := (*v.FutureType).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "future_type")
+		}
+	}
+	if err := v.UnderlyingType.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "underlying_type")
+	}
+	if v.State != nil {
+		if err := (*v.State).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "state")
+		}
+	}
+	if err := v.ProductGroup.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "product_group")
+	}
+
+	return nil
+}
+
+// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindFuture      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind = "future"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindOption      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind = "option"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindSpot        InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind = "spot"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindFutureCombo InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind = "future_combo"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindOptionCombo InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind = "option_combo"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindFuture, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindOption, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindSpot, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindFutureCombo, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKindOptionCombo:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataKind", fmt.Sprintf("unknown value %v", v))
+}
+
+// Optional (omitted for spot). Calendar unit of the instrument's settlement/expiration period (`minute`, `hour`, `day`, `week`, `month`, or `perpetual`). Biweekly contracts still report `week`.
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodMinute    InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "minute"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodHour      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "hour"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodDay       InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "day"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodWeek      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "week"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodMonth     InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "month"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodPerpetual InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod = "perpetual"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodMinute, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodHour, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodDay, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodWeek, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodMonth, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriodPerpetual:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataSettlementPeriod", fmt.Sprintf("unknown value %v", v))
+}
+
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps struct {
+	// The price from which the increased tick size applies
+	AbovePrice *float64 `json:"above_price,omitempty"`
+	// Tick size to be used above the price. It must be multiple of the minimum tick size.
+	TickSize *float64 `json:"tick_size,omitempty"`
+}
+
+// UnmarshalJSON decodes InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps"); err != nil {
+		return err
+	}
+
+	type plain InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps", err)
+	}
+
+	*v = InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataTickSizeSteps) Validate() error {
+
+	return nil
+}
+
+// The option type (only for options).
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionTypeCall InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType = "call"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionTypePut  InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType = "put"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionTypeCall, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionTypePut:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataOptionType", fmt.Sprintf("unknown value %v", v))
+}
+
+// Future type (only for futures)(field is deprecated and will be removed in the future, `instrument_type` should be used instead).
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureTypeLinear   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType = "linear"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureTypeReversed InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType = "reversed"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureTypeLinear, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureTypeReversed:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataFutureType", fmt.Sprintf("unknown value %v", v))
+}
+
+// The type of the underlying asset.
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCrypto         InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "crypto"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquity         InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "equity"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodity      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "commodity"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypePreipo         InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "preipo"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquityEtf      InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "equity_etf"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCryptoIndex    InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "crypto_index"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeAdr            InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "adr"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeForeignEquity  InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "foreign_equity"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquityIndex    InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "equity_index"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodityIndex InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "commodity_index"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodityEtf   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "commodity_etf"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeOtc            InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType = "otc"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCrypto, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquity, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodity, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypePreipo, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquityEtf, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCryptoIndex, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeAdr, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeForeignEquity, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeEquityIndex, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodityIndex, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeCommodityEtf, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingTypeOtc:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataUnderlyingType", fmt.Sprintf("unknown value %v", v))
+}
+
+// The state of the order book. Represents the current lifecycle stage of the instrument.
+//
+// **State Lifecycle and Meanings:**
+//
+// - `open`: Default state for running books. In this state book is accepting new orders, edits, cancels; prices should be updated, trading is live.
+// - `settlement`: Books enters to this state during settlement/delivery. New orders, edits, cancels are not accepted. After this state normally next state should be `open` if it was settlement, or `delivered` if it was delivery. On enter to this state good till day orders in book are canceled.
+// - `delivered`: Final state of book that has been delivered. New orders, edits, cancels are not accepted. After some time book process will be terminated and, instrument moved to `expired_instruments` and its `instrument_state` will become archivized. On enter to this all open orders in book are canceled.
+// - `inactive`: After a book is deactivated, this state is set on book. New orders, edits, cancels are not accepted. On enter to this all open orders in book are canceled. Book in this state is not considered as open. This can be also final state for book.
+// - `locked`: New orders, edits, are not accepted, only cancels ARE accepted. In some cases when configured books can start as locked or it may become locked on admin request. Settlement is possible on locked books.
+// - `halted`: The state that books enter as a result of an error. Settlement is not possible when there is at least one book in this state.
+// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateOpen       InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "open"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateSettlement InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "settlement"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateDelivered  InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "delivered"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateInactive   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "inactive"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateLocked     InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "locked"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateHalted     InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "halted"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateArchivized InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState = "archivized"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateOpen, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateSettlement, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateDelivered, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateInactive, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateLocked, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateHalted, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataStateArchivized:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataState", fmt.Sprintf("unknown value %v", v))
+}
+
+// Product group classification of the instrument's base currency. Determines gateway and multicast channel assignment , see [Underlying Tiers](https://docs.deribit.com/starbase/underlying-tiers).
+type InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup string
+
+// Values of InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup.
+const (
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupBtc   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup = "BTC"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupEth   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup = "ETH"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupTier2 InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup = "TIER_2"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupTier3 InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup = "TIER_3"
+	InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupRwa   InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup = "RWA"
+)
+
+// Validate reports whether v is one of the values the schema lists.
+func (v InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup) Validate() error {
+	switch v {
+	case InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupBtc, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupEth, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupTier2, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupTier3, InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroupRwa:
+		return nil
+	}
+
+	return asyncapirt.Invalid("InstrumentCreationKindCurrencySubscriptionMessagePayloadParamsDataProductGroup", fmt.Sprintf("unknown value %v", v))
 }
 
 type InstrumentStateKindCurrencySubscribeRequestPayload struct {
@@ -10992,7 +11495,7 @@ func (v InstrumentStateKindCurrencySubscribeRequestPayloadParams) Validate() err
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^instrument\\.state\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^instrument\\.state\\.(future|option|spot|future_combo|option_combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
 			return err
 		}
 	}
@@ -11108,7 +11611,7 @@ func (v InstrumentStateKindCurrencySubscriptionMessagePayloadParams) Validate() 
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^instrument\\.state\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^instrument\\.state\\.(future|option|spot|future_combo|option_combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
 		return err
 	}
 
@@ -11136,14 +11639,8 @@ type InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData", members, "timestamp", "state", "instrument_name"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "InstrumentStateKindCurrencySubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -11456,8 +11953,8 @@ type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData struct {
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -11531,12 +12028,12 @@ type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData struct {
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
@@ -11547,7 +12044,6 @@ type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -11555,10 +12051,6 @@ func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData) Unmars
 	}
 
 	if err := asyncapirt.RequireKeys("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -11593,6 +12085,9 @@ func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData) Validat
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -11606,11 +12101,6 @@ func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsData) Validat
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -11728,6 +12218,110 @@ func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataDirection
 	return asyncapirt.Invalid("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataAdvanced string
 
@@ -11795,35 +12389,6 @@ func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataCancelRea
 	}
 
 	return asyncapirt.Invalid("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataCancelReason", fmt.Sprintf("unknown value %v", v))
-}
-
-// The Ids of the orders that will be triggered if the order is filled
-type UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds", err)
-	}
-
-	*v = UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds.
-func (v UserOrdersInstrumentNameRawSubscriptionMessagePayloadParamsDataOtoOrderIds) Validate() error {
-
-	return nil
 }
 
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
@@ -11948,7 +12513,7 @@ func (v UserOrdersInstrumentNameIntervalSubscribeRequestPayloadParams) Validate(
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.[^.]+\\.(100ms|agg2)$"); err != nil {
 			return err
 		}
 	}
@@ -12100,8 +12665,8 @@ type UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -12175,23 +12740,21 @@ type UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
 	// `true` if the order is an order that can trigger an OCO pair, otherwise not present.
-	IsPrimaryOtoco *bool    `json:"is_primary_otoco,omitempty"`
-	MaxShow        *float64 `json:"max_show,omitempty"`
+	IsPrimaryOtoco *bool `json:"is_primary_otoco,omitempty"`
 }
 
 // UnmarshalJSON decodes UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -12199,10 +12762,6 @@ func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIte
 	}
 
 	if err := asyncapirt.RequireKeys("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -12237,6 +12796,9 @@ func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -12250,11 +12812,6 @@ func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -12372,6 +12929,110 @@ func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	return asyncapirt.Invalid("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemAdvanced string
 
@@ -12439,35 +13100,6 @@ func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem
 	}
 
 	return asyncapirt.Invalid("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemCancelReason", fmt.Sprintf("unknown value %v", v))
-}
-
-// The Ids of the orders that will be triggered if the order is filled
-type UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds", err)
-	}
-
-	*v = UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds.
-func (v UserOrdersInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds) Validate() error {
-
-	return nil
 }
 
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
@@ -12592,7 +13224,7 @@ func (v UserOrdersKindCurrencyRawSubscribeRequestPayloadParams) Validate() error
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.raw$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.raw$"); err != nil {
 			return err
 		}
 	}
@@ -12708,7 +13340,7 @@ func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParams) Validate() er
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.orders\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.raw$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.orders\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.raw$"); err != nil {
 		return err
 	}
 
@@ -12742,8 +13374,8 @@ type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData struct {
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -12817,12 +13449,12 @@ type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData struct {
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
@@ -12833,7 +13465,6 @@ type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -12841,10 +13472,6 @@ func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData) Unmarsha
 	}
 
 	if err := asyncapirt.RequireKeys("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -12879,6 +13506,9 @@ func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData) Validate(
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -12892,11 +13522,6 @@ func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsData) Validate(
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -13014,6 +13639,110 @@ func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataDirection) 
 	return asyncapirt.Invalid("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataAdvanced string
 
@@ -13081,35 +13810,6 @@ func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataCancelReaso
 	}
 
 	return asyncapirt.Invalid("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataCancelReason", fmt.Sprintf("unknown value %v", v))
-}
-
-// The Ids of the orders that will be triggered if the order is filled
-type UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds", err)
-	}
-
-	*v = UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds.
-func (v UserOrdersKindCurrencyRawSubscriptionMessagePayloadParamsDataOtoOrderIds) Validate() error {
-
-	return nil
 }
 
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
@@ -13234,7 +13934,7 @@ func (v UserOrdersKindCurrencyIntervalSubscribeRequestPayloadParams) Validate() 
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.orders\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(100ms|agg2)$"); err != nil {
 			return err
 		}
 	}
@@ -13352,7 +14052,7 @@ func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParams) Validate
 			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
 		}
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.orders\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.orders\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(100ms|agg2)$"); err != nil {
 		return err
 	}
 
@@ -13386,8 +14086,8 @@ type UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -13461,23 +14161,21 @@ type UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
 	// `true` if the order is an order that can trigger an OCO pair, otherwise not present.
-	IsPrimaryOtoco *bool    `json:"is_primary_otoco,omitempty"`
-	MaxShow        *float64 `json:"max_show,omitempty"`
+	IsPrimaryOtoco *bool `json:"is_primary_otoco,omitempty"`
 }
 
 // UnmarshalJSON decodes UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem")
 	if err != nil {
@@ -13485,10 +14183,6 @@ func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem)
 	}
 
 	if err := asyncapirt.RequireKeys("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -13523,6 +14217,9 @@ func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) 
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -13536,11 +14233,6 @@ func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem) 
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -13658,6 +14350,110 @@ func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDi
 	return asyncapirt.Invalid("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemAdvanced string
 
@@ -13725,35 +14521,6 @@ func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemCa
 	}
 
 	return asyncapirt.Invalid("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemCancelReason", fmt.Sprintf("unknown value %v", v))
-}
-
-// The Ids of the orders that will be triggered if the order is filled
-type UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds", err)
-	}
-
-	*v = UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds.
-func (v UserOrdersKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemOtoOrderIds) Validate() error {
-
-	return nil
 }
 
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
@@ -13878,7 +14645,7 @@ func (v UserChangesInstrumentNameIntervalSubscribeRequestPayloadParams) Validate
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.changes\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.changes\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -13994,7 +14761,7 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParams) Valid
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.changes\\.[^.]+\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.changes\\.[^.]+\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -14006,20 +14773,13 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData struc
 	InstrumentName *string                                                                              `json:"instrument_name,omitempty"`
 	Trades         []UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem    `json:"trades,omitempty"`
 	Orders         []UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem    `json:"orders,omitempty"`
-	Position       *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition       `json:"position,omitempty"`
 	Positions      []UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem `json:"positions,omitempty"`
 }
 
 // UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "trades", "orders", "position", "positions"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -14051,11 +14811,6 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsData) V
 			}
 		}
 	}
-	if v.Position != nil {
-		if err := (*v.Position).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "position")
-		}
-	}
 	if v.Positions != nil {
 		for i0, item0 := range v.Positions {
 			if err := item0.Validate(); err != nil {
@@ -14076,7 +14831,7 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -14089,16 +14844,16 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -14128,7 +14883,7 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -14141,7 +14896,7 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -14155,12 +14910,11 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem")
 	if err != nil {
@@ -14168,10 +14922,6 @@ func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTr
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -14227,8 +14977,10 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTra
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -14293,7 +15045,7 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTra
 	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection string
 
 // Values of UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection.
@@ -14417,8 +15169,7 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTra
 	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations struct {
+type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -14426,40 +15177,35 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations")
+func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations
+	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem", err)
 	}
 
-	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations(decoded)
+	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -14470,7 +15216,7 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTra
 }
 
 // Optional client allocation info for brokers.
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo struct {
+type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -14479,27 +15225,27 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo
+	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo(decoded)
+	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -14531,8 +15277,8 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrders
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -14606,12 +15352,12 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrders
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
@@ -14622,7 +15368,6 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrders
 
 // UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem")
 	if err != nil {
@@ -14630,10 +15375,6 @@ func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOr
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItem", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -14668,6 +15409,9 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrd
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -14681,11 +15425,6 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrd
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -14803,6 +15542,110 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrd
 	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemAdvanced string
 
@@ -14872,35 +15715,6 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrd
 	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemCancelReason", fmt.Sprintf("unknown value %v", v))
 }
 
-// The Ids of the orders that will be triggered if the order is filled
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds", err)
-	}
-
-	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds) Validate() error {
-
-	return nil
-}
-
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition string
 
@@ -14919,140 +15733,6 @@ func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrd
 	}
 
 	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition", fmt.Sprintf("unknown value %v", v))
-}
-
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition struct {
-	// Unique instrument identifier
-	InstrumentName string `json:"instrument_name"`
-	// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
-	Kind UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind `json:"kind"`
-	// Unique user identifier
-	UserID int64 `json:"user_id"`
-	// Average price of trades that built this position
-	AveragePrice float64 `json:"average_price"`
-	// Direction: `buy`, `sell` or `zero`
-	Direction UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection `json:"direction"`
-	// Current mark price for position's instrument
-	MarkPrice float64 `json:"mark_price"`
-	// Delta parameter
-	Delta float64 `json:"delta"`
-	// Only for options, Gamma parameter
-	Gamma *float64 `json:"gamma,omitempty"`
-	// Only for options, Vega parameter
-	Vega *float64 `json:"vega,omitempty"`
-	// Only for options, Theta parameter
-	Theta *float64 `json:"theta,omitempty"`
-	// Current index price
-	IndexPrice float64 `json:"index_price"`
-	// Initial margin
-	InitialMargin float64 `json:"initial_margin"`
-	// Maintenance margin
-	MaintenanceMargin float64 `json:"maintenance_margin"`
-	// Optional (not added for spot). Last settlement price for position's instrument 0 if instrument wasn't settled yet
-	SettlementPrice *float64 `json:"settlement_price,omitempty"`
-	// Profit or loss from position
-	TotalProfitLoss float64 `json:"total_profit_loss"`
-	// Floating profit or loss
-	FloatingProfitLoss float64 `json:"floating_profit_loss"`
-	// Realized profit or loss
-	RealizedProfitLoss float64 `json:"realized_profit_loss"`
-	// Position size for futures size in quote currency (e.g. USD), for options size is in base currency (e.g. BTC)
-	Size float64 `json:"size"`
-	// Only for futures, position size in base currency
-	SizeCurrency *float64 `json:"size_currency,omitempty"`
-	// Only for options, average price in USD
-	AveragePriceUsd *float64 `json:"average_price_usd,omitempty"`
-	// Only for options, floating profit or loss in USD
-	FloatingProfitLossUsd *float64 `json:"floating_profit_loss_usd,omitempty"`
-	// Current available leverage for a future position. A JSON number, not an integer: at the instrument cap this is typically a whole value such as `50.0`; for large positions the initial-margin curve can taper it to a fractional value (rounded to 6 decimal places), for example `35.639422`.
-	Leverage *float64 `json:"leverage,omitempty"`
-	// Realized Funding in current session included in session realized profit or loss, only for positions of perpetual instruments
-	RealizedFunding *float64 `json:"realized_funding,omitempty"`
-	// Value used to calculate `realized_funding` (perpetual only)
-	InterestValue *float64 `json:"interest_value,omitempty"`
-}
-
-// UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition strictly. Required properties must be
-// present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "index_price", "initial_margin", "maintenance_margin", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "gamma", "vega", "theta", "index_price", "initial_margin", "maintenance_margin", "settlement_price", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size", "size_currency", "average_price_usd", "floating_profit_loss_usd", "leverage", "realized_funding", "interest_value"); err != nil {
-		return err
-	}
-
-	type plain UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition", err)
-	}
-
-	*v = UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPosition) Validate() error {
-	if err := v.Kind.Validate(); err != nil {
-		return ctxerrors.Wrap(err, "kind")
-	}
-	if err := v.Direction.Validate(); err != nil {
-		return ctxerrors.Wrap(err, "direction")
-	}
-
-	return nil
-}
-
-// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind string
-
-// Values of UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind.
-const (
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindFuture      UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind = "future"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindOption      UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind = "option"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindSpot        UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind = "spot"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindFutureCombo UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind = "future_combo"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindOptionCombo UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind = "option_combo"
-)
-
-// Validate reports whether v is one of the values the schema lists.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind) Validate() error {
-	switch v {
-	case UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindFuture, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindOption, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindSpot, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindFutureCombo, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKindOptionCombo:
-		return nil
-	}
-
-	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionKind", fmt.Sprintf("unknown value %v", v))
-}
-
-// Direction: `buy`, `sell` or `zero`
-type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection string
-
-// Values of UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection.
-const (
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionBuy  UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "buy"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionSell UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "sell"
-	UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionZero UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "zero"
-)
-
-// Validate reports whether v is one of the values the schema lists.
-func (v UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection) Validate() error {
-	switch v {
-	case UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionBuy, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionSell, UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirectionZero:
-		return nil
-	}
-
-	return asyncapirt.Invalid("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionDirection", fmt.Sprintf("unknown value %v", v))
 }
 
 type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem struct {
@@ -15108,7 +15788,6 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositi
 
 // UnmarshalJSON decodes UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem")
 	if err != nil {
@@ -15116,10 +15795,6 @@ func (v *UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPo
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "index_price", "initial_margin", "maintenance_margin", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataPositionsItem", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "gamma", "vega", "theta", "index_price", "initial_margin", "maintenance_margin", "settlement_price", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size", "size_currency", "average_price_usd", "floating_profit_loss_usd", "leverage", "realized_funding", "interest_value"); err != nil {
 		return err
 	}
 
@@ -15291,7 +15966,7 @@ func (v UserChangesKindCurrencyIntervalSubscribeRequestPayloadParams) Validate()
 		return err
 	}
 	for i0, item0 := range v.Channels {
-		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.changes\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+		if err := asyncapirt.CheckPattern(fmt.Sprintf("%s[%d]", "channels", i0), string(item0), "^user\\.changes\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 			return err
 		}
 	}
@@ -15407,7 +16082,7 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParams) Validat
 	if err := v.Data.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "data")
 	}
-	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.changes\\.(future|option|spot|future_combo|option_combo)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(raw|100ms|agg2)$"); err != nil {
+	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^user\\.changes\\.(future|option|spot|future_combo|option_combo|combo|any)\\.(BTC|ETH|USDC|USDT|EURR|any)\\.(agg2|100ms|raw)$"); err != nil {
 		return err
 	}
 
@@ -15419,20 +16094,13 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData struct 
 	InstrumentName *string                                                                            `json:"instrument_name,omitempty"`
 	Trades         []UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem    `json:"trades,omitempty"`
 	Orders         []UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem    `json:"orders,omitempty"`
-	Position       *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition       `json:"position,omitempty"`
 	Positions      []UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem `json:"positions,omitempty"`
 }
 
 // UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData", members, "instrument_name", "trades", "orders", "position", "positions"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -15464,11 +16132,6 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsData) Val
 			}
 		}
 	}
-	if v.Position != nil {
-		if err := (*v.Position).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "position")
-		}
-	}
 	if v.Positions != nil {
 		for i0, item0 := range v.Positions {
 			if err := item0.Validate(); err != nil {
@@ -15489,7 +16152,7 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	InstrumentName string `json:"instrument_name"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp int64 `json:"timestamp"`
-	// The Starbase causal timestamp of the trade (nanoseconds since the Unix epoch)
+	// Optional field: the Starbase causal timestamp of the trade, in nanoseconds since the UNIX epoch (present only for trades matched in Starbase)
 	StarbaseTimestamp *int64 `json:"starbase_timestamp,omitempty"`
 	// Raw Starbase order id of the user's order, in Starbase's own (non currency-prefixed) id namespace (present only for trades matched in Starbase)
 	StarbaseOrderID *int64 `json:"starbase_order_id,omitempty"`
@@ -15502,16 +16165,16 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	// Advanced type of user order: `"usd"` or `"implv"` (only for options; omitted if not applicable)
 	Advanced *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemAdvanced `json:"advanced,omitempty"`
 	// Id of the user order (maker or taker), i.e. subscriber's order id that took part in the trade
-	OrderID string `json:"order_id"`
-	// Always `null`
+	OrderID *string `json:"order_id"`
+	// Matched order id for self-trades; null otherwise.
 	MatchingID *string `json:"matching_id"`
-	// Direction: `buy`, or `sell`
+	// Trade direction of the user
 	Direction UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction"`
 	// Direction of the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` = Zero-Minus Tick).
 	TickDirection UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTickDirection `json:"tick_direction"`
 	// Index Price at the moment of trade
 	IndexPrice float64 `json:"index_price"`
-	// Price in base currency
+	// The price of the trade
 	Price float64 `json:"price"`
 	// Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
@@ -15541,7 +16204,7 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteID *int64 `json:"block_rfq_quote_id,omitempty"`
-	// `true` if user order is reduce-only
+	// `true` if user order is reduce-only; omitted for spot trades.
 	ReduceOnly *bool `json:"reduce_only,omitempty"`
 	// `true` if user order is post-only
 	PostOnly *bool `json:"post_only,omitempty"`
@@ -15554,7 +16217,7 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	// Profit and loss in base currency.
 	ProfitLoss *float64 `json:"profit_loss,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice float64 `json:"mark_price"`
+	MarkPrice *float64 `json:"mark_price"`
 	// Optional field containing leg trades if trade is a combo trade (present when querying for **only** combo trades and in `combo_trades` events). Each leg trade has the same fields as a top-level user trade, including `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp` when matched in Starbase, and `starbase_client_order_id` for orders submitted via [Starbase](https://docs.deribit.com/starbase/overview) direct access.
 	Legs []json.RawMessage `json:"legs,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
@@ -15568,12 +16231,11 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	// QuoteID of the user order (optional, present only for orders placed with `private/mass_quote`)
 	QuoteID *string `json:"quote_id,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-	TradeAllocations *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem")
 	if err != nil {
@@ -15581,10 +16243,6 @@ func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTrad
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "fee", "fee_currency", "state", "mark_price"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItem", members, "trade_id", "trade_seq", "instrument_name", "timestamp", "starbase_timestamp", "starbase_order_id", "starbase_client_order_id", "order_type", "original_order_type", "advanced", "order_id", "matching_id", "direction", "tick_direction", "index_price", "price", "amount", "contracts", "iv", "underlying_price", "liquidation", "liquidity", "fee", "fee_currency", "label", "state", "block_trade_id", "block_trade_leg_count", "block_rfq_id", "block_rfq_quote_id", "reduce_only", "post_only", "mmp", "risk_reducing", "api", "profit_loss", "mark_price", "legs", "combo_id", "combo_trade_id", "starbase_match_id", "quote_set_id", "quote_id", "trade_allocations"); err != nil {
 		return err
 	}
 
@@ -15640,8 +16298,10 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTrade
 		return ctxerrors.Wrap(err, "state")
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -15706,7 +16366,7 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTrade
 	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemAdvanced", fmt.Sprintf("unknown value %v", v))
 }
 
-// Direction: `buy`, or `sell`
+// Trade direction of the user
 type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection string
 
 // Values of UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemDirection.
@@ -15830,8 +16490,7 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTrade
 	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemState", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Each allocation specifies `user_id`, `amount`, and `fee` for the allocated part of the trade. For broker client allocations, a `client_info` object will be included.
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations struct {
+type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem struct {
 	// User ID to which part of the trade is allocated. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Amount allocated to this user.
@@ -15839,40 +16498,35 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	// Fee for the allocated part of the trade.
 	Fee float64 `json:"fee"`
 	// Optional client allocation info for brokers.
-	ClientInfo *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 }
 
-// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations")
+func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem")
 	if err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", members, "amount", "fee"); err != nil {
+	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem", members, "amount", "fee"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", members, "user_id", "amount", "fee", "client_info"); err != nil {
-		return err
-	}
-
-	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations
+	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations", err)
+		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem", err)
 	}
 
-	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations(decoded)
+	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -15883,7 +16537,7 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTrade
 }
 
 // Optional client allocation info for brokers.
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo struct {
+type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -15892,27 +16546,27 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo"); err != nil {
+func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo
+	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo(decoded)
+	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -15944,8 +16598,8 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersIt
 	StarbaseClientOrderID *string `json:"starbase_client_order_id,omitempty"`
 	// Direction: `buy`, or `sell`
 	Direction UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemDirection `json:"direction"`
-	// Price in base currency or "market_price" in case of open trigger market orders
-	Price json.RawMessage `json:"price"`
+	// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+	Price UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice `json:"price"`
 	// User defined label (up to 64 characters)
 	Label string `json:"label"`
 	// `true` for post-only orders only
@@ -16019,12 +16673,12 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersIt
 	// Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
 	CancelReason *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemCancelReason `json:"cancel_reason,omitempty"`
 	// The Ids of the orders that will be triggered if the order is filled
-	OtoOrderIds *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds `json:"oto_order_ids,omitempty"`
+	OtoOrderIds []string `json:"oto_order_ids,omitempty"`
 	// <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 	TriggerFillCondition *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition `json:"trigger_fill_condition,omitempty"`
 	// Unique reference that identifies a one_cancels_others (OCO) pair.
 	OcoRef *string `json:"oco_ref,omitempty"`
-	// Unique order identifier
+	// ID of the order that triggered this order.
 	PrimaryOrderID *string `json:"primary_order_id,omitempty"`
 	// `true` if the order is an order that can be triggered by another order, otherwise not present.
 	IsSecondaryOto *bool `json:"is_secondary_oto,omitempty"`
@@ -16035,7 +16689,6 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersIt
 
 // UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem")
 	if err != nil {
@@ -16043,10 +16696,6 @@ func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrde
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem", members, "order_id", "order_state", "order_type", "time_in_force", "instrument_name", "creation_timestamp", "last_update_timestamp", "direction", "price", "label", "post_only", "api"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItem", members, "order_id", "order_state", "order_type", "original_order_type", "time_in_force", "is_rebalance", "is_liquidation", "instrument_name", "creation_timestamp", "last_update_timestamp", "starbase_last_update_timestamp", "starbase_client_order_id", "direction", "price", "label", "post_only", "reject_post_only", "reduce_only", "api", "web", "mobile", "refresh_amount", "display_amount", "amount", "contracts", "filled_amount", "average_price", "advanced", "implv", "usd", "triggered", "trigger", "trigger_price", "trigger_offset", "trigger_reference_price", "block_trade", "mmp", "risk_reducing", "replaced", "auto_replaced", "quote", "mmp_group", "quote_set_id", "quote_id", "trigger_order_id", "combo_order_id", "starbase_order_id", "app_name", "mmp_cancelled", "cancel_reason", "oto_order_ids", "trigger_fill_condition", "oco_ref", "primary_order_id", "is_secondary_oto", "is_primary_otoco", "max_show"); err != nil {
 		return err
 	}
 
@@ -16081,6 +16730,9 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrder
 	if err := v.Direction.Validate(); err != nil {
 		return ctxerrors.Wrap(err, "direction")
 	}
+	if err := v.Price.Validate(); err != nil {
+		return ctxerrors.Wrap(err, "price")
+	}
 	if v.Advanced != nil {
 		if err := (*v.Advanced).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "advanced")
@@ -16094,11 +16746,6 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrder
 	if v.CancelReason != nil {
 		if err := (*v.CancelReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "cancel_reason")
-		}
-	}
-	if v.OtoOrderIds != nil {
-		if err := (*v.OtoOrderIds).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "oto_order_ids")
 		}
 	}
 	if v.TriggerFillCondition != nil {
@@ -16216,6 +16863,110 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrder
 	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
+// Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+// UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice holds one of several shapes. Set it with the From methods and read
+// it with Value or the As methods.
+type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice struct {
+	union json.RawMessage
+}
+
+// MarshalJSON encodes the held value.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) MarshalJSON() ([]byte, error) {
+	if v.union == nil {
+		return []byte("null"), nil
+	}
+
+	return v.union, nil
+}
+
+// UnmarshalJSON stores data after checking that it is exactly one variant.
+func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) UnmarshalJSON(data []byte) error {
+	v.union = append(json.RawMessage(nil), data...)
+
+	if _, err := v.Value(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// FromFloat64 sets the held value to a float64.
+func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) FromFloat64(value float64) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsFloat64 decodes the held value as a float64.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) AsFloat64() (float64, error) {
+	var decoded float64
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice as Float64")
+	}
+
+	return decoded, nil
+}
+
+// FromString sets the held value to a string.
+func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) FromString(value string) error {
+	if err := asyncapirt.ValidateValue(value); err != nil {
+		return err
+	}
+
+	data, err := json.Marshal(value)
+	if err != nil {
+		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice: %v", err)
+	}
+
+	v.union = data
+
+	return nil
+}
+
+// AsString decodes the held value as a string.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) AsString() (string, error) {
+	var decoded string
+	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
+		return decoded, ctxerrors.Wrap(err, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice as String")
+	}
+
+	return decoded, nil
+}
+
+// Value decodes the held value as the one variant it matches. The union has no
+// discriminator, so every variant is tried and exactly one must decode.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) Value() (any, error) {
+	var matches []any
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsFloat64(); err == nil {
+		matches = append(matches, value)
+	}
+
+	// A failed variant is expected here; SingleMatch reports when none fit.
+	if value, err := v.AsString(); err == nil {
+		matches = append(matches, value)
+	}
+
+	return asyncapirt.SingleMatch("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice", matches)
+}
+
+// Validate checks that the held value is a valid variant.
+func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemPrice) Validate() error {
+	_, err := v.Value()
+
+	return err
+}
+
 // advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
 type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemAdvanced string
 
@@ -16285,35 +17036,6 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrder
 	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemCancelReason", fmt.Sprintf("unknown value %v", v))
 }
 
-// The Ids of the orders that will be triggered if the order is filled
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds struct {
-}
-
-// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds"); err != nil {
-		return err
-	}
-
-	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds", err)
-	}
-
-	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemOtoOrderIds) Validate() error {
-
-	return nil
-}
-
 // <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
 type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition string
 
@@ -16332,140 +17054,6 @@ func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrder
 	}
 
 	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataOrdersItemTriggerFillCondition", fmt.Sprintf("unknown value %v", v))
-}
-
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition struct {
-	// Unique instrument identifier
-	InstrumentName string `json:"instrument_name"`
-	// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
-	Kind UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind `json:"kind"`
-	// Unique user identifier
-	UserID int64 `json:"user_id"`
-	// Average price of trades that built this position
-	AveragePrice float64 `json:"average_price"`
-	// Direction: `buy`, `sell` or `zero`
-	Direction UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection `json:"direction"`
-	// Current mark price for position's instrument
-	MarkPrice float64 `json:"mark_price"`
-	// Delta parameter
-	Delta float64 `json:"delta"`
-	// Only for options, Gamma parameter
-	Gamma *float64 `json:"gamma,omitempty"`
-	// Only for options, Vega parameter
-	Vega *float64 `json:"vega,omitempty"`
-	// Only for options, Theta parameter
-	Theta *float64 `json:"theta,omitempty"`
-	// Current index price
-	IndexPrice float64 `json:"index_price"`
-	// Initial margin
-	InitialMargin float64 `json:"initial_margin"`
-	// Maintenance margin
-	MaintenanceMargin float64 `json:"maintenance_margin"`
-	// Optional (not added for spot). Last settlement price for position's instrument 0 if instrument wasn't settled yet
-	SettlementPrice *float64 `json:"settlement_price,omitempty"`
-	// Profit or loss from position
-	TotalProfitLoss float64 `json:"total_profit_loss"`
-	// Floating profit or loss
-	FloatingProfitLoss float64 `json:"floating_profit_loss"`
-	// Realized profit or loss
-	RealizedProfitLoss float64 `json:"realized_profit_loss"`
-	// Position size for futures size in quote currency (e.g. USD), for options size is in base currency (e.g. BTC)
-	Size float64 `json:"size"`
-	// Only for futures, position size in base currency
-	SizeCurrency *float64 `json:"size_currency,omitempty"`
-	// Only for options, average price in USD
-	AveragePriceUsd *float64 `json:"average_price_usd,omitempty"`
-	// Only for options, floating profit or loss in USD
-	FloatingProfitLossUsd *float64 `json:"floating_profit_loss_usd,omitempty"`
-	// Current available leverage for a future position. A JSON number, not an integer: at the instrument cap this is typically a whole value such as `50.0`; for large positions the initial-margin curve can taper it to a fractional value (rounded to 6 decimal places), for example `35.639422`.
-	Leverage *float64 `json:"leverage,omitempty"`
-	// Realized Funding in current session included in session realized profit or loss, only for positions of perpetual instruments
-	RealizedFunding *float64 `json:"realized_funding,omitempty"`
-	// Value used to calculate `realized_funding` (perpetual only)
-	InterestValue *float64 `json:"interest_value,omitempty"`
-}
-
-// UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition strictly. Required properties must be
-// present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "index_price", "initial_margin", "maintenance_margin", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "gamma", "vega", "theta", "index_price", "initial_margin", "maintenance_margin", "settlement_price", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size", "size_currency", "average_price_usd", "floating_profit_loss_usd", "leverage", "realized_funding", "interest_value"); err != nil {
-		return err
-	}
-
-	type plain UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition", err)
-	}
-
-	*v = UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition) Validate() error {
-	if err := v.Kind.Validate(); err != nil {
-		return ctxerrors.Wrap(err, "kind")
-	}
-	if err := v.Direction.Validate(); err != nil {
-		return ctxerrors.Wrap(err, "direction")
-	}
-
-	return nil
-}
-
-// Instrument kind: `"future"`, `"option"`, `"spot"`, `"future_combo"`, `"option_combo"`
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind string
-
-// Values of UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind.
-const (
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindFuture      UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind = "future"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindOption      UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind = "option"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindSpot        UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind = "spot"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindFutureCombo UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind = "future_combo"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindOptionCombo UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind = "option_combo"
-)
-
-// Validate reports whether v is one of the values the schema lists.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind) Validate() error {
-	switch v {
-	case UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindFuture, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindOption, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindSpot, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindFutureCombo, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKindOptionCombo:
-		return nil
-	}
-
-	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionKind", fmt.Sprintf("unknown value %v", v))
-}
-
-// Direction: `buy`, `sell` or `zero`
-type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection string
-
-// Values of UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection.
-const (
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionBuy  UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "buy"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionSell UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "sell"
-	UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionZero UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection = "zero"
-)
-
-// Validate reports whether v is one of the values the schema lists.
-func (v UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection) Validate() error {
-	switch v {
-	case UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionBuy, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionSell, UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirectionZero:
-		return nil
-	}
-
-	return asyncapirt.Invalid("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionDirection", fmt.Sprintf("unknown value %v", v))
 }
 
 type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem struct {
@@ -16521,7 +17109,6 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosition
 
 // UnmarshalJSON decodes UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem")
 	if err != nil {
@@ -16529,10 +17116,6 @@ func (v *UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPosi
 	}
 
 	if err := asyncapirt.RequireKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "index_price", "initial_margin", "maintenance_margin", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataPositionsItem", members, "instrument_name", "kind", "user_id", "average_price", "direction", "mark_price", "delta", "gamma", "vega", "theta", "index_price", "initial_margin", "maintenance_margin", "settlement_price", "total_profit_loss", "floating_profit_loss", "realized_profit_loss", "size", "size_currency", "average_price_usd", "floating_profit_loss_usd", "leverage", "realized_funding", "interest_value"); err != nil {
 		return err
 	}
 
@@ -16857,12 +17440,13 @@ type UserAccessLogSubscriptionMessagePayloadParamsData struct {
 	// - ``reset_api_key`` - API key was reset (in `data` key client id)
 	Log string `json:"log"`
 	// Optional, additional information about action, type depends on `log` value
-	Data *UserAccessLogSubscriptionMessagePayloadParamsDataData `json:"data,omitempty"`
+	//
+	// Not enforced by the generated code: type object or string (kept as raw JSON).
+	Data json.RawMessage `json:"data,omitempty"`
 }
 
 // UnmarshalJSON decodes UserAccessLogSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserAccessLogSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserAccessLogSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -16870,10 +17454,6 @@ func (v *UserAccessLogSubscriptionMessagePayloadParamsData) UnmarshalJSON(data [
 	}
 
 	if err := asyncapirt.RequireKeys("UserAccessLogSubscriptionMessagePayloadParamsData", members, "id", "ip", "timestamp", "country", "city", "log"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserAccessLogSubscriptionMessagePayloadParamsData", members, "id", "ip", "timestamp", "country", "city", "log", "data"); err != nil {
 		return err
 	}
 
@@ -16891,117 +17471,8 @@ func (v *UserAccessLogSubscriptionMessagePayloadParamsData) UnmarshalJSON(data [
 
 // Validate checks the constraints the schema declares for UserAccessLogSubscriptionMessagePayloadParamsData.
 func (v UserAccessLogSubscriptionMessagePayloadParamsData) Validate() error {
-	if v.Data != nil {
-		if err := (*v.Data).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "data")
-		}
-	}
 
 	return nil
-}
-
-// Optional, additional information about action, type depends on `log` value
-// UserAccessLogSubscriptionMessagePayloadParamsDataData holds one of several shapes. Set it with the From methods and read
-// it with Value or the As methods.
-type UserAccessLogSubscriptionMessagePayloadParamsDataData struct {
-	union json.RawMessage
-}
-
-// MarshalJSON encodes the held value.
-func (v UserAccessLogSubscriptionMessagePayloadParamsDataData) MarshalJSON() ([]byte, error) {
-	if v.union == nil {
-		return []byte("null"), nil
-	}
-
-	return v.union, nil
-}
-
-// UnmarshalJSON stores data after checking that it is exactly one variant.
-func (v *UserAccessLogSubscriptionMessagePayloadParamsDataData) UnmarshalJSON(data []byte) error {
-	v.union = append(json.RawMessage(nil), data...)
-
-	if _, err := v.Value(); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// FromJSON sets the held value to a map[string]any.
-func (v *UserAccessLogSubscriptionMessagePayloadParamsDataData) FromJSON(value map[string]any) error {
-	if err := asyncapirt.ValidateValue(value); err != nil {
-		return err
-	}
-
-	data, err := json.Marshal(value)
-	if err != nil {
-		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserAccessLogSubscriptionMessagePayloadParamsDataData: %v", err)
-	}
-
-	v.union = data
-
-	return nil
-}
-
-// AsJSON decodes the held value as a map[string]any.
-func (v UserAccessLogSubscriptionMessagePayloadParamsDataData) AsJSON() (map[string]any, error) {
-	var decoded map[string]any
-	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
-		return decoded, ctxerrors.Wrap(err, "UserAccessLogSubscriptionMessagePayloadParamsDataData as JSON")
-	}
-
-	return decoded, nil
-}
-
-// FromString sets the held value to a string.
-func (v *UserAccessLogSubscriptionMessagePayloadParamsDataData) FromString(value string) error {
-	if err := asyncapirt.ValidateValue(value); err != nil {
-		return err
-	}
-
-	data, err := json.Marshal(value)
-	if err != nil {
-		return ctxerrors.Wrapf(commerr.ErrInvalidValue, "UserAccessLogSubscriptionMessagePayloadParamsDataData: %v", err)
-	}
-
-	v.union = data
-
-	return nil
-}
-
-// AsString decodes the held value as a string.
-func (v UserAccessLogSubscriptionMessagePayloadParamsDataData) AsString() (string, error) {
-	var decoded string
-	if err := asyncapirt.UnmarshalStrict(v.union, &decoded); err != nil {
-		return decoded, ctxerrors.Wrap(err, "UserAccessLogSubscriptionMessagePayloadParamsDataData as String")
-	}
-
-	return decoded, nil
-}
-
-// Value decodes the held value as the one variant it matches. The union has no
-// discriminator, so every variant is tried and exactly one must decode.
-func (v UserAccessLogSubscriptionMessagePayloadParamsDataData) Value() (any, error) {
-	var matches []any
-
-	// A failed variant is expected here; SingleMatch reports when none fit.
-	if value, err := v.AsJSON(); err == nil {
-		matches = append(matches, value)
-	}
-
-	// A failed variant is expected here; SingleMatch reports when none fit.
-	if value, err := v.AsString(); err == nil {
-		matches = append(matches, value)
-	}
-
-	return asyncapirt.SingleMatch("UserAccessLogSubscriptionMessagePayloadParamsDataData", matches)
-}
-
-// Validate checks that the held value is a valid variant.
-func (v UserAccessLogSubscriptionMessagePayloadParamsDataData) Validate() error {
-	_, err := v.Value()
-
-	return err
 }
 
 type UserLockSubscribeRequestPayload struct {
@@ -17238,7 +17709,6 @@ type UserLockSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserLockSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserLockSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserLockSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -17246,10 +17716,6 @@ func (v *UserLockSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte
 	}
 
 	if err := asyncapirt.RequireKeys("UserLockSubscriptionMessagePayloadParamsData", members, "currency", "locked"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserLockSubscriptionMessagePayloadParamsData", members, "currency", "locked"); err != nil {
 		return err
 	}
 
@@ -17508,7 +17974,7 @@ type UserLiquidationSubscriptionMessagePayloadParamsData struct {
 	UserID int64 `json:"user_id"`
 	// Present and `true` only when this event applies to an isolated-margin subaccount.
 	Isolated *bool `json:"isolated,omitempty"`
-	// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+	// Present on every state: the margin currency (`liquidation_started`/`liquidation_completed`/`close_out_liquidation_started`/`close_out_liquidation_completed`) or the transfer currency (`lsp_transfer`/`adl_transfer`/`adl_transfer_received`).
 	Currency *UserLiquidationSubscriptionMessagePayloadParamsDataCurrency `json:"currency,omitempty"`
 	// Present for `liquidation_started`, `liquidation_completed`, `close_out_liquidation_started`, and `close_out_liquidation_completed`.
 	MarginBalance *float64 `json:"margin_balance,omitempty"`
@@ -17520,7 +17986,7 @@ type UserLiquidationSubscriptionMessagePayloadParamsData struct {
 	CloseOutMargin *float64 `json:"close_out_margin,omitempty"`
 	// Present for `liquidation_started`, `liquidation_completed`, `close_out_liquidation_started`, and `close_out_liquidation_completed`.
 	Equity *float64 `json:"equity,omitempty"`
-	// Unique instrument identifier
+	// Present for `lsp_transfer`, `adl_transfer`, and `adl_transfer_received`.
 	InstrumentName *string `json:"instrument_name,omitempty"`
 	// Present for `lsp_transfer`, `adl_transfer`, and `adl_transfer_received`. This account's own resulting position side.
 	Direction *UserLiquidationSubscriptionMessagePayloadParamsDataDirection `json:"direction,omitempty"`
@@ -17536,7 +18002,6 @@ type UserLiquidationSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserLiquidationSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserLiquidationSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserLiquidationSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -17544,10 +18009,6 @@ func (v *UserLiquidationSubscriptionMessagePayloadParamsData) UnmarshalJSON(data
 	}
 
 	if err := asyncapirt.RequireKeys("UserLiquidationSubscriptionMessagePayloadParamsData", members, "state", "user_id", "timestamp"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserLiquidationSubscriptionMessagePayloadParamsData", members, "state", "user_id", "isolated", "currency", "margin_balance", "maintenance_margin", "initial_margin", "close_out_margin", "equity", "instrument_name", "direction", "amount", "price", "commission", "timestamp"); err != nil {
 		return err
 	}
 
@@ -17611,7 +18072,7 @@ func (v UserLiquidationSubscriptionMessagePayloadParamsDataState) Validate() err
 	return asyncapirt.Invalid("UserLiquidationSubscriptionMessagePayloadParamsDataState", fmt.Sprintf("unknown value %v", v))
 }
 
-// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+// Present on every state: the margin currency (`liquidation_started`/`liquidation_completed`/`close_out_liquidation_started`/`close_out_liquidation_completed`) or the transfer currency (`lsp_transfer`/`adl_transfer`/`adl_transfer_received`).
 type UserLiquidationSubscriptionMessagePayloadParamsDataCurrency string
 
 // Values of UserLiquidationSubscriptionMessagePayloadParamsDataCurrency.
@@ -17889,7 +18350,7 @@ type UserIsolatedLiquidationSubscriptionMessagePayloadParamsData struct {
 	UserID int64 `json:"user_id"`
 	// Present and `true` only when this event applies to an isolated-margin subaccount.
 	Isolated *bool `json:"isolated,omitempty"`
-	// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+	// Present on every state: the margin currency (`liquidation_started`/`liquidation_completed`/`close_out_liquidation_started`/`close_out_liquidation_completed`) or the transfer currency (`lsp_transfer`/`adl_transfer`/`adl_transfer_received`).
 	Currency *UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataCurrency `json:"currency,omitempty"`
 	// Present for `liquidation_started`, `liquidation_completed`, `close_out_liquidation_started`, and `close_out_liquidation_completed`.
 	MarginBalance *float64 `json:"margin_balance,omitempty"`
@@ -17901,7 +18362,7 @@ type UserIsolatedLiquidationSubscriptionMessagePayloadParamsData struct {
 	CloseOutMargin *float64 `json:"close_out_margin,omitempty"`
 	// Present for `liquidation_started`, `liquidation_completed`, `close_out_liquidation_started`, and `close_out_liquidation_completed`.
 	Equity *float64 `json:"equity,omitempty"`
-	// Unique instrument identifier
+	// Present for `lsp_transfer`, `adl_transfer`, and `adl_transfer_received`.
 	InstrumentName *string `json:"instrument_name,omitempty"`
 	// Present for `lsp_transfer`, `adl_transfer`, and `adl_transfer_received`. This account's own resulting position side.
 	Direction *UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataDirection `json:"direction,omitempty"`
@@ -17917,7 +18378,6 @@ type UserIsolatedLiquidationSubscriptionMessagePayloadParamsData struct {
 
 // UnmarshalJSON decodes UserIsolatedLiquidationSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserIsolatedLiquidationSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserIsolatedLiquidationSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -17925,10 +18385,6 @@ func (v *UserIsolatedLiquidationSubscriptionMessagePayloadParamsData) UnmarshalJ
 	}
 
 	if err := asyncapirt.RequireKeys("UserIsolatedLiquidationSubscriptionMessagePayloadParamsData", members, "state", "user_id", "timestamp"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserIsolatedLiquidationSubscriptionMessagePayloadParamsData", members, "state", "user_id", "isolated", "currency", "margin_balance", "maintenance_margin", "initial_margin", "close_out_margin", "equity", "instrument_name", "direction", "amount", "price", "commission", "timestamp"); err != nil {
 		return err
 	}
 
@@ -17992,7 +18448,7 @@ func (v UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataState) Valida
 	return asyncapirt.Invalid("UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataState", fmt.Sprintf("unknown value %v", v))
 }
 
-// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+// Present on every state: the margin currency (`liquidation_started`/`liquidation_completed`/`close_out_liquidation_started`/`close_out_liquidation_completed`) or the transfer currency (`lsp_transfer`/`adl_transfer`/`adl_transfer_received`).
 type UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataCurrency string
 
 // Values of UserIsolatedLiquidationSubscriptionMessagePayloadParamsDataCurrency.
@@ -18265,7 +18721,7 @@ type UserLspSubscriptionMessagePayloadParamsData struct {
 	// - `disabled`: This participant's LSP configuration transitioned from enabled to disabled , check `automatic` to see whether this was a manual change or an automatic disable after repeated transfer failures.
 	// - `configuration_changed`: This participant's effective configuration changed (enable state and/or any group limit, including a change to the platform-wide default that affects this participant). Fired on every configuration write, including no-op enable/disable transitions.
 	Type UserLspSubscriptionMessagePayloadParamsDataType `json:"type"`
-	// Unique instrument identifier
+	// Present for `transfer` only.
 	InstrumentName *string `json:"instrument_name,omitempty"`
 	// Present for `transfer` only.
 	Direction *UserLspSubscriptionMessagePayloadParamsDataDirection `json:"direction,omitempty"`
@@ -18273,7 +18729,7 @@ type UserLspSubscriptionMessagePayloadParamsData struct {
 	Amount *float64 `json:"amount,omitempty"`
 	// Present for `transfer` only. The transfer price applied to this assignment attempt.
 	Price *float64 `json:"price,omitempty"`
-	// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+	// Present for `transfer` only.
 	Currency *UserLspSubscriptionMessagePayloadParamsDataCurrency `json:"currency,omitempty"`
 	// Present for `transfer` only. `true` if the assignment succeeded, `false` if it failed (see `error_reason`). A successful transfer is also sent on Starbase FIX Drop Copy as a TradeCaptureReport (`35=AE`, TradeType (828) `3`) when the portfolio belongs to a Starbase Member; a failed one is not.
 	Success *bool `json:"success,omitempty"`
@@ -18288,14 +18744,13 @@ type UserLspSubscriptionMessagePayloadParamsData struct {
 	// Present for `disabled` only, and only when `automatic` is `true`. Length of the failure-counting window, in minutes.
 	WindowMinutes *int64 `json:"window_minutes,omitempty"`
 	// Present for `configuration_changed` only. The participant's resolved effective configuration: `enabled`, plus every cooldown group's effective limit percentage (`group_limits`, keyed by group) , per-participant overrides are already resolved against the platform-wide defaults, so every group appears here regardless of whether this participant has an explicit override.
-	Configuration map[string]any `json:"configuration,omitempty"`
+	Configuration *UserLspSubscriptionMessagePayloadParamsDataConfiguration `json:"configuration,omitempty"`
 	// The timestamp (milliseconds since the Unix epoch)
 	Timestamp int64 `json:"timestamp"`
 }
 
 // UnmarshalJSON decodes UserLspSubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *UserLspSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
 	members, err := asyncapirt.DecodeObject(data, "UserLspSubscriptionMessagePayloadParamsData")
 	if err != nil {
@@ -18303,10 +18758,6 @@ func (v *UserLspSubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte)
 	}
 
 	if err := asyncapirt.RequireKeys("UserLspSubscriptionMessagePayloadParamsData", members, "type", "timestamp"); err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("UserLspSubscriptionMessagePayloadParamsData", members, "type", "instrument_name", "direction", "amount", "price", "currency", "success", "starbase_match_id", "error_reason", "automatic", "failure_count", "window_minutes", "configuration", "timestamp"); err != nil {
 		return err
 	}
 
@@ -18340,6 +18791,11 @@ func (v UserLspSubscriptionMessagePayloadParamsData) Validate() error {
 	if v.ErrorReason != nil {
 		if err := (*v.ErrorReason).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "error_reason")
+		}
+	}
+	if v.Configuration != nil {
+		if err := (*v.Configuration).Validate(); err != nil {
+			return ctxerrors.Wrap(err, "configuration")
 		}
 	}
 
@@ -18390,7 +18846,7 @@ func (v UserLspSubscriptionMessagePayloadParamsDataDirection) Validate() error {
 	return asyncapirt.Invalid("UserLspSubscriptionMessagePayloadParamsDataDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-// Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+// Present for `transfer` only.
 type UserLspSubscriptionMessagePayloadParamsDataCurrency string
 
 // Values of UserLspSubscriptionMessagePayloadParamsDataCurrency.
@@ -18433,6 +18889,46 @@ func (v UserLspSubscriptionMessagePayloadParamsDataErrorReason) Validate() error
 	}
 
 	return asyncapirt.Invalid("UserLspSubscriptionMessagePayloadParamsDataErrorReason", fmt.Sprintf("unknown value %v", v))
+}
+
+// Present for `configuration_changed` only. The participant's resolved effective configuration: `enabled`, plus every cooldown group's effective limit percentage (`group_limits`, keyed by group) , per-participant overrides are already resolved against the platform-wide defaults, so every group appears here regardless of whether this participant has an explicit override.
+type UserLspSubscriptionMessagePayloadParamsDataConfiguration struct {
+	// Whether this subaccount is currently an active LSP participant eligible to receive assignments.
+	Enabled bool `json:"enabled"`
+	// The effective assignment limit for each cooldown group, expressed as a percentage of the participant's own equity. Keyed by group: `"1"` through `"6"` (crypto tiers, `"6"` is the catch-all tier) or `"rwa"` (real-world-asset instruments, e.g. tokenized equities/commodities).
+	//
+	// Every group appears here , per-participant overrides are already resolved against the platform-wide defaults. A value of `0` means assignments for that group are disabled entirely.
+	GroupLimits map[string]float64 `json:"group_limits"`
+}
+
+// UnmarshalJSON decodes UserLspSubscriptionMessagePayloadParamsDataConfiguration strictly. Required properties must be
+// present and the decoded value must pass Validate.
+func (v *UserLspSubscriptionMessagePayloadParamsDataConfiguration) UnmarshalJSON(data []byte) error {
+	members, err := asyncapirt.DecodeObject(data, "UserLspSubscriptionMessagePayloadParamsDataConfiguration")
+	if err != nil {
+		return err
+	}
+
+	if err := asyncapirt.RequireKeys("UserLspSubscriptionMessagePayloadParamsDataConfiguration", members, "enabled", "group_limits"); err != nil {
+		return err
+	}
+
+	type plain UserLspSubscriptionMessagePayloadParamsDataConfiguration
+
+	var decoded plain
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		return asyncapirt.DecodeError("UserLspSubscriptionMessagePayloadParamsDataConfiguration", err)
+	}
+
+	*v = UserLspSubscriptionMessagePayloadParamsDataConfiguration(decoded)
+
+	return v.Validate()
+}
+
+// Validate checks the constraints the schema declares for UserLspSubscriptionMessagePayloadParamsDataConfiguration.
+func (v UserLspSubscriptionMessagePayloadParamsDataConfiguration) Validate() error {
+
+	return nil
 }
 
 type BlockRfqMakerCurrencySubscribeRequestPayload struct {
@@ -18684,23 +19180,17 @@ type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData struct {
 	// Indicates whether the RFQ was created as non-anonymous, meaning taker and maker aliases are visible to counterparties.
 	Disclosed *bool `json:"disclosed,omitempty"`
 	// Taker alias. Present only when `disclosed` is `true`.
-	Taker       *string                                                               `json:"taker,omitempty"`
-	IndexPrices *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices `json:"index_prices,omitempty"`
+	Taker       *string   `json:"taker,omitempty"`
+	IndexPrices []float64 `json:"index_prices,omitempty"`
 	// Indicates whether the RFQ is included in the taker's rating calculation. Present only for closed RFQs created by the requesting taker.
-	IncludedInTakerRating *bool                                                            `json:"included_in_taker_rating,omitempty"`
-	Trades                *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades `json:"trades,omitempty"`
+	IncludedInTakerRating *bool                                                                 `json:"included_in_taker_rating,omitempty"`
+	Trades                []BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem `json:"trades,omitempty"`
 }
 
 // UnmarshalJSON decodes BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData", members, "creation_timestamp", "expiration_timestamp", "block_rfq_id", "role", "state", "taker_rating", "amount", "min_trade_amount", "legs", "hedge", "combo_id", "disclosed", "taker", "index_prices", "included_in_taker_rating", "trades"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -18740,14 +19230,11 @@ func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsData) Validate() er
 			return ctxerrors.Wrap(err, "hedge")
 		}
 	}
-	if v.IndexPrices != nil {
-		if err := (*v.IndexPrices).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "index_prices")
-		}
-	}
 	if v.Trades != nil {
-		if err := (*v.Trades).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trades")
+		for i0, item0 := range v.Trades {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trades", i0))
+			}
 		}
 	}
 
@@ -18805,14 +19292,8 @@ type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem struct {
 
 // UnmarshalJSON decodes BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem", members, "ratio", "instrument_name", "direction"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataLegsItem"); err != nil {
 		return err
 	}
 
@@ -18918,38 +19399,10 @@ func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataHedgeDirection)
 	return asyncapirt.Invalid("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataHedgeDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices struct {
-}
-
-// UnmarshalJSON decodes BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices", err)
-	}
-
-	*v = BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices.
-func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices) Validate() error {
-
-	return nil
-}
-
-type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades struct {
+type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem struct {
 	// Direction: `buy`, or `sell`
-	Direction *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection `json:"direction,omitempty"`
-	// Price in base currency
+	Direction *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction,omitempty"`
+	// Price in the instrument's price units (quote currency for futures and spot).
 	Price *float64 `json:"price,omitempty"`
 	// Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
 	Amount *float64 `json:"amount,omitempty"`
@@ -18959,33 +19412,27 @@ type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades struct {
 	HedgeAmount *float64 `json:"hedge_amount,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades")
-	if err != nil {
+func (v *BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades", members, "direction", "price", "amount", "maker", "hedge_amount"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades
+	type plain BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades", err)
+		return asyncapirt.DecodeError("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem", err)
 	}
 
-	*v = BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades(decoded)
+	*v = BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades.
-func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem.
+func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItem) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -18996,22 +19443,22 @@ func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTrades) Validat
 }
 
 // Direction: `buy`, or `sell`
-type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection string
+type BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection string
 
-// Values of BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection.
+// Values of BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection.
 const (
-	BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionBuy  BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection = "buy"
-	BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionSell BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection = "sell"
+	BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy  BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "buy"
+	BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection) Validate() error {
+func (v BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection) Validate() error {
 	switch v {
-	case BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionBuy, BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionSell:
+	case BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy, BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqMakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
 type BlockRfqTakerCurrencySubscribeRequestPayload struct {
@@ -19272,27 +19719,21 @@ type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData struct {
 	// Indicates whether the RFQ was created as non-anonymous, meaning taker and maker aliases are visible to counterparties.
 	Disclosed *bool `json:"disclosed,omitempty"`
 	// Taker alias. Present only when `disclosed` is `true`.
-	Taker       *string                                                               `json:"taker,omitempty"`
-	IndexPrices *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices `json:"index_prices,omitempty"`
+	Taker       *string   `json:"taker,omitempty"`
+	IndexPrices []float64 `json:"index_prices,omitempty"`
 	// Indicates whether the RFQ is included in the taker's rating calculation. Present only for closed RFQs created by the requesting taker.
-	IncludedInTakerRating *bool                                                            `json:"included_in_taker_rating,omitempty"`
-	Trades                *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades `json:"trades,omitempty"`
+	IncludedInTakerRating *bool                                                                 `json:"included_in_taker_rating,omitempty"`
+	Trades                []BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem `json:"trades,omitempty"`
 	// Present only if a trade trigger was placed by the taker and only visible to taker. Only for cases: `cancelled` (contains the reason for cancellation) and `untriggered` (contains the information about the trade trigger).
 	TradeTrigger *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeTrigger `json:"trade_trigger,omitempty"`
 	// List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts. The taker can also allocate to himself. Visible only to the taker.
-	TradeAllocations *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations `json:"trade_allocations,omitempty"`
+	TradeAllocations []BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem `json:"trade_allocations,omitempty"`
 }
 
 // UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData", members, "creation_timestamp", "expiration_timestamp", "block_rfq_id", "role", "state", "taker_rating", "makers", "amount", "min_trade_amount", "asks", "bids", "legs", "hedge", "combo_id", "label", "app_name", "mark_price", "disclosed", "taker", "index_prices", "included_in_taker_rating", "trades", "trade_trigger", "trade_allocations"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData"); err != nil {
 		return err
 	}
 
@@ -19346,14 +19787,11 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData) Validate() er
 			return ctxerrors.Wrap(err, "hedge")
 		}
 	}
-	if v.IndexPrices != nil {
-		if err := (*v.IndexPrices).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "index_prices")
-		}
-	}
 	if v.Trades != nil {
-		if err := (*v.Trades).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trades")
+		for i0, item0 := range v.Trades {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trades", i0))
+			}
 		}
 	}
 	if v.TradeTrigger != nil {
@@ -19362,8 +19800,10 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsData) Validate() er
 		}
 	}
 	if v.TradeAllocations != nil {
-		if err := (*v.TradeAllocations).Validate(); err != nil {
-			return ctxerrors.Wrap(err, "trade_allocations")
+		for i0, item0 := range v.TradeAllocations {
+			if err := item0.Validate(); err != nil {
+				return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "trade_allocations", i0))
+			}
 		}
 	}
 
@@ -19559,14 +19999,8 @@ type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem struct {
 
 // UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem", members, "ratio", "instrument_name", "direction"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataLegsItem"); err != nil {
 		return err
 	}
 
@@ -19672,38 +20106,10 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataHedgeDirection)
 	return asyncapirt.Invalid("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataHedgeDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices struct {
-}
-
-// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices strictly. Required properties must be
-// present and the decoded value must pass Validate.
-func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices
-
-	var decoded plain
-	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices", err)
-	}
-
-	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices(decoded)
-
-	return v.Validate()
-}
-
-// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices.
-func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataIndexPrices) Validate() error {
-
-	return nil
-}
-
-type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades struct {
+type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem struct {
 	// Direction: `buy`, or `sell`
-	Direction *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection `json:"direction,omitempty"`
-	// Price in base currency
+	Direction *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction,omitempty"`
+	// Price in the instrument's price units (quote currency for futures and spot).
 	Price *float64 `json:"price,omitempty"`
 	// Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
 	Amount *float64 `json:"amount,omitempty"`
@@ -19713,33 +20119,27 @@ type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades struct {
 	HedgeAmount *float64 `json:"hedge_amount,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades")
-	if err != nil {
+func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades", members, "direction", "price", "amount", "maker", "hedge_amount"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades
+	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades", err)
+		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem", err)
 	}
 
-	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades(decoded)
+	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades.
-func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem.
+func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItem) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -19750,22 +20150,22 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTrades) Validat
 }
 
 // Direction: `buy`, or `sell`
-type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection string
+type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection string
 
-// Values of BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection.
+// Values of BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection.
 const (
-	BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionBuy  BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection = "buy"
-	BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionSell BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection = "sell"
+	BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy  BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "buy"
+	BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection) Validate() error {
+func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection) Validate() error {
 	switch v {
-	case BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionBuy, BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirectionSell:
+	case BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy, BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
 // Present only if a trade trigger was placed by the taker and only visible to taker. Only for cases: `cancelled` (contains the reason for cancellation) and `untriggered` (contains the information about the trade trigger).
@@ -19855,43 +20255,36 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeTriggerDir
 	return asyncapirt.Invalid("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeTriggerDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-// List of allocations for Block RFQ pre-allocation. Allows to split amount between different (sub)accounts. The taker can also allocate to himself. Visible only to the taker.
-type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations struct {
+type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem struct {
 	// User ID to allocate part of the RFQ amount. For brokers the User ID is obstructed.
 	UserID *int64 `json:"user_id,omitempty"`
 	// Client allocation info for brokers.
-	ClientInfo *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo `json:"client_info,omitempty"`
+	ClientInfo *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo `json:"client_info,omitempty"`
 	// Amount allocated to this user or client.
 	Amount *float64 `json:"amount,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations")
-	if err != nil {
+func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations", members, "user_id", "client_info", "amount"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations
+	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations", err)
+		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem", err)
 	}
 
-	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations(decoded)
+	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations.
-func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocations) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem.
+func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItem) Validate() error {
 	if v.ClientInfo != nil {
 		if err := (*v.ClientInfo).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "client_info")
@@ -19902,7 +20295,7 @@ func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocation
 }
 
 // Client allocation info for brokers.
-type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo struct {
+type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo struct {
 	// ID of a client; available to broker. Represents a group of users under a common name.
 	ClientID *int64 `json:"client_id,omitempty"`
 	// ID assigned to a single user in a client; available to broker.
@@ -19911,27 +20304,27 @@ type BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsCl
 	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo"); err != nil {
+func (v *BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo"); err != nil {
 		return err
 	}
 
-	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo
+	type plain BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo", err)
+		return asyncapirt.DecodeError("BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo", err)
 	}
 
-	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo(decoded)
+	*v = BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo.
-func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsClientInfo) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo.
+func (v BlockRfqTakerCurrencySubscriptionMessagePayloadParamsDataTradeAllocationsItemClientInfo) Validate() error {
 
 	return nil
 }
@@ -20201,14 +20594,8 @@ type BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem struct 
 
 // UnmarshalJSON decodes BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem", members, "creation_timestamp", "last_update_timestamp", "block_rfq_id", "block_rfq_quote_id", "quote_state", "execution_instruction", "price", "amount", "direction", "filled_amount", "legs", "hedge", "replaced", "label", "app_name", "quote_state_reason"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItem"); err != nil {
 		return err
 	}
 
@@ -20306,14 +20693,8 @@ type BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem
 
 // UnmarshalJSON decodes BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
 func (v *BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem")
-	if err != nil {
-		return err
-	}
-
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem", members, "ratio", "instrument_name", "direction", "price"); err != nil {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqMakerQuotesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem"); err != nil {
 		return err
 	}
 
@@ -20599,8 +20980,8 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayload) Validate() error {
 
 // Response containing notification data
 type BlockRfqTradesCurrencySubscriptionMessagePayloadParams struct {
-	Data    BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData `json:"data"`
-	Channel string                                                     `json:"channel"`
+	Data    []BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem `json:"data"`
+	Channel string                                                           `json:"channel"`
 }
 
 // UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParams strictly. Required properties must be
@@ -20634,8 +21015,10 @@ func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParams) UnmarshalJSON(d
 
 // Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParams.
 func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParams) Validate() error {
-	if err := v.Data.Validate(); err != nil {
-		return ctxerrors.Wrap(err, "data")
+	for i0, item0 := range v.Data {
+		if err := item0.Validate(); err != nil {
+			return ctxerrors.Wrap(err, fmt.Sprintf("%s[%d]", "data", i0))
+		}
 	}
 	if err := asyncapirt.CheckPattern("channel", string(v.Channel), "^block_rfq\\.trades\\.(BTC|ETH|USDC|USDT|EURR|any)$"); err != nil {
 		return err
@@ -20644,51 +21027,45 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParams) Validate() error
 	return nil
 }
 
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData struct {
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem struct {
 	// ID of the Block RFQ
 	ID *int64 `json:"id,omitempty"`
 	// The timestamp of the trade (milliseconds since the UNIX epoch)
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	// Trade direction of the taker
-	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection `json:"direction,omitempty"`
+	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection `json:"direction,omitempty"`
 	// This value multiplied by the ratio of a leg gives trade size on that leg.
 	Amount *float64 `json:"amount,omitempty"`
 	// Mark Price at the moment of trade
-	MarkPrice *float64                                                             `json:"mark_price,omitempty"`
-	Legs      []BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem `json:"legs,omitempty"`
+	MarkPrice *float64                                                                 `json:"mark_price,omitempty"`
+	Legs      []BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem `json:"legs,omitempty"`
 	// Unique combo identifier
-	ComboID *string                                                                `json:"combo_id,omitempty"`
-	Hedge   *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge       `json:"hedge,omitempty"`
-	Trades  []BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem `json:"trades,omitempty"`
+	ComboID *string                                                                    `json:"combo_id,omitempty"`
+	Hedge   *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge       `json:"hedge,omitempty"`
+	Trades  []BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem `json:"trades,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData")
-	if err != nil {
+func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData", members, "id", "timestamp", "direction", "amount", "mark_price", "legs", "combo_id", "hedge", "trades"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData
+	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData", err)
+		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem", err)
 	}
 
-	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData(decoded)
+	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem.
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItem) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -20718,62 +21095,56 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsData) Validate() e
 }
 
 // Trade direction of the taker
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection string
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection string
 
-// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection.
+// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection.
 const (
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection = "buy"
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection = "sell"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection = "buy"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection) Validate() error {
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection) Validate() error {
 	switch v {
-	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirectionSell:
+	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem struct {
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem struct {
 	// Ratio of amount between legs
 	Ratio *int64 `json:"ratio,omitempty"`
 	// Unique instrument identifier
 	InstrumentName *string `json:"instrument_name,omitempty"`
 	// Direction: `buy`, or `sell`
-	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection `json:"direction,omitempty"`
+	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection `json:"direction,omitempty"`
 	// Price for a leg
 	Price *float64 `json:"price,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem")
-	if err != nil {
+func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem", members, "ratio", "instrument_name", "direction", "price"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem
+	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem", err)
+		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem", err)
 	}
 
-	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem(decoded)
+	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem.
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItem) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -20784,56 +21155,56 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItem) Vali
 }
 
 // Direction: `buy`, or `sell`
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection string
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection string
 
-// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection.
+// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection.
 const (
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection = "buy"
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection = "sell"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection = "buy"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection) Validate() error {
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection) Validate() error {
 	switch v {
-	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirectionSell:
+	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataLegsItemDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemLegsItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge struct {
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge struct {
 	// It represents the requested hedge leg size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount *int64 `json:"amount,omitempty"`
 	// Unique instrument identifier
 	InstrumentName *string `json:"instrument_name,omitempty"`
 	// Direction: `buy`, or `sell`
-	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection `json:"direction,omitempty"`
+	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection `json:"direction,omitempty"`
 	// Price for a hedge leg
 	Price *float64 `json:"price,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge strictly. Required properties must be
 // present and the decoded value must pass Validate.
-func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge) UnmarshalJSON(data []byte) error {
-	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge"); err != nil {
+func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge"); err != nil {
 		return err
 	}
 
-	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge
+	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge", err)
+		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge", err)
 	}
 
-	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge(decoded)
+	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge.
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedge) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -20844,28 +21215,28 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedge) Validat
 }
 
 // Direction: `buy`, or `sell`
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection string
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection string
 
-// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection.
+// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection.
 const (
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection = "buy"
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection = "sell"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection = "buy"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection) Validate() error {
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection) Validate() error {
 	switch v {
-	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirectionSell:
+	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataHedgeDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemHedgeDirection", fmt.Sprintf("unknown value %v", v))
 }
 
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem struct {
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem struct {
 	// Direction: `buy`, or `sell`
-	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection `json:"direction,omitempty"`
-	// Price in base currency
+	Direction *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection `json:"direction,omitempty"`
+	// Price in the instrument's price units (quote currency for futures and spot).
 	Price *float64 `json:"price,omitempty"`
 	// Trade amount. For options, linear futures, linear perpetuals and spots the amount is denominated in the underlying base currency coin. The inverse perpetuals and inverse futures are denominated in USD units.
 	Amount *float64 `json:"amount,omitempty"`
@@ -20873,33 +21244,27 @@ type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem struct
 	HedgeAmount *float64 `json:"hedge_amount,omitempty"`
 }
 
-// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem strictly. Required properties must be
+// UnmarshalJSON decodes BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem strictly. Required properties must be
 // present and the decoded value must pass Validate.
-// Properties the schema does not declare are rejected.
-func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem) UnmarshalJSON(data []byte) error {
-	members, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem")
-	if err != nil {
+func (v *BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem) UnmarshalJSON(data []byte) error {
+	if _, err := asyncapirt.DecodeObject(data, "BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem"); err != nil {
 		return err
 	}
 
-	if err := asyncapirt.RejectUnknownKeys("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem", members, "direction", "price", "amount", "hedge_amount"); err != nil {
-		return err
-	}
-
-	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem
+	type plain BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem
 
 	var decoded plain
 	if err := json.Unmarshal(data, &decoded); err != nil {
-		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem", err)
+		return asyncapirt.DecodeError("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem", err)
 	}
 
-	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem(decoded)
+	*v = BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem(decoded)
 
 	return v.Validate()
 }
 
-// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem) Validate() error {
+// Validate checks the constraints the schema declares for BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem.
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItem) Validate() error {
 	if v.Direction != nil {
 		if err := (*v.Direction).Validate(); err != nil {
 			return ctxerrors.Wrap(err, "direction")
@@ -20910,22 +21275,22 @@ func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItem) Va
 }
 
 // Direction: `buy`, or `sell`
-type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection string
+type BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection string
 
-// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection.
+// Values of BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection.
 const (
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "buy"
-	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection = "sell"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirectionBuy  BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection = "buy"
+	BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirectionSell BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection = "sell"
 )
 
 // Validate reports whether v is one of the values the schema lists.
-func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection) Validate() error {
+func (v BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection) Validate() error {
 	switch v {
-	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirectionSell:
+	case BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirectionBuy, BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirectionSell:
 		return nil
 	}
 
-	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataTradesItemDirection", fmt.Sprintf("unknown value %v", v))
+	return asyncapirt.Invalid("BlockRfqTradesCurrencySubscriptionMessagePayloadParamsDataItemTradesItemDirection", fmt.Sprintf("unknown value %v", v))
 }
 
 // Base message structure for Deribit WebSocket messages

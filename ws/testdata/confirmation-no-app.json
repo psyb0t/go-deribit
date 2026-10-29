@@ -16,7 +16,10 @@
       ],
       "role": "maker",
       "user_id": 1,
-      "state": {}
+      "state": {
+        "value": "executed",
+        "timestamp": 1
+      }
     }
   }
 }
