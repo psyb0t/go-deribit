@@ -2,6 +2,12 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.1, 2026-10-31
+
+- Documentation only. The doc comment on `ChartVolume` in the REST client now reads "Traded volume within a single candle" instead of "todo".
+- The doc comments on the 43 subscription request methods in `ws/` link to docs.deribit.com/articles/notifications instead of the old deribit.mintlify.app address.
+- No exported identifiers changed.
+
 ## v0.2.0, 2026-10-29
 
 - Regenerated from Deribit's current OpenAPI and AsyncAPI specs. The AsyncAPI rewrite broke `scripts/patch-asyncapi.sh`, so scheduled regeneration had stopped.

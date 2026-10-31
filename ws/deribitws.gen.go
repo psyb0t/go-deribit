@@ -21355,7 +21355,7 @@ func (v DeribitMessage) Validate() error {
 
 // Message names, as the spec gives them.
 const (
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: PlatformStateSubscribeRequestPayload.
 	// Content type: application/json.
 	MessagePlatformStateSubscribeRequest = "subscribe_request"
@@ -21363,7 +21363,7 @@ const (
 	// Payload: PlatformStateSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessagePlatformStateSubscriptionMessage = "platform_state_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: PlatformStatePublicMethodsStateSubscribeRequestPayload.
 	// Content type: application/json.
 	MessagePlatformStatePublicMethodsStateSubscribeRequest = "platform_state.public_methods_state_subscribe_request"
@@ -21371,7 +21371,7 @@ const (
 	// Payload: PlatformStatePublicMethodsStateSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessagePlatformStatePublicMethodsStateSubscriptionMessage = "platform_state.public_methods_state_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: AnnouncementsSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageAnnouncementsSubscribeRequest = "announcements_subscribe_request"
@@ -21379,7 +21379,7 @@ const (
 	// Payload: AnnouncementsSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageAnnouncementsSubscriptionMessage = "announcements_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BookInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBookInstrumentNameIntervalSubscribeRequest = "book.(instrument_name).(interval)_subscribe_request"
@@ -21387,7 +21387,7 @@ const (
 	// Payload: BookInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBookInstrumentNameIntervalSubscriptionMessage = "book_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BookInstrumentNameGroupDepthIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBookInstrumentNameGroupDepthIntervalSubscribeRequest = "book.(instrument_name).(group).(depth).(interval)_subscribe_request"
@@ -21395,7 +21395,7 @@ const (
 	// Payload: BookInstrumentNameGroupDepthIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBookInstrumentNameGroupDepthIntervalSubscriptionMessage = "book.(instrument_name).(group).(depth).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: TickerInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageTickerInstrumentNameIntervalSubscribeRequest = "ticker.(instrument_name).(interval)_subscribe_request"
@@ -21403,7 +21403,7 @@ const (
 	// Payload: TickerInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageTickerInstrumentNameIntervalSubscriptionMessage = "ticker_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: IncrementalTickerInstrumentNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageIncrementalTickerInstrumentNameSubscribeRequest = "incremental_ticker.(instrument_name)_subscribe_request"
@@ -21411,7 +21411,7 @@ const (
 	// Payload: IncrementalTickerInstrumentNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageIncrementalTickerInstrumentNameSubscriptionMessage = "incremental_ticker_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: PerpetualInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessagePerpetualInstrumentNameIntervalSubscribeRequest = "perpetual.(instrument_name).(interval)_subscribe_request"
@@ -21419,7 +21419,7 @@ const (
 	// Payload: PerpetualInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessagePerpetualInstrumentNameIntervalSubscriptionMessage = "perpetual_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: QuoteInstrumentNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageQuoteInstrumentNameSubscribeRequest = "quote.(instrument_name)_subscribe_request"
@@ -21427,7 +21427,7 @@ const (
 	// Payload: QuoteInstrumentNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageQuoteInstrumentNameSubscriptionMessage = "quote_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: TradesInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageTradesInstrumentNameIntervalSubscribeRequest = "trades.(instrument_name).(interval)_subscribe_request"
@@ -21435,7 +21435,7 @@ const (
 	// Payload: TradesInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageTradesInstrumentNameIntervalSubscriptionMessage = "trades_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockTradeConfirmationsSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockTradeConfirmationsSubscribeRequest = "block_trade_confirmations_subscribe_request"
@@ -21443,7 +21443,7 @@ const (
 	// Payload: BlockTradeConfirmationsSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBlockTradeConfirmationsSubscriptionMessage = "block_trade_confirmations_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockTradeConfirmationsCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockTradeConfirmationsCurrencySubscribeRequest = "block_trade_confirmations.(currency)_subscribe_request"
@@ -21451,7 +21451,7 @@ const (
 	// Payload: BlockTradeConfirmationsCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBlockTradeConfirmationsCurrencySubscriptionMessage = "block_trade_confirmations.(currency)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: TradesKindCurrencyIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageTradesKindCurrencyIntervalSubscribeRequest = "trades.(kind).(currency).(interval)_subscribe_request"
@@ -21459,7 +21459,7 @@ const (
 	// Payload: TradesKindCurrencyIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageTradesKindCurrencyIntervalSubscriptionMessage = "trades.(kind).(currency).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: DeribitPriceIndexIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageDeribitPriceIndexIndexNameSubscribeRequest = "deribit_price_index.(index_name)_subscribe_request"
@@ -21467,7 +21467,7 @@ const (
 	// Payload: DeribitPriceIndexIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageDeribitPriceIndexIndexNameSubscriptionMessage = "deribit_price_index_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: DeribitPriceRankingIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageDeribitPriceRankingIndexNameSubscribeRequest = "deribit_price_ranking.(index_name)_subscribe_request"
@@ -21475,7 +21475,7 @@ const (
 	// Payload: DeribitPriceRankingIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageDeribitPriceRankingIndexNameSubscriptionMessage = "deribit_price_ranking_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: DeribitPriceStatisticsIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageDeribitPriceStatisticsIndexNameSubscribeRequest = "deribit_price_statistics.(index_name)_subscribe_request"
@@ -21483,7 +21483,7 @@ const (
 	// Payload: DeribitPriceStatisticsIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageDeribitPriceStatisticsIndexNameSubscriptionMessage = "deribit_price_statistics_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: DeribitVolatilityIndexIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageDeribitVolatilityIndexIndexNameSubscribeRequest = "deribit_volatility_index.(index_name)_subscribe_request"
@@ -21491,7 +21491,7 @@ const (
 	// Payload: DeribitVolatilityIndexIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageDeribitVolatilityIndexIndexNameSubscriptionMessage = "deribit_volatility_index_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: MarkpriceOptionsIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageMarkpriceOptionsIndexNameSubscribeRequest = "markprice.options.(index_name)_subscribe_request"
@@ -21499,7 +21499,7 @@ const (
 	// Payload: MarkpriceOptionsIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageMarkpriceOptionsIndexNameSubscriptionMessage = "markprice_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: EstimatedExpirationPriceIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageEstimatedExpirationPriceIndexNameSubscribeRequest = "estimated_expiration_price.(index_name)_subscribe_request"
@@ -21507,7 +21507,7 @@ const (
 	// Payload: EstimatedExpirationPriceIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageEstimatedExpirationPriceIndexNameSubscriptionMessage = "estimated_expiration_price_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: ChartTradesInstrumentNameResolutionSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageChartTradesInstrumentNameResolutionSubscribeRequest = "chart.trades.(instrument_name).(resolution)_subscribe_request"
@@ -21515,7 +21515,7 @@ const (
 	// Payload: ChartTradesInstrumentNameResolutionSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageChartTradesInstrumentNameResolutionSubscriptionMessage = "chart_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserMmpTriggerIndexNameSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserMmpTriggerIndexNameSubscribeRequest = "user.mmp_trigger.(index_name)_subscribe_request"
@@ -21523,7 +21523,7 @@ const (
 	// Payload: UserMmpTriggerIndexNameSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserMmpTriggerIndexNameSubscriptionMessage = "user_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserPortfolioCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserPortfolioCurrencySubscribeRequest = "user.portfolio.(currency)_subscribe_request"
@@ -21531,7 +21531,7 @@ const (
 	// Payload: UserPortfolioCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserPortfolioCurrencySubscriptionMessage = "user.portfolio.(currency)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserTradesInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserTradesInstrumentNameIntervalSubscribeRequest = "user.trades.(instrument_name).(interval)_subscribe_request"
@@ -21539,7 +21539,7 @@ const (
 	// Payload: UserTradesInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserTradesInstrumentNameIntervalSubscriptionMessage = "user.trades.(instrument_name).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserTradesKindCurrencyIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserTradesKindCurrencyIntervalSubscribeRequest = "user.trades.(kind).(currency).(interval)_subscribe_request"
@@ -21547,7 +21547,7 @@ const (
 	// Payload: UserTradesKindCurrencyIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserTradesKindCurrencyIntervalSubscriptionMessage = "user.trades.(kind).(currency).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserComboTradesInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserComboTradesInstrumentNameIntervalSubscribeRequest = "user.combo_trades.(instrument_name).(interval)_subscribe_request"
@@ -21555,7 +21555,7 @@ const (
 	// Payload: UserComboTradesInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserComboTradesInstrumentNameIntervalSubscriptionMessage = "user.combo_trades.(instrument_name).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserComboTradesKindCurrencyIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserComboTradesKindCurrencyIntervalSubscribeRequest = "user.combo_trades.(kind).(currency).(interval)_subscribe_request"
@@ -21563,7 +21563,7 @@ const (
 	// Payload: UserComboTradesKindCurrencyIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserComboTradesKindCurrencyIntervalSubscriptionMessage = "user.combo_trades.(kind).(currency).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: InstrumentCreationKindCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageInstrumentCreationKindCurrencySubscribeRequest = "instrument.creation.(kind).(currency)_subscribe_request"
@@ -21571,7 +21571,7 @@ const (
 	// Payload: InstrumentCreationKindCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageInstrumentCreationKindCurrencySubscriptionMessage = "instrument_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: InstrumentStateKindCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageInstrumentStateKindCurrencySubscribeRequest = "instrument.state.(kind).(currency)_subscribe_request"
@@ -21579,7 +21579,7 @@ const (
 	// Payload: InstrumentStateKindCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageInstrumentStateKindCurrencySubscriptionMessage = "instrument.state.(kind).(currency)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserOrdersInstrumentNameRawSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserOrdersInstrumentNameRawSubscribeRequest = "user.orders.(instrument_name).raw_subscribe_request"
@@ -21587,7 +21587,7 @@ const (
 	// Payload: UserOrdersInstrumentNameRawSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserOrdersInstrumentNameRawSubscriptionMessage = "user.orders.(instrument_name).raw_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserOrdersInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserOrdersInstrumentNameIntervalSubscribeRequest = "user.orders.(instrument_name).(interval)_subscribe_request"
@@ -21595,7 +21595,7 @@ const (
 	// Payload: UserOrdersInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserOrdersInstrumentNameIntervalSubscriptionMessage = "user.orders.(instrument_name).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserOrdersKindCurrencyRawSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserOrdersKindCurrencyRawSubscribeRequest = "user.orders.(kind).(currency).raw_subscribe_request"
@@ -21603,7 +21603,7 @@ const (
 	// Payload: UserOrdersKindCurrencyRawSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserOrdersKindCurrencyRawSubscriptionMessage = "user.orders.(kind).(currency).raw_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserOrdersKindCurrencyIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserOrdersKindCurrencyIntervalSubscribeRequest = "user.orders.(kind).(currency).(interval)_subscribe_request"
@@ -21611,7 +21611,7 @@ const (
 	// Payload: UserOrdersKindCurrencyIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserOrdersKindCurrencyIntervalSubscriptionMessage = "user.orders.(kind).(currency).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserChangesInstrumentNameIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserChangesInstrumentNameIntervalSubscribeRequest = "user.changes.(instrument_name).(interval)_subscribe_request"
@@ -21619,7 +21619,7 @@ const (
 	// Payload: UserChangesInstrumentNameIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserChangesInstrumentNameIntervalSubscriptionMessage = "user.changes.(instrument_name).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserChangesKindCurrencyIntervalSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserChangesKindCurrencyIntervalSubscribeRequest = "user.changes.(kind).(currency).(interval)_subscribe_request"
@@ -21627,7 +21627,7 @@ const (
 	// Payload: UserChangesKindCurrencyIntervalSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserChangesKindCurrencyIntervalSubscriptionMessage = "user.changes.(kind).(currency).(interval)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserAccessLogSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserAccessLogSubscribeRequest = "user.access_log_subscribe_request"
@@ -21635,7 +21635,7 @@ const (
 	// Payload: UserAccessLogSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserAccessLogSubscriptionMessage = "user.access_log_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserLockSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserLockSubscribeRequest = "user.lock_subscribe_request"
@@ -21643,7 +21643,7 @@ const (
 	// Payload: UserLockSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserLockSubscriptionMessage = "user.lock_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserLiquidationSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserLiquidationSubscribeRequest = "user.liquidation_subscribe_request"
@@ -21651,7 +21651,7 @@ const (
 	// Payload: UserLiquidationSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserLiquidationSubscriptionMessage = "user.liquidation_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserIsolatedLiquidationSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserIsolatedLiquidationSubscribeRequest = "user.isolated.liquidation_subscribe_request"
@@ -21659,7 +21659,7 @@ const (
 	// Payload: UserIsolatedLiquidationSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserIsolatedLiquidationSubscriptionMessage = "user.isolated.liquidation_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: UserLspSubscribeRequestPayload.
 	// Content type: application/json.
 	MessageUserLspSubscribeRequest = "user.lsp_subscribe_request"
@@ -21667,7 +21667,7 @@ const (
 	// Payload: UserLspSubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageUserLspSubscriptionMessage = "user.lsp_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockRfqMakerCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockRfqMakerCurrencySubscribeRequest = "block_rfq.maker.(currency)_subscribe_request"
@@ -21675,7 +21675,7 @@ const (
 	// Payload: BlockRfqMakerCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBlockRfqMakerCurrencySubscriptionMessage = "block_rfq_subscription_notification_data"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockRfqTakerCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockRfqTakerCurrencySubscribeRequest = "block_rfq.taker.(currency)_subscribe_request"
@@ -21683,7 +21683,7 @@ const (
 	// Payload: BlockRfqTakerCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBlockRfqTakerCurrencySubscriptionMessage = "block_rfq.taker.(currency)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockRfqMakerQuotesCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockRfqMakerQuotesCurrencySubscribeRequest = "block_rfq.maker.quotes.(currency)_subscribe_request"
@@ -21691,7 +21691,7 @@ const (
 	// Payload: BlockRfqMakerQuotesCurrencySubscriptionMessagePayload.
 	// Content type: application/json.
 	MessageBlockRfqMakerQuotesCurrencySubscriptionMessage = "block_rfq.maker.quotes.(currency)_subscription_message"
-	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://deribit.mintlify.app/articles/notifications) for more information.
+	// Client sends subscription request to subscribe to notification channel. Please refer to [Notification page](https://docs.deribit.com/articles/notifications) for more information.
 	// Payload: BlockRfqTradesCurrencySubscribeRequestPayload.
 	// Content type: application/json.
 	MessageBlockRfqTradesCurrencySubscribeRequest = "block_rfq.trades.(currency)_subscribe_request"
