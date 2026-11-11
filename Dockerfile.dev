@@ -1,10 +1,10 @@
 # Development image for all Makefile-driven Go checks.
 #
-# Pins the Go 1.26.10 toolchain and carries the linter and security scanners, so
+# Pins the Go 1.26.11 toolchain and carries the linter and security scanners, so
 # `make lint`, `make test` and `make sec` run identically
 # in a local shell and in CI (the pipeline runs every make target inside this
 # image, so there is no host toolchain to drift).
-FROM golang:1.26.10-trixie@sha256:e18951cff6896c16909458a8e0cbd52364a347826ff1f5b86d095fe0670d52e7
+FROM golang:1.26.11-trixie@sha256:fa340cb59ebeb1d53ac1cccfc334201d938fe5f3458003cccb767096d8e032b8
 
 # The base image records the snapshot.debian.org timestamp it was built from.
 # Installing from that snapshot ties every apt package to the base image digest,

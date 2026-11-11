@@ -5642,6 +5642,11 @@ type PrivateAccountResponse struct {
 		// Example: false
 		SecurityKeysEnabled bool `json:"security_keys_enabled"`
 
+		// SelfTradingExtendedAcrossMembers `true` if self trading rejection behavior is applied across all Starbase Members of the main account. Enabled by Deribit on request (available when parameter `extended` = `true`)
+		//
+		// Example: false
+		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
+
 		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
 		SelfTradingExtendedToSubaccounts *string `json:"self_trading_extended_to_subaccounts,omitempty"`
 
@@ -5779,6 +5784,11 @@ type PrivateAccountSummariesResponse struct {
 		//
 		// Example: false
 		SecurityKeysEnabled bool `json:"security_keys_enabled"`
+
+		// SelfTradingExtendedAcrossMembers `true` if self trading rejection behavior is applied across all Starbase Members of the main account. Enabled by Deribit on request (available when parameter `extended` = `true`)
+		//
+		// Example: false
+		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
 
 		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
 		SelfTradingExtendedToSubaccounts *string `json:"self_trading_extended_to_subaccounts,omitempty"`
@@ -9136,7 +9146,7 @@ type TickerNotification struct {
 	// MinPrice The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
 	MinPrice MinPrice `json:"min_price"`
 
-	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 	OpenInterest OpenInterest `json:"open_interest"`
 
 	// SettlementPrice Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
@@ -9267,7 +9277,7 @@ type TickerNotificationWithBidsAndAsks struct {
 	// MinPrice The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
 	MinPrice MinPrice `json:"min_price"`
 
-	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 	OpenInterest OpenInterest `json:"open_interest"`
 
 	// SettlementPrice Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
@@ -9707,6 +9717,11 @@ type BidIv = float64
 // Bids defines model for bids.
 type Bids = [][]float64
 
+// BlockDelayed Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+//
+// Example: 1730827181502
+type BlockDelayed = int
+
 // BlockRfq defines model for block_rfq.
 type BlockRfq struct {
 	// Amount This value multiplied by the ratio of a leg gives trade size on that leg.
@@ -10046,7 +10061,7 @@ type BookSummary struct {
 	// Example: 7022.89
 	MidPrice *float64 `json:"mid_price"`
 
-	// OpenInterest Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	// OpenInterest Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 	//
 	// Example: 0.5
 	OpenInterest *float64 `json:"open_interest,omitempty"`
@@ -10071,13 +10086,31 @@ type BookSummary struct {
 	// Example: 6745.34
 	UnderlyingPrice *float64 `json:"underlying_price,omitempty"`
 
-	// Volume The total 24h traded volume (in base currency)
+	// Volume The total 24h traded volume (in base currency). Equals `volume_realtime` plus `volume_delayed`.
 	//
 	// Example: 223
 	Volume float64 `json:"volume"`
 
+	// VolumeDelayed 24-hour volume in base currency of Block RFQ trades with delayed publication. Delayed volume is reported 8 hours late: it covers delayed Block RFQ trades executed between 32 and 8 hours ago.
+	VolumeDelayed *VolumeDelayed `json:"volume_delayed,omitempty"`
+
+	// VolumeDelayedNotional 24-hour volume in quote currency of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_notional`.
+	VolumeDelayedNotional *VolumeDelayedNotional `json:"volume_delayed_notional,omitempty"`
+
+	// VolumeDelayedUsd 24-hour volume in USD of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_usd`.
+	VolumeDelayedUsd *VolumeDelayedUsd `json:"volume_delayed_usd,omitempty"`
+
 	// VolumeNotional Volume in quote currency (futures and spots only)
 	VolumeNotional *float64 `json:"volume_notional,omitempty"`
+
+	// VolumeRealtime 24-hour volume in base currency of trades published in real time, i.e. all trades except Block RFQ trades with delayed publication.
+	VolumeRealtime *VolumeRealtime `json:"volume_realtime,omitempty"`
+
+	// VolumeRealtimeNotional 24-hour volume in quote currency of trades published in real time; returned together with `volume_notional`.
+	VolumeRealtimeNotional *VolumeRealtimeNotional `json:"volume_realtime_notional,omitempty"`
+
+	// VolumeRealtimeUsd 24-hour volume in USD of trades published in real time; returned together with `volume_usd`.
+	VolumeRealtimeUsd *VolumeRealtimeUsd `json:"volume_realtime_usd,omitempty"`
 
 	// VolumeUsd Volume in USD
 	VolumeUsd *float64 `json:"volume_usd,omitempty"`
@@ -11202,7 +11235,7 @@ type Nonce = string
 // OcoRef Unique reference that identifies a one_cancels_others (OCO) pair.
 type OcoRef = string
 
-// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 type OpenInterest = float64
 
 // OpenOrderPrice Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
@@ -11775,6 +11808,11 @@ type PublicTrade struct {
 	// Amount Trade amount. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 	Amount float64 `json:"amount"`
 
+	// BlockDelayed Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	//
+	// Example: 1730827181502
+	BlockDelayed *BlockDelayed `json:"block_delayed,omitempty"`
+
 	// BlockRfqId ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqId *int `json:"block_rfq_id,omitempty"`
 
@@ -12063,11 +12101,29 @@ type Stats struct {
 	// Example: 10.23
 	PriceChange *float64 `json:"price_change,omitempty"`
 
-	// Volume Volume during last 24h in base currency
+	// Volume Volume during last 24h in base currency. Equals `volume_realtime` plus `volume_delayed`.
 	Volume float64 `json:"volume"`
+
+	// VolumeDelayed 24-hour volume in base currency of Block RFQ trades with delayed publication. Delayed volume is reported 8 hours late: it covers delayed Block RFQ trades executed between 32 and 8 hours ago.
+	VolumeDelayed *VolumeDelayed `json:"volume_delayed,omitempty"`
+
+	// VolumeDelayedNotional 24-hour volume in quote currency of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_notional`.
+	VolumeDelayedNotional *VolumeDelayedNotional `json:"volume_delayed_notional,omitempty"`
+
+	// VolumeDelayedUsd 24-hour volume in USD of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_usd`.
+	VolumeDelayedUsd *VolumeDelayedUsd `json:"volume_delayed_usd,omitempty"`
 
 	// VolumeNotional 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
 	VolumeNotional *float64 `json:"volume_notional,omitempty"`
+
+	// VolumeRealtime 24-hour volume in base currency of trades published in real time, i.e. all trades except Block RFQ trades with delayed publication.
+	VolumeRealtime *VolumeRealtime `json:"volume_realtime,omitempty"`
+
+	// VolumeRealtimeNotional 24-hour volume in quote currency of trades published in real time; returned together with `volume_notional`.
+	VolumeRealtimeNotional *VolumeRealtimeNotional `json:"volume_realtime_notional,omitempty"`
+
+	// VolumeRealtimeUsd 24-hour volume in USD of trades published in real time; returned together with `volume_usd`.
+	VolumeRealtimeUsd *VolumeRealtimeUsd `json:"volume_realtime_usd,omitempty"`
 
 	// VolumeUsd Volume in usd (futures only)
 	VolumeUsd *VolumeUsd `json:"volume_usd,omitempty"`
@@ -12584,6 +12640,11 @@ type UserTrade struct {
 	// Api `true` if user order was created with API
 	Api *bool `json:"api,omitempty"`
 
+	// BlockDelayed Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	//
+	// Example: 1730827181502
+	BlockDelayed *BlockDelayed `json:"block_delayed,omitempty"`
+
 	// BlockRfqId ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqId *int `json:"block_rfq_id,omitempty"`
 
@@ -12757,6 +12818,24 @@ type UserTradeOrderType string
 //
 // Example: MrTrader
 type Username = string
+
+// VolumeDelayed 24-hour volume in base currency of Block RFQ trades with delayed publication. Delayed volume is reported 8 hours late: it covers delayed Block RFQ trades executed between 32 and 8 hours ago.
+type VolumeDelayed = float64
+
+// VolumeDelayedNotional 24-hour volume in quote currency of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_notional`.
+type VolumeDelayedNotional = float64
+
+// VolumeDelayedUsd 24-hour volume in USD of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_usd`.
+type VolumeDelayedUsd = float64
+
+// VolumeRealtime 24-hour volume in base currency of trades published in real time, i.e. all trades except Block RFQ trades with delayed publication.
+type VolumeRealtime = float64
+
+// VolumeRealtimeNotional 24-hour volume in quote currency of trades published in real time; returned together with `volume_notional`.
+type VolumeRealtimeNotional = float64
+
+// VolumeRealtimeUsd 24-hour volume in USD of trades published in real time; returned together with `volume_usd`.
+type VolumeRealtimeUsd = float64
 
 // VolumeUsd Volume in usd (futures only)
 type VolumeUsd = float64
@@ -17015,6 +17094,8 @@ type ClientInterface interface {
 	//
 	// **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 	//
+	// **Delayed publication:** For accounts enabled for delayed publication, Block RFQ trades that meet the minimum size for the settlement currency are published to public data feeds with a delay of up to 8 hours, and at the latest 1 hour before the next settlement. Trades are not delayed when the next settlement is less than 1 hour away. The publication time is returned in the `block_delayed` field of each trade.
+	//
 	// Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.
 	//
 	// **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -19100,6 +19181,8 @@ type ClientInterface interface {
 	//
 	// Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.
 	//
+	// Block RFQs whose trades have delayed publication are listed only after their publication time.
+	//
 	// This is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).
 	//
 	// **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -19110,6 +19193,8 @@ type ClientInterface interface {
 	// PublicGetBookSummaryByCurrency performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
+	//
+	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 	//
@@ -19125,6 +19210,8 @@ type ClientInterface interface {
 	// PublicGetBookSummaryByInstrument performs a GET /public/get_book_summary_by_instrument (the `PublicGetBookSummaryByInstrument` operationId) request.
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
+	//
+	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// This method provides a quick overview of current market activity and liquidity for a single instrument.
 	//
@@ -19361,6 +19448,8 @@ type ClientInterface interface {
 	//
 	// Results can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+	//
 	// **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 	//
 	// **📖 Related Articles:**
@@ -19375,6 +19464,8 @@ type ClientInterface interface {
 	// Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 	//
 	// Results can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
+	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 	//
 	// **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 	//
@@ -19393,6 +19484,8 @@ type ClientInterface interface {
 	//
 	// Results can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 	//
 	// **📖 Related Article:** [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -19405,6 +19498,8 @@ type ClientInterface interface {
 	// Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 	//
 	// Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.
+	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 	//
@@ -19476,6 +19571,8 @@ type ClientInterface interface {
 	// Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.
 	//
 	// Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
+	//
+	// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 	//
@@ -19563,7 +19660,7 @@ type ClientInterface interface {
 	//
 	// This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 	//
-	// **Note:** For spot instruments routed to Coinbase Exchange, `volume_notional` and `volume_usd` are omitted from `stats`.
+	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 	//
 	// **📖 Related Articles:**
 	// - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -19598,6 +19695,8 @@ type ClientInterface interface {
 // Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
 //
 // **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
+//
+// **Delayed publication:** For accounts enabled for delayed publication, Block RFQ trades that meet the minimum size for the settlement currency are published to public data feeds with a delay of up to 8 hours, and at the latest 1 hour before the next settlement. Trades are not delayed when the next settlement is less than 1 hour away. The publication time is returned in the `block_delayed` field of each trade.
 //
 // Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.
 //
@@ -23135,6 +23234,8 @@ func (c *Client) PublicGetBasketIndexComposition(ctx context.Context, params *Pu
 //
 // Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.
 //
+// Block RFQs whose trades have delayed publication are listed only after their publication time.
+//
 // This is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).
 //
 // **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -23155,6 +23256,8 @@ func (c *Client) PublicGetBlockRfqTrades(ctx context.Context, params *PublicGetB
 // PublicGetBookSummaryByCurrency performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
+//
+// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 //
@@ -23180,6 +23283,8 @@ func (c *Client) PublicGetBookSummaryByCurrency(ctx context.Context, params *Pub
 // PublicGetBookSummaryByInstrument performs a GET /public/get_book_summary_by_instrument (the `PublicGetBookSummaryByInstrument` operationId) request.
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
+//
+// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // This method provides a quick overview of current market activity and liquidity for a single instrument.
 //
@@ -23606,6 +23711,8 @@ func (c *Client) PublicGetLastSettlementsByInstrument(ctx context.Context, param
 //
 // Results can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 //
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+//
 // **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 //
 // **📖 Related Articles:**
@@ -23630,6 +23737,8 @@ func (c *Client) PublicGetLastTradesByCurrency(ctx context.Context, params *Publ
 // Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 //
 // Results can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
+//
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 //
 // **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 //
@@ -23658,6 +23767,8 @@ func (c *Client) PublicGetLastTradesByCurrencyAndTime(ctx context.Context, param
 //
 // Results can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 //
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+//
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 //
 // **📖 Related Article:** [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -23680,6 +23791,8 @@ func (c *Client) PublicGetLastTradesByInstrument(ctx context.Context, params *Pu
 // Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 //
 // Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.
+//
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 //
@@ -23821,6 +23934,8 @@ func (c *Client) PublicGetTradeVolumes(ctx context.Context, params *PublicGetTra
 // Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.
 //
 // Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
+//
+// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 //
@@ -23978,7 +24093,7 @@ func (c *Client) PublicTest(ctx context.Context, params *PublicTestParams, reqEd
 //
 // This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 //
-// **Note:** For spot instruments routed to Coinbase Exchange, `volume_notional` and `volume_usd` are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -38396,6 +38511,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 	//
+	// **Delayed publication:** For accounts enabled for delayed publication, Block RFQ trades that meet the minimum size for the settlement currency are published to public data feeds with a delay of up to 8 hours, and at the latest 1 hour before the next settlement. Trades are not delayed when the next settlement is less than 1 hour away. The publication time is returned in the `block_delayed` field of each trade.
+	//
 	// Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.
 	//
 	// **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -40771,6 +40888,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.
 	//
+	// Block RFQs whose trades have delayed publication are listed only after their publication time.
+	//
 	// This is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).
 	//
 	// **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -40783,6 +40902,8 @@ type ClientWithResponsesInterface interface {
 	// PublicGetBookSummaryByCurrencyWithResponse performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
+	//
+	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 	//
@@ -40800,6 +40921,8 @@ type ClientWithResponsesInterface interface {
 	// PublicGetBookSummaryByInstrumentWithResponse performs a GET /public/get_book_summary_by_instrument (the `PublicGetBookSummaryByInstrument` operationId) request.
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
+	//
+	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// This method provides a quick overview of current market activity and liquidity for a single instrument.
 	//
@@ -41074,6 +41197,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Results can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+	//
 	// **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 	//
 	// **📖 Related Articles:**
@@ -41090,6 +41215,8 @@ type ClientWithResponsesInterface interface {
 	// Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 	//
 	// Results can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
+	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 	//
 	// **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 	//
@@ -41110,6 +41237,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// Results can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 	//
 	// **📖 Related Article:** [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -41124,6 +41253,8 @@ type ClientWithResponsesInterface interface {
 	// Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 	//
 	// Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.
+	//
+	// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 	//
@@ -41209,6 +41340,8 @@ type ClientWithResponsesInterface interface {
 	// Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.
 	//
 	// Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
+	//
+	// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 	//
@@ -41310,7 +41443,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 	//
-	// **Note:** For spot instruments routed to Coinbase Exchange, `volume_notional` and `volume_usd` are omitted from `stats`.
+	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 	//
 	// **📖 Related Articles:**
 	// - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -49069,6 +49202,8 @@ func (r PublicUnsubscribeAllResponse) ContentType() string {
 //
 // **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 //
+// **Delayed publication:** For accounts enabled for delayed publication, Block RFQ trades that meet the minimum size for the settlement currency are published to public data feeds with a delay of up to 8 hours, and at the latest 1 hour before the next settlement. Trades are not delayed when the next settlement is less than 1 hour away. The publication time is returned in the `block_delayed` field of each trade.
+//
 // Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information, or [private/cancel_block_rfq](https://docs.deribit.com/api-reference/block-rfq/private-cancel_block_rfq) to cancel a Block RFQ.
 //
 // **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -52315,6 +52450,8 @@ func (c *ClientWithResponses) PublicGetBasketIndexCompositionWithResponse(ctx co
 //
 // Returns a list of recent Block RFQ trades. Can be optionally filtered by currency.
 //
+// Block RFQs whose trades have delayed publication are listed only after their publication time.
+//
 // This is a public method that provides market data about completed Block RFQ trades. For private Block RFQ information, use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs).
 //
 // **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
@@ -52333,6 +52470,8 @@ func (c *ClientWithResponses) PublicGetBlockRfqTradesWithResponse(ctx context.Co
 // PublicGetBookSummaryByCurrencyWithResponse performs a GET /public/get_book_summary_by_currency (the `PublicGetBookSummaryByCurrency` operationId) request.
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
+//
+// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 //
@@ -52356,6 +52495,8 @@ func (c *ClientWithResponses) PublicGetBookSummaryByCurrencyWithResponse(ctx con
 // PublicGetBookSummaryByInstrumentWithResponse performs a GET /public/get_book_summary_by_instrument (the `PublicGetBookSummaryByInstrument` operationId) request.
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
+//
+// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // This method provides a quick overview of current market activity and liquidity for a single instrument.
 //
@@ -52744,6 +52885,8 @@ func (c *ClientWithResponses) PublicGetLastSettlementsByInstrumentWithResponse(c
 //
 // Results can be filtered by instrument kind and trade ID range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 //
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+//
 // **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 //
 // **📖 Related Articles:**
@@ -52766,6 +52909,8 @@ func (c *ClientWithResponses) PublicGetLastTradesByCurrencyWithResponse(ctx cont
 // Retrieves the latest trades that have occurred for instruments in a specific currency within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 //
 // Results can be filtered by instrument kind. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
+//
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 //
 // **Note:** For currencies with spot instruments routed to Coinbase Exchange, this call is not supported when `kind` is `spot` or `any` , and `any` is the default when `kind` is omitted. A currency counts as routed when it is the base or the quote of a routed pair. Other kinds are unaffected. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history by instrument.
 //
@@ -52792,6 +52937,8 @@ func (c *ClientWithResponses) PublicGetLastTradesByCurrencyAndTimeWithResponse(c
 //
 // Results can be filtered by sequence number range or timestamp range. Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID).
 //
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
+//
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 //
 // **📖 Related Article:** [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -52812,6 +52959,8 @@ func (c *ClientWithResponses) PublicGetLastTradesByInstrumentWithResponse(ctx co
 // Retrieves the latest trades that have occurred for a specific instrument within a specified time range. Returns trade details including price, amount, direction, timestamp, and trade ID.
 //
 // Use the `count` parameter to limit the number of trades returned, and `sorting` to control the order (ascending or descending by trade ID). This method is useful for analyzing trading activity over specific time periods.
+//
+// **Note:** Block RFQ trades with delayed publication are returned only after their publication time (`block_delayed`). They keep their original `timestamp` and `trade_seq`, so results for a past time or sequence range can gain trades after publication.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product trades](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-trades) directly for full trade history.
 //
@@ -52939,6 +53088,8 @@ func (c *ClientWithResponses) PublicGetTradeVolumesWithResponse(ctx context.Cont
 // Retrieves publicly available market data formatted for generating TradingView-compatible candle charts. The data includes open, high, low, close (OHLC) prices and volume for specified time intervals.
 //
 // Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
+//
+// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 //
@@ -53082,7 +53233,7 @@ func (c *ClientWithResponses) PublicTestWithResponse(ctx context.Context, params
 //
 // This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 //
-// **Note:** For spot instruments routed to Coinbase Exchange, `volume_notional` and `volume_usd` are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)

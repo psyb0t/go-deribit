@@ -2,6 +2,13 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.2, 2026-11-11
+
+- Added `BlockDelayed` to `PublicTrade`, `UserTrade` and the trade items of the `trades`, `user.trades`, `user.combo_trades` and `user.changes` channels in `ws/`.
+- Added `VolumeRealtime`, `VolumeRealtimeNotional`, `VolumeRealtimeUsd`, `VolumeDelayed`, `VolumeDelayedNotional` and `VolumeDelayedUsd` to `BookSummary` and `Stats`, and to the stats in the `ticker` and `incremental_ticker` channels in `ws/`.
+- Added `SelfTradingExtendedAcrossMembers` (`*bool`) to the results of `PrivateAccountResponse` and `PrivateAccountSummariesResponse`. Code that names those anonymous result struct types in full needs the new field.
+- Raised the required Go version from 1.26.10 to 1.26.11 in `go.mod` and the development image, which fixes the `net/http` vulnerability GO-2026-6859 found by govulncheck.
+
 ## v0.2.1, 2026-10-31
 
 - Documentation only. The doc comment on `ChartVolume` in the REST client now reads "Traded volume within a single candle" instead of "todo".

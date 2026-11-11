@@ -114,7 +114,7 @@ func BookInstrumentNameGroupDepthIntervalAddress(instrumentName, group, depth, i
 //
 // This is the recommended method for real-time market data updates, as it provides efficient push-based notifications instead of requiring polling.
 //
-// **Note:** For spot instruments routed to Coinbase Exchange, `volume_notional` and `volume_usd` are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -179,6 +179,8 @@ func QuoteInstrumentNameAddress(instrumentName string) string {
 //
 // Use this channel to receive executed trades as they happen for the given instrument. The `interval` controls how frequently trade events are aggregated.
 //
+// **Note:** Block RFQ trades with delayed publication are sent when they are published (`block_delayed`), with their original `timestamp` and `trade_seq`, so they can arrive out of sequence.
+//
 // **Note:** For spot instruments routed to Coinbase Exchange, this channel is not supported. Use the [`matches` channel](https://docs.cdp.coinbase.com/exchange/websocket-feed/channels) for the full trade tape. For user trades, orders and changes, use the `user` channels.
 //
 // **📖 Related Article:** [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -217,6 +219,8 @@ func BlockTradeConfirmationsCurrencyAddress(currency string) string {
 // Trade notifications across all instruments for a given kind and currency.
 //
 // Use this channel when you want a consolidated stream of trades across all instruments of a specific `kind` (e.g., futures, options) and `currency`. The `interval` controls aggregation frequency.
+//
+// **Note:** Block RFQ trades with delayed publication are sent when they are published (`block_delayed`), with their original `timestamp` and `trade_seq`, so they can arrive out of sequence.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this channel is not supported with `kind` = `spot`: the subscription is rejected for any currency that is the base or the quote of a routed pair, and for `currency` = `any` whenever any pair is routed. Other kinds are unaffected. Use the [`matches` channel](https://docs.cdp.coinbase.com/exchange/websocket-feed/channels) for the full trade tape.
 //
@@ -705,6 +709,8 @@ func BlockRfqMakerQuotesCurrencyAddress(currency string) string {
 // BlockRfqTradesCurrencyAddressTemplate is the address of the BlockRfqTradesCurrency channel with its parameters unfilled.
 //
 // Get notifications about recent Block RFQ trades. This is a public channel that provides market data about completed Block RFQ trades.
+//
+// Block RFQs whose trades have delayed publication are sent when they are published.
 //
 // **📖 Related Article:** [Deribit Block RFQ API walkthrough](https://docs.deribit.com/articles/block-rfq-api-walkthrough)
 const BlockRfqTradesCurrencyAddressTemplate = "block_rfq.trades.{currency}"
@@ -2366,7 +2372,7 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 	// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
 	State TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataState `json:"state"`
 	Stats TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats `json:"stats"`
-	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 	OpenInterest float64 `json:"open_interest"`
 	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price"`
@@ -2533,8 +2539,12 @@ func (v TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataState) V
 }
 
 type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats struct {
-	// Volume during last 24h in base currency
+	// Volume during last 24h in base currency. Equals `volume_realtime` plus `volume_delayed`.
 	Volume float64 `json:"volume"`
+	// 24-hour volume in base currency of trades published in real time, i.e. all trades except Block RFQ trades with delayed publication.
+	VolumeRealtime *float64 `json:"volume_realtime,omitempty"`
+	// 24-hour volume in base currency of Block RFQ trades with delayed publication. Delayed volume is reported 8 hours late: it covers delayed Block RFQ trades executed between 32 and 8 hours ago.
+	VolumeDelayed *float64 `json:"volume_delayed,omitempty"`
 	// Lowest price during 24h
 	Low *float64 `json:"low"`
 	// Highest price during 24h
@@ -2543,8 +2553,16 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats struc
 	PriceChange *float64 `json:"price_change,omitempty"`
 	// 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
 	VolumeNotional *float64 `json:"volume_notional,omitempty"`
+	// 24-hour volume in quote currency of trades published in real time; returned together with `volume_notional`.
+	VolumeRealtimeNotional *float64 `json:"volume_realtime_notional,omitempty"`
+	// 24-hour volume in quote currency of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_notional`.
+	VolumeDelayedNotional *float64 `json:"volume_delayed_notional,omitempty"`
 	// Volume in usd (futures only)
 	VolumeUsd *float64 `json:"volume_usd,omitempty"`
+	// 24-hour volume in USD of trades published in real time; returned together with `volume_usd`.
+	VolumeRealtimeUsd *float64 `json:"volume_realtime_usd,omitempty"`
+	// 24-hour volume in USD of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_usd`.
+	VolumeDelayedUsd *float64 `json:"volume_delayed_usd,omitempty"`
 }
 
 // UnmarshalJSON decodes TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats strictly. Required properties must be
@@ -2915,7 +2933,7 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData struct 
 	// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
 	State *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataState `json:"state,omitempty"`
 	Stats *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats `json:"stats,omitempty"`
-	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
 	OpenInterest *float64 `json:"open_interest,omitempty"`
 	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price,omitempty"`
@@ -3102,8 +3120,12 @@ func (v IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataState
 }
 
 type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats struct {
-	// Volume during last 24h in base currency
+	// Volume during last 24h in base currency. Equals `volume_realtime` plus `volume_delayed`.
 	Volume *float64 `json:"volume,omitempty"`
+	// 24-hour volume in base currency of trades published in real time, i.e. all trades except Block RFQ trades with delayed publication.
+	VolumeRealtime *float64 `json:"volume_realtime,omitempty"`
+	// 24-hour volume in base currency of Block RFQ trades with delayed publication. Delayed volume is reported 8 hours late: it covers delayed Block RFQ trades executed between 32 and 8 hours ago.
+	VolumeDelayed *float64 `json:"volume_delayed,omitempty"`
 	// Lowest price during 24h
 	Low *float64 `json:"low,omitempty"`
 	// Highest price during 24h
@@ -3112,8 +3134,16 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats st
 	PriceChange *float64 `json:"price_change,omitempty"`
 	// 24-hour volume in quote currency; omitted when base and quote currencies are equal or for Coinbase-routed spot.
 	VolumeNotional *float64 `json:"volume_notional,omitempty"`
+	// 24-hour volume in quote currency of trades published in real time; returned together with `volume_notional`.
+	VolumeRealtimeNotional *float64 `json:"volume_realtime_notional,omitempty"`
+	// 24-hour volume in quote currency of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_notional`.
+	VolumeDelayedNotional *float64 `json:"volume_delayed_notional,omitempty"`
 	// Volume in usd (futures only)
 	VolumeUsd *float64 `json:"volume_usd,omitempty"`
+	// 24-hour volume in USD of trades published in real time; returned together with `volume_usd`.
+	VolumeRealtimeUsd *float64 `json:"volume_realtime_usd,omitempty"`
+	// 24-hour volume in USD of Block RFQ trades with delayed publication, reported 8 hours late like `volume_delayed`; returned together with `volume_usd`.
+	VolumeDelayedUsd *float64 `json:"volume_delayed_usd,omitempty"`
 }
 
 // UnmarshalJSON decodes IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats strictly. Required properties must be
@@ -4028,6 +4058,8 @@ type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem struct
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
 	ComboID *string `json:"combo_id,omitempty"`
 	// Optional field containing combo trade identifier if the trade is a combo trade
@@ -5407,6 +5439,8 @@ type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem struct {
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// Optional field containing combo instrument name if the trade is a combo trade
 	ComboID *string `json:"combo_id,omitempty"`
 	// Optional field containing combo trade identifier if the trade is a combo trade
@@ -8460,6 +8494,8 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
@@ -9115,6 +9151,8 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
@@ -9770,6 +9808,8 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
@@ -10425,6 +10465,8 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
@@ -14879,6 +14921,8 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
@@ -16200,6 +16244,8 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
 	// Block trade leg count - when trade was part of a block trade
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
+	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
+	BlockDelayed *int64 `json:"block_delayed,omitempty"`
 	// ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqID *int64 `json:"block_rfq_id,omitempty"`
 	// ID of the Block RFQ quote - when trade was part of the Block RFQ
