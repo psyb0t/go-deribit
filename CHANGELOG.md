@@ -2,6 +2,13 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.3, 2026-11-14
+
+- Documentation only. Doc comments in the REST client and in `ws/` now write "Block Trade" with capitals, as the Deribit specs do.
+- The comments on `BlockTradeId`, `BlockTradeIdInResult` and `BlockTradeLegCount`, and on the `Id` and `AppName` fields of trade items, now say the value can belong to a Block RFQ trade as well.
+- The comment on `EnabledFeatures` and `ApiKeyFeatures` fixes the `restricted_block_trades` description ("block_trade read scope").
+- No exported identifiers changed.
+
 ## v0.2.2, 2026-11-11
 
 - Added `BlockDelayed` to `PublicTrade`, `UserTrade` and the trade items of the `trades`, `user.trades`, `user.combo_trades` and `user.changes` channels in `ws/`.

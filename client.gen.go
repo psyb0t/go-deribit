@@ -6759,7 +6759,7 @@ type PrivateGetBrokerClientsResponse struct {
 			// ClientLinkId Numeric identifier for an individual user within the client group. Used together with `client_id` in Broker Voice API calls.
 			ClientLinkId int `json:"client_link_id"`
 
-			// ConfirmationsRequired Number of broker confirmations required for block trades involving this link.
+			// ConfirmationsRequired Number of broker confirmations required for Block Trades involving this link.
 			ConfirmationsRequired int `json:"confirmations_required"`
 
 			// Name Display name for this link.
@@ -6814,10 +6814,10 @@ type PrivateGetBrokerTradeRequestsResponse struct {
 			UserId *string `json:"user_id,omitempty"`
 		} `json:"maker,omitempty"`
 
-		// Nonce Nonce for approving or rejecting the broker block trade request.
+		// Nonce Nonce for approving or rejecting the broker Block Trade request.
 		Nonce *string `json:"nonce,omitempty"`
 
-		// State State of the broker block trade request.
+		// State State of the broker Block Trade request.
 		State *string `json:"state,omitempty"`
 		Taker *struct {
 			// ClientId ID of a client; available to broker. Represents a group of users under a common name.
@@ -6839,7 +6839,7 @@ type PrivateGetBrokerTradeRequestsResponse struct {
 			UserId *string `json:"user_id,omitempty"`
 		} `json:"taker,omitempty"`
 
-		// Timestamp Timestamp of the broker block trade request (milliseconds since the UNIX epoch).
+		// Timestamp Timestamp of the broker Block Trade request (milliseconds since the UNIX epoch).
 		Timestamp *int `json:"timestamp,omitempty"`
 		Trades    *[]struct {
 			// Amount Trade amount.
@@ -6869,7 +6869,7 @@ type PrivateGetBrokerTradesResponse struct {
 	Jsonrpc PrivateGetBrokerTradesResponseJsonrpc `json:"jsonrpc"`
 	Result  struct {
 		History *[]struct {
-			// Id Unique identifier of the block trade history entry.
+			// Id Unique identifier of the Block Trade history entry.
 			Id    *string `json:"id,omitempty"`
 			Maker *struct {
 				// ClientId ID of a client; available to broker. Represents a group of users under a common name.
@@ -6904,7 +6904,7 @@ type PrivateGetBrokerTradesResponse struct {
 				UserId *int `json:"user_id,omitempty"`
 			} `json:"taker,omitempty"`
 
-			// Timestamp Timestamp of the block trade history entry (milliseconds since the UNIX epoch).
+			// Timestamp Timestamp of the Block Trade history entry (milliseconds since the UNIX epoch).
 			Timestamp *int          `json:"timestamp,omitempty"`
 			Trades    *[]BlockTrade `json:"trades,omitempty"`
 		} `json:"history,omitempty"`
@@ -7826,7 +7826,7 @@ type PrivateSimulateBlockTradeResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateSimulateBlockTradeResponseJsonrpc `json:"jsonrpc"`
 
-	// Result `true` if block trade can be executed, `false` otherwise
+	// Result `true` if Block Trade can be executed, `false` otherwise
 	Result bool `json:"result"`
 }
 
@@ -8129,7 +8129,7 @@ type PrivateVerifyBlockTradeResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateVerifyBlockTradeResponseJsonrpc `json:"jsonrpc"`
 	Result  struct {
-		// Signature Signature of block trade<br>It is valid only for 5 minutes around given timestamp
+		// Signature Signature of Block Trade<br>It is valid only for 5 minutes around given timestamp
 		//
 		// Example: 1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs
 		Signature BlockTradeSignature `json:"signature"`
@@ -8176,7 +8176,7 @@ type PublicAuthResponse struct {
 		// CoinbaseLogin The access token was acquired by logging in through Coinbase.
 		CoinbaseLogin *bool `json:"coinbase_login,omitempty"`
 
-		// EnabledFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
+		// EnabledFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read scope of the API key to Block Trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block Trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
 		EnabledFeatures *ApiKeyFeatures `json:"enabled_features,omitempty"`
 
 		// ExpiresIn Token lifetime in seconds
@@ -9596,7 +9596,7 @@ type ApiKey struct {
 	// Example: true
 	Enabled *ApiKeyEnabled `json:"enabled,omitempty"`
 
-	// EnabledFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
+	// EnabledFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read scope of the API key to Block Trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block Trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
 	EnabledFeatures *ApiKeyFeatures `json:"enabled_features,omitempty"`
 
 	// Id Key identifier
@@ -9641,7 +9641,7 @@ type ApiKeyDefault = bool
 // Example: true
 type ApiKeyEnabled = bool
 
-// ApiKeyFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
+// ApiKeyFeatures List of enabled advanced on-key features.<br><br><b>Available options:</b><br>- <code>restricted_block_trades</code>: Limit the block_trade read scope of the API key to Block Trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block Trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature
 type ApiKeyFeatures = []string
 
 // ApiKeyName Api key name that can be displayed in transaction log
@@ -9923,22 +9923,22 @@ type BlockRfqTradeTapeContinuation = string
 
 // BlockTrade defines model for block_trade.
 type BlockTrade struct {
-	// AppName The name of the application that executed the block trade on behalf of the user (optional).
+	// AppName The name of the application that executed the Block Trade or Block RFQ trade on behalf of the user (optional).
 	//
 	// Example: Example Application
 	AppName *string `json:"app_name,omitempty"`
 
-	// BrokerCode Broker code associated with the broker block trade.
+	// BrokerCode Broker code associated with the broker Block Trade.
 	//
 	// Example: 2krM7sJsx
 	BrokerCode *string `json:"broker_code,omitempty"`
 
-	// BrokerName Name of the broker associated with the block trade.
+	// BrokerName Name of the broker associated with the Block Trade.
 	//
 	// Example: Test Broker
 	BrokerName *string `json:"broker_name,omitempty"`
 
-	// Id Block trade id
+	// Id ID of the Block Trade or Block RFQ trade
 	//
 	// Example: 154
 	Id BlockTradeId `json:"id"`
@@ -9950,17 +9950,17 @@ type BlockTrade struct {
 	Trades    []UserTrade `json:"trades"`
 }
 
-// BlockTradeId Block trade id
+// BlockTradeId ID of the Block Trade or Block RFQ trade
 //
 // Example: 154
 type BlockTradeId = string
 
-// BlockTradeIdInResult Block trade id - when trade was part of a block trade
+// BlockTradeIdInResult ID of the Block Trade or Block RFQ trade, when the trade was part of one
 //
 // Example: 154
 type BlockTradeIdInResult = string
 
-// BlockTradeLegCount Block trade leg count - when trade was part of a block trade
+// BlockTradeLegCount Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 //
 // Example: 3
 type BlockTradeLegCount = int
@@ -9970,7 +9970,7 @@ type BlockTradeLegCount = int
 // Example: true
 type BlockTradeOrder = bool
 
-// BlockTradeSignature Signature of block trade<br>It is valid only for 5 minutes around given timestamp
+// BlockTradeSignature Signature of Block Trade<br>It is valid only for 5 minutes around given timestamp
 //
 // Example: 1565173369982.1M9tO0Q-.z9n9WyZUU5op9pEz6Jtd2CI71QxQMMsCZAexnIfK9HQRT1pKH3clxeIbY7Bqm-yMcWIoE3IfCDPW5VEdiN-6oS0YkKUyXPD500MUf3ULKhfkmH81EZs
 type BlockTradeSignature = string
@@ -11486,17 +11486,17 @@ type OriginalOrderType string
 
 // PendingBlockTrade defines model for pending_block_trade.
 type PendingBlockTrade struct {
-	// AppName The name of the application that executed the block trade on behalf of the user (optional).
+	// AppName The name of the application that executed the Block Trade on behalf of the user (optional).
 	//
 	// Example: Example Application
 	AppName string `json:"app_name"`
 
-	// BrokerCode Broker code associated with the broker block trade.
+	// BrokerCode Broker code associated with the broker Block Trade.
 	//
 	// Example: jpqYKgg1
 	BrokerCode *string `json:"broker_code,omitempty"`
 
-	// BrokerName Name of the broker associated with the block trade.
+	// BrokerName Name of the broker associated with the Block Trade.
 	//
 	// Example: Test Broker
 	BrokerName *string `json:"broker_name,omitempty"`
@@ -11506,7 +11506,7 @@ type PendingBlockTrade struct {
 	// Example: BTC-CS-27JUN25-80000_85000
 	ComboId *string `json:"combo_id,omitempty"`
 
-	// CounterpartyState State of the pending block trade for the other party (optional).
+	// CounterpartyState State of the pending Block Trade for the other party (optional).
 	CounterpartyState *struct {
 		// Timestamp State timestamp.
 		Timestamp int `json:"timestamp"`
@@ -11515,7 +11515,7 @@ type PendingBlockTrade struct {
 		Value PendingBlockTradeCounterpartyStateValue `json:"value"`
 	} `json:"counterparty_state,omitempty"`
 
-	// Nonce Nonce that can be used to approve or reject pending block trade.
+	// Nonce Nonce that can be used to approve or reject pending Block Trade.
 	//
 	// Example: bF1_gfgcsd
 	Nonce string `json:"nonce"`
@@ -11523,7 +11523,7 @@ type PendingBlockTrade struct {
 	// Role Trade role of the user: `maker` or `taker`
 	Role Role `json:"role"`
 
-	// State State of the pending block trade for current user.
+	// State State of the pending Block Trade for current user.
 	State struct {
 		// Timestamp State timestamp.
 		Timestamp int `json:"timestamp"`
@@ -11532,7 +11532,7 @@ type PendingBlockTrade struct {
 		Value PendingBlockTradeStateValue `json:"value"`
 	} `json:"state"`
 
-	// Timestamp Timestamp that can be used to approve or reject pending block trade.
+	// Timestamp Timestamp that can be used to approve or reject pending Block Trade.
 	Timestamp int                 `json:"timestamp"`
 	Trades    []PendingBlockTrade `json:"trades"`
 
@@ -11541,7 +11541,7 @@ type PendingBlockTrade struct {
 	// Example: 57874
 	UserId UserId `json:"user_id"`
 
-	// Username Username of the user who initiated the block trade.
+	// Username Username of the user who initiated the Block Trade.
 	//
 	// Example: Trader
 	Username *string `json:"username,omitempty"`
@@ -11816,12 +11816,12 @@ type PublicTrade struct {
 	// BlockRfqId ID of the Block RFQ - when trade was part of the Block RFQ
 	BlockRfqId *int `json:"block_rfq_id,omitempty"`
 
-	// BlockTradeId Block trade id - when trade was part of a block trade
+	// BlockTradeId ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	//
 	// Example: 154
 	BlockTradeId *BlockTradeIdInResult `json:"block_trade_id,omitempty"`
 
-	// BlockTradeLegCount Block trade leg count - when trade was part of a block trade
+	// BlockTradeLegCount Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	//
 	// Example: 3
 	BlockTradeLegCount *BlockTradeLegCount `json:"block_trade_leg_count,omitempty"`
@@ -12651,12 +12651,12 @@ type UserTrade struct {
 	// BlockRfqQuoteId ID of the Block RFQ quote - when trade was part of the Block RFQ
 	BlockRfqQuoteId *int `json:"block_rfq_quote_id,omitempty"`
 
-	// BlockTradeId Block trade id - when trade was part of a block trade
+	// BlockTradeId ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	//
 	// Example: 154
 	BlockTradeId *BlockTradeIdInResult `json:"block_trade_id,omitempty"`
 
-	// BlockTradeLegCount Block trade leg count - when trade was part of a block trade
+	// BlockTradeLegCount Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	//
 	// Example: 3
 	BlockTradeLegCount *BlockTradeLegCount `json:"block_trade_leg_count,omitempty"`
@@ -13551,7 +13551,7 @@ type PrivateCreateApiKeyParams struct {
 	// PublicKey ED25519 or RSA PEM Encoded public key that should be used to create asymmetric API Key for signing requests/authentication requests with user's private key.<br></br> **📖 Related Article:** [Asymmetric API keys](https://docs.deribit.com/articles/asymmetric-api-keys)
 	PublicKey *string `form:"public_key,omitempty" json:"public_key,omitempty"`
 
-	// EnabledFeatures List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br> - `block_trade_approval`: Block trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br>
+	// EnabledFeatures List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read scope of the API key to Block Trades that have been made using this specific API key<br> - `block_trade_approval`: Block Trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br>
 	EnabledFeatures *[]PrivateCreateApiKeyParamsEnabledFeatures `form:"enabled_features,omitempty" json:"enabled_features,omitempty"`
 }
 
@@ -13731,7 +13731,7 @@ type PrivateEditApiKeyParams struct {
 	// Enabled Enables/disables the API key. `true` to enable, `false` to disable
 	Enabled *bool `form:"enabled,omitempty" json:"enabled,omitempty"`
 
-	// EnabledFeatures List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br> - `block_trade_approval`: Block trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br>
+	// EnabledFeatures List of enabled advanced on-key features. Available options:<br> - `restricted_block_trades`: Limit the block_trade read scope of the API key to Block Trades that have been made using this specific API key<br> - `block_trade_approval`: Block Trades created using this API key require additional user approval. Methods that use `block_rfq` scope are not affected by Block Trade approval feature<br>
 	EnabledFeatures *[]PrivateEditApiKeyParamsEnabledFeatures `form:"enabled_features,omitempty" json:"enabled_features,omitempty"`
 
 	// IpWhitelist Whitelist provided IP address on a selected key
@@ -13844,7 +13844,7 @@ type PrivateExecuteBlockTradeParams struct {
 	// Role Describes if user wants to be maker or taker of trades
 	Role Role `form:"role" json:"role"`
 
-	// Trades List of trades for block trade
+	// Trades List of trades for Block Trade
 	Trades []struct {
 		// Amount It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 		Amount *Amount `json:"amount,omitempty"`
@@ -13861,7 +13861,7 @@ type PrivateExecuteBlockTradeParams struct {
 		Price *float64 `json:"price,omitempty"`
 	} `form:"trades" json:"trades"`
 
-	// CounterpartySignature Signature of block trade generated by `private/verify_block_trade_method`
+	// CounterpartySignature Signature of Block Trade generated by `private/verify_block_trade`
 	CounterpartySignature BlockTradeSignature `form:"counterparty_signature" json:"counterparty_signature"`
 }
 
@@ -13961,13 +13961,13 @@ type PrivateGetBlockRfqsParamsRole string
 
 // PrivateGetBlockTradeParams defines parameters for PrivateGetBlockTrade.
 type PrivateGetBlockTradeParams struct {
-	// Id Block trade id
+	// Id ID of the Block Trade or Block RFQ trade
 	Id BlockTradeId `form:"id" json:"id"`
 }
 
 // PrivateGetBlockTradeRequestsParams defines parameters for PrivateGetBlockTradeRequests.
 type PrivateGetBlockTradeRequestsParams struct {
-	// BrokerCode Broker code to filter block trade requests. Only broker clients can use `broker_code` to query for their executed broker block trades.
+	// BrokerCode Broker code to filter Block Trade requests. Only broker clients can use `broker_code` to query for their executed broker Block Trades.
 	BrokerCode *string `form:"broker_code,omitempty" json:"broker_code,omitempty"`
 }
 
@@ -13976,19 +13976,19 @@ type PrivateGetBlockTradesParams struct {
 	// Currency The currency symbol
 	Currency *Currency `form:"currency,omitempty" json:"currency,omitempty"`
 
-	// Count Count of Block Trades returned, maximum - `101`
+	// Count Count of Block Trades and Block RFQ trades returned, maximum - `101`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// StartId Response will contain block trades older than the one provided in this field
+	// StartId Response will contain Block Trades and Block RFQ trades older than the one provided in this field
 	StartId *BlockTradeId `form:"start_id,omitempty" json:"start_id,omitempty"`
 
-	// EndId The id of the oldest block trade to be returned, `start_id` is required with `end_id`
+	// EndId The id of the oldest Block Trade or Block RFQ trade to be returned, `start_id` is required with `end_id`
 	EndId *BlockTradeId `form:"end_id,omitempty" json:"end_id,omitempty"`
 
 	// BlockRfqId ID of the Block RFQ
 	BlockRfqId *int `form:"block_rfq_id,omitempty" json:"block_rfq_id,omitempty"`
 
-	// BrokerCode Broker code to filter block trades. Only broker clients can use `broker_code` to filter broker block trades. Use `any` for all block trades.
+	// BrokerCode Broker code to filter Block Trades. Only broker clients can use `broker_code` to filter broker Block Trades. Use `any` for all Block Trades. Ignored when `block_rfq_id` is provided.
 	BrokerCode *string `form:"broker_code,omitempty" json:"broker_code,omitempty"`
 }
 
@@ -14009,10 +14009,10 @@ type PrivateGetBrokerTradesParams struct {
 	// Count Number of requested items, default - `20`, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// StartId Response will contain block trades older than the one provided in this field
+	// StartId Response will contain Block Trades and Block RFQ trades older than the one provided in this field
 	StartId *BlockTradeId `form:"start_id,omitempty" json:"start_id,omitempty"`
 
-	// EndId The id of the oldest block trade to be returned, `start_id` is required with `end_id`
+	// EndId The id of the oldest Block Trade or Block RFQ trade to be returned, `start_id` is required with `end_id`
 	EndId *BlockTradeId `form:"end_id,omitempty" json:"end_id,omitempty"`
 }
 
@@ -14645,7 +14645,7 @@ type PrivateGetWithdrawalsParams struct {
 
 // PrivateInvalidateBlockTradeSignatureParams defines parameters for PrivateInvalidateBlockTradeSignature.
 type PrivateInvalidateBlockTradeSignatureParams struct {
-	// Signature Signature of block trade that will be invalidated
+	// Signature Signature of Block Trade that will be invalidated
 	Signature BlockTradeSignature `form:"signature" json:"signature"`
 }
 
@@ -15237,7 +15237,7 @@ type PrivateSimulateBlockTradeParams struct {
 	// Role Describes if user wants to be maker or taker of trades
 	Role *Role `form:"role,omitempty" json:"role,omitempty"`
 
-	// Trades List of trades for block trade
+	// Trades List of trades for Block Trade
 	Trades []struct {
 		// Amount It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 		Amount *Amount `json:"amount,omitempty"`
@@ -15443,7 +15443,7 @@ type PrivateVerifyBlockTradeParams struct {
 	// Role Describes if user wants to be maker or taker of trades
 	Role Role `form:"role" json:"role"`
 
-	// Trades List of trades for block trade
+	// Trades List of trades for Block Trade
 	Trades []struct {
 		// Amount It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
 		Amount *Amount `json:"amount,omitempty"`
@@ -17090,7 +17090,7 @@ type ClientInterface interface {
 	//
 	// **Taker method**
 	//
-	// Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
+	// Allows the Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
 	//
 	// **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 	//
@@ -17145,11 +17145,11 @@ type ClientInterface interface {
 
 	// PrivateApproveBlockTrade performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
 	//
-	// Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+	// Approves a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 	//
-	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -17299,7 +17299,7 @@ type ClientInterface interface {
 	//
 	// **Taker method**
 	//
-	// Allows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
+	// Allows the Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
 	//
 	// Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
 	//
@@ -17698,13 +17698,13 @@ type ClientInterface interface {
 
 	// PrivateExecuteBlockTrade performs a GET /private/execute_block_trade (the `PrivateExecuteBlockTrade` operationId) request.
 	//
-	// Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
+	// Executes a Block Trade. This is the second step in the Block Trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
 	//
 	// The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
 	//
-	// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+	// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given Block Trade with a valid `counterparty_signature`, the Block Trade will be executed only once.
 	//
-	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -17849,7 +17849,7 @@ type ClientInterface interface {
 
 	// PrivateGetBlockTrade performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
 	//
-	// Returns information about a specific block trade identified by `block_trade_id`.
+	// Returns information about a specific Block Trade or Block RFQ trade identified by `block_trade_id`.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -17860,11 +17860,11 @@ type ClientInterface interface {
 
 	// PrivateGetBlockTradeRequests performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
 	//
-	// Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.
+	// Provides a list of Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending Block Trade.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
-	// Only broker clients can use `broker_code` to query for their broker block trade requests.
+	// Only broker clients can use `broker_code` to query for their broker Block Trade requests.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -17875,7 +17875,7 @@ type ClientInterface interface {
 
 	// PrivateGetBlockTrades performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
 	//
-	// Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.
+	// Returns a list of the user's Block Trades and Block RFQ trades. If currency is not provided, returns Block Trades and Block RFQ trades for all currencies. `block_rfq_id` can be provided to receive the Block RFQ trades related to that particular Block RFQ.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -17906,7 +17906,7 @@ type ClientInterface interface {
 
 	// PrivateGetBrokerTradeRequests performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
 	//
-	// **Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.
+	// **Broker Method** Provides a list of broker Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker Block Trade. This method takes no parameters.
 	//
 	// **Scope:** `block_trade:read`
 	//
@@ -17915,7 +17915,7 @@ type ClientInterface interface {
 
 	// PrivateGetBrokerTrades performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
 	//
-	// **Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.
+	// **Broker Method** Returns list of broker Block Trades. If currency is not provided, returns broker Block Trades for all currencies.
 	//
 	// **Scope:** `block_trade:read`
 	//
@@ -18482,7 +18482,7 @@ type ClientInterface interface {
 
 	// PrivateInvalidateBlockTradeSignature performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
 	//
-	// Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
+	// Invalidates a Block Trade signature, effectively cancelling the Block Trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -18620,11 +18620,11 @@ type ClientInterface interface {
 
 	// PrivateRejectBlockTrade performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
 	//
-	// Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+	// Rejects a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 	//
-	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -18876,7 +18876,7 @@ type ClientInterface interface {
 
 	// PrivateSimulateBlockTrade performs a GET /private/simulate_block_trade (the `PrivateSimulateBlockTrade` operationId) request.
 	//
-	// Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
+	// Checks if a Block Trade can be executed without actually executing it. Use this method to verify that a Block Trade will succeed before proceeding with the actual execution.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -19019,9 +19019,9 @@ type ClientInterface interface {
 
 	// PrivateVerifyBlockTrade performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
 	//
-	// Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
+	// Verifies and creates a Block Trade signature. This is the first step in the Block Trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
 	//
-	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -19555,7 +19555,7 @@ type ClientInterface interface {
 	//
 	// Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.
 	//
-	// **Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.
+	// **Note:** Position moves are not included in this volume. Block Trades and Block RFQ trades are included in the volume calculations.
 	//
 	// Use the `extended` parameter to include additional volume statistics and breakdowns.
 	//
@@ -19572,7 +19572,7 @@ type ClientInterface interface {
 	//
 	// Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
 	//
-	// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
+	// **Note:** Block Trades and Block RFQ trades are not included in chart prices or volume.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 	//
@@ -19692,7 +19692,7 @@ type ClientInterface interface {
 //
 // **Taker method**
 //
-// Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
+// Allows the Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
 //
 // **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 //
@@ -19778,11 +19778,11 @@ func (c *Client) PrivateAddToAddressBook(ctx context.Context, params *PrivateAdd
 
 // PrivateApproveBlockTrade performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
 //
-// Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+// Approves a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 //
-// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -20042,7 +20042,7 @@ func (c *Client) PrivateCancelBlockRfqQuote(ctx context.Context, params *Private
 //
 // **Taker method**
 //
-// Allows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
+// Allows the Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
 //
 // Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
 //
@@ -20711,13 +20711,13 @@ func (c *Client) PrivateEnableCancelOnDisconnect(ctx context.Context, params *Pr
 
 // PrivateExecuteBlockTrade performs a GET /private/execute_block_trade (the `PrivateExecuteBlockTrade` operationId) request.
 //
-// Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
+// Executes a Block Trade. This is the second step in the Block Trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
 //
 // The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
 //
-// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given Block Trade with a valid `counterparty_signature`, the Block Trade will be executed only once.
 //
-// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -20972,7 +20972,7 @@ func (c *Client) PrivateGetBlockRfqs(ctx context.Context, params *PrivateGetBloc
 
 // PrivateGetBlockTrade performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
 //
-// Returns information about a specific block trade identified by `block_trade_id`.
+// Returns information about a specific Block Trade or Block RFQ trade identified by `block_trade_id`.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -20993,11 +20993,11 @@ func (c *Client) PrivateGetBlockTrade(ctx context.Context, params *PrivateGetBlo
 
 // PrivateGetBlockTradeRequests performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
 //
-// Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.
+// Provides a list of Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending Block Trade.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
-// Only broker clients can use `broker_code` to query for their broker block trade requests.
+// Only broker clients can use `broker_code` to query for their broker Block Trade requests.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -21018,7 +21018,7 @@ func (c *Client) PrivateGetBlockTradeRequests(ctx context.Context, params *Priva
 
 // PrivateGetBlockTrades performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
 //
-// Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.
+// Returns a list of the user's Block Trades and Block RFQ trades. If currency is not provided, returns Block Trades and Block RFQ trades for all currencies. `block_rfq_id` can be provided to receive the Block RFQ trades related to that particular Block RFQ.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -21069,7 +21069,7 @@ func (c *Client) PrivateGetBrokerClients(ctx context.Context, params *PrivateGet
 
 // PrivateGetBrokerTradeRequests performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
 //
-// **Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.
+// **Broker Method** Provides a list of broker Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker Block Trade. This method takes no parameters.
 //
 // **Scope:** `block_trade:read`
 //
@@ -21088,7 +21088,7 @@ func (c *Client) PrivateGetBrokerTradeRequests(ctx context.Context, reqEditors .
 
 // PrivateGetBrokerTrades performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
 //
-// **Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.
+// **Broker Method** Returns list of broker Block Trades. If currency is not provided, returns broker Block Trades for all currencies.
 //
 // **Scope:** `block_trade:read`
 //
@@ -22075,7 +22075,7 @@ func (c *Client) PrivateGetWithdrawals(ctx context.Context, params *PrivateGetWi
 
 // PrivateInvalidateBlockTradeSignature performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
 //
-// Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
+// Invalidates a Block Trade signature, effectively cancelling the Block Trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -22293,11 +22293,11 @@ func (c *Client) PrivatePmeSimulate(ctx context.Context, params *PrivatePmeSimul
 
 // PrivateRejectBlockTrade performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
 //
-// Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+// Rejects a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 //
-// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -22729,7 +22729,7 @@ func (c *Client) PrivateSetSelfTradingConfig(ctx context.Context, params *Privat
 
 // PrivateSimulateBlockTrade performs a GET /private/simulate_block_trade (the `PrivateSimulateBlockTrade` operationId) request.
 //
-// Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
+// Checks if a Block Trade can be executed without actually executing it. Use this method to verify that a Block Trade will succeed before proceeding with the actual execution.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -22982,9 +22982,9 @@ func (c *Client) PrivateUpdateInAddressBook(ctx context.Context, params *Private
 
 // PrivateVerifyBlockTrade performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
 //
-// Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
+// Verifies and creates a Block Trade signature. This is the first step in the Block Trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
 //
-// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -23908,7 +23908,7 @@ func (c *Client) PublicGetTime(ctx context.Context, reqEditors ...RequestEditorF
 //
 // Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.
 //
-// **Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.
+// **Note:** Position moves are not included in this volume. Block Trades and Block RFQ trades are included in the volume calculations.
 //
 // Use the `extended` parameter to include additional volume statistics and breakdowns.
 //
@@ -23935,7 +23935,7 @@ func (c *Client) PublicGetTradeVolumes(ctx context.Context, params *PublicGetTra
 //
 // Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
 //
-// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
+// **Note:** Block Trades and Block RFQ trades are not included in chart prices or volume.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 //
@@ -38507,7 +38507,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Taker method**
 	//
-	// Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
+	// Allows the Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
 	//
 	// **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 	//
@@ -38568,11 +38568,11 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateApproveBlockTradeWithResponse performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
 	//
-	// Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+	// Approves a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 	//
-	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -38744,7 +38744,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Taker method**
 	//
-	// Allows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
+	// Allows the Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
 	//
 	// Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
 	//
@@ -39197,13 +39197,13 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateExecuteBlockTradeWithResponse performs a GET /private/execute_block_trade (the `PrivateExecuteBlockTrade` operationId) request.
 	//
-	// Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
+	// Executes a Block Trade. This is the second step in the Block Trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
 	//
 	// The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
 	//
-	// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+	// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given Block Trade with a valid `counterparty_signature`, the Block Trade will be executed only once.
 	//
-	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -39370,7 +39370,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetBlockTradeWithResponse performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
 	//
-	// Returns information about a specific block trade identified by `block_trade_id`.
+	// Returns information about a specific Block Trade or Block RFQ trade identified by `block_trade_id`.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -39383,11 +39383,11 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetBlockTradeRequestsWithResponse performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
 	//
-	// Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.
+	// Provides a list of Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending Block Trade.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
-	// Only broker clients can use `broker_code` to query for their broker block trade requests.
+	// Only broker clients can use `broker_code` to query for their broker Block Trade requests.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -39400,7 +39400,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetBlockTradesWithResponse performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
 	//
-	// Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.
+	// Returns a list of the user's Block Trades and Block RFQ trades. If currency is not provided, returns Block Trades and Block RFQ trades for all currencies. `block_rfq_id` can be provided to receive the Block RFQ trades related to that particular Block RFQ.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -39435,7 +39435,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetBrokerTradeRequestsWithResponse performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
 	//
-	// **Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.
+	// **Broker Method** Provides a list of broker Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker Block Trade. This method takes no parameters.
 	//
 	// **Scope:** `block_trade:read`
 	//
@@ -39446,7 +39446,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetBrokerTradesWithResponse performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
 	//
-	// **Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.
+	// **Broker Method** Returns list of broker Block Trades. If currency is not provided, returns broker Block Trades for all currencies.
 	//
 	// **Scope:** `block_trade:read`
 	//
@@ -40097,7 +40097,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateInvalidateBlockTradeSignatureWithResponse performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
 	//
-	// Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
+	// Invalidates a Block Trade signature, effectively cancelling the Block Trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -40251,11 +40251,11 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateRejectBlockTradeWithResponse performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
 	//
-	// Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+	// Rejects a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 	//
-	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+	// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 	//
-	// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+	// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -40543,7 +40543,7 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateSimulateBlockTradeWithResponse performs a GET /private/simulate_block_trade (the `PrivateSimulateBlockTrade` operationId) request.
 	//
-	// Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
+	// Checks if a Block Trade can be executed without actually executing it. Use this method to verify that a Block Trade will succeed before proceeding with the actual execution.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -40708,9 +40708,9 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateVerifyBlockTradeWithResponse performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
 	//
-	// Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
+	// Verifies and creates a Block Trade signature. This is the first step in the Block Trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
 	//
-	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+	// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 	//
 	// **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 	//
@@ -41322,7 +41322,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.
 	//
-	// **Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.
+	// **Note:** Position moves are not included in this volume. Block Trades and Block RFQ trades are included in the volume calculations.
 	//
 	// Use the `extended` parameter to include additional volume statistics and breakdowns.
 	//
@@ -41341,7 +41341,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
 	//
-	// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
+	// **Note:** Block Trades and Block RFQ trades are not included in chart prices or volume.
 	//
 	// **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 	//
@@ -49198,7 +49198,7 @@ func (r PublicUnsubscribeAllResponse) ContentType() string {
 //
 // **Taker method**
 //
-// Allows Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
+// Allows the Block RFQ taker to accept a quote by sending a single crossing price. The order can be either filled immediately (`fill_or_kill`) or remain active until cancelled (`good_til_cancelled`).
 //
 // **Note:** After Block RFQ creation, a grace period of 5 seconds begins, during which the taker cannot see quotes or trade the Block RFQ.
 //
@@ -49278,11 +49278,11 @@ func (c *ClientWithResponses) PrivateAddToAddressBookWithResponse(ctx context.Co
 
 // PrivateApproveBlockTradeWithResponse performs a GET /private/approve_block_trade (the `PrivateApproveBlockTrade` operationId) request.
 //
-// Approves a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+// Approves a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 //
-// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -49520,7 +49520,7 @@ func (c *ClientWithResponses) PrivateCancelBlockRfqQuoteWithResponse(ctx context
 //
 // **Taker method**
 //
-// Allows Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
+// Allows the Block RFQ taker to cancel an active trigger for a Block RFQ. The response includes the full Block RFQ object with the trade trigger state set to cancelled.
 //
 // Use [private/get_block_rfqs](https://docs.deribit.com/api-reference/block-rfq/private-get_block_rfqs) to retrieve Block RFQ information.
 //
@@ -50135,13 +50135,13 @@ func (c *ClientWithResponses) PrivateEnableCancelOnDisconnectWithResponse(ctx co
 
 // PrivateExecuteBlockTradeWithResponse performs a GET /private/execute_block_trade (the `PrivateExecuteBlockTrade` operationId) request.
 //
-// Executes a block trade. This is the second step in the block trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
+// Executes a Block Trade. This is the second step in the Block Trade workflow - the second party calls this method with the signature received from the first party to execute the trade.
 //
 // The whole request must be exactly the same as in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade), only the `role` field should be set appropriately - this means that both sides have to agree on the same `timestamp`, `nonce`, and `trades` fields, and the server will ensure that the `role` field is different between sides (each party accepts their own role).
 //
-// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given block trade with a valid `counterparty_signature`, the block trade will be executed only once.
+// Using the same `timestamp` and `nonce` by both sides in [private/verify_block_trade](https://docs.deribit.com/api-reference/block-trade/private-verify_block_trade) ensures that even if unintentionally both sides execute the given Block Trade with a valid `counterparty_signature`, the Block Trade will be executed only once.
 //
-// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -50374,7 +50374,7 @@ func (c *ClientWithResponses) PrivateGetBlockRfqsWithResponse(ctx context.Contex
 
 // PrivateGetBlockTradeWithResponse performs a GET /private/get_block_trade (the `PrivateGetBlockTrade` operationId) request.
 //
-// Returns information about a specific block trade identified by `block_trade_id`.
+// Returns information about a specific Block Trade or Block RFQ trade identified by `block_trade_id`.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -50393,11 +50393,11 @@ func (c *ClientWithResponses) PrivateGetBlockTradeWithResponse(ctx context.Conte
 
 // PrivateGetBlockTradeRequestsWithResponse performs a GET /private/get_block_trade_requests (the `PrivateGetBlockTradeRequests` operationId) request.
 //
-// Provides a list of block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending block trade.
+// Provides a list of Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used with [private/approve_block_trade](https://docs.deribit.com/api-reference/block-trade/private-approve_block_trade) or [private/reject_block_trade](https://docs.deribit.com/api-reference/block-trade/private-reject_block_trade) to approve or reject the pending Block Trade.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
-// Only broker clients can use `broker_code` to query for their broker block trade requests.
+// Only broker clients can use `broker_code` to query for their broker Block Trade requests.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -50416,7 +50416,7 @@ func (c *ClientWithResponses) PrivateGetBlockTradeRequestsWithResponse(ctx conte
 
 // PrivateGetBlockTradesWithResponse performs a GET /private/get_block_trades (the `PrivateGetBlockTrades` operationId) request.
 //
-// Returns a list of the user's block trades. If currency is not provided, returns block trades for all currencies. `block_rfq_id` can be provided to receive block trades related to that particular Block RFQ.
+// Returns a list of the user's Block Trades and Block RFQ trades. If currency is not provided, returns Block Trades and Block RFQ trades for all currencies. `block_rfq_id` can be provided to receive the Block RFQ trades related to that particular Block RFQ.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -50463,7 +50463,7 @@ func (c *ClientWithResponses) PrivateGetBrokerClientsWithResponse(ctx context.Co
 
 // PrivateGetBrokerTradeRequestsWithResponse performs a GET /private/get_broker_trade_requests (the `PrivateGetBrokerTradeRequests` operationId) request.
 //
-// **Broker Method** Provides a list of broker block trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker block trade. This method takes no parameters.
+// **Broker Method** Provides a list of broker Block Trade requests including pending approvals, declined trades, and expired trades. `timestamp` and `nonce` received in response can be used to approve or reject the pending broker Block Trade. This method takes no parameters.
 //
 // **Scope:** `block_trade:read`
 //
@@ -50480,7 +50480,7 @@ func (c *ClientWithResponses) PrivateGetBrokerTradeRequestsWithResponse(ctx cont
 
 // PrivateGetBrokerTradesWithResponse performs a GET /private/get_broker_trades (the `PrivateGetBrokerTrades` operationId) request.
 //
-// **Broker Method** Returns list of broker block trades. If currency is not provided, returns broker block trades for all currencies.
+// **Broker Method** Returns list of broker Block Trades. If currency is not provided, returns broker Block Trades for all currencies.
 //
 // **Scope:** `block_trade:read`
 //
@@ -51383,7 +51383,7 @@ func (c *ClientWithResponses) PrivateGetWithdrawalsWithResponse(ctx context.Cont
 
 // PrivateInvalidateBlockTradeSignatureWithResponse performs a GET /private/invalidate_block_trade_signature (the `PrivateInvalidateBlockTradeSignature` operationId) request.
 //
-// Invalidates a block trade signature, effectively cancelling the block trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
+// Invalidates a Block Trade signature, effectively cancelling the Block Trade. This can be called at any time before [private/execute_block_trade](https://docs.deribit.com/api-reference/block-trade/private-execute_block_trade) is called.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -51585,11 +51585,11 @@ func (c *ClientWithResponses) PrivatePmeSimulateWithResponse(ctx context.Context
 
 // PrivateRejectBlockTradeWithResponse performs a GET /private/reject_block_trade (the `PrivateRejectBlockTrade` operationId) request.
 //
-// Rejects a pending block trade. `nonce` and `timestamp` are used to identify the block trade while `role` should be opposite to the trading counterparty.
+// Rejects a pending Block Trade. `nonce` and `timestamp` are used to identify the Block Trade while `role` should be opposite to the trading counterparty.
 //
-// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending block trades that require approval.
+// Use [private/get_block_trade_requests](https://docs.deribit.com/api-reference/block-trade/private-get_block_trade_requests) to retrieve pending Block Trades that require approval.
 //
-// To use the block trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
+// To use the Block Trade approval feature, an [additional API key setting feature](https://docs.deribit.com/articles/creating-api-key#block-trade-approval-feature) called `enabled_features: block_trade_approval` is required. This key has to be given to the broker/registered partner who performs the trades on behalf of the user for the feature to be active. If the user wants to approve the trade, they must approve it from a different API key that doesn't have this feature enabled.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -51985,7 +51985,7 @@ func (c *ClientWithResponses) PrivateSetSelfTradingConfigWithResponse(ctx contex
 
 // PrivateSimulateBlockTradeWithResponse performs a GET /private/simulate_block_trade (the `PrivateSimulateBlockTrade` operationId) request.
 //
-// Checks if a block trade can be executed without actually executing it. Use this method to verify that a block trade will succeed before proceeding with the actual execution.
+// Checks if a Block Trade can be executed without actually executing it. Use this method to verify that a Block Trade will succeed before proceeding with the actual execution.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -52216,9 +52216,9 @@ func (c *ClientWithResponses) PrivateUpdateInAddressBookWithResponse(ctx context
 
 // PrivateVerifyBlockTradeWithResponse performs a GET /private/verify_block_trade (the `PrivateVerifyBlockTrade` operationId) request.
 //
-// Verifies and creates a block trade signature. This is the first step in the block trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
+// Verifies and creates a Block Trade signature. This is the first step in the Block Trade workflow - the first party calls this method to generate a signature that must be shared with the second party.
 //
-// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a block trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" block trade.
+// **Note:** In the API, the `direction` field is always expressed from the maker's perspective. This means that when you accept a Block Trade as a taker, the direction shown in the API represents the opposite side of your trade. For example, if you are buying puts as a taker, the API will show the operation as a "sell put" (maker's perspective), and you will be verifying and accepting a "sell put" Block Trade.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 //
@@ -53064,7 +53064,7 @@ func (c *ClientWithResponses) PublicGetTimeWithResponse(ctx context.Context, req
 //
 // Retrieves aggregated 24-hour trade volumes for different instrument types and currencies. The volume statistics include all executed trades across the platform.
 //
-// **Note:** Position moves are not included in this volume. Block trades and Block RFQ trades are included in the volume calculations.
+// **Note:** Position moves are not included in this volume. Block Trades and Block RFQ trades are included in the volume calculations.
 //
 // Use the `extended` parameter to include additional volume statistics and breakdowns.
 //
@@ -53089,7 +53089,7 @@ func (c *ClientWithResponses) PublicGetTradeVolumesWithResponse(ctx context.Cont
 //
 // Use the `chart_resolution` parameter to specify the candle interval (e.g., 1m, 5m, 1h, 1d). This method provides the standard format used by TradingView and other charting platforms.
 //
-// **Note:** Block trades, including Block RFQ trades, are not included in chart prices or volume.
+// **Note:** Block Trades and Block RFQ trades are not included in chart prices or volume.
 //
 // **Note:** For spot instruments routed to Coinbase Exchange, this call is not supported. Use [Get product candles](https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-product-candles) instead.
 //

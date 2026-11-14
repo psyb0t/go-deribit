@@ -195,14 +195,14 @@ func TradesInstrumentNameIntervalAddress(instrumentName, interval string) string
 
 // BlockTradeConfirmationsAddressTemplate is the address of the BlockTradeConfirmations channel.
 //
-// Provides notifications regarding block trade approval. Subscribe to this channel to receive notifications about pending block trades that require your approval.
+// Provides notifications regarding Block Trade approval. Subscribe to this channel to receive notifications about pending Block Trades that require your approval.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 const BlockTradeConfirmationsAddressTemplate = "block_trade_confirmations"
 
 // BlockTradeConfirmationsCurrencyAddressTemplate is the address of the BlockTradeConfirmationsCurrency channel with its parameters unfilled.
 //
-// Provides notifications regarding block trade approval. Supports filtering by currency. Subscribe to this channel to receive notifications about pending block trades that require your approval, filtered by a specific currency.
+// Provides notifications regarding Block Trade approval. Supports filtering by currency. Subscribe to this channel to receive notifications about pending Block Trades that require your approval, filtered by a specific currency.
 //
 // **📖 Related Article:** [Block Trading](https://docs.deribit.com/articles/block-trading-api)
 const BlockTradeConfirmationsCurrencyAddressTemplate = "block_trade_confirmations.{currency}"
@@ -405,7 +405,7 @@ func UserPortfolioCurrencyAddress(currency string) string {
 //
 // **Block RFQ trades:** Trades resulting from Block RFQ execution are included in this channel. These trades carry the following additional fields:
 // - `block_rfq_id` , ID of the Block RFQ.
-// - `block_trade_id` , ID of the resulting block trade.
+// - `block_trade_id` , ID of the resulting Block RFQ trade.
 // - `block_rfq_quote_id` , ID of the accepted quote (present on the **maker** side only).
 // - `order_id` , always present for direct trade participants (makers and takers).
 const UserTradesInstrumentNameIntervalAddressTemplate = "user.trades.{instrument_name}.{interval}"
@@ -4054,9 +4054,9 @@ type TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem struct
 	Liquidation *TradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemLiquidation `json:"liquidation,omitempty"`
 	// Mark Price at the moment of trade
 	MarkPrice *float64 `json:"mark_price"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -4399,26 +4399,26 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParams) Validate() erro
 }
 
 type BlockTradeConfirmationsSubscriptionMessagePayloadParamsData struct {
-	// Nonce that can be used to approve or reject pending block trade.
+	// Nonce that can be used to approve or reject pending Block Trade.
 	Nonce string `json:"nonce"`
-	// Timestamp that can be used to approve or reject pending block trade.
+	// Timestamp that can be used to approve or reject pending Block Trade.
 	Timestamp int64                                                                   `json:"timestamp"`
 	Trades    []BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataTradesItem `json:"trades"`
-	// The name of the application that executed the block trade on behalf of the user (optional).
+	// The name of the application that executed the Block Trade on behalf of the user (optional).
 	AppName *string `json:"app_name,omitempty"`
-	// Username of the user who initiated the block trade.
+	// Username of the user who initiated the Block Trade.
 	Username *string `json:"username,omitempty"`
 	// Trade role of the user: `maker` or `taker`
 	Role BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataRole `json:"role"`
 	// Unique user identifier
 	UserID int64 `json:"user_id"`
-	// Broker code associated with the broker block trade.
+	// Broker code associated with the broker Block Trade.
 	BrokerCode *string `json:"broker_code,omitempty"`
-	// Name of the broker associated with the block trade.
+	// Name of the broker associated with the Block Trade.
 	BrokerName *string `json:"broker_name,omitempty"`
-	// State of the pending block trade for current user.
+	// State of the pending Block Trade for current user.
 	State BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState `json:"state"`
-	// State of the pending block trade for the other party (optional).
+	// State of the pending Block Trade for the other party (optional).
 	CounterpartyState *BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState `json:"counterparty_state,omitempty"`
 	// Combo instrument identifier
 	ComboID *string `json:"combo_id,omitempty"`
@@ -4552,7 +4552,7 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataRole) Validat
 	return asyncapirt.Invalid("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataRole", fmt.Sprintf("unknown value %v", v))
 }
 
-// State of the pending block trade for current user.
+// State of the pending Block Trade for current user.
 type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataState struct {
 	// State value.
 	Value BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue `json:"value"`
@@ -4614,7 +4614,7 @@ func (v BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue) V
 	return asyncapirt.Invalid("BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataStateValue", fmt.Sprintf("unknown value %v", v))
 }
 
-// State of the pending block trade for the other party (optional).
+// State of the pending Block Trade for the other party (optional).
 type BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyState struct {
 	// State value.
 	Value BlockTradeConfirmationsSubscriptionMessagePayloadParamsDataCounterpartyStateValue `json:"value"`
@@ -4902,26 +4902,26 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParams) Validat
 }
 
 type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsData struct {
-	// Nonce that can be used to approve or reject pending block trade.
+	// Nonce that can be used to approve or reject pending Block Trade.
 	Nonce string `json:"nonce"`
-	// Timestamp that can be used to approve or reject pending block trade.
+	// Timestamp that can be used to approve or reject pending Block Trade.
 	Timestamp int64                                                                           `json:"timestamp"`
 	Trades    []BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataTradesItem `json:"trades"`
-	// The name of the application that executed the block trade on behalf of the user (optional).
+	// The name of the application that executed the Block Trade on behalf of the user (optional).
 	AppName *string `json:"app_name,omitempty"`
-	// Username of the user who initiated the block trade.
+	// Username of the user who initiated the Block Trade.
 	Username *string `json:"username,omitempty"`
 	// Trade role of the user: `maker` or `taker`
 	Role BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataRole `json:"role"`
 	// Unique user identifier
 	UserID int64 `json:"user_id"`
-	// Broker code associated with the broker block trade.
+	// Broker code associated with the broker Block Trade.
 	BrokerCode *string `json:"broker_code,omitempty"`
-	// Name of the broker associated with the block trade.
+	// Name of the broker associated with the Block Trade.
 	BrokerName *string `json:"broker_name,omitempty"`
-	// State of the pending block trade for current user.
+	// State of the pending Block Trade for current user.
 	State BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState `json:"state"`
-	// State of the pending block trade for the other party (optional).
+	// State of the pending Block Trade for the other party (optional).
 	CounterpartyState *BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState `json:"counterparty_state,omitempty"`
 	// Combo instrument identifier
 	ComboID *string `json:"combo_id,omitempty"`
@@ -5055,7 +5055,7 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataRole)
 	return asyncapirt.Invalid("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataRole", fmt.Sprintf("unknown value %v", v))
 }
 
-// State of the pending block trade for current user.
+// State of the pending Block Trade for current user.
 type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState struct {
 	// State value.
 	Value BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue `json:"value"`
@@ -5117,7 +5117,7 @@ func (v BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataState
 	return asyncapirt.Invalid("BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataStateValue", fmt.Sprintf("unknown value %v", v))
 }
 
-// State of the pending block trade for the other party (optional).
+// State of the pending Block Trade for the other party (optional).
 type BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyState struct {
 	// State value.
 	Value BlockTradeConfirmationsCurrencySubscriptionMessagePayloadParamsDataCounterpartyStateValue `json:"value"`
@@ -5435,9 +5435,9 @@ type TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem struct {
 	Liquidation *TradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemLiquidation `json:"liquidation,omitempty"`
 	// Mark Price at the moment of trade
 	MarkPrice *float64 `json:"mark_price"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -8490,9 +8490,9 @@ type UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItem st
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -9147,9 +9147,9 @@ type UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem stru
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -9804,9 +9804,9 @@ type UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataIt
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserComboTradesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -10461,9 +10461,9 @@ type UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItem
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserComboTradesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -14917,9 +14917,9 @@ type UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTrades
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserChangesInstrumentNameIntervalSubscriptionMessagePayloadParamsDataTradesItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
@@ -16240,9 +16240,9 @@ type UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesIt
 	Label *string `json:"label,omitempty"`
 	// Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"` or `"archive"` (if order was archived)
 	State UserChangesKindCurrencyIntervalSubscriptionMessagePayloadParamsDataTradesItemState `json:"state"`
-	// Block trade id - when trade was part of a block trade
+	// ID of the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeID *string `json:"block_trade_id,omitempty"`
-	// Block trade leg count - when trade was part of a block trade
+	// Number of legs in the Block Trade or Block RFQ trade, when the trade was part of one
 	BlockTradeLegCount *int64 `json:"block_trade_leg_count,omitempty"`
 	// Optional field (only for Block RFQ trades with delayed publication): the time the trade is published to public data feeds, in milliseconds since the UNIX epoch. Until then, the trade is returned only to its counterparties and is not included in public trades or the Block RFQ trade tape. The trade never updates the ticker `last_price` or tick direction, or the 24-hour `high`, `low` and `price_change`; its volume is reported in `volume_delayed`.
 	BlockDelayed *int64 `json:"block_delayed,omitempty"`
