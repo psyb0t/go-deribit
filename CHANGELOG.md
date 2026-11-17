@@ -2,6 +2,13 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.3.0, 2026-11-17
+
+- Added `PrivateGetCtnId` to `ClientInterface` and `Client`, and `PrivateGetCtnIdWithResponse` to `ClientWithResponsesInterface` and `ClientWithResponses`, for the new private CTN id endpoint.
+- Added the supporting types `PrivateGetCtnIdResponse`, `PrivateGetCtnIdResponse2`, `PrivateGetCtnIdResponseJsonrpc` and the constant `PrivateGetCtnIdResponseJsonrpcN20`, plus `NewPrivateGetCtnIdRequest` and `ParsePrivateGetCtnIdResponse2`.
+- Changed the type of `SelfTradingExtendedToSubaccounts` in the results of `PrivateAccountResponse` and `PrivateAccountSummariesResponse` from `*string` to `*bool`. Callers that read this field must update their code.
+- Updated the `open_interest` note in the ticker subscription docs in `ws` to say it is always reported with an 8-hour delay.
+
 ## v0.2.3, 2026-11-14
 
 - Documentation only. Doc comments in the REST client and in `ws/` now write "Block Trade" with capitals, as the Deribit specs do.

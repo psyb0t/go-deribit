@@ -114,7 +114,7 @@ func BookInstrumentNameGroupDepthIntervalAddress(instrumentName, group, depth, i
 //
 // This is the recommended method for real-time market data updates, as it provides efficient push-based notifications instead of requiring polling.
 //
-// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -2372,7 +2372,7 @@ type TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsData struct {
 	// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
 	State TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataState `json:"state"`
 	Stats TickerInstrumentNameIntervalSubscriptionMessagePayloadParamsDataStats `json:"stats"`
-	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 	OpenInterest float64 `json:"open_interest"`
 	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price"`
@@ -2933,7 +2933,7 @@ type IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsData struct 
 	// - `archivized`: Set when instrument is moved to `expired_instruments` table, final state.
 	State *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataState `json:"state,omitempty"`
 	Stats *IncrementalTickerInstrumentNameSubscriptionMessagePayloadParamsDataStats `json:"stats,omitempty"`
-	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+	// The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 	OpenInterest *float64 `json:"open_interest,omitempty"`
 	// The current best bid price, `0` if the bid side is empty
 	BestBidPrice *float64 `json:"best_bid_price,omitempty"`

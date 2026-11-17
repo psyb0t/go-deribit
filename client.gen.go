@@ -750,6 +750,21 @@ func (e PrivateGetCancelOnDisconnectResponseJsonrpc) Valid() bool {
 	}
 }
 
+// Defines values for PrivateGetCtnIdResponseJsonrpc.
+const (
+	PrivateGetCtnIdResponseJsonrpcN20 PrivateGetCtnIdResponseJsonrpc = "2.0"
+)
+
+// Valid indicates whether the value is a known member of the PrivateGetCtnIdResponseJsonrpc enum.
+func (e PrivateGetCtnIdResponseJsonrpc) Valid() bool {
+	switch e {
+	case PrivateGetCtnIdResponseJsonrpcN20:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PrivateGetCurrenciesResponseJsonrpc.
 const (
 	PrivateGetCurrenciesResponseJsonrpcN20 PrivateGetCurrenciesResponseJsonrpc = "2.0"
@@ -5648,7 +5663,7 @@ type PrivateAccountResponse struct {
 		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
 
 		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
-		SelfTradingExtendedToSubaccounts *string `json:"self_trading_extended_to_subaccounts,omitempty"`
+		SelfTradingExtendedToSubaccounts *bool `json:"self_trading_extended_to_subaccounts,omitempty"`
 
 		// SelfTradingRejectMode Self trading rejection behavior - `reject_taker` or `cancel_maker` (available when parameter `extended` = `true`)
 		SelfTradingRejectMode *string `json:"self_trading_reject_mode,omitempty"`
@@ -5791,7 +5806,7 @@ type PrivateAccountSummariesResponse struct {
 		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
 
 		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
-		SelfTradingExtendedToSubaccounts *string `json:"self_trading_extended_to_subaccounts,omitempty"`
+		SelfTradingExtendedToSubaccounts *bool `json:"self_trading_extended_to_subaccounts,omitempty"`
 
 		// SelfTradingRejectMode Self trading rejection behavior - `reject_taker` or `cancel_maker` (available when parameter `extended` = `true`)
 		SelfTradingRejectMode *string `json:"self_trading_reject_mode,omitempty"`
@@ -6937,6 +6952,24 @@ type PrivateGetCancelOnDisconnectResponse struct {
 
 // PrivateGetCancelOnDisconnectResponseJsonrpc The JSON-RPC version (2.0)
 type PrivateGetCancelOnDisconnectResponseJsonrpc string
+
+// PrivateGetCtnIdResponse defines model for PrivateGetCtnIdResponse.
+type PrivateGetCtnIdResponse struct {
+	// Id The id that was sent in the request
+	Id *int `json:"id,omitempty"`
+
+	// Jsonrpc The JSON-RPC version (2.0)
+	Jsonrpc PrivateGetCtnIdResponseJsonrpc `json:"jsonrpc"`
+	Result  struct {
+		// CtnId Coinbase Transfer Network (CTN) ID of the account
+		//
+		// Example: 6a1f2c3d-4b5e-4f60-8a71-9b0c1d2e3f40
+		CtnId string `json:"ctn_id"`
+	} `json:"result"`
+}
+
+// PrivateGetCtnIdResponseJsonrpc The JSON-RPC version (2.0)
+type PrivateGetCtnIdResponseJsonrpc string
 
 // PrivateGetCurrenciesResponse defines model for PrivateGetCurrenciesResponse.
 type PrivateGetCurrenciesResponse struct {
@@ -9146,7 +9179,7 @@ type TickerNotification struct {
 	// MinPrice The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
 	MinPrice MinPrice `json:"min_price"`
 
-	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 	OpenInterest OpenInterest `json:"open_interest"`
 
 	// SettlementPrice Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
@@ -9277,7 +9310,7 @@ type TickerNotificationWithBidsAndAsks struct {
 	// MinPrice The minimum price for the future. Any sell orders you submit lower than this price will be clamped to this minimum.
 	MinPrice MinPrice `json:"min_price"`
 
-	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+	// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 	OpenInterest OpenInterest `json:"open_interest"`
 
 	// SettlementPrice Optional (not added for spot). The settlement price for the instrument. Only when `state = open`
@@ -10061,7 +10094,7 @@ type BookSummary struct {
 	// Example: 7022.89
 	MidPrice *float64 `json:"mid_price"`
 
-	// OpenInterest Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+	// OpenInterest Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 	//
 	// Example: 0.5
 	OpenInterest *float64 `json:"open_interest,omitempty"`
@@ -10201,7 +10234,7 @@ type CoinbaseAddressBookItem struct {
 	// IsSelf Indicates that the beneficiary is the account owner , travel rule data (present when provided)
 	IsSelf *bool `json:"is_self,omitempty"`
 
-	// Kind Kind of the destination: `"onchain"` , blockchain address, `"ctn"` , Coinbase Travel Network counterparty
+	// Kind Kind of the destination: `"onchain"` , blockchain address, `"ctn"` , Coinbase Transfer Network counterparty
 	Kind CoinbaseAddressBookItemKind `json:"kind"`
 
 	// Label Label of the address book entry
@@ -10263,7 +10296,7 @@ type CoinbaseAddressBookItem struct {
 // CoinbaseAddressBookItemEntityType Type of the beneficiary entity , travel rule data (present when provided)
 type CoinbaseAddressBookItemEntityType string
 
-// CoinbaseAddressBookItemKind Kind of the destination: `"onchain"` , blockchain address, `"ctn"` , Coinbase Travel Network counterparty
+// CoinbaseAddressBookItemKind Kind of the destination: `"onchain"` , blockchain address, `"ctn"` , Coinbase Transfer Network counterparty
 type CoinbaseAddressBookItemKind string
 
 // CoinbaseAddressBookItemStatus Status of the entry: `"active"` for deposit addresses, `"waiting"` while the security delay is pending, `"ready"` otherwise
@@ -11235,7 +11268,7 @@ type Nonce = string
 // OcoRef Unique reference that identifies a one_cancels_others (OCO) pair.
 type OcoRef = string
 
-// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Reported with an 8-hour delay, i.e. the open interest as of 8 hours ago.
+// OpenInterest The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin. Always reported with an 8-hour delay, i.e. the open interest as of 8 hours ago, regardless of trade type (on-screen, Block Trade or Block RFQ).
 type OpenInterest = float64
 
 // OpenOrderPrice Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
@@ -13031,7 +13064,7 @@ type PrivateAddToAddressBookParams struct {
 	// Tag Destination tag / memo for networks that support one. **Coinbase wallet type only.** Used together with `address` and `network`; also serves to disambiguate address book entries that share the same address.
 	Tag *string `form:"tag,omitempty" json:"tag,omitempty"`
 
-	// CounterpartyId Identifier of a Coinbase Travel Network (CTN) counterparty. **Coinbase wallet type only.** Used instead of `address` and `network`; entries created with `counterparty_id` apply to all currencies, so `currency` is omitted.
+	// CounterpartyId Identifier of a Coinbase Transfer Network (CTN) counterparty. **Coinbase wallet type only.** Used instead of `address` and `network`; entries created with `counterparty_id` apply to all currencies, so `currency` is omitted.
 	CounterpartyId *string `form:"counterparty_id,omitempty" json:"counterparty_id,omitempty"`
 
 	// Label Label of the address book entry
@@ -13937,7 +13970,12 @@ type PrivateGetBlockRfqsParams struct {
 	// Count Count of Block RFQs returned, maximum - `1000`
 	Count *int `form:"count,omitempty" json:"count,omitempty"`
 
-	// State State of Block RFQ
+	// State Filter Block RFQs by state. Default: `open`.
+	//
+	// `open`, `filled`, `cancelled` and `expired` match the Block RFQ `state` field. Two more values are filters only and never appear as a Block RFQ `state`:
+	//
+	// - `closed`: all Block RFQs that are no longer open (`filled`, `cancelled` or `expired`).
+	// - `traded`: `filled` Block RFQs the user traded on. For a taker this matches `filled`. For a maker it returns only Block RFQs where the maker's quote was executed.
 	State *PrivateGetBlockRfqsParamsState `form:"state,omitempty" json:"state,omitempty"`
 
 	// Role Role of the user in Block RFQ. When the `any` role is selected, the method returns all Block RFQs in which the user has participated, either as the `taker` or as a `maker`
@@ -17126,7 +17164,7 @@ type ClientInterface interface {
 	//
 	// **Coinbase wallet type**
 	//
-	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 	//
 	// - Required parameters are `type` and `label`, plus one of:
 	//   - `address` together with `currency` and `network` (optional `tag`) , an on-chain address on the selected network, or
@@ -17934,6 +17972,17 @@ type ClientInterface interface {
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_cancel_on_disconnect)
 	PrivateGetCancelOnDisconnect(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// PrivateGetCtnId performs a GET /private/get_ctn_id (the `PrivateGetCtnId` operationId) request.
+	//
+	// Returns the Coinbase Transfer Network (CTN) ID of the account. Share this ID with a sending party so they can add the account as a CTN counterparty and send funds to it.
+	//
+	// **Coinbase wallet type only.** The method is available to institutional Coinbase accounts and takes no parameters. Other accounts receive an error.
+	//
+	// **Scope:** `wallet:read`
+	//
+	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_ctn_id)
+	PrivateGetCtnId(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// PrivateGetCurrencies performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
 	//
 	// Returns a list of cryptocurrencies available for the authenticated user's account.
@@ -18525,6 +18574,8 @@ type ClientInterface interface {
 	//
 	// **📖 Related Support Article:** [Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)
 	//
+	// **Restrictions:** Not available for Coinbase Custody accounts (`coinbase` wallet type): error `13021` (`forbidden`) is returned.
+	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_custody_accounts)
 	PrivateListCustodyAccounts(ctx context.Context, params *PrivateListCustodyAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -19044,7 +19095,7 @@ type ClientInterface interface {
 	//
 	// **Coinbase wallet type**
 	//
-	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 	//
 	// - Required parameters are `currency` (any portfolio currency) and `amount`, plus one of `address` or `id` (the address book entry identifier returned by `private/get_address_book`).
 	// - When `address` is an on-chain address, pass `network` (and `tag` when applicable) to identify the address book entry. For a CTN withdrawal, pass the CTN counterparty identifier of the entry as `address`.
@@ -19194,7 +19245,7 @@ type ClientInterface interface {
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
 	//
-	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+	// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 	//
@@ -19211,7 +19262,7 @@ type ClientInterface interface {
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
 	//
-	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+	// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// This method provides a quick overview of current market activity and liquidity for a single instrument.
 	//
@@ -19660,7 +19711,7 @@ type ClientInterface interface {
 	//
 	// This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 	//
-	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
+	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 	//
 	// **📖 Related Articles:**
 	// - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -19748,7 +19799,7 @@ func (c *Client) PrivateAddBlockRfqQuote(ctx context.Context, params *PrivateAdd
 //
 // **Coinbase wallet type**
 //
-// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 //
 // - Required parameters are `type` and `label`, plus one of:
 //   - `address` together with `currency` and `network` (optional `tag`) , an on-chain address on the selected network, or
@@ -21127,6 +21178,27 @@ func (c *Client) PrivateGetCancelOnDisconnect(ctx context.Context, params *Priva
 	return c.Client.Do(req)
 }
 
+// PrivateGetCtnId performs a GET /private/get_ctn_id (the `PrivateGetCtnId` operationId) request.
+//
+// Returns the Coinbase Transfer Network (CTN) ID of the account. Share this ID with a sending party so they can add the account as a CTN counterparty and send funds to it.
+//
+// **Coinbase wallet type only.** The method is available to institutional Coinbase accounts and takes no parameters. Other accounts receive an error.
+//
+// **Scope:** `wallet:read`
+//
+// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_ctn_id)
+func (c *Client) PrivateGetCtnId(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPrivateGetCtnIdRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // PrivateGetCurrencies performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
 //
 // Returns a list of cryptocurrencies available for the authenticated user's account.
@@ -22148,6 +22220,8 @@ func (c *Client) PrivateListApiKeys(ctx context.Context, reqEditors ...RequestEd
 //
 // **📖 Related Support Article:** [Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)
 //
+// **Restrictions:** Not available for Coinbase Custody accounts (`coinbase` wallet type): error `13021` (`forbidden`) is returned.
+//
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_custody_accounts)
 func (c *Client) PrivateListCustodyAccounts(ctx context.Context, params *PrivateListCustodyAccountsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPrivateListCustodyAccountsRequest(c.Server, params)
@@ -23017,7 +23091,7 @@ func (c *Client) PrivateVerifyBlockTrade(ctx context.Context, params *PrivateVer
 //
 // **Coinbase wallet type**
 //
-// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 //
 // - Required parameters are `currency` (any portfolio currency) and `amount`, plus one of `address` or `id` (the address book entry identifier returned by `private/get_address_book`).
 // - When `address` is an on-chain address, pass `network` (and `tag` when applicable) to identify the address book entry. For a CTN withdrawal, pass the CTN counterparty identifier of the entry as `address`.
@@ -23257,7 +23331,7 @@ func (c *Client) PublicGetBlockRfqTrades(ctx context.Context, params *PublicGetB
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
 //
-// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 //
@@ -23284,7 +23358,7 @@ func (c *Client) PublicGetBookSummaryByCurrency(ctx context.Context, params *Pub
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
 //
-// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // This method provides a quick overview of current market activity and liquidity for a single instrument.
 //
@@ -24093,7 +24167,7 @@ func (c *Client) PublicTest(ctx context.Context, params *PublicTestParams, reqEd
 //
 // This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 //
-// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -29016,6 +29090,33 @@ func NewPrivateGetCancelOnDisconnectRequest(server string, params *PrivateGetCan
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
 		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPrivateGetCtnIdRequest constructs an http.Request for the PrivateGetCtnId method
+func NewPrivateGetCtnIdRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/private/get_ctn_id")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
@@ -38547,7 +38648,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Coinbase wallet type**
 	//
-	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 	//
 	// - Required parameters are `type` and `label`, plus one of:
 	//   - `address` together with `currency` and `network` (optional `tag`) , an on-chain address on the selected network, or
@@ -39469,6 +39570,19 @@ type ClientWithResponsesInterface interface {
 	// Returns a wrapper object for the known response body format(s).
 	PrivateGetCancelOnDisconnectWithResponse(ctx context.Context, params *PrivateGetCancelOnDisconnectParams, reqEditors ...RequestEditorFn) (*PrivateGetCancelOnDisconnectResponse2, error)
 
+	// PrivateGetCtnIdWithResponse performs a GET /private/get_ctn_id (the `PrivateGetCtnId` operationId) request.
+	//
+	// Returns the Coinbase Transfer Network (CTN) ID of the account. Share this ID with a sending party so they can add the account as a CTN counterparty and send funds to it.
+	//
+	// **Coinbase wallet type only.** The method is available to institutional Coinbase accounts and takes no parameters. Other accounts receive an error.
+	//
+	// **Scope:** `wallet:read`
+	//
+	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_ctn_id)
+	//
+	// Returns a wrapper object for the known response body format(s).
+	PrivateGetCtnIdWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCtnIdResponse2, error)
+
 	// PrivateGetCurrenciesWithResponse performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
 	//
 	// Returns a list of cryptocurrencies available for the authenticated user's account.
@@ -40146,6 +40260,8 @@ type ClientWithResponsesInterface interface {
 	//
 	// **📖 Related Support Article:** [Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)
 	//
+	// **Restrictions:** Not available for Coinbase Custody accounts (`coinbase` wallet type): error `13021` (`forbidden`) is returned.
+	//
 	// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_custody_accounts)
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -40735,7 +40851,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// **Coinbase wallet type**
 	//
-	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+	// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 	//
 	// - Required parameters are `currency` (any portfolio currency) and `amount`, plus one of `address` or `id` (the address book entry identifier returned by `private/get_address_book`).
 	// - When `address` is an on-chain address, pass `network` (and `tag` when applicable) to identify the address book entry. For a CTN withdrawal, pass the CTN counterparty identifier of the entry as `address`.
@@ -40903,7 +41019,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
 	//
-	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+	// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 	//
@@ -40922,7 +41038,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
 	//
-	// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+	// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 	//
 	// This method provides a quick overview of current market activity and liquidity for a single instrument.
 	//
@@ -41443,7 +41559,7 @@ type ClientWithResponsesInterface interface {
 	//
 	// This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 	//
-	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
+	// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 	//
 	// **📖 Related Articles:**
 	// - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -43890,6 +44006,47 @@ func (r PrivateGetCancelOnDisconnectResponse2) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r PrivateGetCancelOnDisconnectResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type PrivateGetCtnIdResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *PrivateGetCtnIdResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r PrivateGetCtnIdResponse2) GetJSON200() *PrivateGetCtnIdResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r PrivateGetCtnIdResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r PrivateGetCtnIdResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PrivateGetCtnIdResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r PrivateGetCtnIdResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -49250,7 +49407,7 @@ func (c *ClientWithResponses) PrivateAddBlockRfqQuoteWithResponse(ctx context.Co
 //
 // **Coinbase wallet type**
 //
-// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 //
 // - Required parameters are `type` and `label`, plus one of:
 //   - `address` together with `currency` and `network` (optional `tag`) , an on-chain address on the selected network, or
@@ -50515,6 +50672,25 @@ func (c *ClientWithResponses) PrivateGetCancelOnDisconnectWithResponse(ctx conte
 	return ParsePrivateGetCancelOnDisconnectResponse2(rsp)
 }
 
+// PrivateGetCtnIdWithResponse performs a GET /private/get_ctn_id (the `PrivateGetCtnId` operationId) request.
+//
+// Returns the Coinbase Transfer Network (CTN) ID of the account. Share this ID with a sending party so they can add the account as a CTN counterparty and send funds to it.
+//
+// **Coinbase wallet type only.** The method is available to institutional Coinbase accounts and takes no parameters. Other accounts receive an error.
+//
+// **Scope:** `wallet:read`
+//
+// [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Fget_ctn_id)
+//
+// Returns a wrapper object for the known response body format(s).
+func (c *ClientWithResponses) PrivateGetCtnIdWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PrivateGetCtnIdResponse2, error) {
+	rsp, err := c.PrivateGetCtnId(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePrivateGetCtnIdResponse2(rsp)
+}
+
 // PrivateGetCurrenciesWithResponse performs a GET /private/get_currencies (the `PrivateGetCurrencies` operationId) request.
 //
 // Returns a list of cryptocurrencies available for the authenticated user's account.
@@ -51450,6 +51626,8 @@ func (c *ClientWithResponses) PrivateListApiKeysWithResponse(ctx context.Context
 //
 // **📖 Related Support Article:** [Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)
 //
+// **Restrictions:** Not available for Coinbase Custody accounts (`coinbase` wallet type): error `13021` (`forbidden`) is returned.
+//
 // [Try in API console](https://test.deribit.com/api_console?method=%2Fprivate%2Flist_custody_accounts)
 //
 // Returns a wrapper object for the known response body format(s).
@@ -52249,7 +52427,7 @@ func (c *ClientWithResponses) PrivateVerifyBlockTradeWithResponse(ctx context.Co
 //
 // **Coinbase wallet type**
 //
-// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Travel Network) counterparties, and behaves differently:
+// For Coinbase wallet type accounts the method supports network selection and CTN (Coinbase Transfer Network) counterparties, and behaves differently:
 //
 // - Required parameters are `currency` (any portfolio currency) and `amount`, plus one of `address` or `id` (the address book entry identifier returned by `private/get_address_book`).
 // - When `address` is an on-chain address, pass `network` (and `tag` when applicable) to identify the address book entry. For a CTN withdrawal, pass the CTN counterparty identifier of the entry as `address`.
@@ -52471,7 +52649,7 @@ func (c *ClientWithResponses) PublicGetBlockRfqTradesWithResponse(ctx context.Co
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, and other market statistics for all instruments in a given currency.
 //
-// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // Results can be filtered by instrument kind (future, option, etc.). This method provides a quick overview of market activity across all instruments for a currency.
 //
@@ -52496,7 +52674,7 @@ func (c *ClientWithResponses) PublicGetBookSummaryByCurrencyWithResponse(ctx con
 //
 // Retrieves summary information such as open interest, 24-hour volume, best bid/ask prices, last trade price, mark price, and other market statistics for a specific instrument.
 //
-// **Note:** `open_interest` is reported with an 8-hour delay. `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
+// **Note:** `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). `volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late.
 //
 // This method provides a quick overview of current market activity and liquidity for a single instrument.
 //
@@ -53233,7 +53411,7 @@ func (c *ClientWithResponses) PublicTestWithResponse(ctx context.Context, params
 //
 // This is a lightweight method for getting current market data for a single instrument. For real-time updates, consider using WebSocket subscriptions to ticker channels.
 //
-// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is reported with an 8-hour delay. For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
+// **Note:** `stats.volume` equals `volume_realtime` plus `volume_delayed`; `volume_delayed` covers Block RFQ trades with delayed publication and is reported 8 hours late. Trades with delayed publication do not affect `last_price` or the 24-hour `high`, `low` and `price_change`. `open_interest` is always reported with an 8-hour delay, regardless of trade type (on-screen, Block Trade or Block RFQ). For spot instruments routed to Coinbase Exchange, `volume_notional`, `volume_usd` and their `_realtime`/`_delayed` breakdowns are omitted from `stats`.
 //
 // **📖 Related Articles:**
 // - [Spot Trading: Deribit and Coinbase-Routed Instruments](https://docs.deribit.com/articles/spot-trading-venues)
@@ -54808,6 +54986,32 @@ func ParsePrivateGetCancelOnDisconnectResponse2(rsp *http.Response) (*PrivateGet
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest PrivateGetCancelOnDisconnectResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePrivateGetCtnIdResponse2 parses an HTTP response from a PrivateGetCtnIdWithResponse call
+func ParsePrivateGetCtnIdResponse2(rsp *http.Response) (*PrivateGetCtnIdResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PrivateGetCtnIdResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PrivateGetCtnIdResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
