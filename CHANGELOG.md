@@ -2,6 +2,15 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.4.0, 2026-11-20
+
+- Added `Currencies` (`*[]string`) to `PrivateGetAccountSummariesParams` to request summaries for chosen currencies only.
+- Changed the type of `Currency` in `PrivateGetSubaccountsDetailsParams` from `Currency` to `WalletCurrency`. Callers that set it must pass the new type.
+- Changed the anonymous `Result` struct types of `PrivateAccountResponse` and `PrivateAccountSummariesResponse`. They gained fields such as `AvailableSubaccountTransferFunds`, `DepositAddress` and `HasNonBlockChainEquity`, and the new enum-typed fields for fee type, margin model, self-trading reject mode and user origin. `PrivateAccountSummariesResponse` is no longer comparable with `==`. Code that names these result structs in full must change.
+- Changed the `Result` item types of `PrivateGetSubaccountsResponse` and `PrivateGetSubaccountsDetailsResponse`. The open orders in the details result are now an inline struct instead of `[]Order`, so callers that assign them to `Order` must change.
+- Added the enum types `PrivateAccountResponseResultFeesDefaultType`, `PrivateAccountResponseResultMarginModel`, `PrivateAccountResponseResultSelfTradingRejectMode` and `PrivateAccountResponseResultUserOrigin`, with their constants and `Valid` methods. Matching types and constants exist for `PrivateAccountSummariesResponse` (`PrivateAccountSummariesResponseResultSelfTradingRejectMode`, `PrivateAccountSummariesResponseResultSummariesFeesDefaultType`, `PrivateAccountSummariesResponseResultSummariesMarginModel`, `PrivateAccountSummariesResponseResultUserOrigin`).
+- Rewrote doc comments for the account, account summaries, subaccounts, subaccount details, remove subaccount and change subaccount name methods to match the updated Deribit specs.
+
 ## v0.3.0, 2026-11-17
 
 - Added `PrivateGetCtnId` to `ClientInterface` and `Client`, and `PrivateGetCtnIdWithResponse` to `ClientWithResponsesInterface` and `ClientWithResponses`, for the new private CTN id endpoint.

@@ -138,6 +138,66 @@ func (e PrivateAccountResponseJsonrpc) Valid() bool {
 	}
 }
 
+// Defines values for PrivateAccountResponseResultFeesDefaultType.
+const (
+	PrivateAccountResponseResultFeesDefaultTypeFixed    PrivateAccountResponseResultFeesDefaultType = "fixed"
+	PrivateAccountResponseResultFeesDefaultTypeRelative PrivateAccountResponseResultFeesDefaultType = "relative"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountResponseResultFeesDefaultType enum.
+func (e PrivateAccountResponseResultFeesDefaultType) Valid() bool {
+	switch e {
+	case PrivateAccountResponseResultFeesDefaultTypeFixed:
+		return true
+	case PrivateAccountResponseResultFeesDefaultTypeRelative:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountResponseResultMarginModel.
+const (
+	PrivateAccountResponseResultMarginModelCrossPm      PrivateAccountResponseResultMarginModel = "cross_pm"
+	PrivateAccountResponseResultMarginModelCrossSm      PrivateAccountResponseResultMarginModel = "cross_sm"
+	PrivateAccountResponseResultMarginModelSegregatedPm PrivateAccountResponseResultMarginModel = "segregated_pm"
+	PrivateAccountResponseResultMarginModelSegregatedSm PrivateAccountResponseResultMarginModel = "segregated_sm"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountResponseResultMarginModel enum.
+func (e PrivateAccountResponseResultMarginModel) Valid() bool {
+	switch e {
+	case PrivateAccountResponseResultMarginModelCrossPm:
+		return true
+	case PrivateAccountResponseResultMarginModelCrossSm:
+		return true
+	case PrivateAccountResponseResultMarginModelSegregatedPm:
+		return true
+	case PrivateAccountResponseResultMarginModelSegregatedSm:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountResponseResultSelfTradingRejectMode.
+const (
+	PrivateAccountResponseResultSelfTradingRejectModeCancelMaker PrivateAccountResponseResultSelfTradingRejectMode = "cancel_maker"
+	PrivateAccountResponseResultSelfTradingRejectModeRejectTaker PrivateAccountResponseResultSelfTradingRejectMode = "reject_taker"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountResponseResultSelfTradingRejectMode enum.
+func (e PrivateAccountResponseResultSelfTradingRejectMode) Valid() bool {
+	switch e {
+	case PrivateAccountResponseResultSelfTradingRejectModeCancelMaker:
+		return true
+	case PrivateAccountResponseResultSelfTradingRejectModeRejectTaker:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PrivateAccountResponseResultType.
 const (
 	PrivateAccountResponseResultTypeMain       PrivateAccountResponseResultType = "main"
@@ -150,6 +210,24 @@ func (e PrivateAccountResponseResultType) Valid() bool {
 	case PrivateAccountResponseResultTypeMain:
 		return true
 	case PrivateAccountResponseResultTypeSubaccount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountResponseResultUserOrigin.
+const (
+	PrivateAccountResponseResultUserOriginCoinbase PrivateAccountResponseResultUserOrigin = "coinbase"
+	PrivateAccountResponseResultUserOriginDeribit  PrivateAccountResponseResultUserOrigin = "deribit"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountResponseResultUserOrigin enum.
+func (e PrivateAccountResponseResultUserOrigin) Valid() bool {
+	switch e {
+	case PrivateAccountResponseResultUserOriginCoinbase:
+		return true
+	case PrivateAccountResponseResultUserOriginDeribit:
 		return true
 	default:
 		return false
@@ -171,6 +249,66 @@ func (e PrivateAccountSummariesResponseJsonrpc) Valid() bool {
 	}
 }
 
+// Defines values for PrivateAccountSummariesResponseResultSelfTradingRejectMode.
+const (
+	PrivateAccountSummariesResponseResultSelfTradingRejectModeCancelMaker PrivateAccountSummariesResponseResultSelfTradingRejectMode = "cancel_maker"
+	PrivateAccountSummariesResponseResultSelfTradingRejectModeRejectTaker PrivateAccountSummariesResponseResultSelfTradingRejectMode = "reject_taker"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountSummariesResponseResultSelfTradingRejectMode enum.
+func (e PrivateAccountSummariesResponseResultSelfTradingRejectMode) Valid() bool {
+	switch e {
+	case PrivateAccountSummariesResponseResultSelfTradingRejectModeCancelMaker:
+		return true
+	case PrivateAccountSummariesResponseResultSelfTradingRejectModeRejectTaker:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountSummariesResponseResultSummariesFeesDefaultType.
+const (
+	PrivateAccountSummariesResponseResultSummariesFeesDefaultTypeFixed    PrivateAccountSummariesResponseResultSummariesFeesDefaultType = "fixed"
+	PrivateAccountSummariesResponseResultSummariesFeesDefaultTypeRelative PrivateAccountSummariesResponseResultSummariesFeesDefaultType = "relative"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountSummariesResponseResultSummariesFeesDefaultType enum.
+func (e PrivateAccountSummariesResponseResultSummariesFeesDefaultType) Valid() bool {
+	switch e {
+	case PrivateAccountSummariesResponseResultSummariesFeesDefaultTypeFixed:
+		return true
+	case PrivateAccountSummariesResponseResultSummariesFeesDefaultTypeRelative:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountSummariesResponseResultSummariesMarginModel.
+const (
+	PrivateAccountSummariesResponseResultSummariesMarginModelCrossPm      PrivateAccountSummariesResponseResultSummariesMarginModel = "cross_pm"
+	PrivateAccountSummariesResponseResultSummariesMarginModelCrossSm      PrivateAccountSummariesResponseResultSummariesMarginModel = "cross_sm"
+	PrivateAccountSummariesResponseResultSummariesMarginModelSegregatedPm PrivateAccountSummariesResponseResultSummariesMarginModel = "segregated_pm"
+	PrivateAccountSummariesResponseResultSummariesMarginModelSegregatedSm PrivateAccountSummariesResponseResultSummariesMarginModel = "segregated_sm"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountSummariesResponseResultSummariesMarginModel enum.
+func (e PrivateAccountSummariesResponseResultSummariesMarginModel) Valid() bool {
+	switch e {
+	case PrivateAccountSummariesResponseResultSummariesMarginModelCrossPm:
+		return true
+	case PrivateAccountSummariesResponseResultSummariesMarginModelCrossSm:
+		return true
+	case PrivateAccountSummariesResponseResultSummariesMarginModelSegregatedPm:
+		return true
+	case PrivateAccountSummariesResponseResultSummariesMarginModelSegregatedSm:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for PrivateAccountSummariesResponseResultType.
 const (
 	PrivateAccountSummariesResponseResultTypeMain       PrivateAccountSummariesResponseResultType = "main"
@@ -183,6 +321,24 @@ func (e PrivateAccountSummariesResponseResultType) Valid() bool {
 	case PrivateAccountSummariesResponseResultTypeMain:
 		return true
 	case PrivateAccountSummariesResponseResultTypeSubaccount:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for PrivateAccountSummariesResponseResultUserOrigin.
+const (
+	PrivateAccountSummariesResponseResultUserOriginCoinbase PrivateAccountSummariesResponseResultUserOrigin = "coinbase"
+	PrivateAccountSummariesResponseResultUserOriginDeribit  PrivateAccountSummariesResponseResultUserOrigin = "deribit"
+)
+
+// Valid indicates whether the value is a known member of the PrivateAccountSummariesResponseResultUserOrigin enum.
+func (e PrivateAccountSummariesResponseResultUserOrigin) Valid() bool {
+	switch e {
+	case PrivateAccountSummariesResponseResultUserOriginCoinbase:
+		return true
+	case PrivateAccountSummariesResponseResultUserOriginDeribit:
 		return true
 	default:
 		return false
@@ -5381,15 +5537,20 @@ type PrivateAccountResponse struct {
 		// Example: 0.3
 		AdditionalReserve *AdditionalReserve `json:"additional_reserve,omitempty"`
 
-		// AffiliatePromotionFee Affiliate promotion fee (if greater than 0.0)
+		// AffiliatePromotionFee Active affiliate fee promotion, as a fraction by which trading fees are reduced (fee = standard fee × (1 - `affiliate_promotion_fee`)). Returned only while a promotion is active (available when parameter `extended` = `true`).
 		//
-		// Example: 0
+		// Example: 0.1
 		AffiliatePromotionFee *float64 `json:"affiliate_promotion_fee,omitempty"`
 
 		// AvailableFunds Funds available to increase margin usage (open or enlarge positions). Equal to `margin_balance - initial_margin`, floored at `0` in the API response. When initial margin usage exceeds 100%, this is `0` and only reducing orders can be placed. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
 		//
 		// Example: 2.2638913
 		AvailableFunds float64 `json:"available_funds"`
+
+		// AvailableSubaccountTransferFunds Funds available for transfer to other subaccounts of the same main account. Returned only when it differs from `available_withdrawal_funds`, which happens when additional restrictions apply to external withdrawals only. Always ≥ `0`.
+		//
+		// Example: 2.5
+		AvailableSubaccountTransferFunds *float64 `json:"available_subaccount_transfer_funds,omitempty"`
 
 		// AvailableWithdrawalFunds Funds available to withdraw in the selected currency. Typically lower than `available_funds` because withdrawals also exclude positive session profit, locked balance, `spot_reserve`, `additional_reserve`, and non-withdrawable external/implied equity components. Always ≥ `0`.
 		//
@@ -5420,7 +5581,7 @@ type PrivateAccountResponse struct {
 		// Example: 1542100802842
 		CreationTimestamp *int `json:"creation_timestamp,omitempty"`
 
-		// CrossCollateralEnabled When `true` cross collateral is enabled for user
+		// CrossCollateralEnabled `true` when the account uses a cross collateral margin model (`cross_sm` or `cross_pm`), where all cross collateral currencies are margined together. The `total_*_usd` fields are returned only in this case.
 		//
 		// Example: true
 		CrossCollateralEnabled *bool `json:"cross_collateral_enabled,omitempty"`
@@ -5451,7 +5612,7 @@ type PrivateAccountResponse struct {
 		// They therefore do not add up to `delta_total`, which is calculated on the Net Transaction Delta basis described under `delta_total`.
 		DeltaTotalMap *DeltaTotalMap `json:"delta_total_map,omitempty"`
 
-		// DepositAddress The deposit address for the account (if available)
+		// DepositAddress The account's deposit address for the selected currency. Omitted when no deposit address has been generated for the account yet.
 		//
 		// Example: 14diAAyXL5UzhPTCKC998ch2GV7DMb7yDi
 		DepositAddress *string `json:"deposit_address,omitempty"`
@@ -5459,7 +5620,7 @@ type PrivateAccountResponse struct {
 		// Email User email (available when parameter `extended` = `true`)
 		//
 		// Example: support@deribit.com
-		Email string `json:"email"`
+		Email *string `json:"email,omitempty"`
 
 		// Equity The account's equity in the selected currency: `balance + futures (session UPL + RPL) + options mark value` (plus any external/implied equity). Related: `margin_balance` excludes options mark value under standard margin.
 		//
@@ -5469,23 +5630,52 @@ type PrivateAccountResponse struct {
 		// FeeBalance The account's fee balance (it can be used to pay for fees)
 		FeeBalance *FeeBalance `json:"fee_balance,omitempty"`
 
-		// FeeGroup Fee group indicates the level of fee discounts applied to an account. Use `extended`: `true` to view this field. If the field is missing, the account is not assigned to any fee group. **📖 Related Support Article:** [Automatically applied volume based fee discounts](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees#heading-11)
+		// FeeGroup Name of the fee tier assigned to the account. This is how to check which fee tier applies to an account through the API.
+		//
+		// - A preset tier (for example one of the automatically applied volume-based tiers) is returned by its name.
+		// - `Custom` means the account has individually configured fee rates that do not come from a preset tier.
+		//
+		// **Requirements:** returned only when `extended` = `true`.
+		//
+		// **When absent:** the account is on the default (standard) fee tier. The field is omitted together with `fees`; there is no explicit "Standard" value.
+		//
+		// Subaccounts report the tier of their main account (or of the SMA manager for accounts linked to one). The rates of the tier are returned in `fees`.
+		//
+		// **Related articles:** [Fees](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees#heading-11)
+		//
+		//
+		// Example: Custom
 		FeeGroup *string `json:"fee_group,omitempty"`
 
-		// Fees Fee structure for all currency pairs and instrument types related to the currency (available when parameter `extended` = `true` and user has any discounts). Keys are index names (e.g., "btc_usd"), values are objects with instrument types as keys (option, perpetual, future).
+		// Fees Fee rates of the account's fee tier (see `fee_group`) for every index related to the selected currency. Keys are index names (for example `btc_usd`); values are objects keyed by instrument kind (`future`, `perpetual`, `option`, `spot`). Kinds and indexes without a configured discount are omitted and use the standard rates.
+		//
+		// **Requirements:** returned only when `extended` = `true` and the account is on a non-default fee tier. Absent for accounts on standard fees.
+		//
+		// **Reading the values:**
+		// - `default.type` = `relative`: `maker` and `taker` are multipliers of the standard fee (for example `0.625` means 62.5% of the standard rate).
+		// - `default.type` = `fixed`: `maker` and `taker` are the fee rates themselves, as a fraction of the traded amount (negative values are rebates).
+		// - `block_trade` is always a multiplier of the standard block trade fee.
+		// - `settlement` is always a fixed fee rate applied at delivery/settlement.
+		//
+		// **Related articles:** [Fees](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees)
 		Fees *map[string]map[string]struct {
-			// BlockTrade Block trade fee (if applicable)
+			// BlockTrade Block trade fee as a multiplier of the standard block trade fee (only when configured)
 			BlockTrade *float64 `json:"block_trade,omitempty"`
-			Default    struct {
-				// Maker Maker fee
+
+			// Default Order book trading fees
+			Default struct {
+				// Maker Maker fee (multiplier or rate, depending on `type`); a negative fixed rate is a rebate
 				Maker float64 `json:"maker"`
 
-				// Taker Taker fee
+				// Taker Taker fee (multiplier or rate, depending on `type`)
 				Taker float64 `json:"taker"`
 
-				// Type Fee type - `relative` if fee is calculated as a fraction of base instrument fee, `fixed` if fee is calculated solely using user fee
-				Type string `json:"type"`
+				// Type `relative` - `maker`/`taker` are multipliers of the standard fee; `fixed` - `maker`/`taker` are absolute fee rates
+				Type PrivateAccountResponseResultFeesDefaultType `json:"type"`
 			} `json:"default"`
+
+			// Settlement Fixed delivery/settlement fee rate (only when configured)
+			Settlement *float64 `json:"settlement,omitempty"`
 		} `json:"fees,omitempty"`
 
 		// FuturesPl Combined profit and loss of all futures and perpetual positions included in `total_pl` (`total_pl - options_pl`).
@@ -5503,13 +5693,13 @@ type PrivateAccountResponse struct {
 		// Example: 0
 		FuturesSessionUpl float64 `json:"futures_session_upl"`
 
-		// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity
+		// HasNonBlockChainEquity Returned with value `true` only when part of the account's equity is not held on chain at Deribit (for example off-exchange or credit-based equity, or a pending loan in the selected currency). Omitted otherwise.
 		HasNonBlockChainEquity *bool `json:"has_non_block_chain_equity,omitempty"`
 
 		// Id Account id (available when parameter `extended` = `true`)
 		//
 		// Example: 12354
-		Id int `json:"id"`
+		Id *int `json:"id,omitempty"`
 
 		// InitialMargin Minimum margin required to open or increase positions (includes margin for open orders). If initial margin usage exceeds 100%, `available_funds` is `0`. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
 		//
@@ -5544,15 +5734,20 @@ type PrivateAccountResponse struct {
 		// Example: 0.1334519
 		MaintenanceMargin float64 `json:"maintenance_margin"`
 
+		// MandatoryTfa `true` when mandatory two-factor authentication is enforced for the account, so the required security key assignments must be set up (for example, to generate a deposit address); `false` when it is not enforced or the account is exempted. Taken from the main account (available when `extended` = `true`)
+		//
+		// Example: true
+		MandatoryTfa *bool `json:"mandatory_tfa,omitempty"`
+
 		// MarginBalance Collateral available against margin requirements. Under standard margin (SM): `equity - options_value` (cash balance plus futures session UPL and RPL). Under portfolio margin (PM): equal to `equity` on a segregated account, and `equity - outstanding_loan_amount` on a cross account. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
 		//
 		// Example: 2.25
 		MarginBalance *float64 `json:"margin_balance,omitempty"`
 
-		// MarginModel Name of user's currently enabled margin model
+		// MarginModel Margin model currently enabled for the account: `segregated_sm` (segregated standard margin), `segregated_pm` (segregated portfolio margin), `cross_sm` (cross collateral standard margin) or `cross_pm` (cross collateral portfolio margin).
 		//
 		// Example: segregated_sm
-		MarginModel *string `json:"margin_model,omitempty"`
+		MarginModel *PrivateAccountResponseResultMarginModel `json:"margin_model,omitempty"`
 
 		// MmpEnabled Whether MMP is enabled (available when parameter `extended` = `true`)
 		//
@@ -5569,7 +5764,7 @@ type PrivateAccountResponse struct {
 		// Example: 0
 		OptionsGamma float64 `json:"options_gamma"`
 
-		// OptionsGammaMap Map of options' gammas per index
+		// OptionsGammaMap Sum of option position gammas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 		OptionsGammaMap map[string]float64 `json:"options_gamma_map"`
 
 		// OptionsPl Combined profit and loss of all options positions included in `total_pl`.
@@ -5592,7 +5787,7 @@ type PrivateAccountResponse struct {
 		// Example: 0
 		OptionsTheta float64 `json:"options_theta"`
 
-		// OptionsThetaMap Map of options' thetas per index
+		// OptionsThetaMap Sum of option position thetas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 		OptionsThetaMap map[string]float64 `json:"options_theta_map"`
 
 		// OptionsValue Mark value of all open options positions in the selected currency. Under standard margin, `margin_balance = equity - options_value`.
@@ -5605,10 +5800,10 @@ type PrivateAccountResponse struct {
 		// Example: 0
 		OptionsVega float64 `json:"options_vega"`
 
-		// OptionsVegaMap Map of options' vegas per index
+		// OptionsVegaMap Sum of option position vegas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 		OptionsVegaMap map[string]float64 `json:"options_vega_map"`
 
-		// PortfolioMarginingEnabled `true` when portfolio margining is enabled for user
+		// PortfolioMarginingEnabled `true` when the account uses a portfolio margin model (`segregated_pm` or `cross_pm`), `false` for standard margin.
 		//
 		// Example: true
 		PortfolioMarginingEnabled *bool `json:"portfolio_margining_enabled,omitempty"`
@@ -5642,12 +5837,12 @@ type PrivateAccountResponse struct {
 		// Example: 1
 		ProjectedMaintenanceMargin ProjectedMaintenanceMargin `json:"projected_maintenance_margin"`
 
-		// ReceiveNotifications Whether the account receives notifications
+		// ReceiveNotifications Email-forwarding flag reported for the account (available when `extended` = `true`). It does not reflect changes made with `private/toggle_notifications_from_subaccount`; see the known limitation there
 		//
 		// Example: false
 		ReceiveNotifications *bool `json:"receive_notifications,omitempty"`
 
-		// ReferrerId Optional identifier of the referrer (of the affiliation program, and available when parameter `extended` = `true`), which link was used by this account at registration. It coincides with suffix of the affiliation link path after `/reg-`
+		// ReferrerId Identifier of the affiliate whose referral link was used to register this account, or `null` when the account was not referred. It equals the suffix of the referral link after `?reg=` (available when parameter `extended` = `true`).
 		//
 		// Example: 517.6035
 		ReferrerId *string `json:"referrer_id,omitempty"`
@@ -5655,18 +5850,18 @@ type PrivateAccountResponse struct {
 		// SecurityKeysEnabled Whether Security Key authentication is enabled (available when parameter `extended` = `true`)
 		//
 		// Example: false
-		SecurityKeysEnabled bool `json:"security_keys_enabled"`
+		SecurityKeysEnabled *bool `json:"security_keys_enabled,omitempty"`
 
 		// SelfTradingExtendedAcrossMembers `true` if self trading rejection behavior is applied across all Starbase Members of the main account. Enabled by Deribit on request (available when parameter `extended` = `true`)
 		//
 		// Example: false
 		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
 
-		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
+		// SelfTradingExtendedToSubaccounts `true` if self-trade prevention also applies to trades between the main account and its subaccounts. Returned only when self-trade prevention is configured (available when parameter `extended` = `true`).
 		SelfTradingExtendedToSubaccounts *bool `json:"self_trading_extended_to_subaccounts,omitempty"`
 
-		// SelfTradingRejectMode Self trading rejection behavior - `reject_taker` or `cancel_maker` (available when parameter `extended` = `true`)
-		SelfTradingRejectMode *string `json:"self_trading_reject_mode,omitempty"`
+		// SelfTradingRejectMode Self-trade prevention behavior: `reject_taker` rejects the incoming (taker) order, `cancel_maker` cancels the resting (maker) order. Returned only when self-trade prevention is configured for the account (available when parameter `extended` = `true`).
+		SelfTradingRejectMode *PrivateAccountResponseResultSelfTradingRejectMode `json:"self_trading_reject_mode,omitempty"`
 
 		// SessionRpl Realized profit and loss accrued in the current trading session (since the last daily settlement). Resets at each daily settlement.
 		//
@@ -5678,7 +5873,7 @@ type PrivateAccountResponse struct {
 		// Example: 0.846863
 		SessionUpl Upl `json:"session_upl"`
 
-		// SpotReserve The account's balance reserved in active spot orders
+		// SpotReserve Part of the balance reserved by open spot orders (the amount the orders would spend if filled). Excluded from `available_withdrawal_funds`.
 		//
 		// Example: 0.3
 		SpotReserve *float64 `json:"spot_reserve,omitempty"`
@@ -5686,7 +5881,7 @@ type PrivateAccountResponse struct {
 		// SystemName System generated user nickname (available when parameter `extended` = `true`)
 		//
 		// Example: myname
-		SystemName string `json:"system_name"`
+		SystemName *string `json:"system_name,omitempty"`
 
 		// TotalDeltaTotalUsd Optional (only for users using cross margin). The account's total delta total in all cross collateral currencies, expressed in USD
 		//
@@ -5718,24 +5913,57 @@ type PrivateAccountResponse struct {
 		// Example: 0.02032221
 		TotalPl float64 `json:"total_pl"`
 
-		// TradingProductsDetails Which trading products are enabled or can be overwritten for the account
-		TradingProductsDetails *map[string]interface{} `json:"trading_products_details,omitempty"`
+		// TradingProductsDetails Per trading product, whether it is enabled and can be overwritten for the account (available when parameter `extended` = `true`)
+		TradingProductsDetails *[]struct {
+			// Enabled Whether the product is enabled for the account
+			Enabled bool `json:"enabled"`
+
+			// Overwriteable Whether the setting can be overwritten at the account level (subaccounts only)
+			Overwriteable bool `json:"overwriteable"`
+
+			// Product Trading product name
+			Product string `json:"product"`
+
+			// RequiresConsent Whether enabling the product requires consent (subaccounts only)
+			RequiresConsent bool `json:"requires_consent"`
+		} `json:"trading_products_details,omitempty"`
 
 		// Type Account type (available when parameter `extended` = `true`)
-		Type PrivateAccountResponseResultType `json:"type"`
+		Type *PrivateAccountResponseResultType `json:"type,omitempty"`
+
+		// UserOrigin How the account was created: `deribit` for accounts registered on Deribit, `coinbase` for accounts provisioned through Coinbase (available when parameter `extended` = `true`).
+		//
+		// Example: deribit
+		UserOrigin *PrivateAccountResponseResultUserOrigin `json:"user_origin,omitempty"`
 
 		// Username Account name (given by user) (available when parameter `extended` = `true`)
 		//
 		// Example: name
-		Username string `json:"username"`
+		Username *string `json:"username,omitempty"`
 	} `json:"result"`
 }
 
 // PrivateAccountResponseJsonrpc The JSON-RPC version (2.0)
 type PrivateAccountResponseJsonrpc string
 
+// PrivateAccountResponseResultFeesDefaultType `relative` - `maker`/`taker` are multipliers of the standard fee; `fixed` - `maker`/`taker` are absolute fee rates
+type PrivateAccountResponseResultFeesDefaultType string
+
+// PrivateAccountResponseResultMarginModel Margin model currently enabled for the account: `segregated_sm` (segregated standard margin), `segregated_pm` (segregated portfolio margin), `cross_sm` (cross collateral standard margin) or `cross_pm` (cross collateral portfolio margin).
+//
+// Example: segregated_sm
+type PrivateAccountResponseResultMarginModel string
+
+// PrivateAccountResponseResultSelfTradingRejectMode Self-trade prevention behavior: `reject_taker` rejects the incoming (taker) order, `cancel_maker` cancels the resting (maker) order. Returned only when self-trade prevention is configured for the account (available when parameter `extended` = `true`).
+type PrivateAccountResponseResultSelfTradingRejectMode string
+
 // PrivateAccountResponseResultType Account type (available when parameter `extended` = `true`)
 type PrivateAccountResponseResultType string
+
+// PrivateAccountResponseResultUserOrigin How the account was created: `deribit` for accounts registered on Deribit, `coinbase` for accounts provisioned through Coinbase (available when parameter `extended` = `true`).
+//
+// Example: deribit
+type PrivateAccountResponseResultUserOrigin string
 
 // PrivateAccountSummariesResponse defines model for PrivateAccountSummariesResponse.
 type PrivateAccountSummariesResponse struct {
@@ -5745,9 +5973,9 @@ type PrivateAccountSummariesResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateAccountSummariesResponseJsonrpc `json:"jsonrpc"`
 	Result  struct {
-		// AffiliatePromotionFee Affiliate promotion fee (if greater than 0.0)
+		// AffiliatePromotionFee Active affiliate fee promotion, as a fraction by which trading fees are reduced (fee = standard fee × (1 - `affiliate_promotion_fee`)). Returned only while a promotion is active (available when parameter `extended` = `true`).
 		//
-		// Example: 0
+		// Example: 0.1
 		AffiliatePromotionFee *float64 `json:"affiliate_promotion_fee,omitempty"`
 
 		// BlockRfqSelfMatchPrevention When enabled, Block RFQ self-match prevention stops RFQ execution between accounts under the same legal entity. Independent of general self-match prevention (available when parameter `extended` = `true`).
@@ -5763,34 +5991,44 @@ type PrivateAccountSummariesResponse struct {
 		// Email User email (available when parameter `extended` = `true`)
 		//
 		// Example: support@deribit.com
-		Email string `json:"email"`
+		Email *string `json:"email,omitempty"`
 
 		// Id Account id (available when parameter `extended` = `true`)
 		//
 		// Example: 12354
-		Id int `json:"id"`
+		Id *int `json:"id,omitempty"`
 
 		// InteruserTransfersEnabled `true` when the inter-user transfers are enabled for user (available when parameter `extended` = `true`)
 		//
 		// Example: false
 		InteruserTransfersEnabled *bool `json:"interuser_transfers_enabled,omitempty"`
 
+		// IsDirectAccessAllowed Whether Direct Access trading is enabled for the account.
+		//
+		// Example: false
+		IsDirectAccessAllowed *bool `json:"is_direct_access_allowed,omitempty"`
+
 		// LoginEnabled Whether account is loginable using email and password (available when parameter `extended` = `true` and account is a subaccount)
 		//
 		// Example: false
 		LoginEnabled *bool `json:"login_enabled,omitempty"`
+
+		// MandatoryTfa `true` when mandatory two-factor authentication is enforced for the account, so the required security key assignments must be set up (for example, to generate a deposit address); `false` when it is not enforced or the account is exempted. Taken from the main account (available when `extended` = `true`)
+		//
+		// Example: true
+		MandatoryTfa *bool `json:"mandatory_tfa,omitempty"`
 
 		// MmpEnabled Whether MMP is enabled (available when parameter `extended` = `true`)
 		//
 		// Example: false
 		MmpEnabled *bool `json:"mmp_enabled,omitempty"`
 
-		// ReceiveNotifications Whether the account receives notifications
+		// ReceiveNotifications Email-forwarding flag reported for the account (available when `extended` = `true`). It does not reflect changes made with `private/toggle_notifications_from_subaccount`; see the known limitation there
 		//
 		// Example: false
 		ReceiveNotifications *bool `json:"receive_notifications,omitempty"`
 
-		// ReferrerId Optional identifier of the referrer (of the affiliation program, and available when parameter `extended` = `true`), which link was used by this account at registration. It coincides with suffix of the affiliation link path after `/reg-`
+		// ReferrerId Identifier of the affiliate whose referral link was used to register this account, or `null` when the account was not referred. It equals the suffix of the referral link after `?reg=` (available when parameter `extended` = `true`).
 		//
 		// Example: 517.6035
 		ReferrerId *string `json:"referrer_id,omitempty"`
@@ -5798,35 +6036,35 @@ type PrivateAccountSummariesResponse struct {
 		// SecurityKeysEnabled Whether Security Key authentication is enabled (available when parameter `extended` = `true`)
 		//
 		// Example: false
-		SecurityKeysEnabled bool `json:"security_keys_enabled"`
+		SecurityKeysEnabled *bool `json:"security_keys_enabled,omitempty"`
 
 		// SelfTradingExtendedAcrossMembers `true` if self trading rejection behavior is applied across all Starbase Members of the main account. Enabled by Deribit on request (available when parameter `extended` = `true`)
 		//
 		// Example: false
 		SelfTradingExtendedAcrossMembers *bool `json:"self_trading_extended_across_members,omitempty"`
 
-		// SelfTradingExtendedToSubaccounts `true` if self trading rejection behavior is applied to trades between subaccounts (available when parameter `extended` = `true`)
+		// SelfTradingExtendedToSubaccounts `true` if self-trade prevention also applies to trades between the main account and its subaccounts. Returned only when self-trade prevention is configured (available when parameter `extended` = `true`).
 		SelfTradingExtendedToSubaccounts *bool `json:"self_trading_extended_to_subaccounts,omitempty"`
 
-		// SelfTradingRejectMode Self trading rejection behavior - `reject_taker` or `cancel_maker` (available when parameter `extended` = `true`)
-		SelfTradingRejectMode *string `json:"self_trading_reject_mode,omitempty"`
+		// SelfTradingRejectMode Self-trade prevention behavior: `reject_taker` rejects the incoming (taker) order, `cancel_maker` cancels the resting (maker) order. Returned only when self-trade prevention is configured for the account (available when parameter `extended` = `true`).
+		SelfTradingRejectMode *PrivateAccountSummariesResponseResultSelfTradingRejectMode `json:"self_trading_reject_mode,omitempty"`
 
-		// Summaries Aggregated list of per-currency account summaries
-		Summaries *[]struct {
+		// Summaries List of per-currency account summaries (all currencies of the account, or those requested with `currencies`)
+		Summaries []struct {
 			// AdditionalReserve The account's balance reserved for open buy option orders and option combo orders (the premium payable if they fill). Only non-zero on the `cross_sm` margin model; balance reserved by spot orders is reported separately in `spot_reserve`.
 			//
 			// Example: 0.3
 			AdditionalReserve *AdditionalReserve `json:"additional_reserve,omitempty"`
 
-			// AffiliatePromotionFee Affiliate promotion fee (if greater than 0.0)
-			//
-			// Example: 0
-			AffiliatePromotionFee *float64 `json:"affiliate_promotion_fee,omitempty"`
-
 			// AvailableFunds Funds available to increase margin usage (open or enlarge positions). Equal to `margin_balance - initial_margin`, floored at `0` in the API response. When initial margin usage exceeds 100%, this is `0` and only reducing orders can be placed. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
 			//
 			// Example: 2.2638913
 			AvailableFunds float64 `json:"available_funds"`
+
+			// AvailableSubaccountTransferFunds Funds available for transfer to other subaccounts of the same main account. Returned only when it differs from `available_withdrawal_funds`, which happens when additional restrictions apply to external withdrawals only. Always ≥ `0`.
+			//
+			// Example: 2.5
+			AvailableSubaccountTransferFunds *float64 `json:"available_subaccount_transfer_funds,omitempty"`
 
 			// AvailableWithdrawalFunds Funds available to withdraw in the selected currency. Typically lower than `available_funds` because withdrawals also exclude positive session profit, locked balance, `spot_reserve`, `additional_reserve`, and non-withdrawable external/implied equity components. Always ≥ `0`.
 			//
@@ -5847,7 +6085,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			CloseOutMargin *CloseOutMargin `json:"close_out_margin,omitempty"`
 
-			// CrossCollateralEnabled When `true` cross collateral is enabled for user
+			// CrossCollateralEnabled `true` when the account uses a cross collateral margin model (`cross_sm` or `cross_pm`), where all cross collateral currencies are margined together. The `total_*_usd` fields are returned only in this case.
 			//
 			// Example: true
 			CrossCollateralEnabled *bool `json:"cross_collateral_enabled,omitempty"`
@@ -5878,7 +6116,7 @@ type PrivateAccountSummariesResponse struct {
 			// They therefore do not add up to `delta_total`, which is calculated on the Net Transaction Delta basis described under `delta_total`.
 			DeltaTotalMap *DeltaTotalMap `json:"delta_total_map,omitempty"`
 
-			// DepositAddress The deposit address for the account (if available)
+			// DepositAddress The account's deposit address for the selected currency. Omitted when no deposit address has been generated for the account yet.
 			//
 			// Example: 14diAAyXL5UzhPTCKC998ch2GV7DMb7yDi
 			DepositAddress *string `json:"deposit_address,omitempty"`
@@ -5891,23 +6129,52 @@ type PrivateAccountSummariesResponse struct {
 			// FeeBalance The account's fee balance (it can be used to pay for fees)
 			FeeBalance *FeeBalance `json:"fee_balance,omitempty"`
 
-			// FeeGroup Fee group indicates the level of fee discounts applied to an account. Use `extended`: `true` to view this field. If the field is missing, the account is not assigned to any fee group. **📖 Related Support Article:** [Automatically applied volume based fee discounts](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees#heading-11)
+			// FeeGroup Name of the fee tier assigned to the account. This is how to check which fee tier applies to an account through the API.
+			//
+			// - A preset tier (for example one of the automatically applied volume-based tiers) is returned by its name.
+			// - `Custom` means the account has individually configured fee rates that do not come from a preset tier.
+			//
+			// **Requirements:** returned only when `extended` = `true`.
+			//
+			// **When absent:** the account is on the default (standard) fee tier. The field is omitted together with `fees`; there is no explicit "Standard" value.
+			//
+			// Subaccounts report the tier of their main account (or of the SMA manager for accounts linked to one). The rates of the tier are returned in `fees`.
+			//
+			// **Related articles:** [Fees](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees#heading-11)
+			//
+			//
+			// Example: Custom
 			FeeGroup *string `json:"fee_group,omitempty"`
 
-			// Fees Fee structure for all currency pairs and instrument types related to the currency (available when parameter `extended` = `true` and user has any discounts). Keys are index names (e.g., "btc_usd"), values are objects with instrument types as keys (option, perpetual, future).
+			// Fees Fee rates of the account's fee tier (see `fee_group`) for every index related to the selected currency. Keys are index names (for example `btc_usd`); values are objects keyed by instrument kind (`future`, `perpetual`, `option`, `spot`). Kinds and indexes without a configured discount are omitted and use the standard rates.
+			//
+			// **Requirements:** returned only when `extended` = `true` and the account is on a non-default fee tier. Absent for accounts on standard fees.
+			//
+			// **Reading the values:**
+			// - `default.type` = `relative`: `maker` and `taker` are multipliers of the standard fee (for example `0.625` means 62.5% of the standard rate).
+			// - `default.type` = `fixed`: `maker` and `taker` are the fee rates themselves, as a fraction of the traded amount (negative values are rebates).
+			// - `block_trade` is always a multiplier of the standard block trade fee.
+			// - `settlement` is always a fixed fee rate applied at delivery/settlement.
+			//
+			// **Related articles:** [Fees](https://support.deribit.com/hc/en-us/articles/25944746248989-Fees)
 			Fees *map[string]map[string]struct {
-				// BlockTrade Block trade fee (if applicable)
+				// BlockTrade Block trade fee as a multiplier of the standard block trade fee (only when configured)
 				BlockTrade *float64 `json:"block_trade,omitempty"`
-				Default    struct {
-					// Maker Maker fee
+
+				// Default Order book trading fees
+				Default struct {
+					// Maker Maker fee (multiplier or rate, depending on `type`); a negative fixed rate is a rebate
 					Maker float64 `json:"maker"`
 
-					// Taker Taker fee
+					// Taker Taker fee (multiplier or rate, depending on `type`)
 					Taker float64 `json:"taker"`
 
-					// Type Fee calculation type (e.g., fixed, relative)
-					Type string `json:"type"`
+					// Type `relative` - `maker`/`taker` are multipliers of the standard fee; `fixed` - `maker`/`taker` are absolute fee rates
+					Type PrivateAccountSummariesResponseResultSummariesFeesDefaultType `json:"type"`
 				} `json:"default"`
+
+				// Settlement Fixed delivery/settlement fee rate (only when configured)
+				Settlement *float64 `json:"settlement,omitempty"`
 			} `json:"fees,omitempty"`
 
 			// FuturesPl Combined profit and loss of all futures and perpetual positions included in `total_pl` (`total_pl - options_pl`).
@@ -5925,7 +6192,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			FuturesSessionUpl float64 `json:"futures_session_upl"`
 
-			// HasNonBlockChainEquity Optional field returned with value `true` when user has non block chain equity
+			// HasNonBlockChainEquity Returned with value `true` only when part of the account's equity is not held on chain at Deribit (for example off-exchange or credit-based equity, or a pending loan in the selected currency). Omitted otherwise.
 			HasNonBlockChainEquity *bool `json:"has_non_block_chain_equity,omitempty"`
 
 			// InitialMargin Minimum margin required to open or increase positions (includes margin for open orders). If initial margin usage exceeds 100%, `available_funds` is `0`. When cross collateral is enabled, this aggregated value is calculated by converting the sum of each cross collateral currency's value to the given currency, using each cross collateral currency's index.
@@ -5951,10 +6218,10 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 2.25
 			MarginBalance *float64 `json:"margin_balance,omitempty"`
 
-			// MarginModel Name of user's currently enabled margin model
+			// MarginModel Margin model currently enabled for the account: `segregated_sm` (segregated standard margin), `segregated_pm` (segregated portfolio margin), `cross_sm` (cross collateral standard margin) or `cross_pm` (cross collateral portfolio margin).
 			//
 			// Example: segregated_sm
-			MarginModel *string `json:"margin_model,omitempty"`
+			MarginModel *PrivateAccountSummariesResponseResultSummariesMarginModel `json:"margin_model,omitempty"`
 
 			// OptionsDelta Sum of the deltas of all options positions. For inverse (coin-margined) options this is the Black-Scholes delta; for linear options it is the index-price-adjusted delta. Unlike account-level `delta_total`, the options mark value is not subtracted.
 			//
@@ -5966,7 +6233,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			OptionsGamma float64 `json:"options_gamma"`
 
-			// OptionsGammaMap Map of options' gammas per index
+			// OptionsGammaMap Sum of option position gammas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 			OptionsGammaMap map[string]float64 `json:"options_gamma_map"`
 
 			// OptionsPl Combined profit and loss of all options positions included in `total_pl`.
@@ -5989,7 +6256,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			OptionsTheta float64 `json:"options_theta"`
 
-			// OptionsThetaMap Map of options' thetas per index
+			// OptionsThetaMap Sum of option position thetas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 			OptionsThetaMap map[string]float64 `json:"options_theta_map"`
 
 			// OptionsValue Mark value of all open options positions in the selected currency. Under standard margin, `margin_balance = equity - options_value`.
@@ -6002,10 +6269,10 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0
 			OptionsVega float64 `json:"options_vega"`
 
-			// OptionsVegaMap Map of options' vegas per index
+			// OptionsVegaMap Sum of option position vegas per index. Keys are index names (for example `btc_usd`); only indexes with open options positions are included.
 			OptionsVegaMap map[string]float64 `json:"options_vega_map"`
 
-			// PortfolioMarginingEnabled `true` when portfolio margining is enabled for user
+			// PortfolioMarginingEnabled `true` when the account uses a portfolio margin model (`segregated_pm` or `cross_pm`), `false` for standard margin.
 			//
 			// Example: true
 			PortfolioMarginingEnabled *bool `json:"portfolio_margining_enabled,omitempty"`
@@ -6039,11 +6306,6 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 1
 			ProjectedMaintenanceMargin ProjectedMaintenanceMargin `json:"projected_maintenance_margin"`
 
-			// ReceiveNotifications Whether the account receives notifications
-			//
-			// Example: false
-			ReceiveNotifications *bool `json:"receive_notifications,omitempty"`
-
 			// SessionRpl Realized profit and loss accrued in the current trading session (since the last daily settlement). Resets at each daily settlement.
 			//
 			// Example: 0.1
@@ -6054,7 +6316,7 @@ type PrivateAccountSummariesResponse struct {
 			// Example: 0.846863
 			SessionUpl Upl `json:"session_upl"`
 
-			// SpotReserve The account's balance reserved in active spot orders
+			// SpotReserve Part of the balance reserved by open spot orders (the amount the orders would spend if filled). Excluded from `available_withdrawal_funds`.
 			//
 			// Example: 0.3
 			SpotReserve *float64 `json:"spot_reserve,omitempty"`
@@ -6088,34 +6350,64 @@ type PrivateAccountSummariesResponse struct {
 			//
 			// Example: 0.02032221
 			TotalPl float64 `json:"total_pl"`
-
-			// TradingProductsDetails Which trading products are enabled or can be overwritten for the account
-			TradingProductsDetails *map[string]interface{} `json:"trading_products_details,omitempty"`
-		} `json:"summaries,omitempty"`
+		} `json:"summaries"`
 
 		// SystemName System generated user nickname (available when parameter `extended` = `true`)
 		//
 		// Example: myname
-		SystemName string `json:"system_name"`
+		SystemName *string `json:"system_name,omitempty"`
 
-		// TradingProductsDetails Which trading products are enabled or can be overwritten for the account
-		TradingProductsDetails *map[string]interface{} `json:"trading_products_details,omitempty"`
+		// TradingProductsDetails Per trading product, whether it is enabled and can be overwritten for the account (available when parameter `extended` = `true`)
+		TradingProductsDetails *[]struct {
+			// Enabled Whether the product is enabled for the account
+			Enabled bool `json:"enabled"`
+
+			// Overwriteable Whether the setting can be overwritten at the account level (subaccounts only)
+			Overwriteable bool `json:"overwriteable"`
+
+			// Product Trading product name
+			Product string `json:"product"`
+
+			// RequiresConsent Whether enabling the product requires consent (subaccounts only)
+			RequiresConsent bool `json:"requires_consent"`
+		} `json:"trading_products_details,omitempty"`
 
 		// Type Account type (available when parameter `extended` = `true`)
-		Type PrivateAccountSummariesResponseResultType `json:"type"`
+		Type *PrivateAccountSummariesResponseResultType `json:"type,omitempty"`
+
+		// UserOrigin How the account was created: `deribit` for accounts registered on Deribit, `coinbase` for accounts provisioned through Coinbase (available when parameter `extended` = `true`).
+		//
+		// Example: deribit
+		UserOrigin *PrivateAccountSummariesResponseResultUserOrigin `json:"user_origin,omitempty"`
 
 		// Username Account name (given by user) (available when parameter `extended` = `true`)
 		//
 		// Example: name
-		Username string `json:"username"`
+		Username *string `json:"username,omitempty"`
 	} `json:"result"`
 }
 
 // PrivateAccountSummariesResponseJsonrpc The JSON-RPC version (2.0)
 type PrivateAccountSummariesResponseJsonrpc string
 
+// PrivateAccountSummariesResponseResultSelfTradingRejectMode Self-trade prevention behavior: `reject_taker` rejects the incoming (taker) order, `cancel_maker` cancels the resting (maker) order. Returned only when self-trade prevention is configured for the account (available when parameter `extended` = `true`).
+type PrivateAccountSummariesResponseResultSelfTradingRejectMode string
+
+// PrivateAccountSummariesResponseResultSummariesFeesDefaultType `relative` - `maker`/`taker` are multipliers of the standard fee; `fixed` - `maker`/`taker` are absolute fee rates
+type PrivateAccountSummariesResponseResultSummariesFeesDefaultType string
+
+// PrivateAccountSummariesResponseResultSummariesMarginModel Margin model currently enabled for the account: `segregated_sm` (segregated standard margin), `segregated_pm` (segregated portfolio margin), `cross_sm` (cross collateral standard margin) or `cross_pm` (cross collateral portfolio margin).
+//
+// Example: segregated_sm
+type PrivateAccountSummariesResponseResultSummariesMarginModel string
+
 // PrivateAccountSummariesResponseResultType Account type (available when parameter `extended` = `true`)
 type PrivateAccountSummariesResponseResultType string
+
+// PrivateAccountSummariesResponseResultUserOrigin How the account was created: `deribit` for accounts registered on Deribit, `coinbase` for accounts provisioned through Coinbase (available when parameter `extended` = `true`).
+//
+// Example: deribit
+type PrivateAccountSummariesResponseResultUserOrigin string
 
 // PrivateAddBlockRfqQuoteResponse defines model for PrivateAddBlockRfqQuoteResponse.
 type PrivateAddBlockRfqQuoteResponse struct {
@@ -6421,7 +6713,7 @@ type PrivateCreateSubaccountResponse struct {
 		// Portfolio Portfolio entries keyed by lowercase currency code.
 		Portfolio *Portfolio `json:"portfolio,omitempty"`
 
-		// ReceiveNotifications When `true` - receive all notification emails on the main email
+		// ReceiveNotifications Email-forwarding flag reported for the account. It does not reflect changes made with `private/toggle_notifications_from_subaccount`; see the known limitation there
 		ReceiveNotifications bool `json:"receive_notifications"`
 
 		// ReferralsCount Number of referrals
@@ -7418,8 +7710,208 @@ type PrivateGetSubaccountsDetailsResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateGetSubaccountsDetailsResponseJsonrpc `json:"jsonrpc"`
 	Result  []struct {
-		OpenOrders *[]Order   `json:"open_orders,omitempty"`
-		Positions  []Position `json:"positions"`
+		// OpenOrders Open orders of the account in the requested currency. Present only when `with_open_orders` = `true`
+		OpenOrders *[]struct {
+			// Advanced advanced type: `"usd"` or `"implv"` (Only for options; field is omitted if not applicable).
+			Advanced *Advanced `json:"advanced,omitempty"`
+
+			// Amount It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+			Amount *Amount `json:"amount,omitempty"`
+
+			// Api `true` if created with API
+			Api Api `json:"api"`
+
+			// AppName The name of the application that placed the order on behalf of the user (optional).
+			//
+			// Example: Example Application
+			AppName *string `json:"app_name,omitempty"`
+
+			// AutoReplaced Options, advanced orders only - `true` if last modification of the order was performed by the pricing engine, otherwise `false`.
+			AutoReplaced *bool `json:"auto_replaced,omitempty"`
+
+			// AveragePrice Average fill price of the order
+			AveragePrice *AveragePrice `json:"average_price,omitempty"`
+
+			// BlockTrade `true` if order made from block_trade trade, added only in that case.
+			//
+			// Example: true
+			BlockTrade *BlockTradeOrder `json:"block_trade,omitempty"`
+
+			// CancelReason Enumerated reason behind cancel `"user_request"`, `"autoliquidation"`, `"cancel_on_disconnect"`, `"risk_mitigation"`, `"pme_risk_reduction"` (portfolio margining risk reduction), `"pme_account_locked"` (portfolio margining account locked per currency), `"position_locked"`, `"mmp_trigger"` (market maker protection), `"mmp_config_curtailment"` (market maker configured quantity decreased), `"edit_post_only_reject"` (cancelled on edit because of `reject_post_only` setting), `"oco_other_closed"` (the oco order linked to this order was closed), `"oto_primary_closed"` (the oto primary order that was going to trigger this order was cancelled), `"settlement"` (closed because of a settlement event, e.g. good-til-day orders are cancelled when an instrument enters the daily settlement). Note: orders cancelled because an instrument expired (delivery) currently do not include a `cancel_reason` field.
+			CancelReason *CancelReason `json:"cancel_reason,omitempty"`
+
+			// ComboOrderId Id of the combo order that created this order (only present for orders that were created as legs of a combo order).
+			//
+			// Example: 103148386169
+			ComboOrderId *string `json:"combo_order_id,omitempty"`
+
+			// Contracts It represents the order size in contract units. (Optional, may be absent in historical data).
+			Contracts *Contracts `json:"contracts,omitempty"`
+
+			// CreationTimestamp The timestamp (milliseconds since the Unix epoch)
+			//
+			// Example: 1536569522277
+			CreationTimestamp Timestamp `json:"creation_timestamp"`
+
+			// Direction Direction: `buy`, or `sell`
+			Direction Direction `json:"direction"`
+
+			// DisplayAmount The actual display amount of iceberg order. Absent for other types of orders.
+			DisplayAmount *DisplayAmount `json:"display_amount,omitempty"`
+
+			// FilledAmount Filled amount of the order. For perpetual and futures the filled_amount is in USD units, for options - in units or corresponding cryptocurrency contracts, e.g., BTC or ETH.
+			FilledAmount *FilledAmount `json:"filled_amount,omitempty"`
+
+			// Implv Implied volatility in percent. (Only if `advanced="implv"`)
+			Implv *Implv `json:"implv,omitempty"`
+
+			// InstrumentName Unique instrument identifier
+			//
+			// Example: BTC-PERPETUAL
+			InstrumentName InstrumentName `json:"instrument_name"`
+
+			// IsLiquidation Optional (not added for spot). `true` if order was automatically created during liquidation
+			IsLiquidation *bool `json:"is_liquidation,omitempty"`
+
+			// IsPrimaryOtoco `true` if the order is an order that can trigger an OCO pair, otherwise not present.
+			IsPrimaryOtoco *bool `json:"is_primary_otoco,omitempty"`
+
+			// IsRebalance Optional (only for spot). `true` if order was automatically created during cross-collateral balance restoration
+			IsRebalance *bool `json:"is_rebalance,omitempty"`
+
+			// IsSecondaryOto `true` if the order is an order that can be triggered by another order, otherwise not present.
+			IsSecondaryOto *IsSecondaryOto `json:"is_secondary_oto,omitempty"`
+
+			// Label User defined label (up to 64 characters)
+			Label Label `json:"label"`
+
+			// LastUpdateTimestamp The timestamp (milliseconds since the Unix epoch)
+			//
+			// Example: 1536569522277
+			LastUpdateTimestamp Timestamp `json:"last_update_timestamp"`
+
+			// Mmp `true` if the order is a MMP order, otherwise `false`.
+			Mmp *bool `json:"mmp,omitempty"`
+
+			// MmpCancelled `true` if order was cancelled by mmp trigger (optional)
+			//
+			// Example: true
+			MmpCancelled *bool `json:"mmp_cancelled,omitempty"`
+
+			// MmpGroup Name of the MMP group supplied in the `private/mass_quote` request. Only present for quote orders.
+			MmpGroup *string `json:"mmp_group,omitempty"`
+
+			// Mobile Optional field with value `true` added only when created with Mobile Application
+			Mobile *Mobile `json:"mobile,omitempty"`
+
+			// OcoRef Unique reference that identifies a one_cancels_others (OCO) pair.
+			OcoRef *OcoRef `json:"oco_ref,omitempty"`
+
+			// OrderId Unique order identifier
+			//
+			// Example: ETH-100234
+			OrderId OrderId `json:"order_id"`
+
+			// OrderState Order state: `"open"`, `"filled"`, `"rejected"`, `"cancelled"`, `"untriggered"`
+			OrderState OrderState `json:"order_state"`
+
+			// OrderType Order type: `"limit"`, `"market"`, `"stop_limit"`, `"stop_market"`, `"take_limit"`, `"take_market"`, `"trailing_stop"`
+			OrderType OrderType `json:"order_type"`
+
+			// OriginalOrderType Original API order type when an order is represented internally as a limit order. For example, Starbase market orders use `"limit"` as `order_type` with `"market"` in this optional field.
+			OriginalOrderType *OriginalOrderType `json:"original_order_type,omitempty"`
+
+			// OtoOrderIds The Ids of the orders that will be triggered if the order is filled
+			OtoOrderIds *[]OrderId `json:"oto_order_ids,omitempty"`
+
+			// PostOnly `true` for post-only orders only
+			PostOnly PostOnly `json:"post_only"`
+
+			// Price Price in the instrument's price units (quote currency for futures and spot), or market_price for open trigger market orders.
+			Price OpenOrderPrice `json:"price"`
+
+			// PrimaryOrderId Unique order identifier
+			//
+			// Example: ETH-100234
+			PrimaryOrderId *OrderId `json:"primary_order_id,omitempty"`
+
+			// Quote If order is a quote. Present only if true.
+			Quote *bool `json:"quote,omitempty"`
+
+			// QuoteId The same QuoteID as supplied in the `private/mass_quote` request. Only present for quote orders.
+			QuoteId *string `json:"quote_id,omitempty"`
+
+			// QuoteSetId Identifier of the QuoteSet supplied in the `private/mass_quote` request. Only present for quote orders.
+			QuoteSetId *string `json:"quote_set_id,omitempty"`
+
+			// ReduceOnly Optional (not added for spot). '`true` for reduce-only orders only'
+			ReduceOnly *ReduceOnly `json:"reduce_only,omitempty"`
+
+			// RefreshAmount The initial display amount of iceberg order. Iceberg order display amount will be refreshed to that value after match consuming actual display amount. Absent for other types of orders
+			RefreshAmount *RefreshAmount `json:"refresh_amount,omitempty"`
+
+			// RejectPostOnly `true` if order has `reject_post_only` flag (field is present only when `post_only` is `true`)
+			RejectPostOnly *RejectPostOnly `json:"reject_post_only,omitempty"`
+
+			// Replaced `true` if the order was edited (by user or - in case of advanced options orders - by pricing engine), otherwise `false`.
+			Replaced *bool `json:"replaced,omitempty"`
+
+			// RiskReducing `true` if the order is marked by the platform as a risk reducing order (can apply only to orders placed by PM users), otherwise `false`.
+			RiskReducing *bool `json:"risk_reducing,omitempty"`
+
+			// StarbaseClientOrderId Client order id of an order submitted directly to [Starbase](https://docs.deribit.com/starbase/overview) via direct access; not returned for orders placed through the Deribit API (combo legs inherit the parent combo order's client order id)
+			StarbaseClientOrderId *string `json:"starbase_client_order_id,omitempty"`
+
+			// StarbaseLastUpdateTimestamp The Starbase causal timestamp (nanoseconds since the Unix epoch) of the last book update that affected this order. Present only for orders placed in Starbase, including combo leg order updates; not always available for direct access orders
+			//
+			// Example: 1536569522277000000
+			StarbaseLastUpdateTimestamp *StarbaseLastUpdateTimestamp `json:"starbase_last_update_timestamp,omitempty"`
+
+			// StarbaseOrderId Raw Starbase order id, in Starbase's own (non currency-prefixed) id namespace. Only present for orders placed in Starbase. Combo leg orders expose the parent combo order's Starbase order id.
+			//
+			// Example: 103148386170
+			StarbaseOrderId *int `json:"starbase_order_id,omitempty"`
+
+			// TimeInForce Order time in force: `"good_til_cancelled"`, `"good_til_day"`, `"fill_or_kill"` or `"immediate_or_cancel"`
+			TimeInForce TimeInForce `json:"time_in_force"`
+
+			// Trigger Trigger type (only for trigger orders). Allowed values: `"index_price"`, `"mark_price"`, `"last_price"`.
+			Trigger *Trigger `json:"trigger,omitempty"`
+
+			// TriggerFillCondition <p>The fill condition of the linked order (Only for linked order types), default: `first_hit`.</p> <ul> <li>`"first_hit"` - any execution of the primary order will fully cancel/place all secondary orders.</li> <li>`"complete_fill"` - a complete execution (meaning the primary order no longer exists) will cancel/place the secondary orders.</li> <li>`"incremental"` - any fill of the primary order will cause proportional partial cancellation/placement of the secondary order. The amount that will be subtracted/added to the secondary order will be rounded down to the contract size.</li> </ul>
+			TriggerFillCondition *TriggerFillCondition `json:"trigger_fill_condition,omitempty"`
+
+			// TriggerOffset The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)
+			TriggerOffset *TriggerOffset `json:"trigger_offset,omitempty"`
+
+			// TriggerOrderId Id of the trigger order that created the order (Only for orders that were created by triggered orders).
+			//
+			// Example: SLIB-370
+			TriggerOrderId *string `json:"trigger_order_id,omitempty"`
+
+			// TriggerPrice Trigger price (Only for future trigger orders)
+			TriggerPrice *TriggerPrice `json:"trigger_price,omitempty"`
+
+			// TriggerReferencePrice The price of the given trigger at the time when the order was placed (Only for trailing trigger orders)
+			TriggerReferencePrice *TriggerReferencePrice `json:"trigger_reference_price,omitempty"`
+
+			// Triggered Whether the trigger order has been triggered
+			Triggered *Triggered `json:"triggered,omitempty"`
+
+			// Usd Option price in USD (Only if `advanced="usd"`)
+			Usd *Usd `json:"usd,omitempty"`
+
+			// UserId ID of the account (main or subaccount) that owns the order
+			//
+			// Example: 3
+			UserId *int `json:"user_id,omitempty"`
+
+			// Web `true` if created via Deribit frontend (optional)
+			Web *Web `json:"web,omitempty"`
+		} `json:"open_orders,omitempty"`
+
+		// Positions Open positions of the account in the requested currency (not aggregated with other accounts)
+		Positions []PositionWithOpenOrdersMargin `json:"positions"`
 
 		// Uid Account/Subaccount identifier
 		Uid int `json:"uid"`
@@ -7437,16 +7929,19 @@ type PrivateGetSubaccountsResponse struct {
 	// Jsonrpc The JSON-RPC version (2.0)
 	Jsonrpc PrivateGetSubaccountsResponseJsonrpc `json:"jsonrpc"`
 	Result  []struct {
+		// DisabledTradingProducts List of disabled trading products. Omitted from the main account entry when the caller lacks main account access
+		DisabledTradingProducts *[]string `json:"disabled_trading_products,omitempty"`
+
 		// Email User email
 		Email string `json:"email"`
 
 		// Id Account/Subaccount identifier
 		Id int `json:"id"`
 
-		// IsPassword `true` when password for the subaccount has been configured
-		IsPassword bool `json:"is_password"`
+		// IsPassword `true` when password for the subaccount has been configured. Omitted from the main account entry when the caller lacks main account access
+		IsPassword *bool `json:"is_password,omitempty"`
 
-		// LoginEnabled Informs whether login to the subaccount is enabled
+		// LoginEnabled Informs whether login to the subaccount is enabled. Omitted from the main account entry when the caller lacks main account access
 		LoginEnabled *bool `json:"login_enabled,omitempty"`
 
 		// MarginModel Margin model
@@ -7458,19 +7953,30 @@ type PrivateGetSubaccountsResponse struct {
 		// Portfolio Portfolio entries keyed by lowercase currency code.
 		Portfolio *Portfolio `json:"portfolio,omitempty"`
 
-		// ReceiveNotifications When `true` - receive all notification emails on the main email
+		// ReceiveNotifications Email-forwarding flag reported for the account. It does not reflect changes made with `private/toggle_notifications_from_subaccount`; see the known limitation there
 		ReceiveNotifications bool `json:"receive_notifications"`
 
-		// SecurityKeysAssignments Names of assignments with Security Keys assigned
-		SecurityKeysAssignments *[]interface{} `json:"security_keys_assignments,omitempty"`
+		// ReferralsCount Number of referrals of the account. Only included if `with_portfolio` == `true`.
+		ReferralsCount *int `json:"referrals_count,omitempty"`
 
-		// SecurityKeysEnabled Whether the Security Keys authentication is enabled
+		// SecurityKeysAssignments Names of assignments with Security Keys assigned. Omitted from the main account entry when the caller lacks main account access
+		SecurityKeysAssignments *[]string `json:"security_keys_assignments,omitempty"`
+
+		// SecurityKeysEnabled Whether Security Keys authentication is enabled. Omitted from the main account entry when the caller lacks main account access
 		SecurityKeysEnabled *bool `json:"security_keys_enabled,omitempty"`
 
 		// SystemName System generated user nickname
-		SystemName string                                  `json:"system_name"`
-		Type       PrivateGetSubaccountsResponseResultType `json:"type"`
-		Username   string                                  `json:"username"`
+		SystemName string `json:"system_name"`
+
+		// TradingProductsDetails Per trading product, whether it is enabled and can be overwritten for the account
+		TradingProductsDetails *[]struct {
+			Enabled         *bool   `json:"enabled,omitempty"`
+			Overwriteable   *bool   `json:"overwriteable,omitempty"`
+			Product         *string `json:"product,omitempty"`
+			RequiresConsent *bool   `json:"requires_consent,omitempty"`
+		} `json:"trading_products_details,omitempty"`
+		Type     PrivateGetSubaccountsResponseResultType `json:"type"`
+		Username string                                  `json:"username"`
 	} `json:"result"`
 }
 
@@ -13540,10 +14046,10 @@ type PrivateChangeScopeInApiKeyParams struct {
 
 // PrivateChangeSubaccountNameParams defines parameters for PrivateChangeSubaccountName.
 type PrivateChangeSubaccountNameParams struct {
-	// Sid The user id for the subaccount
+	// Sid The user id of the subaccount to rename, or the id of the authenticated main account to rename the main account itself
 	Sid int `form:"sid" json:"sid"`
 
-	// Name The new user name
+	// Name The new display name, 5-80 characters after trimming whitespace, unique within the main account and its subaccounts. See name rules above
 	Name string `form:"name" json:"name"`
 }
 
@@ -13909,11 +14415,14 @@ type PrivateGetAccessLogParams struct {
 
 // PrivateGetAccountSummariesParams defines parameters for PrivateGetAccountSummaries.
 type PrivateGetAccountSummariesParams struct {
-	// SubaccountId The user id for the subaccount
+	// SubaccountId The user id of the subaccount to summarize. Defaults to the authenticated account; another account requires a main account token (`mainaccount` scope) and must belong to the same main account
 	SubaccountId *int `form:"subaccount_id,omitempty" json:"subaccount_id,omitempty"`
 
-	// Extended Include additional fields
+	// Extended Include additional account-level fields (`id`, `username`, `system_name`, `email`, `type`, `security_keys_enabled`, ...) and, for accounts on a non-default fee tier, `fee_group` and `fees`. `false` by default
 	Extended *bool `form:"extended,omitempty" json:"extended,omitempty"`
+
+	// Currencies Optional list of currencies to return summaries for, e.g. `["BTC", "ETH"]`. By default the summaries of all currencies held by the account's wallet type are returned. A currency that is invalid or not available for the account results in `-32602` (`Invalid params`)
+	Currencies *[]string `form:"currencies,omitempty" json:"currencies,omitempty"`
 }
 
 // PrivateGetAccountSummaryParams defines parameters for PrivateGetAccountSummary.
@@ -13923,10 +14432,10 @@ type PrivateGetAccountSummaryParams struct {
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	Currency WalletCurrency `form:"currency" json:"currency"`
 
-	// SubaccountId The user id for the subaccount
+	// SubaccountId The user id of the subaccount to summarize. Defaults to the authenticated account; another account requires a main account token (`mainaccount` scope) and must belong to the same main account
 	SubaccountId *int `form:"subaccount_id,omitempty" json:"subaccount_id,omitempty"`
 
-	// Extended Include additional fields
+	// Extended Include additional account-level fields (`id`, `username`, `system_name`, `email`, `type`, `security_keys_enabled`, ...) and, for accounts on a non-default fee tier, `fee_group` and `fees`. `false` by default
 	Extended *bool `form:"extended,omitempty" json:"extended,omitempty"`
 }
 
@@ -14370,7 +14879,7 @@ type PrivateGetSettlementHistoryByInstrumentParams struct {
 
 // PrivateGetSubaccountsParams defines parameters for PrivateGetSubaccounts.
 type PrivateGetSubaccountsParams struct {
-	// WithPortfolio Portfolio flag: `true` for portfolio information, `false` for subaccount information only. `false` by default
+	// WithPortfolio Portfolio flag: `true` to include per-currency balance and margin summaries (no positions), `false` for account metadata only
 	WithPortfolio *bool `form:"with_portfolio,omitempty" json:"with_portfolio,omitempty"`
 }
 
@@ -14379,7 +14888,7 @@ type PrivateGetSubaccountsDetailsParams struct {
 	// Currency The currency symbol.
 	//
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
-	Currency Currency `form:"currency" json:"currency"`
+	Currency WalletCurrency `form:"currency" json:"currency"`
 
 	// WithOpenOrders Optional parameter to ask for open orders list, default: `false`
 	WithOpenOrders *bool `form:"with_open_orders,omitempty" json:"with_open_orders,omitempty"`
@@ -14882,7 +15391,7 @@ type PrivateRemoveFromAddressBookParams struct {
 
 // PrivateRemoveSubaccountParams defines parameters for PrivateRemoveSubaccount.
 type PrivateRemoveSubaccountParams struct {
-	// SubaccountId The user id for the subaccount
+	// SubaccountId The user id of the subaccount to remove (must belong to the authenticated main account)
 	SubaccountId int `form:"subaccount_id" json:"subaccount_id"`
 }
 
@@ -15146,10 +15655,10 @@ type PrivateSetDisabledTradingProductsParamsTradingProducts string
 
 // PrivateSetEmailForSubaccountParams defines parameters for PrivateSetEmailForSubaccount.
 type PrivateSetEmailForSubaccountParams struct {
-	// Sid The user id for the subaccount
+	// Sid The user id of the subaccount (must belong to the authenticated main account)
 	Sid int `form:"sid" json:"sid"`
 
-	// Email The email address for the subaccount
+	// Email The new email address for the subaccount, up to 64 characters
 	Email string `form:"email" json:"email"`
 }
 
@@ -15364,19 +15873,19 @@ type PrivateSubscribeParams struct {
 
 // PrivateToggleNotificationsFromSubaccountParams defines parameters for PrivateToggleNotificationsFromSubaccount.
 type PrivateToggleNotificationsFromSubaccountParams struct {
-	// Sid The user id for the subaccount
+	// Sid The user id of the subaccount (must belong to the authenticated main account)
 	Sid int `form:"sid" json:"sid"`
 
-	// State enable (`true`) or disable (`false`) notifications
+	// State Forwarding preference: `true` to request copies at the main account email, `false` to request no copies. Currently has no effect; see the known limitation above
 	State bool `form:"state" json:"state"`
 }
 
 // PrivateToggleSubaccountLoginParams defines parameters for PrivateToggleSubaccountLogin.
 type PrivateToggleSubaccountLoginParams struct {
-	// Sid The user id for the subaccount
+	// Sid The user id of the subaccount (must belong to the authenticated main account)
 	Sid int `form:"sid" json:"sid"`
 
-	// State enable or disable login.
+	// State `enable` or `disable` direct login. Disabling terminates the subaccount's active sessions
 	State PrivateToggleSubaccountLoginParamsState `form:"state" json:"state"`
 }
 
@@ -17447,9 +17956,22 @@ type ClientInterface interface {
 
 	// PrivateChangeSubaccountName performs a GET /private/change_subaccount_name (the `PrivateChangeSubaccountName` operationId) request.
 	//
-	// Updates the display name (username) for a subaccount. The new name is used for identification purposes and does not affect the subaccount's functionality or access.
+	// Changes the display name (alias) of a subaccount, or of the authenticated main account itself (pass the main account's own id as `sid`). The alias is returned as `username` in account responses; the system-generated name (`system_name`), login credentials and account functionality are not affected.
 	//
-	// Only the main account owner can change subaccount names.
+	// **Access & Restrictions:**
+	// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token.
+	// - `sid` must be the main account itself or one of its own subaccounts. Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	//
+	// **Name rules** (applied after trimming leading and trailing whitespace):
+	// - 5 to 80 characters.
+	// - Only Latin-1 (ISO 8859-1) characters; control characters and the soft hyphen are rejected.
+	// - Must be unique among the main account and its active subaccounts. This includes the target's current name, so re-submitting it fails with `already_taken`.
+	// - Must not match the reserved auto-generated pattern `<main_username>_<number>` (or `<main_username>_vault_<number>`).
+	// - Setting the name to the account's own `system_name` clears a previously set alias.
+	//
+	// **Errors:** an invalid name returns `12002` (`wrong_subaccount_name`) with `data` = `already_taken`, `wrong_format` (invalid characters or reserved pattern), or `{"msg": "too_short" | "too_long", "size": <limit>}`. `12002` may also be returned without `data`.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -17556,7 +18078,16 @@ type ClientInterface interface {
 	//
 	// Creates a new subaccount under the authenticated main account. Subaccounts allow you to organize trading activities and manage risk separately from the main account.
 	//
-	// This method takes no parameters. The new subaccount will be created with default settings and can be configured using other subaccount management methods.
+	// This method takes no parameters. The new subaccount inherits the main account's email address and is created with direct login disabled (`login_enabled: false`). It is accessible through the main account; the response contains an empty `portfolio` entry for every currency.
+	//
+	// **Access & Restrictions:**
+	// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token. Tokens without `mainaccount` (for example subaccount tokens) are rejected with `13021` (`forbidden`).
+	// - Not available for accounts without subaccount management and for some partner account types (`13009`, `unauthorized`), nor for locked accounts (`11098`).
+	//
+	// **Limits & Errors:**
+	// - A main account can have up to 20 regular subaccounts by default (the limit can be configured per account by Deribit). Exceeding it returns `12001` (`too_many_subaccounts`).
+	//
+	// **Example:** values are illustrative. Only BTC and ETH portfolio entries are shown; the actual currency set depends on the service configuration. The example assumes the main account has no disabled trading products or subaccount consent requirements.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -17764,9 +18295,11 @@ type ClientInterface interface {
 
 	// PrivateGetAccountSummaries performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
 	//
-	// Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.
+	// Retrieves account summaries for the authenticated user in a single call. The result is an object: account-level fields (such as `id`, `username`, `email`, `type`, present when `extended` is `true`) are on the object itself, and the `summaries` array holds one summary per currency with balance, equity, available funds, and margin information.
 	//
-	// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. Prefer this method over looping `private/get_account_summary` per currency.
+	// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter (a main account token is required to select another account, which must belong to the same main account; otherwise `-32602`, `Not allowed`). Use `currencies` to limit the result to selected currencies. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply. Prefer this method over looping `private/get_account_summary` per currency.
+	//
+	// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 	//
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	//
@@ -17781,7 +18314,16 @@ type ClientInterface interface {
 	//
 	// Key relationships (standard margin): `equity = balance + futures session PnL + options_value`, `margin_balance = equity - options_value`, `available_funds = max(0, margin_balance - initial_margin)`. Under portfolio margin, `margin_balance` equals `equity`. Session PnL fields reset at daily settlement; `total_pl` does not.
 	//
-	// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.
+	// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply.
+	//
+	// **Account selection (`subaccount_id`):**
+	// - If omitted (or equal to the caller's own id) the summary is for the authenticated account.
+	// - Another account can be requested only with a main account token (scope `mainaccount`), and it must belong to the same main account. Otherwise the call returns `-32602` (`Invalid params`, `Not allowed`).
+	// - A removed subaccount returns `13020` (`not_found`); a vault subaccount returns `14049` (`vault_subaccount_not_allowed`).
+	//
+	// **Currency:** `currency` is required and must be a currency held by the target account's wallet type; otherwise the call returns `-32602` (`Invalid params`, "not supported for wallet type" or an invalid currency).
+	//
+	// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 	//
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	//
@@ -18353,11 +18895,17 @@ type ClientInterface interface {
 
 	// PrivateGetSubaccounts performs a GET /private/get_subaccounts (the `PrivateGetSubaccounts` operationId) request.
 	//
-	// Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.
+	// Retrieves the main account and its subaccounts, with identifiers, names, email, login and security status. The list always includes the main account itself (`type: main`); removed subaccounts are not listed.
 	//
-	// When called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.
+	// **Visibility:**
+	// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The response lists the main account and its eligible subaccounts.
+	// - Without main account access, a subaccount caller receives only the main account, with limited details (login, password and security-key related fields and `disabled_trading_products` are omitted), and the calling subaccount with full details.
+	// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+	// - Not available for retail brokers (`14021`).
 	//
-	// Set the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.
+	// **Portfolio:** set `with_portfolio` to `true` to include per-currency balance and margin summaries (equity, balance, available funds, margin; no positions or orders). With main account access, each returned account has a `portfolio` object. Without it, only the calling subaccount has `portfolio`; the main account entry omits it. The flag also adds `referrals_count` and, while an email change is awaiting confirmation, `not_confirmed_email`. By default only account metadata is returned.
+	//
+	// **Examples:** response values are illustrative, not live account data. The examples show all trading products enabled, with no subaccount consent requirements.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -18368,9 +18916,19 @@ type ClientInterface interface {
 
 	// PrivateGetSubaccountsDetails performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
 	//
-	// Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.
+	// Retrieves the positions in a given currency for the accounts visible to the caller. The result has one entry per account (`uid`) with that account's own positions (size, average entry price, mark price, margin and P&L); positions are not aggregated across accounts.
 	//
-	// Optionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.
+	// **Visibility:**
+	// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The result covers the main account and its eligible subaccounts.
+	// - Without main account access, only the calling subaccount is returned.
+	// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+	// - Not available for retail brokers (`14021`).
+	//
+	// **Open orders:** set `with_open_orders` to `true` to add an `open_orders` list to each entry. It is omitted by default.
+	//
+	// **Notes:**
+	// - `currency` must be available for the account's wallet type, otherwise `-32602` (`Invalid params`, "not supported for wallet type").
+	// - Results are cached for 1 second. When the data cannot be collected in time the call fails with `13028` (`temporarily_unavailable`); retry the request.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -18714,9 +19272,29 @@ type ClientInterface interface {
 
 	// PrivateRemoveSubaccount performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
 	//
-	// Permanently removes a subaccount. The subaccount must be empty (no positions, no open orders, and zero balance) before it can be removed.
+	// Removes a subaccount from the main account. The subaccount must be empty before it can be removed.
 	//
-	// This operation cannot be undone. All subaccount data will be permanently deleted.
+	// Removal cannot be undone through the API. The subaccount can no longer be used or logged in to, it disappears from `private/get_subaccounts`, all of its active sessions are terminated, and its deposit addresses are moved to the main account.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount. Any other account is rejected with `13009` (`unauthorized`); an already removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	// - Vault subaccounts are rejected during access validation with `14049` (`vault_subaccount_not_allowed`).
+	// - Only one subaccount can be removed per main account every 5 minutes. A repeated call earlier returns `12006` (`remove_subaccount_over_limit`) with the remaining time in `data.wait` (seconds).
+	//
+	// **Removal is refused with `12007` (`subaccount_not_removable`)**; `data.reason` is one of:
+	// - `"has not zero equity"`: open positions, a position closed since the last daily settlement (08:00 UTC) whose realized profit/loss is not settled yet (the subaccount becomes removable after that settlement), non-zero initial or maintenance margin, or absolute equity or balance at or above the currency's minimum balance (only dust whose absolute value is below the threshold is allowed);
+	// - `"has opened trigger orders"`: untriggered trigger orders;
+	// - `"has pending deposits"`;
+	// - `"is owner of app"`: the subaccount owns an API application;
+	// - `"has active block rfq"` or `"is part of block rfq allocation"`;
+	// - `"is linked to a voice broker"`;
+	// - `"is an LSP participant"`;
+	// - `"has a locked portfolio, reason: <reasons>"`, where `<reasons>` is a comma-separated list such as `liquidation running`, `negative equity`, `locked by admin`, `locked on user request` or `legacy lock`.
+	//
+	// Other reason strings may be returned in rare cases.
+	//
+	// If the subaccount's portfolio could not be cleaned up or verified, or the change could not be saved, the call fails with `13008` (`request_failed`).
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -18844,9 +19422,23 @@ type ClientInterface interface {
 
 	// PrivateSetEmailForSubaccount performs a GET /private/set_email_for_subaccount (the `PrivateSetEmailForSubaccount` operationId) request.
 	//
-	// Assigns an email address to a subaccount. This email can be used for direct login to the subaccount and for receiving notifications.
+	// Assigns an email address to a subaccount. This email is used for direct login to the subaccount and for receiving notifications.
 	//
-	// The email address owner will receive a confirmation email with a link to verify the email address. The email must be confirmed before it can be used for login.
+	// **Behavior:**
+	// - Normally the address is not applied immediately: a verification email with a confirmation link is sent to it, and it can be used for login only after it is confirmed.
+	// - Two changes are applied immediately, without a verification email: setting the main account's own email (the subaccount returns to the main email and its direct login is disabled), and setting the subaccount's current confirmed email while another change is pending (the pending change is cancelled).
+	// - Every successful change terminates all active sessions of the subaccount.
+	// - An address that is already registered to another account does not produce an error: the call returns `ok` without revealing whether the address exists, and the address is not assigned.
+	// - An address already used by another subaccount of the same main account returns `-32602` (`Invalid params`) with `data.subaccount_id` of that subaccount.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	//
+	// **Validation & Limits:**
+	// - Maximum email length is 64 characters; a longer address returns `-32602` with `max_length`.
+	// - `11043` (`bad_argument`) with `data` = `email_wrong_format`, `email_blocked`, `empty_email_address`, `invalid_email_domain` or `same_email` (the address equals the current email and no change is pending).
+	// - Changes are rate limited per subaccount: `10028` (`too_many_requests`) with the time to wait in `data.wait` (seconds).
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -19001,9 +19593,16 @@ type ClientInterface interface {
 
 	// PrivateToggleNotificationsFromSubaccount performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
 	//
-	// Enables or disables email and other notifications for a subaccount. When notifications are disabled, the subaccount will not receive email alerts, trade confirmations, or other notification messages.
+	// Saves a subaccount's preference for forwarding copies of its notification emails to the main account's email address. It does not stop the subaccount from receiving its own emails.
 	//
-	// This setting only affects notifications sent to the subaccount's email address. Notifications sent to the main account are not affected.
+	// When forwarding is active, forwarded copies exclude the registration welcome email and mask activation and password-change links. Their title is `Notification for subaccount: <name> - <original title>`.
+	//
+	// **Known limitation:** changing this setting currently has no effect on forwarding, and `receive_notifications` (returned by `private/get_subaccounts`, `private/create_subaccount`, and by `private/get_account_summary` / `private/get_account_summaries` with `extended` = `true`) does not reflect it. A successful response only confirms that the request was accepted.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). The target must be an owned subaccount, not the main account itself. An invalid target is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+	// - Also rejected for accounts without subaccount management (`13009`) and locked accounts (`11098`).
+	// - Send `state` as a JSON boolean. Do not rely on rejection of other types: the current implementation may coerce them to a boolean.
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -19018,7 +19617,20 @@ type ClientInterface interface {
 	//
 	// Enables or disables direct login access for a subaccount. When login is disabled, the subaccount cannot be accessed directly using email and password authentication, but can still be accessed through the main account.
 	//
-	// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated.
+	// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated (all sessions of the subaccount are dropped). Requesting the state the subaccount already has is accepted and returns `ok`.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	// - `state` must be `enable` or `disable`; any other value returns `11043` (`bad_argument`) with `data` = `state`.
+	//
+	// **Enabling login** additionally requires:
+	// - no email change pending for the subaccount;
+	// - an email address different from the main account's email;
+	// - a password configured for the subaccount.
+	//
+	// **Known limitation:** if one of these conditions is not met, the call currently returns `ok` but login stays disabled. Check `login_enabled` in `private/get_subaccounts` to confirm the change.
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -20283,9 +20895,22 @@ func (c *Client) PrivateChangeScopeInApiKey(ctx context.Context, params *Private
 
 // PrivateChangeSubaccountName performs a GET /private/change_subaccount_name (the `PrivateChangeSubaccountName` operationId) request.
 //
-// Updates the display name (username) for a subaccount. The new name is used for identification purposes and does not affect the subaccount's functionality or access.
+// Changes the display name (alias) of a subaccount, or of the authenticated main account itself (pass the main account's own id as `sid`). The alias is returned as `username` in account responses; the system-generated name (`system_name`), login credentials and account functionality are not affected.
 //
-// Only the main account owner can change subaccount names.
+// **Access & Restrictions:**
+// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token.
+// - `sid` must be the main account itself or one of its own subaccounts. Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+//
+// **Name rules** (applied after trimming leading and trailing whitespace):
+// - 5 to 80 characters.
+// - Only Latin-1 (ISO 8859-1) characters; control characters and the soft hyphen are rejected.
+// - Must be unique among the main account and its active subaccounts. This includes the target's current name, so re-submitting it fails with `already_taken`.
+// - Must not match the reserved auto-generated pattern `<main_username>_<number>` (or `<main_username>_vault_<number>`).
+// - Setting the name to the account's own `system_name` clears a previously set alias.
+//
+// **Errors:** an invalid name returns `12002` (`wrong_subaccount_name`) with `data` = `already_taken`, `wrong_format` (invalid characters or reserved pattern), or `{"msg": "too_short" | "too_long", "size": <limit>}`. `12002` may also be returned without `data`.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -20462,7 +21087,16 @@ func (c *Client) PrivateCreateDepositAddress(ctx context.Context, params *Privat
 //
 // Creates a new subaccount under the authenticated main account. Subaccounts allow you to organize trading activities and manage risk separately from the main account.
 //
-// This method takes no parameters. The new subaccount will be created with default settings and can be configured using other subaccount management methods.
+// This method takes no parameters. The new subaccount inherits the main account's email address and is created with direct login disabled (`login_enabled: false`). It is accessible through the main account; the response contains an empty `portfolio` entry for every currency.
+//
+// **Access & Restrictions:**
+// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token. Tokens without `mainaccount` (for example subaccount tokens) are rejected with `13021` (`forbidden`).
+// - Not available for accounts without subaccount management and for some partner account types (`13009`, `unauthorized`), nor for locked accounts (`11098`).
+//
+// **Limits & Errors:**
+// - A main account can have up to 20 regular subaccounts by default (the limit can be configured per account by Deribit). Exceeding it returns `12001` (`too_many_subaccounts`).
+//
+// **Example:** values are illustrative. Only BTC and ETH portfolio entries are shown; the actual currency set depends on the service configuration. The example assumes the main account has no disabled trading products or subaccount consent requirements.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -20810,9 +21444,11 @@ func (c *Client) PrivateGetAccessLog(ctx context.Context, params *PrivateGetAcce
 
 // PrivateGetAccountSummaries performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
 //
-// Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.
+// Retrieves account summaries for the authenticated user in a single call. The result is an object: account-level fields (such as `id`, `username`, `email`, `type`, present when `extended` is `true`) are on the object itself, and the `summaries` array holds one summary per currency with balance, equity, available funds, and margin information.
 //
-// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. Prefer this method over looping `private/get_account_summary` per currency.
+// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter (a main account token is required to select another account, which must belong to the same main account; otherwise `-32602`, `Not allowed`). Use `currencies` to limit the result to selected currencies. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply. Prefer this method over looping `private/get_account_summary` per currency.
+//
+// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 //
 // **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 //
@@ -20837,7 +21473,16 @@ func (c *Client) PrivateGetAccountSummaries(ctx context.Context, params *Private
 //
 // Key relationships (standard margin): `equity = balance + futures session PnL + options_value`, `margin_balance = equity - options_value`, `available_funds = max(0, margin_balance - initial_margin)`. Under portfolio margin, `margin_balance` equals `equity`. Session PnL fields reset at daily settlement; `total_pl` does not.
 //
-// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.
+// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply.
+//
+// **Account selection (`subaccount_id`):**
+// - If omitted (or equal to the caller's own id) the summary is for the authenticated account.
+// - Another account can be requested only with a main account token (scope `mainaccount`), and it must belong to the same main account. Otherwise the call returns `-32602` (`Invalid params`, `Not allowed`).
+// - A removed subaccount returns `13020` (`not_found`); a vault subaccount returns `14049` (`vault_subaccount_not_allowed`).
+//
+// **Currency:** `currency` is required and must be a currency held by the target account's wallet type; otherwise the call returns `-32602` (`Invalid params`, "not supported for wallet type" or an invalid currency).
+//
+// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 //
 // **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 //
@@ -21849,11 +22494,17 @@ func (c *Client) PrivateGetSettlementHistoryByInstrument(ctx context.Context, pa
 
 // PrivateGetSubaccounts performs a GET /private/get_subaccounts (the `PrivateGetSubaccounts` operationId) request.
 //
-// Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.
+// Retrieves the main account and its subaccounts, with identifiers, names, email, login and security status. The list always includes the main account itself (`type: main`); removed subaccounts are not listed.
 //
-// When called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.
+// **Visibility:**
+// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The response lists the main account and its eligible subaccounts.
+// - Without main account access, a subaccount caller receives only the main account, with limited details (login, password and security-key related fields and `disabled_trading_products` are omitted), and the calling subaccount with full details.
+// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+// - Not available for retail brokers (`14021`).
 //
-// Set the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.
+// **Portfolio:** set `with_portfolio` to `true` to include per-currency balance and margin summaries (equity, balance, available funds, margin; no positions or orders). With main account access, each returned account has a `portfolio` object. Without it, only the calling subaccount has `portfolio`; the main account entry omits it. The flag also adds `referrals_count` and, while an email change is awaiting confirmation, `not_confirmed_email`. By default only account metadata is returned.
+//
+// **Examples:** response values are illustrative, not live account data. The examples show all trading products enabled, with no subaccount consent requirements.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -21874,9 +22525,19 @@ func (c *Client) PrivateGetSubaccounts(ctx context.Context, params *PrivateGetSu
 
 // PrivateGetSubaccountsDetails performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
 //
-// Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.
+// Retrieves the positions in a given currency for the accounts visible to the caller. The result has one entry per account (`uid`) with that account's own positions (size, average entry price, mark price, margin and P&L); positions are not aggregated across accounts.
 //
-// Optionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.
+// **Visibility:**
+// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The result covers the main account and its eligible subaccounts.
+// - Without main account access, only the calling subaccount is returned.
+// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+// - Not available for retail brokers (`14021`).
+//
+// **Open orders:** set `with_open_orders` to `true` to add an `open_orders` list to each entry. It is omitted by default.
+//
+// **Notes:**
+// - `currency` must be available for the account's wallet type, otherwise `-32602` (`Invalid params`, "not supported for wallet type").
+// - Results are cached for 1 second. When the data cannot be collected in time the call fails with `13028` (`temporarily_unavailable`); retry the request.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -22440,9 +23101,29 @@ func (c *Client) PrivateRemoveFromAddressBook(ctx context.Context, params *Priva
 
 // PrivateRemoveSubaccount performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
 //
-// Permanently removes a subaccount. The subaccount must be empty (no positions, no open orders, and zero balance) before it can be removed.
+// Removes a subaccount from the main account. The subaccount must be empty before it can be removed.
 //
-// This operation cannot be undone. All subaccount data will be permanently deleted.
+// Removal cannot be undone through the API. The subaccount can no longer be used or logged in to, it disappears from `private/get_subaccounts`, all of its active sessions are terminated, and its deposit addresses are moved to the main account.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount. Any other account is rejected with `13009` (`unauthorized`); an already removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+// - Vault subaccounts are rejected during access validation with `14049` (`vault_subaccount_not_allowed`).
+// - Only one subaccount can be removed per main account every 5 minutes. A repeated call earlier returns `12006` (`remove_subaccount_over_limit`) with the remaining time in `data.wait` (seconds).
+//
+// **Removal is refused with `12007` (`subaccount_not_removable`)**; `data.reason` is one of:
+// - `"has not zero equity"`: open positions, a position closed since the last daily settlement (08:00 UTC) whose realized profit/loss is not settled yet (the subaccount becomes removable after that settlement), non-zero initial or maintenance margin, or absolute equity or balance at or above the currency's minimum balance (only dust whose absolute value is below the threshold is allowed);
+// - `"has opened trigger orders"`: untriggered trigger orders;
+// - `"has pending deposits"`;
+// - `"is owner of app"`: the subaccount owns an API application;
+// - `"has active block rfq"` or `"is part of block rfq allocation"`;
+// - `"is linked to a voice broker"`;
+// - `"is an LSP participant"`;
+// - `"has a locked portfolio, reason: <reasons>"`, where `<reasons>` is a comma-separated list such as `liquidation running`, `negative equity`, `locked by admin`, `locked on user request` or `legacy lock`.
+//
+// Other reason strings may be returned in rare cases.
+//
+// If the subaccount's portfolio could not be cleaned up or verified, or the change could not be saved, the call fails with `13008` (`request_failed`).
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -22670,9 +23351,23 @@ func (c *Client) PrivateSetDisabledTradingProducts(ctx context.Context, params *
 
 // PrivateSetEmailForSubaccount performs a GET /private/set_email_for_subaccount (the `PrivateSetEmailForSubaccount` operationId) request.
 //
-// Assigns an email address to a subaccount. This email can be used for direct login to the subaccount and for receiving notifications.
+// Assigns an email address to a subaccount. This email is used for direct login to the subaccount and for receiving notifications.
 //
-// The email address owner will receive a confirmation email with a link to verify the email address. The email must be confirmed before it can be used for login.
+// **Behavior:**
+// - Normally the address is not applied immediately: a verification email with a confirmation link is sent to it, and it can be used for login only after it is confirmed.
+// - Two changes are applied immediately, without a verification email: setting the main account's own email (the subaccount returns to the main email and its direct login is disabled), and setting the subaccount's current confirmed email while another change is pending (the pending change is cancelled).
+// - Every successful change terminates all active sessions of the subaccount.
+// - An address that is already registered to another account does not produce an error: the call returns `ok` without revealing whether the address exists, and the address is not assigned.
+// - An address already used by another subaccount of the same main account returns `-32602` (`Invalid params`) with `data.subaccount_id` of that subaccount.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+//
+// **Validation & Limits:**
+// - Maximum email length is 64 characters; a longer address returns `-32602` with `max_length`.
+// - `11043` (`bad_argument`) with `data` = `email_wrong_format`, `email_blocked`, `empty_email_address`, `invalid_email_domain` or `same_email` (the address equals the current email and no change is pending).
+// - Changes are rate limited per subaccount: `10028` (`too_many_requests`) with the time to wait in `data.wait` (seconds).
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -22937,9 +23632,16 @@ func (c *Client) PrivateSubscribe(ctx context.Context, params *PrivateSubscribeP
 
 // PrivateToggleNotificationsFromSubaccount performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
 //
-// Enables or disables email and other notifications for a subaccount. When notifications are disabled, the subaccount will not receive email alerts, trade confirmations, or other notification messages.
+// Saves a subaccount's preference for forwarding copies of its notification emails to the main account's email address. It does not stop the subaccount from receiving its own emails.
 //
-// This setting only affects notifications sent to the subaccount's email address. Notifications sent to the main account are not affected.
+// When forwarding is active, forwarded copies exclude the registration welcome email and mask activation and password-change links. Their title is `Notification for subaccount: <name> - <original title>`.
+//
+// **Known limitation:** changing this setting currently has no effect on forwarding, and `receive_notifications` (returned by `private/get_subaccounts`, `private/create_subaccount`, and by `private/get_account_summary` / `private/get_account_summaries` with `extended` = `true`) does not reflect it. A successful response only confirms that the request was accepted.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). The target must be an owned subaccount, not the main account itself. An invalid target is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+// - Also rejected for accounts without subaccount management (`13009`) and locked accounts (`11098`).
+// - Send `state` as a JSON boolean. Do not rely on rejection of other types: the current implementation may coerce them to a boolean.
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -22964,7 +23666,20 @@ func (c *Client) PrivateToggleNotificationsFromSubaccount(ctx context.Context, p
 //
 // Enables or disables direct login access for a subaccount. When login is disabled, the subaccount cannot be accessed directly using email and password authentication, but can still be accessed through the main account.
 //
-// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated.
+// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated (all sessions of the subaccount are dropped). Requesting the state the subaccount already has is accepted and returns `ok`.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+// - `state` must be `enable` or `disable`; any other value returns `11043` (`bad_argument`) with `data` = `state`.
+//
+// **Enabling login** additionally requires:
+// - no email change pending for the subaccount;
+// - an email address different from the main account's email;
+// - a password configured for the subaccount.
+//
+// **Known limitation:** if one of these conditions is not met, the call currently returns `ok` but login stays disabled. Check `login_enabled` in `private/get_subaccounts` to confirm the change.
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -28147,6 +28862,18 @@ func NewPrivateGetAccountSummariesRequest(server string, params *PrivateGetAccou
 		if params.Extended != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "extended", *params.Extended, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Currencies != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "currencies", *params.Currencies, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -38971,9 +39698,22 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateChangeSubaccountNameWithResponse performs a GET /private/change_subaccount_name (the `PrivateChangeSubaccountName` operationId) request.
 	//
-	// Updates the display name (username) for a subaccount. The new name is used for identification purposes and does not affect the subaccount's functionality or access.
+	// Changes the display name (alias) of a subaccount, or of the authenticated main account itself (pass the main account's own id as `sid`). The alias is returned as `username` in account responses; the system-generated name (`system_name`), login credentials and account functionality are not affected.
 	//
-	// Only the main account owner can change subaccount names.
+	// **Access & Restrictions:**
+	// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token.
+	// - `sid` must be the main account itself or one of its own subaccounts. Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	//
+	// **Name rules** (applied after trimming leading and trailing whitespace):
+	// - 5 to 80 characters.
+	// - Only Latin-1 (ISO 8859-1) characters; control characters and the soft hyphen are rejected.
+	// - Must be unique among the main account and its active subaccounts. This includes the target's current name, so re-submitting it fails with `already_taken`.
+	// - Must not match the reserved auto-generated pattern `<main_username>_<number>` (or `<main_username>_vault_<number>`).
+	// - Setting the name to the account's own `system_name` clears a previously set alias.
+	//
+	// **Errors:** an invalid name returns `12002` (`wrong_subaccount_name`) with `data` = `already_taken`, `wrong_format` (invalid characters or reserved pattern), or `{"msg": "too_short" | "too_long", "size": <limit>}`. `12002` may also be returned without `data`.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -39094,7 +39834,16 @@ type ClientWithResponsesInterface interface {
 	//
 	// Creates a new subaccount under the authenticated main account. Subaccounts allow you to organize trading activities and manage risk separately from the main account.
 	//
-	// This method takes no parameters. The new subaccount will be created with default settings and can be configured using other subaccount management methods.
+	// This method takes no parameters. The new subaccount inherits the main account's email address and is created with direct login disabled (`login_enabled: false`). It is accessible through the main account; the response contains an empty `portfolio` entry for every currency.
+	//
+	// **Access & Restrictions:**
+	// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token. Tokens without `mainaccount` (for example subaccount tokens) are rejected with `13021` (`forbidden`).
+	// - Not available for accounts without subaccount management and for some partner account types (`13009`, `unauthorized`), nor for locked accounts (`11098`).
+	//
+	// **Limits & Errors:**
+	// - A main account can have up to 20 regular subaccounts by default (the limit can be configured per account by Deribit). Exceeding it returns `12001` (`too_many_subaccounts`).
+	//
+	// **Example:** values are illustrative. Only BTC and ETH portfolio entries are shown; the actual currency set depends on the service configuration. The example assumes the main account has no disabled trading products or subaccount consent requirements.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -39330,9 +40079,11 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetAccountSummariesWithResponse performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
 	//
-	// Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.
+	// Retrieves account summaries for the authenticated user in a single call. The result is an object: account-level fields (such as `id`, `username`, `email`, `type`, present when `extended` is `true`) are on the object itself, and the `summaries` array holds one summary per currency with balance, equity, available funds, and margin information.
 	//
-	// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. Prefer this method over looping `private/get_account_summary` per currency.
+	// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter (a main account token is required to select another account, which must belong to the same main account; otherwise `-32602`, `Not allowed`). Use `currencies` to limit the result to selected currencies. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply. Prefer this method over looping `private/get_account_summary` per currency.
+	//
+	// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 	//
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	//
@@ -39349,7 +40100,16 @@ type ClientWithResponsesInterface interface {
 	//
 	// Key relationships (standard margin): `equity = balance + futures session PnL + options_value`, `margin_balance = equity - options_value`, `available_funds = max(0, margin_balance - initial_margin)`. Under portfolio margin, `margin_balance` equals `equity`. Session PnL fields reset at daily settlement; `total_pl` does not.
 	//
-	// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.
+	// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply.
+	//
+	// **Account selection (`subaccount_id`):**
+	// - If omitted (or equal to the caller's own id) the summary is for the authenticated account.
+	// - Another account can be requested only with a main account token (scope `mainaccount`), and it must belong to the same main account. Otherwise the call returns `-32602` (`Invalid params`, `Not allowed`).
+	// - A removed subaccount returns `13020` (`not_found`); a vault subaccount returns `14049` (`vault_subaccount_not_allowed`).
+	//
+	// **Currency:** `currency` is required and must be a currency held by the target account's wallet type; otherwise the call returns `-32602` (`Invalid params`, "not supported for wallet type" or an invalid currency).
+	//
+	// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 	//
 	// **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 	//
@@ -40009,11 +40769,17 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetSubaccountsWithResponse performs a GET /private/get_subaccounts (the `PrivateGetSubaccounts` operationId) request.
 	//
-	// Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.
+	// Retrieves the main account and its subaccounts, with identifiers, names, email, login and security status. The list always includes the main account itself (`type: main`); removed subaccounts are not listed.
 	//
-	// When called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.
+	// **Visibility:**
+	// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The response lists the main account and its eligible subaccounts.
+	// - Without main account access, a subaccount caller receives only the main account, with limited details (login, password and security-key related fields and `disabled_trading_products` are omitted), and the calling subaccount with full details.
+	// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+	// - Not available for retail brokers (`14021`).
 	//
-	// Set the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.
+	// **Portfolio:** set `with_portfolio` to `true` to include per-currency balance and margin summaries (equity, balance, available funds, margin; no positions or orders). With main account access, each returned account has a `portfolio` object. Without it, only the calling subaccount has `portfolio`; the main account entry omits it. The flag also adds `referrals_count` and, while an email change is awaiting confirmation, `not_confirmed_email`. By default only account metadata is returned.
+	//
+	// **Examples:** response values are illustrative, not live account data. The examples show all trading products enabled, with no subaccount consent requirements.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -40026,9 +40792,19 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateGetSubaccountsDetailsWithResponse performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
 	//
-	// Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.
+	// Retrieves the positions in a given currency for the accounts visible to the caller. The result has one entry per account (`uid`) with that account's own positions (size, average entry price, mark price, margin and P&L); positions are not aggregated across accounts.
 	//
-	// Optionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.
+	// **Visibility:**
+	// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The result covers the main account and its eligible subaccounts.
+	// - Without main account access, only the calling subaccount is returned.
+	// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+	// - Not available for retail brokers (`14021`).
+	//
+	// **Open orders:** set `with_open_orders` to `true` to add an `open_orders` list to each entry. It is omitted by default.
+	//
+	// **Notes:**
+	// - `currency` must be available for the account's wallet type, otherwise `-32602` (`Invalid params`, "not supported for wallet type").
+	// - Results are cached for 1 second. When the data cannot be collected in time the call fails with `13028` (`temporarily_unavailable`); retry the request.
 	//
 	// **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 	//
@@ -40416,9 +41192,29 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateRemoveSubaccountWithResponse performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
 	//
-	// Permanently removes a subaccount. The subaccount must be empty (no positions, no open orders, and zero balance) before it can be removed.
+	// Removes a subaccount from the main account. The subaccount must be empty before it can be removed.
 	//
-	// This operation cannot be undone. All subaccount data will be permanently deleted.
+	// Removal cannot be undone through the API. The subaccount can no longer be used or logged in to, it disappears from `private/get_subaccounts`, all of its active sessions are terminated, and its deposit addresses are moved to the main account.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount. Any other account is rejected with `13009` (`unauthorized`); an already removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	// - Vault subaccounts are rejected during access validation with `14049` (`vault_subaccount_not_allowed`).
+	// - Only one subaccount can be removed per main account every 5 minutes. A repeated call earlier returns `12006` (`remove_subaccount_over_limit`) with the remaining time in `data.wait` (seconds).
+	//
+	// **Removal is refused with `12007` (`subaccount_not_removable`)**; `data.reason` is one of:
+	// - `"has not zero equity"`: open positions, a position closed since the last daily settlement (08:00 UTC) whose realized profit/loss is not settled yet (the subaccount becomes removable after that settlement), non-zero initial or maintenance margin, or absolute equity or balance at or above the currency's minimum balance (only dust whose absolute value is below the threshold is allowed);
+	// - `"has opened trigger orders"`: untriggered trigger orders;
+	// - `"has pending deposits"`;
+	// - `"is owner of app"`: the subaccount owns an API application;
+	// - `"has active block rfq"` or `"is part of block rfq allocation"`;
+	// - `"is linked to a voice broker"`;
+	// - `"is an LSP participant"`;
+	// - `"has a locked portfolio, reason: <reasons>"`, where `<reasons>` is a comma-separated list such as `liquidation running`, `negative equity`, `locked by admin`, `locked on user request` or `legacy lock`.
+	//
+	// Other reason strings may be returned in rare cases.
+	//
+	// If the subaccount's portfolio could not be cleaned up or verified, or the change could not be saved, the call fails with `13008` (`request_failed`).
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -40566,9 +41362,23 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateSetEmailForSubaccountWithResponse performs a GET /private/set_email_for_subaccount (the `PrivateSetEmailForSubaccount` operationId) request.
 	//
-	// Assigns an email address to a subaccount. This email can be used for direct login to the subaccount and for receiving notifications.
+	// Assigns an email address to a subaccount. This email is used for direct login to the subaccount and for receiving notifications.
 	//
-	// The email address owner will receive a confirmation email with a link to verify the email address. The email must be confirmed before it can be used for login.
+	// **Behavior:**
+	// - Normally the address is not applied immediately: a verification email with a confirmation link is sent to it, and it can be used for login only after it is confirmed.
+	// - Two changes are applied immediately, without a verification email: setting the main account's own email (the subaccount returns to the main email and its direct login is disabled), and setting the subaccount's current confirmed email while another change is pending (the pending change is cancelled).
+	// - Every successful change terminates all active sessions of the subaccount.
+	// - An address that is already registered to another account does not produce an error: the call returns `ok` without revealing whether the address exists, and the address is not assigned.
+	// - An address already used by another subaccount of the same main account returns `-32602` (`Invalid params`) with `data.subaccount_id` of that subaccount.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	//
+	// **Validation & Limits:**
+	// - Maximum email length is 64 characters; a longer address returns `-32602` with `max_length`.
+	// - `11043` (`bad_argument`) with `data` = `email_wrong_format`, `email_blocked`, `empty_email_address`, `invalid_email_domain` or `same_email` (the address equals the current email and no change is pending).
+	// - Changes are rate limited per subaccount: `10028` (`too_many_requests`) with the time to wait in `data.wait` (seconds).
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -40745,9 +41555,16 @@ type ClientWithResponsesInterface interface {
 
 	// PrivateToggleNotificationsFromSubaccountWithResponse performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
 	//
-	// Enables or disables email and other notifications for a subaccount. When notifications are disabled, the subaccount will not receive email alerts, trade confirmations, or other notification messages.
+	// Saves a subaccount's preference for forwarding copies of its notification emails to the main account's email address. It does not stop the subaccount from receiving its own emails.
 	//
-	// This setting only affects notifications sent to the subaccount's email address. Notifications sent to the main account are not affected.
+	// When forwarding is active, forwarded copies exclude the registration welcome email and mask activation and password-change links. Their title is `Notification for subaccount: <name> - <original title>`.
+	//
+	// **Known limitation:** changing this setting currently has no effect on forwarding, and `receive_notifications` (returned by `private/get_subaccounts`, `private/create_subaccount`, and by `private/get_account_summary` / `private/get_account_summaries` with `extended` = `true`) does not reflect it. A successful response only confirms that the request was accepted.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). The target must be an owned subaccount, not the main account itself. An invalid target is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+	// - Also rejected for accounts without subaccount management (`13009`) and locked accounts (`11098`).
+	// - Send `state` as a JSON boolean. Do not rely on rejection of other types: the current implementation may coerce them to a boolean.
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -40764,7 +41581,20 @@ type ClientWithResponsesInterface interface {
 	//
 	// Enables or disables direct login access for a subaccount. When login is disabled, the subaccount cannot be accessed directly using email and password authentication, but can still be accessed through the main account.
 	//
-	// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated.
+	// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated (all sessions of the subaccount are dropped). Requesting the state the subaccount already has is accepted and returns `ok`.
+	//
+	// **Access & Restrictions:**
+	// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+	// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+	// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+	// - `state` must be `enable` or `disable`; any other value returns `11043` (`bad_argument`) with `data` = `state`.
+	//
+	// **Enabling login** additionally requires:
+	// - no email change pending for the subaccount;
+	// - an email address different from the main account's email;
+	// - a password configured for the subaccount.
+	//
+	// **Known limitation:** if one of these conditions is not met, the call currently returns `ok` but login stays disabled. Check `login_enabled` in `private/get_subaccounts` to confirm the change.
 	//
 	// **[TFA required](https://docs.deribit.com/articles/security-keys)**
 	//
@@ -49851,9 +50681,22 @@ func (c *ClientWithResponses) PrivateChangeScopeInApiKeyWithResponse(ctx context
 
 // PrivateChangeSubaccountNameWithResponse performs a GET /private/change_subaccount_name (the `PrivateChangeSubaccountName` operationId) request.
 //
-// Updates the display name (username) for a subaccount. The new name is used for identification purposes and does not affect the subaccount's functionality or access.
+// Changes the display name (alias) of a subaccount, or of the authenticated main account itself (pass the main account's own id as `sid`). The alias is returned as `username` in account responses; the system-generated name (`system_name`), login credentials and account functionality are not affected.
 //
-// Only the main account owner can change subaccount names.
+// **Access & Restrictions:**
+// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token.
+// - `sid` must be the main account itself or one of its own subaccounts. Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+//
+// **Name rules** (applied after trimming leading and trailing whitespace):
+// - 5 to 80 characters.
+// - Only Latin-1 (ISO 8859-1) characters; control characters and the soft hyphen are rejected.
+// - Must be unique among the main account and its active subaccounts. This includes the target's current name, so re-submitting it fails with `already_taken`.
+// - Must not match the reserved auto-generated pattern `<main_username>_<number>` (or `<main_username>_vault_<number>`).
+// - Setting the name to the account's own `system_name` clears a previously set alias.
+//
+// **Errors:** an invalid name returns `12002` (`wrong_subaccount_name`) with `data` = `already_taken`, `wrong_format` (invalid characters or reserved pattern), or `{"msg": "too_short" | "too_long", "size": <limit>}`. `12002` may also be returned without `data`.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -50016,7 +50859,16 @@ func (c *ClientWithResponses) PrivateCreateDepositAddressWithResponse(ctx contex
 //
 // Creates a new subaccount under the authenticated main account. Subaccounts allow you to organize trading activities and manage risk separately from the main account.
 //
-// This method takes no parameters. The new subaccount will be created with default settings and can be configured using other subaccount management methods.
+// This method takes no parameters. The new subaccount inherits the main account's email address and is created with direct login disabled (`login_enabled: false`). It is accessible through the main account; the response contains an empty `portfolio` entry for every currency.
+//
+// **Access & Restrictions:**
+// - Requires scope `account:read_write` and `mainaccount`, i.e. a main account token. Tokens without `mainaccount` (for example subaccount tokens) are rejected with `13021` (`forbidden`).
+// - Not available for accounts without subaccount management and for some partner account types (`13009`, `unauthorized`), nor for locked accounts (`11098`).
+//
+// **Limits & Errors:**
+// - A main account can have up to 20 regular subaccounts by default (the limit can be configured per account by Deribit). Exceeding it returns `12001` (`too_many_subaccounts`).
+//
+// **Example:** values are illustrative. Only BTC and ETH portfolio entries are shown; the actual currency set depends on the service configuration. The example assumes the main account has no disabled trading products or subaccount consent requirements.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -50336,9 +51188,11 @@ func (c *ClientWithResponses) PrivateGetAccessLogWithResponse(ctx context.Contex
 
 // PrivateGetAccountSummariesWithResponse performs a GET /private/get_account_summaries (the `PrivateGetAccountSummaries` operationId) request.
 //
-// Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.
+// Retrieves account summaries for the authenticated user in a single call. The result is an object: account-level fields (such as `id`, `username`, `email`, `type`, present when `extended` is `true`) are on the object itself, and the `summaries` array holds one summary per currency with balance, equity, available funds, and margin information.
 //
-// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. Prefer this method over looping `private/get_account_summary` per currency.
+// To retrieve summaries for a specific subaccount, use the `subaccount_id` parameter (a main account token is required to select another account, which must belong to the same main account; otherwise `-32602`, `Not allowed`). Use `currencies` to limit the result to selected currencies. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply. Prefer this method over looping `private/get_account_summary` per currency.
+//
+// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 //
 // **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 //
@@ -50361,7 +51215,16 @@ func (c *ClientWithResponses) PrivateGetAccountSummariesWithResponse(ctx context
 //
 // Key relationships (standard margin): `equity = balance + futures session PnL + options_value`, `margin_balance = equity - options_value`, `available_funds = max(0, margin_balance - initial_margin)`. Under portfolio margin, `margin_balance` equals `equity`. Session PnL fields reset at daily settlement; `total_pl` does not.
 //
-// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.
+// To retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included. The account's fee tier is returned in `fee_group` (with its rates in `fees`) only when `extended` is `true` and the account is on a non-default tier; when both are absent, standard fees apply.
+//
+// **Account selection (`subaccount_id`):**
+// - If omitted (or equal to the caller's own id) the summary is for the authenticated account.
+// - Another account can be requested only with a main account token (scope `mainaccount`), and it must belong to the same main account. Otherwise the call returns `-32602` (`Invalid params`, `Not allowed`).
+// - A removed subaccount returns `13020` (`not_found`); a vault subaccount returns `14049` (`vault_subaccount_not_allowed`).
+//
+// **Currency:** `currency` is required and must be a currency held by the target account's wallet type; otherwise the call returns `-32602` (`Invalid params`, "not supported for wallet type" or an invalid currency).
+//
+// **Examples:** responses are illustrative, not live account data. The extended default example abbreviates account metadata and fee configuration; it is not an exhaustive list of returned fields.
 //
 // **📖 Related Article:** [Using the currency Parameter](https://docs.deribit.com/articles/currency-parameter)
 //
@@ -51285,11 +52148,17 @@ func (c *ClientWithResponses) PrivateGetSettlementHistoryByInstrumentWithRespons
 
 // PrivateGetSubaccountsWithResponse performs a GET /private/get_subaccounts (the `PrivateGetSubaccounts` operationId) request.
 //
-// Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.
+// Retrieves the main account and its subaccounts, with identifiers, names, email, login and security status. The list always includes the main account itself (`type: main`); removed subaccounts are not listed.
 //
-// When called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.
+// **Visibility:**
+// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The response lists the main account and its eligible subaccounts.
+// - Without main account access, a subaccount caller receives only the main account, with limited details (login, password and security-key related fields and `disabled_trading_products` are omitted), and the calling subaccount with full details.
+// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+// - Not available for retail brokers (`14021`).
 //
-// Set the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.
+// **Portfolio:** set `with_portfolio` to `true` to include per-currency balance and margin summaries (equity, balance, available funds, margin; no positions or orders). With main account access, each returned account has a `portfolio` object. Without it, only the calling subaccount has `portfolio`; the main account entry omits it. The flag also adds `referrals_count` and, while an email change is awaiting confirmation, `not_confirmed_email`. By default only account metadata is returned.
+//
+// **Examples:** response values are illustrative, not live account data. The examples show all trading products enabled, with no subaccount consent requirements.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -51308,9 +52177,19 @@ func (c *ClientWithResponses) PrivateGetSubaccountsWithResponse(ctx context.Cont
 
 // PrivateGetSubaccountsDetailsWithResponse performs a GET /private/get_subaccounts_details (the `PrivateGetSubaccountsDetails` operationId) request.
 //
-// Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.
+// Retrieves the positions in a given currency for the accounts visible to the caller. The result has one entry per account (`uid`) with that account's own positions (size, average entry price, mark price, margin and P&L); positions are not aggregated across accounts.
 //
-// Optionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.
+// **Visibility:**
+// - Main account access is available when the authenticated account is the main account, or its token grants access to that main account (`mainaccount` scope or impersonated access). The result covers the main account and its eligible subaccounts.
+// - Without main account access, only the calling subaccount is returned.
+// - Vault subaccounts are excluded from ordinary public listings. Isolated-margin subaccounts are not listed.
+// - Not available for retail brokers (`14021`).
+//
+// **Open orders:** set `with_open_orders` to `true` to add an `open_orders` list to each entry. It is omitted by default.
+//
+// **Notes:**
+// - `currency` must be available for the account's wallet type, otherwise `-32602` (`Invalid params`, "not supported for wallet type").
+// - Results are cached for 1 second. When the data cannot be collected in time the call fails with `13028` (`temporarily_unavailable`); retry the request.
 //
 // **📖 Related Article:** [Managing Subaccounts](https://docs.deribit.com/articles/managing-subaccounts-api)
 //
@@ -51830,9 +52709,29 @@ func (c *ClientWithResponses) PrivateRemoveFromAddressBookWithResponse(ctx conte
 
 // PrivateRemoveSubaccountWithResponse performs a GET /private/remove_subaccount (the `PrivateRemoveSubaccount` operationId) request.
 //
-// Permanently removes a subaccount. The subaccount must be empty (no positions, no open orders, and zero balance) before it can be removed.
+// Removes a subaccount from the main account. The subaccount must be empty before it can be removed.
 //
-// This operation cannot be undone. All subaccount data will be permanently deleted.
+// Removal cannot be undone through the API. The subaccount can no longer be used or logged in to, it disappears from `private/get_subaccounts`, all of its active sessions are terminated, and its deposit addresses are moved to the main account.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount. Any other account is rejected with `13009` (`unauthorized`); an already removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+// - Vault subaccounts are rejected during access validation with `14049` (`vault_subaccount_not_allowed`).
+// - Only one subaccount can be removed per main account every 5 minutes. A repeated call earlier returns `12006` (`remove_subaccount_over_limit`) with the remaining time in `data.wait` (seconds).
+//
+// **Removal is refused with `12007` (`subaccount_not_removable`)**; `data.reason` is one of:
+// - `"has not zero equity"`: open positions, a position closed since the last daily settlement (08:00 UTC) whose realized profit/loss is not settled yet (the subaccount becomes removable after that settlement), non-zero initial or maintenance margin, or absolute equity or balance at or above the currency's minimum balance (only dust whose absolute value is below the threshold is allowed);
+// - `"has opened trigger orders"`: untriggered trigger orders;
+// - `"has pending deposits"`;
+// - `"is owner of app"`: the subaccount owns an API application;
+// - `"has active block rfq"` or `"is part of block rfq allocation"`;
+// - `"is linked to a voice broker"`;
+// - `"is an LSP participant"`;
+// - `"has a locked portfolio, reason: <reasons>"`, where `<reasons>` is a comma-separated list such as `liquidation running`, `negative equity`, `locked by admin`, `locked on user request` or `legacy lock`.
+//
+// Other reason strings may be returned in rare cases.
+//
+// If the subaccount's portfolio could not be cleaned up or verified, or the change could not be saved, the call fails with `13008` (`request_failed`).
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -52040,9 +52939,23 @@ func (c *ClientWithResponses) PrivateSetDisabledTradingProductsWithResponse(ctx 
 
 // PrivateSetEmailForSubaccountWithResponse performs a GET /private/set_email_for_subaccount (the `PrivateSetEmailForSubaccount` operationId) request.
 //
-// Assigns an email address to a subaccount. This email can be used for direct login to the subaccount and for receiving notifications.
+// Assigns an email address to a subaccount. This email is used for direct login to the subaccount and for receiving notifications.
 //
-// The email address owner will receive a confirmation email with a link to verify the email address. The email must be confirmed before it can be used for login.
+// **Behavior:**
+// - Normally the address is not applied immediately: a verification email with a confirmation link is sent to it, and it can be used for login only after it is confirmed.
+// - Two changes are applied immediately, without a verification email: setting the main account's own email (the subaccount returns to the main email and its direct login is disabled), and setting the subaccount's current confirmed email while another change is pending (the pending change is cancelled).
+// - Every successful change terminates all active sessions of the subaccount.
+// - An address that is already registered to another account does not produce an error: the call returns `ok` without revealing whether the address exists, and the address is not assigned.
+// - An address already used by another subaccount of the same main account returns `-32602` (`Invalid params`) with `data.subaccount_id` of that subaccount.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+//
+// **Validation & Limits:**
+// - Maximum email length is 64 characters; a longer address returns `-32602` with `max_length`.
+// - `11043` (`bad_argument`) with `data` = `email_wrong_format`, `email_blocked`, `empty_email_address`, `invalid_email_domain` or `same_email` (the address equals the current email and no change is pending).
+// - Changes are rate limited per subaccount: `10028` (`too_many_requests`) with the time to wait in `data.wait` (seconds).
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -52285,9 +53198,16 @@ func (c *ClientWithResponses) PrivateSubscribeWithResponse(ctx context.Context, 
 
 // PrivateToggleNotificationsFromSubaccountWithResponse performs a GET /private/toggle_notifications_from_subaccount (the `PrivateToggleNotificationsFromSubaccount` operationId) request.
 //
-// Enables or disables email and other notifications for a subaccount. When notifications are disabled, the subaccount will not receive email alerts, trade confirmations, or other notification messages.
+// Saves a subaccount's preference for forwarding copies of its notification emails to the main account's email address. It does not stop the subaccount from receiving its own emails.
 //
-// This setting only affects notifications sent to the subaccount's email address. Notifications sent to the main account are not affected.
+// When forwarding is active, forwarded copies exclude the registration welcome email and mask activation and password-change links. Their title is `Notification for subaccount: <name> - <original title>`.
+//
+// **Known limitation:** changing this setting currently has no effect on forwarding, and `receive_notifications` (returned by `private/get_subaccounts`, `private/create_subaccount`, and by `private/get_account_summary` / `private/get_account_summaries` with `extended` = `true`) does not reflect it. A successful response only confirms that the request was accepted.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). The target must be an owned subaccount, not the main account itself. An invalid target is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`. Vault subaccounts are rejected with `14049`.
+// - Also rejected for accounts without subaccount management (`13009`) and locked accounts (`11098`).
+// - Send `state` as a JSON boolean. Do not rely on rejection of other types: the current implementation may coerce them to a boolean.
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
@@ -52310,7 +53230,20 @@ func (c *ClientWithResponses) PrivateToggleNotificationsFromSubaccountWithRespon
 //
 // Enables or disables direct login access for a subaccount. When login is disabled, the subaccount cannot be accessed directly using email and password authentication, but can still be accessed through the main account.
 //
-// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated.
+// If login is disabled while an active session exists for the subaccount, that session will be immediately terminated (all sessions of the subaccount are dropped). Requesting the state the subaccount already has is accepted and returns `ok`.
+//
+// **Access & Restrictions:**
+// - Must be called by the main account that owns the subaccount (`sid`). Any other account is rejected with `13009` (`unauthorized`); a removed subaccount returns `13009` with `data.reason` = `already_removed`.
+// - Vault subaccounts are rejected with `14049` (`vault_subaccount_not_allowed`).
+// - Also rejected for accounts without subaccount management (`13009`), retail brokers (`14021`) and locked accounts (`11098`).
+// - `state` must be `enable` or `disable`; any other value returns `11043` (`bad_argument`) with `data` = `state`.
+//
+// **Enabling login** additionally requires:
+// - no email change pending for the subaccount;
+// - an email address different from the main account's email;
+// - a password configured for the subaccount.
+//
+// **Known limitation:** if one of these conditions is not met, the call currently returns `ok` but login stays disabled. Check `login_enabled` in `private/get_subaccounts` to confirm the change.
 //
 // **[TFA required](https://docs.deribit.com/articles/security-keys)**
 //
